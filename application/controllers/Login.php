@@ -33,43 +33,43 @@ class Login extends CI_Controller {
 		$data['baseurl'] = base_url();
 		$data['siteurl'] = site_url();
 		$this->load->view('templates/header',$data);
-		$this->load->view('main/index',$data);
+		$this->load->view('main/login',$data);
 		$this->load->view('templates/footer',$data);
 	}
 	
-	public function cekLogin()
-	{
-		$user = trim($this->input->post('user'));
-		$pass = trim($this->input->post('pass'));
-		$i = 0;
-		$cek = $this->login_model->cekUser($user,$pass);
-		if($cek)
-		{
-			$arrHasil[0]["msg"] = "";
-		}
-		else
-		{
-			$arrHasil[0]["msg"] = "*Wrong username/password combination";
-		}
+	// public function cekLogin()
+	// {
+	// 	$user = trim($this->input->post('user'));
+	// 	$pass = trim($this->input->post('pass'));
+	// 	$i = 0;
+	// 	$cek = $this->login_model->cekUser($user,$pass);
+	// 	if($cek)
+	// 	{
+	// 		$arrHasil[0]["msg"] = "";
+	// 	}
+	// 	else
+	// 	{
+	// 		$arrHasil[0]["msg"] = "*Wrong username/password combination";
+	// 	}
 			
-		echo json_encode($arrHasil);
-	}
+	// 	echo json_encode($arrHasil);
+	// }
 		
-	public function ubah(){
-		$arrayx=array();
-		$username = $this->input->post('username');
-		$passlama =  $this->input->post('passlama');
-		$passbaru1 = $this->input->post('passbaru1');
-		$passbaru2 = $this->input->post('passbaru2');
-		$cek = $this->login_model->cekUser($username,$passlama);
-		if($cek===false){
-			$arrayx[0]['status']="Not Found";
-			echo json_encode($arrayx);
-		}else{	
-			$cek2 = $this->login_model->ubahUser($username,$passbaru2);
-			echo json_encode($cek2);
+	// public function ubah(){
+	// 	$arrayx=array();
+	// 	$username = $this->input->post('username');
+	// 	$passlama =  $this->input->post('passlama');
+	// 	$passbaru1 = $this->input->post('passbaru1');
+	// 	$passbaru2 = $this->input->post('passbaru2');
+	// 	$cek = $this->login_model->cekUser($username,$passlama);
+	// 	if($cek===false){
+	// 		$arrayx[0]['status']="Not Found";
+	// 		echo json_encode($arrayx);
+	// 	}else{	
+	// 		$cek2 = $this->login_model->ubahUser($username,$passbaru2);
+	// 		echo json_encode($cek2);
 			
-		}			
+	// 	}			
 		
-	}
+	// }
 }
