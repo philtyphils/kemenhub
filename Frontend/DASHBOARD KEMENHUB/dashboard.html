@@ -17,7 +17,7 @@
             <div class="sidebar-wrapper">
                 <div class="logo">
                     <a href="#" class="simple-text">
-                        LOGO
+                        <img src="assets/img/logo.png" alt="logo" style="width: 100%;">
                     </a>
                 </div>
     
@@ -155,7 +155,7 @@ var chart_tusk = new Highcharts.chart({
         type: 'pie',
         events: {
             load: function(event) {
-            $('.highcharts-legend-item').last().append('<br/><div style="margin-left:2rem;"><hr/><span style="float:left;font-weight: bold;padding-bottom:2px;">Total :</span><span style="float:left;color:#9A9A9A;font-weight: 700;"> ' + Total + '</span> </div>')
+            $('.highcharts-legend-item').last().append('<br/><div style="margin-left:2rem;"><hr/><span style="float:left;font-weight: bold;padding-bottom:2px;">Total</span><span style="float:left;color:#9A9A9A;font-weight: 700;"> ' + Total + '</span> </div>')
             }
         }  
     },
@@ -195,10 +195,10 @@ var chart_tusk = new Highcharts.chart({
         innerSize: '50%',
         data: [{
             name: 'AKTIF',
-            y: 200000000000,
+            y: 2000,
         }, {
             name: 'NON AKTIF',
-            y: 105000000000
+            y: 105
         }]
     }],
     navigation: {
@@ -229,7 +229,7 @@ var chart_tersus = new Highcharts.chart({
         type: 'pie',
         events: {
             load: function(event) {
-            $('.highcharts-legend-item').last().append('<br/><div style="margin-left:2rem;"><hr/><span style="float:left;font-weight: bold;padding-bottom:5px;">Total :</span><span style="float:left;color:#9A9A9A;font-weight: 700;"> ' + Total + '</span> </div>')
+            $('.highcharts-legend-item').last().append('<br/><div style="margin-left:2rem;"><hr/><span style="float:left;font-weight: bold;padding-bottom:5px;">Total</span><span style="float:left;color:#9A9A9A;font-weight: 700;"> ' + Total + '</span> </div>')
             }
         }  
         
@@ -269,10 +269,10 @@ var chart_tersus = new Highcharts.chart({
         innerSize: '50%',
         data: [{
             name: 'AKTIF',
-            y: 50000000,
+            y: 50000,
         }, {
             name: 'NON AKTIF',
-            y: 9000000
+            y: 900
         }]
     }],
     navigation: {
