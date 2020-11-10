@@ -46,7 +46,6 @@ class Export extends CI_Controller
 		$writer = new Xlsx($spreadsheet);
 		$filename = 'Data-TUKS-TERSUS-Indonesia';
 		
-		header('Content-Type: application/vnd.ms-excel');
         header('Content-Disposition: attachment;filename="'. $filename);
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
         header('Content-Transfer-Encoding: binary');
