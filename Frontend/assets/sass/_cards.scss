@@ -29,6 +29,22 @@
     margin: 15px 0 10px 0;
 }
 
+.title-form {
+    margin: $none;
+    color: $black-color;
+    margin-bottom: 20px;
+    display: inline-block;
+    font-size: 20px;
+}
+
+.title-form::after {
+    display: block;
+    height: 2px;
+    background-color: #f39c12;
+    content: " ";
+    width: 100%;
+    margin: 15px 0 10px 0;
+}
 
 
 .card .card-content {

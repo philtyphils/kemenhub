@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Data</title>
-    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/assets/sass/main.css">
-    <link href="/assets/css/font-awesome.css" rel="stylesheet" />
-    <link href="/assets/css/bootstrap-datepicker.css" rel="stylesheet" />
-    <link href="/assets/css/google-roboto-300-700.css" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/sass/main.css">
+    <link href="assets/css/font-awesome.css" rel="stylesheet" />
+    <link href="assets/css/bootstrap-datepicker.css" rel="stylesheet" />
+    <link href="assets/css/google-roboto-300-700.css" rel="stylesheet" />
     
 </head>
 <body>
@@ -106,38 +106,22 @@
                                 </div>
                                 <div class="card-content" style="padding-top: 60px;">
                                     <div class="warp-toolbar">
-                                        <input type="text" id="searchbox" class="searchbutton" placeholder="Silahkan cari data disini...">
+                                        <form action="" class="search">
+                                            <input type="text" id="searchbox" placeholder="Silahkan cari data disini..." class="searchbutton">
+                                            <i class="fa fa-search" aria-hidden="true"></i>
+                                        </form>
                                     </div>
-                                    <div class="warp-toolbar col-md-6" style="padding-left: 0;margin-top: 1rem;">
-                                        <select class="selectpicker" multiple data-live-search="true" title="Provinsi">
-                                            <option>Mustard</option>
-                                            <option>Ketchup</option>
-                                            <option>Relish</option>
-                                        </select>
+                                   
+                                    <div class="warp-toolbar col-md-6" style="padding-left: 0;margin-top: 2rem;">
+                                        <button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-success btn-fill" style="margin-right: 1rem">
+                                            <i class="fa fa-search" aria-hidden="true" style="margin-right: 10px;"></i>
+                                            <span>Cari Provinsi</span>
+                                        </button>
 
-                                        <select class="selectpicker" multiple data-live-search="true" title="Kelas" id="box">
-                                            <option>Mustard</option>
-                                            <option>Ketchup</option>
-                                            <option>Relish</option>
-                                        </select>
-
-                                        <select class="selectpicker" multiple data-live-search="true" title="Kategori" id="box">
-                                            <option>Mustard</option>
-                                            <option>Ketchup</option>
-                                            <option>Relish</option>
-                                        </select>
-
-                                        <select class="selectpicker">
-                                            <option value="">Pilih TUKS / TERSUS</option>
-                                            <option value="aktif">TUKS</option>
-                                            <option value="nonaktif">TERSUS</option>
-                                        </select>
-
-                                        <select class="selectpicker">
-                                            <option value="">Pilih Status</option>
-                                            <option value="aktif">AKTIF</option>
-                                            <option value="nonaktif">NON AKTIF</option>
-                                        </select>
+                                        <button type="button" data-toggle="modal" data-target="#myModalLain" class="btn btn-primary btn-fill">
+                                            <i class="fa fa-search" aria-hidden="true" style="margin-right: 10px;"></i>
+                                            <span>Cari Dermaga</span>
+                                        </button>
                                     </div>
 
                                     <div class="toolbar col-md-12" style="padding: 0;">
@@ -508,11 +492,11 @@
 
 <!-- MODAL DELETE-->
         <div class="modal fade" id="delete-modal" role="dialog">
-            <div class="modal-dialog modal-sm">
+            <div class="modal-dialog">
                 <!--modal delete content start-->
                 <div class="modal-content">
                     <div class="modal-header" style="background-color: #43425D;color: #ffff;">
-                        <button type="button" class="close" data-dismiss="modal" style="color: #ffff;">&times;</button>
+                        <button type="button" class="close" data-dismiss="modal" style="color: #ffff;outline: none;">&times;</button>
                     </div>
                     <div class="modal-body">
                         <h5>Apakah anda nyakin akan Delete ?</h5>
@@ -527,18 +511,121 @@
         </div>
 <!-- MODAL DELETE-->
 
-
+<!-- MODAL SEARCH-->
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #43425D;color: #ffff;">
+                <button type="button" class="close" data-dismiss="modal" style="color: #ffff;outline: none;">&times;</button>
+            </div>
+            <div class="modal-body">
+                <h5 class="title-form">Cari Data Berdasarkan Provinsi</h5>
+                <form  role="search">
+                    <div class="form-group col-md-12" style="padding-left: 0;margin-bottom: 0;">
+                        <label for="kategori">Kategori</label>
+                        <select class="selectpicker form-control" multiple data-live-search="true" title="Kategori" id="box">
+                            <option>Mustard</option>
+                            <option>Ketchup</option>
+                            <option>Relish</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6" style="padding-left: 0;margin-bottom: 0;">
+                        <label for="provinsi">Provinsi</label>
+                        <select class="selectpicker form-control" multiple data-live-search="true" title="Provinsi">
+                            <option>Mustard</option>
+                            <option>Ketchup</option>
+                            <option>Relish</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6" style="padding-left: 0;margin-bottom: 0;">
+                        <label for="wilayahkerja">Wilayah Kerja</label>
+                        <select class="selectpicker form-control" multiple data-live-search="true" title="Wilayah Kerja" id="box" >
+                            <option>Mustard</option>
+                            <option>Ketchup</option>
+                            <option>Relish</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group col-md-6" style="padding-left: 0;margin-bottom: 0;">
+                        <label for="tukstersus">TUKS /  TERSUS</label>
+                        <select class="selectpicker form-control">
+                            <option value="">Pilih TUKS / TERSUS</option>
+                            <option value="aktif">TUKS</option>
+                            <option value="nonaktif">TERSUS</option>
+                        </select>                       
+                    </div>
+                    <div class="form-group col-md-6" style="padding-left: 0;margin-bottom: 0;">
+                        <label for="status">STATUS</label>
+                        <select class="selectpicker form-control">
+                            <option value="">Pilih Status</option>
+                            <option value="aktif">AKTIF</option>
+                            <option value="nonaktif">NON AKTIF</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-success btn-fill">Cari Data</button>
+                </form>
+            </div>
+        </div>
     </div>
+</div>
+<!-- MODAL SEARCH-->
+
+<!-- MODAL SEARCH-->
+<div class="modal fade" id="myModalLain" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #43425D;color: #ffff;">
+                <button type="button" class="close" data-dismiss="modal" style="color: #ffff;outline: none;">&times;</button>
+            </div>
+            <div class="modal-body">
+                <h5 class="title-form">Cari Data Berdasarkan Dermaga</h5>
+                <form  role="search">
+                    <div class="form-group col-md-12" style="padding-left: 0;margin-bottom: 1rem;">
+                        <label for="dermaga">Dermaga Tipe</label>
+                        <input type="text" name="dermaga" id="dermaga" class="form-control" required placeholder="Dermaga Type">
+                    </div>
+                    <div class="form-group col-md-6" style="padding-left: 0;margin-bottom: 1rem;">
+                        <label for="kedalaman">Kedalaman</label>
+                        <div class="input-group">
+                            <input type="number" name="meter[]" id="meter" class="form-control" required placeholder="Meter" aria-describedby="basic-addon1">
+                            <span class="input-group-addon" id="basic-addon1">M LWH</span>
+                        </div>  
+                    </div>
+                    <div class="form-group col-md-6" style="padding-left: 0;margin-bottom: 1rem;">
+                        <label for="kapasitas">Kapasitas</label>
+                        <input type="number" name="dermaga" id="kapasitas" class="form-control" required placeholder="Kapasitas">
+                    </div>
+                    
+                    <div class="form-group col-md-12" style="padding-left: 0;margin-bottom: 1rem;">
+                        <label for="satuan">Satuan</label>
+                        <select class="form-control" id="satuan" name="satuan[]" required>
+                            <option value="">Pilih Satuan</option>
+                            <option>FIT</option>
+                            <option>GT</option>
+                            <option>DWT</option>
+                        </select>                      
+                    </div>
+                    <button type="submit" class="btn btn-success btn-fill">Cari Data</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- MODAL SEARCH-->
+
 </body>
 <script src="assets/js/jquery.3.2.1.min.js" type="text/javascript"></script>
 <script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
 <script src="assets/js/light-bootstrap-dashboard.js"></script>
 <script src="assets/js/bootstrap-select.min.js"></script>
 <script src="assets/js/jquery.datatables.js"></script>
+<!-- <script>
+   $('#myModal').modal('show')
+</script> -->
+
 <script>
     $('select').selectpicker();
 </script>
-
 
 <script type="text/javascript">
     $(document).ready(function() {

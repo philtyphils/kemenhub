@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FORM</title>
-    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/assets/sass/main.css">
-    <link href="/assets/css/font-awesome.css" rel="stylesheet" />
-    <link href="/assets/css/bootstrap-datepicker.css" rel="stylesheet" />
-    <link href="/assets/css/google-roboto-300-700.css" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/sass/main.css">
+    <link href="assets/css/font-awesome.css" rel="stylesheet" />
+    <link href="assets/css/bootstrap-datepicker.css" rel="stylesheet" />
+    <link href="assets/css/google-roboto-300-700.css" rel="stylesheet" />
 </head>
 <body>
     <div class="wrapper">
@@ -120,7 +120,7 @@
                                                 </select>                 
                                             </div>
                                             <div class="wrap">
-                                                <div class="form-group col-md-6">
+                                                <div class="form-group col-md-6 border-right">
                                                     <label for="alamat">Alamat Kantor</label>
                                                     <textarea name="alamat[]" id="alamat"  rows="9" class="form-control" required></textarea> 
                                                 </div>
@@ -170,207 +170,210 @@
                                             </div>
                                         </div>
 
-                                        <div class=" row group">   
-                                        
-                                            <div class="form-group col-md-6">
-                                                <label for="lokasi">Alamat Lokasi</label>
-                                                <textarea name="lokasi[]" id="lokasi"  rows="13" class="form-control" required></textarea> 
-                                            </div>
-
-                                            <div class="form-group col-md-6">
-                                                <div class="form-group">
-                                                    <label for="provinsi">Provinsi</label>
-                                                    <select name="provinsi[]" class="form-control" id="provinsi" required >
-                                                        <option value="">Pilih Provinsi</option>
-                                                        <option value="male">Male</option>
-                                                        <option value="female">Female</option>
-                                                    </select>
+                                        <div class="row group"> 
+                                            <div class="wrap-2">
+                                                <div class="form-group col-md-6">
+                                                    <label for="lokasi">Alamat Lokasi</label>
+                                                    <textarea name="lokasi[]" id="lokasi"  rows="13" class="form-control" required></textarea> 
                                                 </div>
-                                                <div class="row">
-                                                    <div class="form-group col-md-4">
-                                                        <label for="kecamatan">Kecamatan</label>
-                                                        <select name="kecamatan[]" class="form-control" id="kecamatan" required >
-                                                            <option value="">Pilih Kecamatan</option>
+                                                <div class="form-group col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="provinsi">Provinsi</label>
+                                                        <select name="provinsi[]" class="form-control" id="provinsi" required >
+                                                            <option value="">Pilih Provinsi</option>
                                                             <option value="male">Male</option>
                                                             <option value="female">Female</option>
                                                         </select>
                                                     </div>
-                                                    <div class="form-group col-md-4">
-                                                        <label for="kecamatan">Kelurahan</label>
-                                                        <select name="Kelurahan[]" class="form-control" id="Kelurahan" required >
-                                                            <option value="">Pilih Kelurahan</option>
-                                                            <option value="male">Male</option>
-                                                            <option value="female">Female</option>
-                                                        </select>
+                                                    <div class="row">
+                                                        <div class="form-group col-md-4">
+                                                            <label for="kecamatan">Kecamatan</label>
+                                                            <select name="kecamatan[]" class="form-control" id="kecamatan" required >
+                                                                <option value="">Pilih Kecamatan</option>
+                                                                <option value="male">Male</option>
+                                                                <option value="female">Female</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group col-md-4">
+                                                            <label for="kecamatan">Kelurahan</label>
+                                                            <select name="Kelurahan[]" class="form-control" id="Kelurahan" required >
+                                                                <option value="">Pilih Kelurahan</option>
+                                                                <option value="male">Male</option>
+                                                                <option value="female">Female</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group col-md-4">
+                                                            <label for="kodepos">KodePos</label>
+                                                            <input type="number" name="kodepos" id="kodepos" class="form-control" required placeholder="KodePos">  
+                                                        </div>
                                                     </div>
-                                                    <div class="form-group col-md-4">
-                                                        <label for="kodepos">KodePos</label>
-                                                        <input type="number" name="kodepos" id="kodepos" class="form-control" required placeholder="KodePos">  
+                                                    <div class="row" id="latitude">
+                                                        <div class="form-group col-md-3" >
+                                                            <label for="dms">Degrees</label>
+                                                            <div class="input-group">
+                                                                <input type="number" name="dms[]" id="dms" class="form-control" required placeholder="Degrees" aria-describedby="basic-addon1">
+                                                                <span class="input-group-addon" id="basic-addon1">°</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group col-md-3">
+                                                            <label for="dms">Minutes</label>
+                                                            <div class="input-group">  
+                                                                <input type="number" name="dms[]" id="dms" class="form-control" required placeholder="Minutes" aria-describedby="basic-addon1">
+                                                                <span class="input-group-addon" id="basic-addon1">'</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group col-md-3">
+                                                            <label for="dms">Seconds</label>
+                                                            <div class="input-group">    
+                                                                <input type="number" name="dms[]" id="dms" class="form-control" required placeholder="Seconds" aria-describedby="basic-addon1">
+                                                                <span class="input-group-addon" id="basic-addon1">"</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group col-md-3">
+                                                            <label for="direction">Direction</label>
+                                                            <select name="direction[]" class="form-control" id="direction" required>
+                                                                <option value="">Pilih</option>
+                                                                <option value="">LU</option>
+                                                                <option value="">LS</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+    
+                                                    <div class="row" id="longitude">
+                                                        <div class="form-group col-md-3" >
+                                                            <label for="dms">Degrees</label>
+                                                            <div class="input-group">
+                                                                <input type="number" name="dms[]" id="dms" class="form-control" required placeholder="Degrees" aria-describedby="basic-addon1">
+                                                                <span class="input-group-addon" id="basic-addon1">°</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group col-md-3">
+                                                            <label for="dms">Minutes</label>
+                                                            <div class="input-group">
+                                                                <input type="number" name="dms[]" id="dms" class="form-control" required placeholder="Minutes" aria-describedby="basic-addon1">
+                                                                <span class="input-group-addon" id="basic-addon1">'</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group col-md-3">
+                                                            <label for="dms">Seconds</label>
+                                                            <div class="input-group">
+                                                                <input type="number" name="dms[]" id="dms" class="form-control" required placeholder="Seconds" aria-describedby="basic-addon1">
+                                                                <span class="input-group-addon" id="basic-addon1">"</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group col-md-3">
+                                                            <label for="direction">Direction</label>
+                                                            <select name="direction[]" class="form-control" id="direction" required disabled>
+                                                                <option value="">Pilih</option>
+                                                                <option value="" selected>BT</option>
+                                                            </select>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div class="row" id="latitude">
-                                                    <div class="form-group col-md-3" >
-                                                        <label for="dms">Latitude</label>
-                                                        <div class="input-group">
-                                                            <input type="number" name="dms[]" id="dms" class="form-control" required placeholder="Degrees" aria-describedby="basic-addon1">
-                                                            <span class="input-group-addon" id="basic-addon1">°</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group col-md-3">
-                                                        <label for="dms">Minutes</label>
-                                                        <div class="input-group">  
-                                                            <input type="number" name="dms[]" id="dms" class="form-control" required placeholder="Minutes" aria-describedby="basic-addon1">
-                                                            <span class="input-group-addon" id="basic-addon1">'</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group col-md-3">
-                                                        <label for="dms">Seconds</label>
-                                                        <div class="input-group">    
-                                                            <input type="number" name="dms[]" id="dms" class="form-control" required placeholder="Seconds" aria-describedby="basic-addon1">
-                                                            <span class="input-group-addon" id="basic-addon1">"</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group col-md-3">
-                                                        <label for="direction">Direction</label>
-                                                        <select name="direction[]" class="form-control" id="direction" required>
-                                                            <option value="">Pilih</option>
-                                                            <option value="">NORTH</option>
-                                                            <option value="">SOUTH</option>
-                                                            <option value="">WEST</option>
-                                                            <option value="">EAST</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
+                                            </div> 
 
-                                                <div class="row" id="longitude">
-                                                    <div class="form-group col-md-3" >
-                                                        <label for="dms">Longitude</label>
-                                                        <div class="input-group">
-                                                            <input type="number" name="dms[]" id="dms" class="form-control" required placeholder="Degrees" aria-describedby="basic-addon1">
-                                                            <span class="input-group-addon" id="basic-addon1">°</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group col-md-3">
-                                                        <label for="dms">Minutes</label>
-                                                        <div class="input-group">
-                                                            <input type="number" name="dms[]" id="dms" class="form-control" required placeholder="Minutes" aria-describedby="basic-addon1">
-                                                            <span class="input-group-addon" id="basic-addon1">'</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group col-md-3">
-                                                        <label for="dms">Seconds</label>
-                                                        <div class="input-group">
-                                                            <input type="number" name="dms[]" id="dms" class="form-control" required placeholder="Seconds" aria-describedby="basic-addon1">
-                                                            <span class="input-group-addon" id="basic-addon1">"</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group col-md-3">
-                                                        <label for="direction">Direction</label>
-                                                        <select name="direction[]" class="form-control" id="direction" required>
-                                                            <option value="">Pilih</option>
-                                                            <option value="">NORTH</option>
-                                                            <option value="">SOUTH</option>
-                                                            <option value="">WEST</option>
-                                                            <option value="">EAST</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
                                             <div class="row">
                                                 <div class="form-group col-md-12" >
-                                                    <div class="form-group col-md-12" id="dermaga type">  
-                                                        <div class="col-md-6" style="padding-left:0;">
-                                                            <label for="dermaga">Dermaga Tipe</label>
-                                                            <input type="text" name="dermaga" id="dermaga" class="form-control" required placeholder="Dermaga Type">
-                                                        </div>
-                                                        <div class="col-md-2" >
-                                                            <label for="kedalaman">kedalaman</label>                                                        
-                                                            <input type="number" name="meter[]" id="kedalaman" class="form-control" required placeholder="Meter">
-                                                        </div>
-                                                        
-                                                        <div class="col-md-2">
-                                                            <label for="kapasitas">Kapasitas</label>
-                                                            <input type="number" name="dermaga" id="kapasitas" class="form-control" required placeholder="Kapasitas">
-                                                        </div>
-                                                        <div class="col-md-2"style="padding-right:0;">
-                                                            <label for="satuan">satuan</label>
-                                                            <select class="form-control" id="satuan" name="satuan[]" required>
-                                                                <option value="">Pilih Satuan</option>
-                                                                <option>FIT</option>
-                                                                <option>GT</option>
-                                                                <option>DWT</option>
-                                                        </select>    
-                                                        </div>  
-                                                    </div>
-
-                                                    <div class="form-group col-md-6">
-                                                        <label for="name">NO SK</label>
-                                                        <input type="text" name="nosk" id="" class="form-control" required placeholder="Input No SK">
-                                                    </div>
-    
-                                                    <div class="form-group col-md-6">
-                                                        <label for="bidang usaha">BIDANG USAHA</label>
-                                                        <input type="text" name="bidangusaha" id="" class="form-control" required placeholder="Bidang Usaha"> 
-                                                    </div>
-    
-    
-                                                    <div class="form-group col-md-6">
-                                                        <label for="kelas">KELAS</label>
-                                                        <select name="kelas[]" class="form-control" id="kelas" required>
-                                                            <option value="">Pilih Kelas</option>
-                                                            <option value="">KSOP KELAS II TERNATE</option>
-                                                            <option value="">KUPP KELAS III DARUBA</option>
-                                                            <option value="">KUPP KELAS III JAILOLO</option>
-                                                            <option value="">KUPP KELAS III SOASIO</option>
-                                                            <option value="">KUPP KELAS III LAIWUI</option>
-                                                            <option value="">KUPP KELAS II LABUHA/BABANG</option>
-                                                            <option value="">KUPP KELAS II SANANA</option>
-                                                        </select>
-                                                    </div>
-
-                                                    
-                                                    <div class="form-group col-md-3" >
-                                                        <label for="tersus_tuks">TUKS / TERSUS</label>
-                                                        <select name="tersus_tuks[]" class="form-control" id="provinsi" required>
-                                                            <option value="">Pilih</option>
-                                                            <option value="">TUKS</option>
-                                                            <option value="">TERSUS</option>
-                                                        </select>  
-                                                    </div>
-    
-                                                    <div class="form-group col-md-3" >
-                                                        <label for="status">STATUS</label>
-                                                        <select name="status[]" class="form-control" id="status" required>
-                                                            <option value="">Pilih Status</option>
-                                                            <option value="aktif">AKTIF</option>
-                                                            <option value="nonaktif">NON AKTIF</option>
-                                                        </select>  
-                                                    </div>
-    
-                                                    <div class="col-md-3">
-                                                        <label for="terbit">Tgl Terbit</label>
-                                                        <div class="input-group date" data-provide="datepicker">
-                                                            <div class="input-group-addon">
-                                                                <span class="glyphicon glyphicon-th"></span>
+                                                    <div class="wrap-2">
+                                                        <div class="form-group col-md-12" id="dermaga type">  
+                                                            <div class="col-md-5" style="padding-left:0;">
+                                                                <label for="dermaga">Dermaga Tipe</label>
+                                                                <input type="text" name="dermaga" id="dermaga" class="form-control" required placeholder="Dermaga Type">
                                                             </div>
-                                                            <input placeholder="Tanggal Terbit" type="text" class="form-control datepicker" name="tgl_terbit[]" autocomplete="off">
+                                                            <div class="col-md-3" >
+                                                                <label for="kedalaman">kedalaman</label>
+                                                                <div class="input-group">
+                                                                    <input type="number" name="meter[]" id="meter" class="form-control" required placeholder="Meter" aria-describedby="basic-addon1">
+                                                                    <span class="input-group-addon" id="basic-addon1">M LWH</span>
+                                                                </div>                                                       
+                                                                <!-- <input type="number" name="meter[]" id="kedalaman" class="form-control" required placeholder="Meter"> -->
+                                                            </div>
+                                                            
+                                                            <div class="col-md-2">
+                                                                <label for="kapasitas">Kapasitas</label>
+                                                                <input type="number" name="dermaga" id="kapasitas" class="form-control" required placeholder="Kapasitas">
+                                                            </div>
+                                                            <div class="col-md-2"style="padding-right:0;">
+                                                                <label for="satuan">satuan</label>
+                                                                <select class="form-control" id="satuan" name="satuan[]" required>
+                                                                    <option value="">Pilih Satuan</option>
+                                                                    <option>FIT</option>
+                                                                    <option>GT</option>
+                                                                    <option>DWT</option>
+                                                                </select>    
+                                                            </div>      
                                                         </div>
                                                     </div>
+                                                 
+                                                    <div class="wrap-2">
+                                                        <div class="form-group col-md-6">
+                                                            <label for="name">Legalitas</label>
+                                                            <input type="text" name="nosk" id="" class="form-control" required placeholder="Input No SK">
+                                                        </div>
         
-                                                    <div class="col-md-3">
-                                                        <label for="akhir">Masa Berlaku</label>
-                                                        <div class="input-group date" data-provide="datepicker">
-                                                            <div class="input-group-addon">
-                                                                <span class="glyphicon glyphicon-th"></span>
+                                                        <div class="form-group col-md-6">
+                                                            <label for="bidang usaha">BIDANG USAHA</label>
+                                                            <input type="text" name="bidangusaha" id="" class="form-control" required placeholder="Bidang Usaha"> 
+                                                        </div>
+        
+        
+                                                        <div class="form-group col-md-6">
+                                                            <label for="kelas">Wilayah Kerja</label>
+                                                            <select name="kelas[]" class="form-control" id="kelas" required>
+                                                                <option value="">Pilih Wilayah Kerja</option>
+                                                                <option value="">KSOP KELAS II TERNATE</option>
+                                                                <option value="">KUPP KELAS III DARUBA</option>
+                                                                <option value="">KUPP KELAS III JAILOLO</option>
+                                                                <option value="">KUPP KELAS III SOASIO</option>
+                                                                <option value="">KUPP KELAS III LAIWUI</option>
+                                                                <option value="">KUPP KELAS II LABUHA/BABANG</option>
+                                                                <option value="">KUPP KELAS II SANANA</option>
+                                                            </select>
+                                                        </div>
+    
+                                                        
+                                                        <div class="form-group col-md-3" >
+                                                            <label for="tersus_tuks">TUKS / TERSUS</label>
+                                                            <select name="tersus_tuks[]" class="form-control" id="provinsi" required>
+                                                                <option value="">Pilih</option>
+                                                                <option value="">TUKS</option>
+                                                                <option value="">TERSUS</option>
+                                                            </select>  
+                                                        </div>
+        
+                                                        <div class="form-group col-md-3" >
+                                                            <label for="status">STATUS</label>
+                                                            <select name="status[]" class="form-control" id="status" required>
+                                                                <option value="">Pilih Status</option>
+                                                                <option value="aktif">AKTIF</option>
+                                                                <option value="nonaktif">NON AKTIF</option>
+                                                            </select>  
+                                                        </div>
+        
+                                                        <div class="col-md-3">
+                                                            <label for="terbit">Tgl Terbit</label>
+                                                            <div class="input-group date" data-provide="datepicker">
+                                                                <div class="input-group-addon">
+                                                                    <span class="glyphicon glyphicon-th"></span>
+                                                                </div>
+                                                                <input placeholder="Tanggal Terbit" type="text" class="form-control datepicker" name="tgl_terbit[]" autocomplete="off">
                                                             </div>
-                                                            <input placeholder="Masa Berlaku" type="text" class="form-control datepicker" name="tgl_akhir[]" autocomplete="off">
+                                                        </div>
+            
+                                                        <div class="col-md-3">
+                                                            <label for="akhir">Masa Berlaku</label>
+                                                            <div class="input-group date" data-provide="datepicker">
+                                                                <div class="input-group-addon">
+                                                                    <span class="glyphicon glyphicon-th"></span>
+                                                                </div>
+                                                                <input placeholder="Masa Berlaku" type="text" class="form-control datepicker" name="tgl_akhir[]" autocomplete="off">
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 </div>
                                                
-    
-                                                <div class="form-group col-md-12" style="margin: 3rem 0 1rem 0;">
+                                                <div class="form-group col-md-12" style="padding-left: 0;">
                                                     <button type="button" id="btnAdd" class="btn btn-fill btn-primary" style="margin-right: 1rem;">Tambah Lokasi</button>
                                                     <button type="button" class="btn btn-fill btn-danger btnRemove">Hapus</button>
                                                 </div>
