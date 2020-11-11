@@ -27,11 +27,12 @@ class Export extends CI_Controller
 	public function index()
 	{
         //sample paramter
-        $provinsi_id = array(11,19);
+        $provinsi_id = array();
         $kategori_id = array();
         $wilayah_kerja = array();
         $data = $this->Export_model->getData($provinsi_id,$kategori_id,$wilayah_kerja);
-        //echo "<pre>";print_r($data->result_array());die();
+        $rekap_provinsi = $this->Export_model->rekapProvinsi($provinsi_id);
+        //echo "<pre>";print_r($rekap_provinsi->result_array());die();
         $spreadsheet = new Spreadsheet();
         $index = 0;
         $wilayah = "";$row = 8;$no = 0;
@@ -265,10 +266,42 @@ class Export extends CI_Controller
             $wilayah = $r['provinsi'];$no++;
 
         }
-		
-		
+        
+        /* rekaptulasi provinsi */
+        $myWorkSheet = new \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet($spreadsheet, "REKAPiTULASI PROVINSI");
+        $spreadsheet->addSheet($myWorkSheet, $index);
+        $sheet = $spreadsheet->setActiveSheetIndex($index);
+        
+        $sheet->mergeCells('B3:H3');
+        $sheet->getStyle('B3:H3')->getAlignment()->setVertical('center');
+        $sheet->getStyle('B3:H3')->getAlignment()->setHorizontal('center');
+        $sheet->getRowDimension(3)->setRowHeight(36);
+        $sheet->setCellValue('B3', 'REKAPITULASI JUMLAH TERSUS DAN TUKS PER PROVINSI');
+       
+        $sheet->mergeCells('B4:B5'); $sheet->mergeCells('D4:E4'); $sheet->mergeCells('F4:G4'); 
+        $sheet->mergeCells('C4:C5'); $sheet->mergeCells('H4:H5');
+
+        $sheet->setCellValue('B4', 'NO'); $sheet->setCellValue('C4', 'PROVINSI'); $sheet->setCellValue('D4', 'TERSUS');
+        $sheet->setCellValue('F4', 'TUKS'); $sheet->setCellValue('H4', 'JUMLAH');
+        $sheet->setCellValue('D5','AKTIF'); $sheet->setCellValue('E5','TIDAK AKTIF');
+        $sheet->setCellValue('F5','AKTIF'); $sheet->setCellValue('G5','TIDAK AKTIF');
+        
+        $no = 1; $cols = "B"; $rows="6";
+        foreach($rekap_provinsi->result_array() as $key => $value)
+        {
+            $sheet->setCellValue($cols.$rows, $no);$cols++;
+            $sheet->setCellValue($cols.$rows, $value['provinsi']);$cols++;
+            $sheet->setCellValue($cols.$rows, $value['TERSUS_AKTIF']);$cols++;
+            $sheet->setCellValue($cols.$rows, $value['TERSUS_NONAKTIF']);$cols++;
+            $sheet->setCellValue($cols.$rows, $value['TUKS_AKTIF']);$cols++;
+            $sheet->setCellValue($cols.$rows, $value['TUKS_NONAKTIF']);$cols++;
+            $sheet->setCellValue($cols.$rows, $value['JUMLAH']);
+            $rows++;$cols= "B";$no++;
+            
+        }
+        
 		$writer = new Xlsx($spreadsheet);
-		$filename = 'Data-TUKS-TERSUS-Indonesia';
+		$filename = 'Data-TUKS-TERSUS-INDONESIA_'.date("Ymd");
 		
         header('Content-Disposition: attachment;filename="'. $filename);
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');

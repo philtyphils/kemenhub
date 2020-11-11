@@ -76,6 +76,30 @@
             $data = $this->db->get("daftar_perusahaan");
             return $data;
         }
+
+        public function rekapProvinsi($provinsi_id)
+        {
+            $no = 0;
+            if(count($provinsi_id) > 0)
+            {
+                foreach($provinsi_id as $p)
+                {
+                    if($no > 0)
+                    {
+                        $this->db->or_where("kode",$p);
+                    }
+                    else
+                    {
+                        $this->db->where("kode",$p);
+                    }
+                    $no++;
+                }
+            }
+            
+            $data = $this->db->get('rekaptulasi_provinsi');
+            //print($this->db->last_query());die();
+            return $data;
+        }
 		
 		
 	}
