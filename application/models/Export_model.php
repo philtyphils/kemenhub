@@ -14,7 +14,7 @@
         public function getData($provinsi_id,$kategori_id,$wilayah_kerja)
         {
             $no = 0;
-            if(count($kategori_id) > 0)
+            if(count($provinsi_id) > 0)
             {
                 foreach($provinsi_id as $p)
                 {
@@ -67,7 +67,9 @@
                 daftar_perusahaan.sk as legalitas,
                 daftar_perusahaan.tgl_terbit as tgl_terbit,
                 daftar_perusahaan.status as status,
-                daftar_perusahaan.ms_berlaku as ms_berlaku
+                daftar_perusahaan.ms_berlaku as ms_berlaku,
+                daftar_perusahaan.k_lat as latitude,
+                daftar_perusahaan.k_long as longitude,
             ");
             $this->db->order_by("daftar_perusahaan.provinsi_id","asc");
             $this->db->order_by("daftar_perusahaan.ksop_id","asc");
