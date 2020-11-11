@@ -104,15 +104,11 @@
                                     </div>
                                     <span class="fa fa-folder-open"></span>
                                 </div>
-                                <div class="card-content" style="padding-top: 100px;">
-
+                                <div class="card-content" style="padding-top: 60px;">
                                     <div class="warp-toolbar">
-                                        <input type="text" id="searchbox" class="searchbutton" placeholder="Silahkan cari data disini">
+                                        <input type="text" id="searchbox" class="searchbutton" placeholder="Silahkan cari data disini...">
                                     </div>
-                                   
-
-                                    <div class="toolbar">
-                                        <div class="warp-toolbar">
+                                    <div class="warp-toolbar col-md-6" style="padding-left: 0;margin-top: 1rem;">
                                         <select class="selectpicker" multiple data-live-search="true" title="Provinsi">
                                             <option>Mustard</option>
                                             <option>Ketchup</option>
@@ -130,8 +126,23 @@
                                             <option>Ketchup</option>
                                             <option>Relish</option>
                                         </select>
-                                        </div>
-                                        
+
+                                        <select class="selectpicker">
+                                            <option value="">Pilih TUKS / TERSUS</option>
+                                            <option value="aktif">TUKS</option>
+                                            <option value="nonaktif">TERSUS</option>
+                                        </select>
+
+                                        <select class="selectpicker">
+                                            <option value="">Pilih Status</option>
+                                            <option value="aktif">AKTIF</option>
+                                            <option value="nonaktif">NON AKTIF</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="toolbar col-md-12" style="padding: 0;">
+                                       
+                                    <h4 style="font-weight: 400;color: #AAAAAA;letter-spacing: 2px;font-size: 20px;margin-top: 2rem;">TOTAL : 80000</h4>
                                     <div class="warp-toolbar">
                                         <a href="form.html" class="btn btn-success btn-fill" style="margin-right: 1rem;">
                                             <i class="fa fa-plus"></i>
@@ -143,22 +154,24 @@
                                         </a>        
                                     </div>
                                     </div>
+                                   
 
                                     <div class="material-datatables">
-                                        <table id="datatables" class="table table-responsive table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
+                                        <table id="datatables" class="table table-responsive  table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%;font-size: 13px;">
                                             <thead style="color: #FFFFFF;font-weight: 600;font-size: 12px;">
                                                 <tr role="row" style="background-color:#43425D;">
-                                                    <th style="width:60px">No</th>
+                                                    <th>No</th>
                                                     <th>NAMA</th>
-                                                    <th>KELAS</th>
-                                                    <th style="width:150px !important;">BIDANG USAHA</th>
+                                                    <th>ALAMAT</th>
+                                                    <th style="width:100px">WILAYAH KERJA</th>
+                                                    <th>BIDANG USAHA</th>
                                                     <th>KATEGORI</th>
                                                     <th>LOKASI</th>
-                                                    <th>DMS</th>
-                                                    <th style="width:100px">TERSUS / TUSK</th>
-                                                    <th >SK</th>
+                                                    <th>KOORDINAT</th>
+                                                    <th style="width:100px">TERSUS / TUKS</th>
+                                                    <th>LEGALITAS</th>
                                                     <th>TERBIT</th>
-                                                    <th style="width:100px">STATUS</th>
+                                                    <th style="width:100px;text-align: center;">STATUS</th>
                                                     <th style="width:100px">MASA BERLAKU</th>
                                                     <th class="disabled-sorting" style="width:50px">ACTIONS</th>
                                                 </tr>
@@ -166,16 +179,17 @@
                                             <tbody>
                                                 <tr role="row">
                                                     <td>1</td>
-                                                    <td>PT.PERTAMINA (PERSERO)</td>
-                                                    <td>KSOP KELAS IV MANOKWARI</td>
+                                                    <td style="font-weight: bold;">PT.PERTAMINA (PERSERO)</td>
+                                                    <td>Alamat Example</td>
+                                                    <td class="td-status2">KSOP KELAS IV MANOKWARI</td>
                                                     <td>NIAGA MIGAS</td>
                                                     <td>ENERGI</td>
                                                     <td>PELABUHAN MANOKWARI</td>
                                                     <td> d + (min/60) + (sec/3600)</td>
-                                                    <td>TUKS</td>
+                                                    <td class="td-status" style="color: #A3A0FB;">TUKS</td>
                                                     <td>SK Menhub Nomor : KM. 42/AL.106/Phb-80</td>
                                                     <td>15/02/1980</td>
-                                                    <td>AKTIF</td>
+                                                    <td class="td-status" style="color: #649e07;">AKTIF</td>
                                                     <td>02/12/2024</td>
                                                     <td>
                                                         <a href="#" class="btn btn-simple btn-warning btn-icon edit"><i class="fa fa-edit"></i></a>
@@ -184,16 +198,17 @@
                                                 </tr>
                                                 <tr  role="row">
                                                     <td>2</td>
-                                                    <td>PT.MEDCOPAPUA HIJAU SELARAS</td>
-                                                    <td>KSOP KELAS I SORONG</td>
+                                                    <td style="font-weight: bold;">PT.MEDCOPAPUA HIJAU SELARAS</td>
+                                                    <td>Alamat Example</td>
+                                                    <td class="td-status2">KSOP KELAS I SORONG</td>
                                                     <td>PERKEBUNAN JELAPA SAWIT</td>
                                                     <td>PERTANIAN</td>
                                                     <td>DESA KAIRONI,DISTRIK SIDEY, KAB. MANOKWARI, PAPUA BARAT</td>
                                                     <td> d + (min/60) + (sec/3600)</td>
-                                                    <td>TERSUS</td>
+                                                    <td class="td-status" style="color: #6bd189;">TERSUS</td>
                                                     <td>A. 1417/AL. 308/DJPL</td>
                                                     <td>02/12/2019</td>
-                                                    <td>AKTIF</td>
+                                                    <td class="td-status" style="color: #649e07;">AKTIF</td>
                                                     <td>02/12/2024</td>
                                                     <td>
                                                         <a href="#" class="btn btn-simple btn-warning btn-icon edit"><i class="fa fa-edit"></i></a>
@@ -202,16 +217,17 @@
                                                 </tr>
                                                 <tr  role="row">
                                                     <td>3</td>
-                                                    <td>PT.PERTAMINA (PERSERO)</td>
-                                                    <td>KSOP KELAS IV MANOKWARI</td>
+                                                    <td style="font-weight: bold;">PT.PERTAMINA (PERSERO)</td>
+                                                    <td>Alamat Example</td>
+                                                    <td class="td-status2">KSOP KELAS IV MANOKWARI</td>
                                                     <td>NIAGA MIGAS</td>
                                                     <td>ENERGI</td>
                                                     <td>PELABUHAN MANOKWARI</td>
                                                     <td> d + (min/60) + (sec/3600)</td>
-                                                    <td>TUKS</td>
+                                                    <td class="td-status" style="color: #A3A0FB;">TUKS</td>
                                                     <td>SK Menhub Nomor : KM. 42/AL.106/Phb-80</td>
                                                     <td>15/02/1980</td>
-                                                    <td>AKTIF</td>
+                                                    <td class="td-status" style="color: #649e07;">AKTIF</td>
                                                     <td>02/12/2024</td>
                                                     <td>
                                                         <a href="#" class="btn btn-simple btn-warning btn-icon edit"><i class="fa fa-edit"></i></a>
@@ -220,16 +236,17 @@
                                                 </tr>
                                                 <tr  role="row">
                                                     <td>4</td>
-                                                    <td>PT.PERTAMINA (PERSERO)</td>
-                                                    <td>KSOP KELAS IV MANOKWARI</td>
+                                                    <td style="font-weight: bold;">PT.PERTAMINA (PERSERO)</td>
+                                                    <td>Alamat Example</td>
+                                                    <td class="td-status2">KSOP KELAS IV MANOKWARI</td>
                                                     <td>NIAGA MIGAS</td>
                                                     <td>ENERGI</td>
                                                     <td>PELABUHAN MANOKWARI</td>
                                                     <td> d + (min/60) + (sec/3600)</td>
-                                                    <td>TUKS</td>
+                                                    <td class="td-status" style="color: #A3A0FB;">TUKS</td>
                                                     <td>SK Menhub Nomor : KM. 42/AL.106/Phb-80</td>
                                                     <td>15/02/1980</td>
-                                                    <td>AKTIF</td>
+                                                    <td class="td-status" style="color: red;">NON AKTIF</td>
                                                     <td>02/12/2024</td>
                                                     <td>
                                                         <a href="#" class="btn btn-simple btn-warning btn-icon edit"><i class="fa fa-edit"></i></a>
@@ -238,16 +255,17 @@
                                                 </tr>
                                                 <tr  role="row">
                                                     <td>5</td>
-                                                    <td>PT.PERTAMINA (PERSERO)</td>
-                                                    <td>KSOP KELAS IV MANOKWARI</td>
+                                                    <td style="font-weight: bold;">PT.PERTAMINA (PERSERO)</td>
+                                                    <td>Alamat Example</td>
+                                                    <td class="td-status2">KSOP KELAS IV MANOKWARI</td>
                                                     <td>NIAGA MIGAS</td>
                                                     <td>ENERGI</td>
                                                     <td>PELABUHAN MANOKWARI</td>
                                                     <td> d + (min/60) + (sec/3600)</td>
-                                                    <td>TUKS</td>
+                                                    <td class="td-status" style="color: #A3A0FB;">TUKS</td>
                                                     <td>SK Menhub Nomor : KM. 42/AL.106/Phb-80</td>
                                                     <td>15/02/1980</td>
-                                                    <td>AKTIF</td>
+                                                    <td class="td-status" style="color: red;">NON AKTIF</td>
                                                     <td>02/12/2024</td>
                                                     <td>
                                                         <a href="#" class="btn btn-simple btn-warning btn-icon edit"><i class="fa fa-edit"></i></a>
@@ -256,16 +274,17 @@
                                                 </tr>
                                                 <tr  role="row">
                                                     <td>6</td>
-                                                    <td>PT.PERTAMINA (PERSERO)</td>
-                                                    <td>KSOP KELAS IV MANOKWARI</td>
+                                                    <td style="font-weight: bold;">PT.PERTAMINA (PERSERO)</td>
+                                                    <td>Alamat Example</td>
+                                                    <td class="td-status2">KSOP KELAS IV MANOKWARI</td>
                                                     <td>NIAGA MIGAS</td>
                                                     <td>ENERGI</td>
                                                     <td>PELABUHAN MANOKWARI</td>
                                                     <td> d + (min/60) + (sec/3600)</td>
-                                                    <td>TUKS</td>
+                                                    <td class="td-status" style="color: #A3A0FB;">TUKS</td>
                                                     <td>SK Menhub Nomor : KM. 42/AL.106/Phb-80</td>
                                                     <td>15/02/1980</td>
-                                                    <td>AKTIF</td>
+                                                    <td class="td-status" style="color: #649e07;">AKTIF</td>
                                                     <td>02/12/2024</td>
                                                     <td>
                                                         <a href="#" class="btn btn-simple btn-warning btn-icon edit"><i class="fa fa-edit"></i></a>
@@ -274,16 +293,17 @@
                                                 </tr>
                                                 <tr  role="row">
                                                     <td>7</td>
-                                                    <td>PT.PERTAMINA (PERSERO)</td>
-                                                    <td>KSOP KELAS IV MANOKWARI</td>
+                                                    <td style="font-weight: bold;">PT.PERTAMINA (PERSERO)</td>
+                                                    <td>Alamat Example</td>
+                                                    <td class="td-status2">KSOP KELAS IV MANOKWARI</td>
                                                     <td>NIAGA MIGAS</td>
                                                     <td>ENERGI</td>
                                                     <td>PELABUHAN MANOKWARI</td>
                                                     <td> d + (min/60) + (sec/3600)</td>
-                                                    <td>TUKS</td>
+                                                    <td class="td-status" style="color: #A3A0FB;">TUKS</td>
                                                     <td>SK Menhub Nomor : KM. 42/AL.106/Phb-80</td>
                                                     <td>15/02/1980</td>
-                                                    <td>AKTIF</td>
+                                                    <td class="td-status" style="color: #649e07;">AKTIF</td>
                                                     <td>02/12/2024</td>
                                                     <td>
                                                         <a href="#" class="btn btn-simple btn-warning btn-icon edit"><i class="fa fa-edit"></i></a>
@@ -292,16 +312,17 @@
                                                 </tr>
                                                 <tr  role="row">
                                                     <td>8</td>
-                                                    <td>PT.PERTAMINA (PERSERO)</td>
-                                                    <td>KSOP KELAS IV MANOKWARI</td>
+                                                    <td style="font-weight: bold;">PT.PERTAMINA (PERSERO)</td>
+                                                    <td>Alamat Example</td>
+                                                    <td class="td-status2">KSOP KELAS IV MANOKWARI</td>
                                                     <td>NIAGA MIGAS</td>
                                                     <td>ENERGI</td>
                                                     <td>PELABUHAN MANOKWARI</td>
                                                     <td> d + (min/60) + (sec/3600)</td>
-                                                    <td>TUKS</td>
+                                                    <td class="td-status" style="color: #6bd189;">TERSUS</td>
                                                     <td>SK Menhub Nomor : KM. 42/AL.106/Phb-80</td>
                                                     <td>15/02/1980</td>
-                                                    <td>AKTIF</td>
+                                                    <td class="td-status" style="color: #649e07;">AKTIF</td>
                                                     <td>02/12/2024</td>
                                                     <td>
                                                         <a href="#" class="btn btn-simple btn-warning btn-icon edit"><i class="fa fa-edit"></i></a>
@@ -310,16 +331,17 @@
                                                 </tr>
                                                 <tr  role="row">
                                                     <td>9</td>
-                                                    <td>PT.PERTAMINA (PERSERO)</td>
-                                                    <td>KSOP KELAS IV MANOKWARI</td>
+                                                    <td style="font-weight: bold;">PT.PERTAMINA (PERSERO)</td>
+                                                    <td>Alamat Example</td>
+                                                    <td class="td-status2">KSOP KELAS IV MANOKWARI</td>
                                                     <td>NIAGA MIGAS</td>
                                                     <td>ENERGI</td>
                                                     <td>PELABUHAN MANOKWARI</td>
                                                     <td> d + (min/60) + (sec/3600)</td>
-                                                    <td>TUKS</td>
+                                                    <td class="td-status" style="color: #6bd189;">TERSUS</td>
                                                     <td>SK Menhub Nomor : KM. 42/AL.106/Phb-80</td>
                                                     <td>15/02/1980</td>
-                                                    <td>AKTIF</td>
+                                                    <td class="td-status" style="color:RED;">NON AKTIF</td>
                                                     <td>02/12/2024</td>
                                                     <td>
                                                         <a href="#" class="btn btn-simple btn-warning btn-icon edit"><i class="fa fa-edit"></i></a>
@@ -328,16 +350,17 @@
                                                 </tr>
                                                 <tr  role="row">
                                                     <td>10</td>
-                                                    <td>PT.PERTAMINA (PERSERO)</td>
-                                                    <td>KSOP KELAS IV MANOKWARI</td>
+                                                    <td style="font-weight: bold;">PT.PERTAMINA (PERSERO)</td>
+                                                    <td>Alamat Example</td>
+                                                    <td class="td-status2">KSOP KELAS IV MANOKWARI</td>
                                                     <td>NIAGA MIGAS</td>
                                                     <td>ENERGI</td>
                                                     <td>PELABUHAN MANOKWARI</td>
                                                     <td> d + (min/60) + (sec/3600)</td>
-                                                    <td>TUKS</td>
+                                                    <td class="td-status" style="color: #A3A0FB;">TUKS</td>
                                                     <td>SK Menhub Nomor : KM. 42/AL.106/Phb-80</td>
                                                     <td>15/02/1980</td>
-                                                    <td>AKTIF</td>
+                                                    <td class="td-status" style="color: #649e07;">AKTIF</td>
                                                     <td>02/12/2024</td>
                                                     <td>
                                                         <a href="#" class="btn btn-simple btn-warning btn-icon edit"><i class="fa fa-edit"></i></a>
@@ -346,16 +369,17 @@
                                                 </tr>
                                                 <tr  role="row">
                                                     <td>10</td>
-                                                    <td>PT.PERTAMINA (PERSERO)</td>
-                                                    <td>KSOP KELAS IV MANOKWARI</td>
+                                                    <td style="font-weight: bold;">PT.PERTAMINA (PERSERO)</td>
+                                                    <td>Alamat Example</td>
+                                                    <td class="td-status2">KSOP KELAS IV MANOKWARI</td>
                                                     <td>NIAGA MIGAS</td>
                                                     <td>ENERGI</td>
                                                     <td>PELABUHAN MANOKWARI</td>
                                                     <td> d + (min/60) + (sec/3600)</td>
-                                                    <td>TUKS</td>
+                                                    <td class="td-status" style="color: #A3A0FB;">TUKS</td>
                                                     <td>SK Menhub Nomor : KM. 42/AL.106/Phb-80</td>
                                                     <td>15/02/1980</td>
-                                                    <td>AKTIF</td>
+                                                    <td  class="td-status" style="color: #649e07;">AKTIF</td>
                                                     <td>02/12/2024</td>
                                                     <td>
                                                         <a href="#" class="btn btn-simple btn-warning btn-icon edit"><i class="fa fa-edit"></i></a>
@@ -364,16 +388,17 @@
                                                 </tr>
                                                 <tr  role="row">
                                                     <td>10</td>
-                                                    <td>PT.PERTAMINA (PERSERO)</td>
-                                                    <td>KSOP KELAS IV MANOKWARI</td>
+                                                    <td style="font-weight: bold;">PT.PERTAMINA (PERSERO)</td>
+                                                    <td>Alamat Example</td>
+                                                    <td class="td-status2">KSOP KELAS IV MANOKWARI</td>
                                                     <td>NIAGA MIGAS</td>
                                                     <td>ENERGI</td>
                                                     <td>PELABUHAN MANOKWARI</td>
                                                     <td> d + (min/60) + (sec/3600)</td>
-                                                    <td>TUKS</td>
+                                                    <td class="td-status" style="color: #A3A0FB;">TUKS</td>
                                                     <td>SK Menhub Nomor : KM. 42/AL.106/Phb-80</td>
                                                     <td>15/02/1980</td>
-                                                    <td>AKTIF</td>
+                                                    <td class="td-status" style="color: #649e07;">AKTIF</td>
                                                     <td>02/12/2024</td>
                                                     <td>
                                                         <a href="#" class="btn btn-simple btn-warning btn-icon edit"><i class="fa fa-edit"></i></a>
@@ -382,16 +407,17 @@
                                                 </tr>
                                                 <tr  role="row">
                                                     <td>10</td>
-                                                    <td>PT.PERTAMINA (PERSERO)</td>
-                                                    <td>KSOP KELAS IV MANOKWARI</td>
+                                                    <td style="font-weight: bold;" >PT.PERTAMINA (PERSERO)</td>
+                                                    <td>Alamat Example</td>
+                                                    <td class="td-status2">KSOP KELAS IV MANOKWARI</td>
                                                     <td>NIAGA MIGAS</td>
                                                     <td>ENERGI</td>
                                                     <td>PELABUHAN MANOKWARI</td>
                                                     <td> d + (min/60) + (sec/3600)</td>
-                                                    <td>TUKS</td>
+                                                    <td class="td-status" style="color: #A3A0FB;">TUKS</td>
                                                     <td>SK Menhub Nomor : KM. 42/AL.106/Phb-80</td>
                                                     <td>15/02/1980</td>
-                                                    <td>AKTIF</td>
+                                                    <td class="td-status" style="color: RED;">NON AKTIF</td>
                                                     <td>02/12/2024</td>
                                                     <td>
                                                         <a href="#" class="btn btn-simple btn-warning btn-icon edit"><i class="fa fa-edit"></i></a>
@@ -400,16 +426,17 @@
                                                 </tr>
                                                 <tr  role="row">
                                                     <td>10</td>
-                                                    <td>PT.PERTAMINA (PERSERO)</td>
-                                                    <td>KSOP KELAS IV MANOKWARI</td>
+                                                    <td style="font-weight: bold;">PT.PERTAMINA (PERSERO)</td>
+                                                    <td>Alamat Example</td>
+                                                    <td class="td-status2">KSOP KELAS IV MANOKWARI</td>
                                                     <td>NIAGA MIGAS</td>
                                                     <td>ENERGI</td>
                                                     <td>PELABUHAN MANOKWARI</td>
                                                     <td> d + (min/60) + (sec/3600)</td>
-                                                    <td>TUKS</td>
+                                                    <td class="td-status" style="color: #A3A0FB;">TUKS</td>
                                                     <td>SK Menhub Nomor : KM. 42/AL.106/Phb-80</td>
                                                     <td>15/02/1980</td>
-                                                    <td>AKTIF</td>
+                                                    <td class="td-status" style="color: RED;">NON AKTIF</td>
                                                     <td>02/12/2024</td>
                                                     <td >
                                                         <a href="#" class="btn btn-simple btn-warning btn-icon edit"><i class="fa fa-edit"></i></a>
@@ -418,16 +445,17 @@
                                                 </tr>
                                                 <tr  role="row">
                                                     <td>10</td>
-                                                    <td>PT.PERTAMINA (PERSERO)</td>
-                                                    <td>KSOP KELAS IV MANOKWARI</td>
+                                                    <td style="font-weight: bold;">PT.PERTAMINA (PERSERO)</td>
+                                                    <td>Alamat Example</td>
+                                                    <td class="td-status2">KSOP KELAS IV MANOKWARI</td>
                                                     <td>NIAGA MIGAS</td>
                                                     <td>ENERGI</td>
                                                     <td>PELABUHAN MANOKWARI</td>
                                                     <td> d + (min/60) + (sec/3600)</td>
-                                                    <td>TUKS</td>
+                                                    <td class="td-status" style="color: #A3A0FB;">TUKS</td>
                                                     <td>SK Menhub Nomor : KM. 42/AL.106/Phb-80</td>
                                                     <td>15/02/1980</td>
-                                                    <td>AKTIF</td>
+                                                    <td class="td-status" style="color: #649e07;">AKTIF</td>
                                                     <td>02/12/2024</td>
                                                     <td>
                                                         <a href="#" class="btn btn-simple btn-warning btn-icon edit"><i class="fa fa-edit"></i></a>
@@ -473,6 +501,7 @@
                 search: "_INPUT_",
                 searchPlaceholder: "Search records",
             },
+            "ordering": false,
             "scrollX": true
         });
 

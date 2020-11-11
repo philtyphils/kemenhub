@@ -562,6 +562,7 @@ select.selectpicker {
   display: inline-block;
   margin-left: 0;
   margin-right: 1rem;
+  margin-bottom: 1rem;
 }
 
 .bootstrap-select.dropdown-menu-right,
@@ -1251,7 +1252,7 @@ fieldset[disabled] .btn-neutral.active {
 
 .btn-simple {
   border: 0;
-  font-size: 16px;
+  font-size: 19px;
   padding: 8px 16px;
 }
 
@@ -1329,12 +1330,37 @@ fieldset[disabled] .btn-neutral.active {
   display: none;
 }
 
+.label-font {
+  border-bottom: 2px solid #f39c12;
+}
+
+.wrap {
+  width: 100%;
+  display: flow-root;
+  min-height: 1px;
+  position: relative;
+  background-color: #ebecf1;
+  padding: 15px 0;
+  margin-bottom: 2rem;
+  border: 2px solid #43425D;
+  border-radius: 4px;
+}
+
+.group {
+  border: 2px solid #43425D;
+  background-color: #ebecf1;
+  padding: 15px 0;
+  margin-bottom: 2rem;
+  border-radius: 4px;
+}
+
 table.dataTable {
   clear: both;
   margin-top: 6px !important;
   margin-bottom: 6px !important;
   max-width: none !important;
   border-collapse: separate !important;
+  cursor: pointer;
 }
 
 ::-webkit-input-placeholder {
@@ -1357,17 +1383,27 @@ table.dataTable {
   opacity: 1;
 }
 
+.td-status {
+  font-weight: bold;
+  text-align: center;
+}
+
+.td-status2 {
+  color: #428bca;
+  font-weight: bold;
+}
+
 .searchbutton {
   background-color: #FFFFFF;
-  border: 1px solid #888888;
+  border: 1px solid #A3A0FB;
   border-radius: 4px;
   color: #565656;
   padding: 5px 16px;
   -webkit-box-shadow: none;
           box-shadow: none;
   border-width: 2px;
-  outline-color: #888888;
-  width: 20%;
+  outline-color: #A3A0FB;
+  width: 219px;
   -webkit-transition: all .5s;
   transition: all .5s;
 }
@@ -1377,14 +1413,17 @@ table.dataTable {
 }
 
 .toolbar {
-  text-align: end;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  margin: 2rem 0;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .toolbar i {
@@ -2644,11 +2683,6 @@ body {
 .card .card-form {
   padding: 50px;
   position: relative;
-}
-
-.group {
-  border-bottom: 2px solid #f39c12;
-  padding: 20px 0;
 }
 
 .card {

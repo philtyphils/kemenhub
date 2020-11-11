@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="/assets/sass/main.css">
     <link href="/assets/css/font-awesome.css" rel="stylesheet" />
     <link href="/assets/css/bootstrap-datepicker.css" rel="stylesheet" />
-    <link href="/assets/css/google-roboto-300-700.css" rel="stylesheet" /> 
+    <link href="/assets/css/google-roboto-300-700.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -155,7 +155,7 @@ var chart_tusk = new Highcharts.chart({
         type: 'pie',
         events: {
             load: function(event) {
-            $('.highcharts-legend-item').last().append('<br/><div style="margin-left:2rem;"><hr/><span style="float:left;font-weight: bold;padding-bottom:2px;">Total</span><span style="float:left;color:#9A9A9A;font-weight: 700;"> ' + Total + '</span> </div>')
+            $('.highcharts-legend-item').last().append('<br/><div style="margin-left:2rem;"><hr/><span style="float:left;font-weight: bold;margin:5px 0;">Total</span><span style="float:left;color:#9A9A9A;font-weight: 700;"> ' + Total + '</span> </div>')
             }
         }  
     },
@@ -217,7 +217,7 @@ var chart_tusk = new Highcharts.chart({
 });
 
 Highcharts.setOptions({
-	colors: ['#6bd189', '#ffb700']
+	colors: ['#6bd189', '#fcbf1e']
 	});
 var Total = 0;
 var chart_tersus = new Highcharts.chart({
@@ -229,7 +229,7 @@ var chart_tersus = new Highcharts.chart({
         type: 'pie',
         events: {
             load: function(event) {
-            $('.highcharts-legend-item').last().append('<br/><div style="margin-left:2rem;"><hr/><span style="float:left;font-weight: bold;padding-bottom:5px;">Total</span><span style="float:left;color:#9A9A9A;font-weight: 700;"> ' + Total + '</span> </div>')
+            $('.highcharts-legend-item').last().append('<br/><div style="margin-left:2rem;"><hr/><span style="float:left;font-weight: bold;margin:5px 0;">Total</span><span style="float:left;color:#9A9A9A;font-weight: 700;"> ' + Total + '</span> </div>')
             }
         }  
         
@@ -272,7 +272,7 @@ var chart_tersus = new Highcharts.chart({
             y: 50000,
         }, {
             name: 'NON AKTIF',
-            y: 900
+            y: 9000
         }]
     }],
     navigation: {
@@ -292,7 +292,7 @@ var chart_tersus = new Highcharts.chart({
 
 
 Highcharts.setOptions({
-	colors: ['#43425D','#A3A0FB','#ffb700','#6bd189']
+	colors: ['#43425D','#A3A0FB','#fcbf1e','#6bd189']
 	});
 var chart_bar = new Highcharts.chart({
     chart: {
