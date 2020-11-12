@@ -86,18 +86,151 @@
                 {
                     if($no > 0)
                     {
-                        $this->db->or_where("kode",$p);
+                        $this->db->or_where("provinsi_id",$p);
                     }
                     else
                     {
-                        $this->db->where("kode",$p);
+                        $this->db->where("provinsi_id",$p);
                     }
                     $no++;
                 }
             }
             
             $data = $this->db->get('rekaptulasi_provinsi');
-            //print($this->db->last_query());die();
+            return $data;
+        }
+
+        public function rekapWilayahkerja($provinsi_id)
+        {
+            $no = 0;
+            $prov_total = count($provinsi_id);
+            if ($prov_total > 1)
+            {
+                $query ="(";
+                foreach($provinsi_id as $p)
+                {
+                    $query = $query."provinsi_id=".$p. " OR ";
+                }
+                $query = substr($query,0,-4);
+                $query= $query.")";
+                $this->db->where($query);
+            }
+           
+            if ($prov_total == 1)
+            {
+                $this->db->where("provinsi_id",$provinsi_id[0]);
+            }
+            
+            $data = $this->db->get('rekaptulasi_wilayah_kerja');
+            return $data;
+        }
+
+        public function rekapKategori($provinsi_id)
+        {
+            $no = 0;
+            if(count($provinsi_id) > 0)
+            {
+                $data = array();
+                $kategori = $this->db->get('kategori');
+                foreach($kategori->result_array() as $key => $value)
+                {
+                    
+                    $prov_total = count($provinsi_id);
+                    if ($prov_total > 1)
+                    {
+                        $query ="(";
+                        foreach($provinsi_id as $p)
+                        {
+                            $query = $query."provinsi_id=".$p. " OR ";
+                        }
+                        $query = substr($query,0,-4);
+                        $query= $query.")";
+                        $this->db->where($query);
+                    }
+
+                    if ($prov_total == 1)
+                    {
+                        $this->db->where("provinsi_id",$provinsi_id[0]);
+                    }
+
+                    $tersus       = $this->db->where("ter_tuk","TERSUS")->where("kategori_id",$value['kategori_id'])->count_all_results('daftar_perusahaan');
+                
+                    
+                    if ($prov_total > 1)
+                    {
+                        $query ="(";
+                        foreach($provinsi_id as $p)
+                        {
+                            $query = $query."provinsi_id=".$p. " OR ";
+                        }
+                        $query = substr($query,0,-4);
+                        $query= $query.")";
+                        $this->db->where($query);
+                    }
+
+                    if ($prov_total == 1)
+                    {
+                        $this->db->where("provinsi_id",$provinsi_id[0]);
+                    }
+                    
+                    $tuks         = $this->db->where("ter_tuk","TUKS")->where("kategori_id",$value['kategori_id'])->count_all_results('daftar_perusahaan');
+
+                    if ($prov_total > 1)
+                    {
+                        $query ="(";
+                        foreach($provinsi_id as $p)
+                        {
+                            $query = $query."provinsi_id=".$p. " OR ";
+                        }
+                        $query = substr($query,0,-4);
+                        $query= $query.")";
+                        $this->db->where($query);
+                    }
+
+                    if ($prov_total == 1)
+                    {
+                        $this->db->where("provinsi_id",$provinsi_id[0]);
+                    }
+                    $lainnya         = $this->db->where("ter_tuk","")->where("kategori_id",$value['kategori_id'])->count_all_results('daftar_perusahaan');
+                    
+                    if ($prov_total > 1)
+                    {
+                        $query ="(";
+                        foreach($provinsi_id as $p)
+                        {
+                            $query = $query."provinsi_id=".$p. " OR ";
+                        }
+                        $query = substr($query,0,-4);
+                        $query= $query.")";
+                        $this->db->where($query);
+                    }
+
+                    if ($prov_total == 1)
+                    {
+                        $this->db->where("provinsi_id",$provinsi_id[0]);
+                    }
+                    $total         = $this->db->where("kategori_id",$value['kategori_id'])->count_all_results('daftar_perusahaan');
+                   
+                    $result = array(
+                        "kategori"      => $value['nama'],
+                        "TERSUS"        => $tersus,
+                        "TUKS"          => $tuks,
+                        "LAINNYA"       => $lainnya,
+                        "JUMLAH"        => $total
+                    );
+                    
+                    
+                    $data[] = $result;
+                }
+           
+            }
+            else
+            {
+                $data = $this->db->get('rekaptulasi_kategori');
+                $data = $data->result_array();   
+                
+            }
+            
             return $data;
         }
 		

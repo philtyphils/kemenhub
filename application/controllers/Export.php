@@ -27,12 +27,13 @@ class Export extends CI_Controller
 	public function index()
 	{
         //sample paramter
-        $provinsi_id = array();
+        $provinsi_id = array('11','19');
         $kategori_id = array();
         $wilayah_kerja = array();
-        $data = $this->Export_model->getData($provinsi_id,$kategori_id,$wilayah_kerja);
-        $rekap_provinsi = $this->Export_model->rekapProvinsi($provinsi_id);
-        //echo "<pre>";print_r($rekap_provinsi->result_array());die();
+        $data                   = $this->Export_model->getData($provinsi_id,$kategori_id,$wilayah_kerja);
+        $rekap_provinsi         = $this->Export_model->rekapProvinsi($provinsi_id);
+        $rekap_wilayah_kerja    = $this->Export_model->rekapWilayahkerja($provinsi_id);
+        $rekap_kategori         = $this->Export_model->rekapKategori($provinsi_id);
         $spreadsheet = new Spreadsheet();
         $index = 0;
         $wilayah = "";$row = 8;$no = 0;
@@ -74,8 +75,6 @@ class Export extends CI_Controller
         ];
         foreach($data->result_array() as $r)
         {
-            
-            
             if($wilayah != $r['provinsi'])
             {
                 # create new sheet and activeted it
@@ -273,13 +272,33 @@ class Export extends CI_Controller
         $sheet = $spreadsheet->setActiveSheetIndex($index);
         
         $sheet->mergeCells('B3:H3');
-        $sheet->getStyle('B3:H3')->getAlignment()->setVertical('center');
-        $sheet->getStyle('B3:H3')->getAlignment()->setHorizontal('center');
+        
         $sheet->getRowDimension(3)->setRowHeight(36);
+        $sheet->getStyle('B3')->getAlignment()->setVertical('center');
+        $sheet->getStyle('B3')->getAlignment()->setHorizontal('center');
         $sheet->setCellValue('B3', 'REKAPITULASI JUMLAH TERSUS DAN TUKS PER PROVINSI');
-       
+
+        
+        
         $sheet->mergeCells('B4:B5'); $sheet->mergeCells('D4:E4'); $sheet->mergeCells('F4:G4'); 
         $sheet->mergeCells('C4:C5'); $sheet->mergeCells('H4:H5');
+
+        $sheet->getStyle('B4')->getAlignment()->setVertical('center');
+        $sheet->getStyle('C4')->getAlignment()->setVertical('center');
+        $sheet->getStyle('D4')->getAlignment()->setVertical('center');
+        $sheet->getStyle('F4')->getAlignment()->setVertical('center');
+        $sheet->getStyle('D5')->getAlignment()->setVertical('center');
+        $sheet->getStyle('E5')->getAlignment()->setVertical('center');
+        $sheet->getStyle('F5')->getAlignment()->setVertical('center');
+        $sheet->getStyle('G5')->getAlignment()->setVertical('center');
+
+        $sheet->getStyle('C4')->getAlignment()->setHorizontal('center');
+        $sheet->getStyle('D4')->getAlignment()->setHorizontal('center');
+        $sheet->getStyle('F4')->getAlignment()->setHorizontal('center');
+        $sheet->getStyle('D5')->getAlignment()->setHorizontal('center');
+        $sheet->getStyle('E5')->getAlignment()->setHorizontal('center');
+        $sheet->getStyle('F5')->getAlignment()->setHorizontal('center');
+        $sheet->getStyle('G5')->getAlignment()->setHorizontal('center');
 
         $sheet->setCellValue('B4', 'NO'); $sheet->setCellValue('C4', 'PROVINSI'); $sheet->setCellValue('D4', 'TERSUS');
         $sheet->setCellValue('F4', 'TUKS'); $sheet->setCellValue('H4', 'JUMLAH');
@@ -289,17 +308,117 @@ class Export extends CI_Controller
         $no = 1; $cols = "B"; $rows="6";
         foreach($rekap_provinsi->result_array() as $key => $value)
         {
+            $sheet->getStyle($cols.$rows)->getAlignment()->setVertical('center');
+            $sheet->getStyle($cols.$rows)->getAlignment()->setHorizontal('center');
             $sheet->setCellValue($cols.$rows, $no);$cols++;
             $sheet->setCellValue($cols.$rows, $value['provinsi']);$cols++;
+            $sheet->getStyle($cols.$rows)->getAlignment()->setVertical('center');
+            $sheet->getStyle($cols.$rows)->getAlignment()->setHorizontal('center');
             $sheet->setCellValue($cols.$rows, $value['TERSUS_AKTIF']);$cols++;
+            $sheet->getStyle($cols.$rows)->getAlignment()->setVertical('center');
+            $sheet->getStyle($cols.$rows)->getAlignment()->setHorizontal('center');
             $sheet->setCellValue($cols.$rows, $value['TERSUS_NONAKTIF']);$cols++;
+            $sheet->getStyle($cols.$rows)->getAlignment()->setVertical('center');
+            $sheet->getStyle($cols.$rows)->getAlignment()->setHorizontal('center');
             $sheet->setCellValue($cols.$rows, $value['TUKS_AKTIF']);$cols++;
+            $sheet->getStyle($cols.$rows)->getAlignment()->setVertical('center');
+            $sheet->getStyle($cols.$rows)->getAlignment()->setHorizontal('center');
             $sheet->setCellValue($cols.$rows, $value['TUKS_NONAKTIF']);$cols++;
+            $sheet->getStyle($cols.$rows)->getAlignment()->setVertical('center');
+            $sheet->getStyle($cols.$rows)->getAlignment()->setHorizontal('center');
             $sheet->setCellValue($cols.$rows, $value['JUMLAH']);
-            $rows++;$cols= "B";$no++;
-            
+            $rows++;$cols= "B";$no++;            
+        }
+
+        $index++;
+        /* rekaptulasi wilayah kerja */
+        $myWorkSheet = new \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet($spreadsheet, "REKAPiTULASI KATEGORI");
+        $spreadsheet->addSheet($myWorkSheet, $index);
+        $sheet = $spreadsheet->setActiveSheetIndex($index);
+
+        $sheet->mergeCells('B3:H3');
+        $sheet->getColumnDimension('C')->setWidth(17);
+        $sheet->getStyle('B3')->getAlignment()->setVertical('center');
+        $sheet->getStyle('B3')->getAlignment()->setHorizontal('center');
+        $sheet->getStyle('B3')->applyFromArray($style);
+        $sheet->setCellValue('B3', 'REKAPITULASI JUMLAH TERSUS DAN TUKS PER KATEGORI');
+
+        $sheet->getStyle('B5')->getAlignment()->setVertical('center');
+        $sheet->getStyle('B5')->getAlignment()->setHorizontal('center');
+        $sheet->getStyle('B5')->applyFromArray($style);
+        $sheet->setCellValue('B5', 'NO');
+        $sheet->getStyle('C5')->getAlignment()->setVertical('center');
+        $sheet->getStyle('C5')->getAlignment()->setHorizontal('center');      
+        $sheet->getStyle('C5')->applyFromArray($style);
+        $sheet->setCellValue('C5', 'BIDANG USAHA');
+        $sheet->getStyle('D5')->getAlignment()->setVertical('center');
+        $sheet->getStyle('D5')->getAlignment()->setHorizontal('center');
+        $sheet->getStyle('D5')->applyFromArray($style);
+        $sheet->setCellValue('D5', 'TERSUS');
+        $sheet->getStyle('E5')->getAlignment()->setVertical('center');
+        $sheet->getStyle('E5')->getAlignment()->setHorizontal('center');
+        $sheet->getStyle('E5')->applyFromArray($style);
+        $sheet->setCellValue('E5', 'TUKS');
+        $sheet->getStyle('F5')->getAlignment()->setVertical('center');
+        $sheet->getStyle('F5')->getAlignment()->setHorizontal('center');
+        $sheet->getStyle('F5')->applyFromArray($style);
+        $sheet->setCellValue('F5', 'LAIN-LAIN');
+        $sheet->getStyle('G5')->getAlignment()->setVertical('center');
+        $sheet->getStyle('G5')->getAlignment()->setHorizontal('center');
+        $sheet->getStyle('G5')->applyFromArray($style);
+        $sheet->setCellValue('G5', 'JUMLAH');
+
+        unset($col);$columns = "B"; $rows = "6"; $nomor=1; $tersus =0;$tuks =0;$lainlain=0;$jumlah=0;
+        foreach($rekap_kategori as $key => $value)
+        {
+            $sheet->getStyle($columns.$rows)->getAlignment()->setVertical('center');
+            $sheet->getStyle($columns.$rows)->getAlignment()->setHorizontal('center');
+            $sheet->getStyle($columns.$rows)->applyFromArray($styleData);
+            $sheet->setCellValue($columns.$rows, $nomor);$columns++;
+            $sheet->getStyle($columns.$rows)->getAlignment()->setVertical('center');
+            $sheet->getStyle($columns.$rows)->applyFromArray($styleData);
+            $sheet->setCellValue($columns.$rows, $value['kategori']);$columns++;
+            $sheet->getStyle($columns.$rows)->getAlignment()->setVertical('center');
+            $sheet->getStyle($columns.$rows)->getAlignment()->setHorizontal('center');
+            $sheet->getStyle($columns.$rows)->applyFromArray($styleData);
+            $sheet->setCellValue($columns.$rows, $value['TERSUS']);$columns++;
+            $sheet->getStyle($columns.$rows)->getAlignment()->setVertical('center');
+            $sheet->getStyle($columns.$rows)->getAlignment()->setHorizontal('center');
+            $sheet->getStyle($columns.$rows)->applyFromArray($styleData);
+            $sheet->setCellValue($columns.$rows, $value['TUKS']);$columns++;
+            $sheet->getStyle($columns.$rows)->getAlignment()->setVertical('center');
+            $sheet->getStyle($columns.$rows)->getAlignment()->setHorizontal('center');
+            $sheet->getStyle($columns.$rows)->applyFromArray($styleData);
+            $sheet->setCellValue($columns.$rows, $value['LAINNYA']);$columns++;
+            $sheet->getStyle($columns.$rows)->getAlignment()->setVertical('center');
+            $sheet->getStyle($columns.$rows)->getAlignment()->setHorizontal('center');
+            $sheet->getStyle($columns.$rows)->applyFromArray($styleData);
+            $sheet->setCellValue($columns.$rows, $value['JUMLAH']);
+            $nomor++;$columns = "B"; $rows++; $tersus+=$value['TERSUS'];$tuks+=$value['TUKS'];$lainlain=$value['LAINNYA'];$jumlah+=$value['JUMLAH'];
         }
         
+        $sheet->mergeCells("B".$rows.":C".$rows);
+        $sheet->getStyle("B".$rows)->getAlignment()->setVertical('center');
+        $sheet->getStyle("B".$rows)->getAlignment()->setHorizontal('center');
+        $sheet->getStyle("B".$rows)->applyFromArray($styleData);
+        $sheet->setCellValue("B".$rows, "TOTAL");
+        $sheet->getStyle("D".$rows)->getAlignment()->setVertical('center');
+        $sheet->getStyle("D".$rows)->getAlignment()->setHorizontal('center');
+        $sheet->getStyle("D".$rows)->applyFromArray($styleData);
+        $sheet->setCellValue("D".$rows,$tersus );
+        $sheet->getStyle("E".$rows)->getAlignment()->setVertical('center');
+        $sheet->getStyle("E".$rows)->getAlignment()->setHorizontal('center');
+        $sheet->getStyle("E".$rows)->applyFromArray($styleData);
+        $sheet->setCellValue("E".$rows,$tuks );
+        $sheet->getStyle("F".$rows)->getAlignment()->setVertical('center');
+        $sheet->getStyle("F".$rows)->getAlignment()->setHorizontal('center');
+        $sheet->getStyle("F".$rows)->applyFromArray($styleData);
+        $sheet->setCellValue("F".$rows,$lainlain );
+        $sheet->getStyle("G".$rows)->getAlignment()->setVertical('center');
+        $sheet->getStyle("G".$rows)->getAlignment()->setHorizontal('center');
+        $sheet->getStyle("G".$rows)->applyFromArray($styleData);
+        $sheet->setCellValue("G".$rows,$jumlah );
+
 		$writer = new Xlsx($spreadsheet);
 		$filename = 'Data-TUKS-TERSUS-INDONESIA_'.date("Ymd");
 		
