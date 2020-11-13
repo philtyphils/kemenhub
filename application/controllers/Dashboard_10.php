@@ -7,7 +7,7 @@ class Dashboard extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->model('Dashboard_Model','dashboard');
+		$this->load->model('Home_model');
 		$this->load->helper('url');
 		$this->load->library('session');
 		$this->load->library('encrypt');
@@ -34,33 +34,44 @@ class Dashboard extends CI_Controller
 		$data['menu'] = 'Dashboard';
 		$data['baseurl'] = base_url();
 		$data['siteurl'] = site_url();
-
-
-		$tuks = $this->dashboard->status_aktif("TUKS");
-		$tuks_response = array(
-			array(
-				"name" => "AKTIF",
-				"y"    => $tuks['aktif']
-			),
-			array(
-				"name" => "NON AKTIF",
-				"y"	   => $tuks['nonaktif']
-			)
-		);
-		$data['tuks'] = json_encode($tuks_response);
-		
 		$this->load->view('templates/header',$data);
 		$this->load->view('templates/hmenu',$data);
 		$this->load->view('main/dashboard',$data);
 		$this->load->view('templates/footer',$data);
-
 		
+		// $isLoggedIn = $this->session->userdata("isLoggedIn");
+		// $validUser = $this->session->userdata("validUser");
+		// $validPass = $this->session->userdata("validPass");
+		// $validLevel = $this->session->userdata("validLevel");
+		// $validNama = $this->session->userdata("validNama");
+		// $validSession = $this->session->userdata("validSession");
+		// $validRole = $this->session->userdata("validRole");
+
+		// if(!$isLoggedIn){
+		// 	$data['title'] = 'LOGIN';
+		// 	$this->load->view('templates/header',$data);
+		// 	$this->load->view('main/index',$data);
+		// 	$this->load->view('templates/footer',$data);
+		// }else{
+		// 	$data['judul'] = 'HOME';
+		// 	$data['validUser'] = $validUser;
+		// 	$data['validNama'] = $validNama;
+		// 	$data['menu']='';
+		// 	$data['validUser']=$validUser;
+		// 	$data['validSession']=$validSession;
+		// 	$data['validLevel']=$validLevel;
+		// 	$this->load->view('templates/header',$data);
+		// 	$this->load->view('templates/hmenu',$data);
+		// 	$this->load->view('main/frmhome',$data);
+		// 	$this->load->view('templates/footer',$data);
+			
+		// }
 	}
 	
 	// public function getDataRole()
 	// {
 	// 	$ID_USER = trim($this->input->post('USER_ID'));
-	// 	$cek=$this->dashboard->getDataRole($ID_USER);
+	// 	$cek=$this->Home_model->getDataRole($ID_USER);
 	// 	echo json_encode($cek);
 	// }
 	

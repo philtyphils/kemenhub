@@ -22,27 +22,29 @@
 
                                     <div class="toolbar">
                                         <div class="warp-toolbar">
-                                        <select class="selectpicker" multiple data-live-search="true" title="Provinsi">
-                                            <option>Mustard</option>
-                                            <option>Ketchup</option>
-                                            <option>Relish</option>
+                                        <select name="provinsi[]" id="provinsi" class="selectpicker"  multiple data-live-search="true" title="Provinsi">
+                                             <?php for($i=0;$i<count($dataProvinsi);$i++){?>
+                                                <option value="<?php echo trim($dataProvinsi[$i]->id); ?>"><?php echo $dataProvinsi[$i]->name; ?></option>
+                                              <?php } ?>
                                         </select>
 
-                                        <select class="selectpicker" multiple data-live-search="true" title="Kelas" id="box">
-                                            <option>Mustard</option>
-                                            <option>Ketchup</option>
-                                            <option>Relish</option>
+                                        <select name="kelas[]" id="kelas" class="selectpicker" multiple data-live-search="true" title="Kelas" id="box">
+                                            
                                         </select>
 
-                                        <select class="selectpicker" multiple data-live-search="true" title="Kategori" id="box">
-                                            <option>Mustard</option>
-                                            <option>Ketchup</option>
-                                            <option>Relish</option>
+                                        <select name="bidang_us[]" id="bidang_us" class="selectpicker" multiple data-live-search="true" title="Kategori" id="box">
+                                            <?php for($k=0;$k<count($dataBdgUsaha);$k++){?>
+                                                <option value="<?php echo trim($dataBdgUsaha[$k]->bdg_usaha_id); ?>"><?php echo $dataBdgUsaha[$k]->nama; ?></option>
+                                              <?php } ?>
                                         </select>
                                         </div>
                                         
                                     <div class="warp-toolbar">
-                                        <a href="form.html" class="btn btn-success btn-fill" style="margin-right: 1rem;">
+                                        <!-- <a href="" class="btn btn-primary btn-fill">
+                                            <i class="fa fa-search"></i>
+                                            <span>Cari</span>  
+                                        </a> -->
+                                        <a href="<?php echo $siteurl;?>/Form" class="btn btn-success btn-fill" style="margin-right: 1rem;">
                                             <i class="fa fa-plus"></i>
                                             <span>Buat Data Baru</span>  
                                         </a>
@@ -73,276 +75,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr role="row">
-                                                    <td>1</td>
-                                                    <td>PT.PERTAMINA (PERSERO)</td>
-                                                    <td>KSOP KELAS IV MANOKWARI</td>
-                                                    <td>NIAGA MIGAS</td>
-                                                    <td>ENERGI</td>
-                                                    <td>PELABUHAN MANOKWARI</td>
-                                                    <td> d + (min/60) + (sec/3600)</td>
-                                                    <td>TUKS</td>
-                                                    <td>SK Menhub Nomor : KM. 42/AL.106/Phb-80</td>
-                                                    <td>15/02/1980</td>
-                                                    <td>AKTIF</td>
-                                                    <td>02/12/2024</td>
-                                                    <td>
-                                                        <a href="#" class="btn btn-simple btn-warning btn-icon edit"><i class="fa fa-edit"></i></a>
-                                                        <a href="#" class="btn btn-simple btn-danger btn-icon remove"><i class="fa fa-times"></i></a>
-                                                    </td>
-                                                </tr>
-                                                <tr  role="row">
-                                                    <td>2</td>
-                                                    <td>PT.MEDCOPAPUA HIJAU SELARAS</td>
-                                                    <td>KSOP KELAS I SORONG</td>
-                                                    <td>PERKEBUNAN JELAPA SAWIT</td>
-                                                    <td>PERTANIAN</td>
-                                                    <td>DESA KAIRONI,DISTRIK SIDEY, KAB. MANOKWARI, PAPUA BARAT</td>
-                                                    <td> d + (min/60) + (sec/3600)</td>
-                                                    <td>TERSUS</td>
-                                                    <td>A. 1417/AL. 308/DJPL</td>
-                                                    <td>02/12/2019</td>
-                                                    <td>AKTIF</td>
-                                                    <td>02/12/2024</td>
-                                                    <td>
-                                                        <a href="#" class="btn btn-simple btn-warning btn-icon edit"><i class="fa fa-edit"></i></a>
-                                                        <a href="#" class="btn btn-simple btn-danger btn-icon remove"><i class="fa fa-times"></i></a>
-                                                    </td>
-                                                </tr>
-                                                <tr  role="row">
-                                                    <td>3</td>
-                                                    <td>PT.PERTAMINA (PERSERO)</td>
-                                                    <td>KSOP KELAS IV MANOKWARI</td>
-                                                    <td>NIAGA MIGAS</td>
-                                                    <td>ENERGI</td>
-                                                    <td>PELABUHAN MANOKWARI</td>
-                                                    <td> d + (min/60) + (sec/3600)</td>
-                                                    <td>TUKS</td>
-                                                    <td>SK Menhub Nomor : KM. 42/AL.106/Phb-80</td>
-                                                    <td>15/02/1980</td>
-                                                    <td>AKTIF</td>
-                                                    <td>02/12/2024</td>
-                                                    <td>
-                                                        <a href="#" class="btn btn-simple btn-warning btn-icon edit"><i class="fa fa-edit"></i></a>
-                                                        <a href="#" class="btn btn-simple btn-danger btn-icon remove"><i class="fa fa-times"></i></a>
-                                                    </td>
-                                                </tr>
-                                                <tr  role="row">
-                                                    <td>4</td>
-                                                    <td>PT.PERTAMINA (PERSERO)</td>
-                                                    <td>KSOP KELAS IV MANOKWARI</td>
-                                                    <td>NIAGA MIGAS</td>
-                                                    <td>ENERGI</td>
-                                                    <td>PELABUHAN MANOKWARI</td>
-                                                    <td> d + (min/60) + (sec/3600)</td>
-                                                    <td>TUKS</td>
-                                                    <td>SK Menhub Nomor : KM. 42/AL.106/Phb-80</td>
-                                                    <td>15/02/1980</td>
-                                                    <td>AKTIF</td>
-                                                    <td>02/12/2024</td>
-                                                    <td>
-                                                        <a href="#" class="btn btn-simple btn-warning btn-icon edit"><i class="fa fa-edit"></i></a>
-                                                        <a href="#" class="btn btn-simple btn-danger btn-icon remove"><i class="fa fa-times"></i></a>
-                                                    </td>
-                                                </tr>
-                                                <tr  role="row">
-                                                    <td>5</td>
-                                                    <td>PT.PERTAMINA (PERSERO)</td>
-                                                    <td>KSOP KELAS IV MANOKWARI</td>
-                                                    <td>NIAGA MIGAS</td>
-                                                    <td>ENERGI</td>
-                                                    <td>PELABUHAN MANOKWARI</td>
-                                                    <td> d + (min/60) + (sec/3600)</td>
-                                                    <td>TUKS</td>
-                                                    <td>SK Menhub Nomor : KM. 42/AL.106/Phb-80</td>
-                                                    <td>15/02/1980</td>
-                                                    <td>AKTIF</td>
-                                                    <td>02/12/2024</td>
-                                                    <td>
-                                                        <a href="#" class="btn btn-simple btn-warning btn-icon edit"><i class="fa fa-edit"></i></a>
-                                                        <a href="#" class="btn btn-simple btn-danger btn-icon remove"><i class="fa fa-times"></i></a>
-                                                    </td>
-                                                </tr>
-                                                <tr  role="row">
-                                                    <td>6</td>
-                                                    <td>PT.PERTAMINA (PERSERO)</td>
-                                                    <td>KSOP KELAS IV MANOKWARI</td>
-                                                    <td>NIAGA MIGAS</td>
-                                                    <td>ENERGI</td>
-                                                    <td>PELABUHAN MANOKWARI</td>
-                                                    <td> d + (min/60) + (sec/3600)</td>
-                                                    <td>TUKS</td>
-                                                    <td>SK Menhub Nomor : KM. 42/AL.106/Phb-80</td>
-                                                    <td>15/02/1980</td>
-                                                    <td>AKTIF</td>
-                                                    <td>02/12/2024</td>
-                                                    <td>
-                                                        <a href="#" class="btn btn-simple btn-warning btn-icon edit"><i class="fa fa-edit"></i></a>
-                                                        <a href="#" class="btn btn-simple btn-danger btn-icon remove"><i class="fa fa-times"></i></a>
-                                                    </td>
-                                                </tr>
-                                                <tr  role="row">
-                                                    <td>7</td>
-                                                    <td>PT.PERTAMINA (PERSERO)</td>
-                                                    <td>KSOP KELAS IV MANOKWARI</td>
-                                                    <td>NIAGA MIGAS</td>
-                                                    <td>ENERGI</td>
-                                                    <td>PELABUHAN MANOKWARI</td>
-                                                    <td> d + (min/60) + (sec/3600)</td>
-                                                    <td>TUKS</td>
-                                                    <td>SK Menhub Nomor : KM. 42/AL.106/Phb-80</td>
-                                                    <td>15/02/1980</td>
-                                                    <td>AKTIF</td>
-                                                    <td>02/12/2024</td>
-                                                    <td>
-                                                        <a href="#" class="btn btn-simple btn-warning btn-icon edit"><i class="fa fa-edit"></i></a>
-                                                        <a href="#" class="btn btn-simple btn-danger btn-icon remove"><i class="fa fa-times"></i></a>
-                                                    </td>
-                                                </tr>
-                                                <tr  role="row">
-                                                    <td>8</td>
-                                                    <td>PT.PERTAMINA (PERSERO)</td>
-                                                    <td>KSOP KELAS IV MANOKWARI</td>
-                                                    <td>NIAGA MIGAS</td>
-                                                    <td>ENERGI</td>
-                                                    <td>PELABUHAN MANOKWARI</td>
-                                                    <td> d + (min/60) + (sec/3600)</td>
-                                                    <td>TUKS</td>
-                                                    <td>SK Menhub Nomor : KM. 42/AL.106/Phb-80</td>
-                                                    <td>15/02/1980</td>
-                                                    <td>AKTIF</td>
-                                                    <td>02/12/2024</td>
-                                                    <td>
-                                                        <a href="#" class="btn btn-simple btn-warning btn-icon edit"><i class="fa fa-edit"></i></a>
-                                                        <a href="#" class="btn btn-simple btn-danger btn-icon remove"><i class="fa fa-times"></i></a>
-                                                    </td>
-                                                </tr>
-                                                <tr  role="row">
-                                                    <td>9</td>
-                                                    <td>PT.PERTAMINA (PERSERO)</td>
-                                                    <td>KSOP KELAS IV MANOKWARI</td>
-                                                    <td>NIAGA MIGAS</td>
-                                                    <td>ENERGI</td>
-                                                    <td>PELABUHAN MANOKWARI</td>
-                                                    <td> d + (min/60) + (sec/3600)</td>
-                                                    <td>TUKS</td>
-                                                    <td>SK Menhub Nomor : KM. 42/AL.106/Phb-80</td>
-                                                    <td>15/02/1980</td>
-                                                    <td>AKTIF</td>
-                                                    <td>02/12/2024</td>
-                                                    <td>
-                                                        <a href="#" class="btn btn-simple btn-warning btn-icon edit"><i class="fa fa-edit"></i></a>
-                                                        <a href="#" class="btn btn-simple btn-danger btn-icon remove"><i class="fa fa-times"></i></a>
-                                                    </td>
-                                                </tr>
-                                                <tr  role="row">
-                                                    <td>10</td>
-                                                    <td>PT.PERTAMINA (PERSERO)</td>
-                                                    <td>KSOP KELAS IV MANOKWARI</td>
-                                                    <td>NIAGA MIGAS</td>
-                                                    <td>ENERGI</td>
-                                                    <td>PELABUHAN MANOKWARI</td>
-                                                    <td> d + (min/60) + (sec/3600)</td>
-                                                    <td>TUKS</td>
-                                                    <td>SK Menhub Nomor : KM. 42/AL.106/Phb-80</td>
-                                                    <td>15/02/1980</td>
-                                                    <td>AKTIF</td>
-                                                    <td>02/12/2024</td>
-                                                    <td>
-                                                        <a href="#" class="btn btn-simple btn-warning btn-icon edit"><i class="fa fa-edit"></i></a>
-                                                        <a href="#" class="btn btn-simple btn-danger btn-icon remove"><i class="fa fa-times"></i></a>
-                                                    </td>
-                                                </tr>
-                                                <tr  role="row">
-                                                    <td>10</td>
-                                                    <td>PT.PERTAMINA (PERSERO)</td>
-                                                    <td>KSOP KELAS IV MANOKWARI</td>
-                                                    <td>NIAGA MIGAS</td>
-                                                    <td>ENERGI</td>
-                                                    <td>PELABUHAN MANOKWARI</td>
-                                                    <td> d + (min/60) + (sec/3600)</td>
-                                                    <td>TUKS</td>
-                                                    <td>SK Menhub Nomor : KM. 42/AL.106/Phb-80</td>
-                                                    <td>15/02/1980</td>
-                                                    <td>AKTIF</td>
-                                                    <td>02/12/2024</td>
-                                                    <td>
-                                                        <a href="#" class="btn btn-simple btn-warning btn-icon edit"><i class="fa fa-edit"></i></a>
-                                                        <a href="#" class="btn btn-simple btn-danger btn-icon remove"><i class="fa fa-times"></i></a>
-                                                    </td>
-                                                </tr>
-                                                <tr  role="row">
-                                                    <td>10</td>
-                                                    <td>PT.PERTAMINA (PERSERO)</td>
-                                                    <td>KSOP KELAS IV MANOKWARI</td>
-                                                    <td>NIAGA MIGAS</td>
-                                                    <td>ENERGI</td>
-                                                    <td>PELABUHAN MANOKWARI</td>
-                                                    <td> d + (min/60) + (sec/3600)</td>
-                                                    <td>TUKS</td>
-                                                    <td>SK Menhub Nomor : KM. 42/AL.106/Phb-80</td>
-                                                    <td>15/02/1980</td>
-                                                    <td>AKTIF</td>
-                                                    <td>02/12/2024</td>
-                                                    <td>
-                                                        <a href="#" class="btn btn-simple btn-warning btn-icon edit"><i class="fa fa-edit"></i></a>
-                                                        <a href="#" class="btn btn-simple btn-danger btn-icon remove"><i class="fa fa-times"></i></a>
-                                                    </td>
-                                                </tr>
-                                                <tr  role="row">
-                                                    <td>10</td>
-                                                    <td>PT.PERTAMINA (PERSERO)</td>
-                                                    <td>KSOP KELAS IV MANOKWARI</td>
-                                                    <td>NIAGA MIGAS</td>
-                                                    <td>ENERGI</td>
-                                                    <td>PELABUHAN MANOKWARI</td>
-                                                    <td> d + (min/60) + (sec/3600)</td>
-                                                    <td>TUKS</td>
-                                                    <td>SK Menhub Nomor : KM. 42/AL.106/Phb-80</td>
-                                                    <td>15/02/1980</td>
-                                                    <td>AKTIF</td>
-                                                    <td>02/12/2024</td>
-                                                    <td>
-                                                        <a href="#" class="btn btn-simple btn-warning btn-icon edit"><i class="fa fa-edit"></i></a>
-                                                        <a href="#" class="btn btn-simple btn-danger btn-icon remove"><i class="fa fa-times"></i></a>
-                                                    </td>
-                                                </tr>
-                                                <tr  role="row">
-                                                    <td>10</td>
-                                                    <td>PT.PERTAMINA (PERSERO)</td>
-                                                    <td>KSOP KELAS IV MANOKWARI</td>
-                                                    <td>NIAGA MIGAS</td>
-                                                    <td>ENERGI</td>
-                                                    <td>PELABUHAN MANOKWARI</td>
-                                                    <td> d + (min/60) + (sec/3600)</td>
-                                                    <td>TUKS</td>
-                                                    <td>SK Menhub Nomor : KM. 42/AL.106/Phb-80</td>
-                                                    <td>15/02/1980</td>
-                                                    <td>AKTIF</td>
-                                                    <td>02/12/2024</td>
-                                                    <td >
-                                                        <a href="#" class="btn btn-simple btn-warning btn-icon edit"><i class="fa fa-edit"></i></a>
-                                                        <a href="#" class="btn btn-simple btn-danger btn-icon remove"><i class="fa fa-times"></i></a>
-                                                    </td>
-                                                </tr>
-                                                <tr  role="row">
-                                                    <td>10</td>
-                                                    <td>PT.PERTAMINA (PERSERO)</td>
-                                                    <td>KSOP KELAS IV MANOKWARI</td>
-                                                    <td>NIAGA MIGAS</td>
-                                                    <td>ENERGI</td>
-                                                    <td>PELABUHAN MANOKWARI</td>
-                                                    <td> d + (min/60) + (sec/3600)</td>
-                                                    <td>TUKS</td>
-                                                    <td>SK Menhub Nomor : KM. 42/AL.106/Phb-80</td>
-                                                    <td>15/02/1980</td>
-                                                    <td>AKTIF</td>
-                                                    <td>02/12/2024</td>
-                                                    <td>
-                                                        <a href="#" class="btn btn-simple btn-warning btn-icon edit"><i class="fa fa-edit"></i></a>
-                                                        <a href="#" class="btn btn-simple btn-danger btn-icon remove"><i class="fa fa-times"></i></a>
-                                                    </td>
-                                                </tr>
+                                                
                                             </tbody>
                                         </table>
                                     </div>

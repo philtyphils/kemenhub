@@ -1,50 +1,14 @@
+var siteurl = $("#txtsite").val();
+var baseurl = $("#txtbase").val();
 
 
-
-<div class="contents">
-    <div class="container-fluid">
-        <div class="row">
-            <h2 class="title"></h2>
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="header">
-                        <h4 class="title">TUKS</h4>
-                        <p class="category" style="color: #AAAAAA; font-weight: 300;">Jumlah Total TUKS semua Provinsi</p>
-                    </div>
-                    <div id="container-pie"></div>  
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="header">
-                        <h4 class="title">TERSUS </h4>
-                        <p class="category" style="color: #AAAAAA; font-weight: 300;">Jumlah Total TERSUS semua Provinsi</p>
-                    </div>
-                    <div id="container-pie2"></div>  
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="header">
-                        <h4 class="title">TERSUS & TUKS</h4>
-                        <p class="category" style="color: #AAAAAA; font-weight: 300;">Jumlah Per / Provinsi</p>
-                    </div>
-                    <div id="container-bar"></div>  
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<script type="text/javascript">
 $(document).ready(function(){
+
 	Highcharts.setOptions({
 		colors: ['#A3A0FB', '#43425D']
 	});
-	var Total = 0;
 
+	var Total = 0;
 	var chart_tusk = new Highcharts.chart({
 	    chart: {
 	        renderTo: 'container-pie',
@@ -54,7 +18,7 @@ $(document).ready(function(){
 	        type: 'pie',
 	        events: {
 	            load: function(event) {
-	                $('.highcharts-legend-item').last().append('<br/><div style="margin-left:2rem;"><hr/><span style="float:left;font-weight: bold;padding-bottom:2px;">Total</span><span style="float:left;color:#9A9A9A;font-weight: 700;"> ' + Total + '</span> </div>')
+	            $('.highcharts-legend-item').last().append('<br/><div style="margin-left:2rem;"><hr/><span style="float:left;font-weight: bold;padding-bottom:2px;">Total :</span><span style="float:left;color:#9A9A9A;font-weight: 700;"> ' + Total + '</span> </div>')
 	            }
 	        }  
 	    },
@@ -74,7 +38,7 @@ $(document).ready(function(){
 	            showInLegend: true
 	        }
 	    },
-	   	legend: {
+	   legend: {
 	        useHTML: true,
 			labelFormatter: function() {
 	            Total += this.y;
@@ -92,7 +56,13 @@ $(document).ready(function(){
 	        name: 'Status',
 	        colorByPoint: true,
 	        innerSize: '50%',
-	        data: <?php echo $tuks; ?>
+	        data: [{
+	            name: 'AKTIF',
+	            y: 200000000000,
+	        }, {
+	            name: 'NON AKTIF',
+	            y: 105000000000
+	        }]
 	    }],
 	    navigation: {
 	        buttonOptions: {
@@ -296,8 +266,3 @@ $(document).ready(function(){
 	});
 	
 });
-</script>
-
-<!-- comment bcos the value from controller couldnt get from js 
-<script type="text/javascript" src="<?php echo $baseurl;?>assets/js/dashboard.js?v=<?php echo uniqid(); ?>"></script> 
--->

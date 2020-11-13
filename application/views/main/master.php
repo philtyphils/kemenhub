@@ -17,7 +17,7 @@
                                     <div id="container-pie"></div>   
                                 </div>
                                 <div class="footer">
-                                    <a href="kategori.html" class="btn btn-fill btn-primary">VIEW</a>
+                                    <a href="<?php echo $siteurl;?>/Kategori" class="btn btn-fill btn-primary">VIEW</a>
                                 </div>
                             </div>
                         </div>
@@ -35,7 +35,7 @@
                                     <div id="container-pie2"></div>   
                                 </div>
                                 <div class="footer">
-                                    <a href="kelas.html" class="btn btn-fill btn-primary">VIEW</a>
+                                    <a href="<?php echo $siteurl;?>/Kelas" class="btn btn-fill btn-primary">VIEW</a>
                                 </div>
                             </div>
                         </div>

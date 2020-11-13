@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Master extends CI_Controller 
+class Kategori extends CI_Controller 
 {
 
 	public function __construct()
@@ -29,13 +29,13 @@ class Master extends CI_Controller
 	 */
 	public function index()
 	{
-		$data['title'] = 'Master';
-		$data['menu'] = 'Master';
+		$data['title'] = 'Kategori';
+		$data['menu'] = 'Kategori';
 		$data['baseurl'] = base_url();
 		$data['siteurl'] = site_url();
 		$this->load->view('templates/header',$data);
 		$this->load->view('templates/hmenu',$data);
-		$this->load->view('main/master',$data);
+		$this->load->view('main/kategori',$data);
 		$this->load->view('templates/footer',$data);
 		
 		// $isLoggedIn = $this->session->userdata("isLoggedIn");
