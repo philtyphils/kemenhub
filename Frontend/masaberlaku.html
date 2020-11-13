@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data</title>
+    <title>Message</title>
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/sass/main.css">
     <link href="assets/css/font-awesome.css" rel="stylesheet" />
@@ -76,10 +76,10 @@
                                       </p>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="masaberlaku.html">Notification 1</a></li>
-                                    <li><a href="masaberlaku.html">Notification 2</a></li>
-                                    <li><a href="masaberlaku.html">Notification 3</a></li>
-                                    <li><a href="masaberlaku.html">Notification 4</a></li>
+                                  <li><a href="masaberlaku.html">Notification 1</a></li>
+                                  <li><a href="masaberlaku.html">Notification 2</a></li>
+                                  <li><a href="masaberlaku.html">Notification 3</a></li>
+                                  <li><a href="masaberlaku.html">Notification 4</a></li>
                                 </ul>
                             </li>      
                             <li class="dropdown">
@@ -108,66 +108,30 @@
                             <div class="card">
                                 <div class="header-master">
                                     <div class="header">
-                                        <h4 class="title">TUKS & TERSUS DATATABLE</h4>
-                                        <p class="category" style="color: #AAAAAA; font-weight: 300;">REKAPITULASI TERSUS & TUKS DATATABLE </p>
+                                        <h4 class="title">DATA MASA BERLAKU expired</h4>
+                                        <p class="category" style="color: #AAAAAA; font-weight: 300;">Di bawah ini adalah Data Masa berlaku Perusahaan yang habis</p>
                                     </div>
-                                    <span class="fa fa-folder-open"></span>
+                                   
+                                    <span class="fa fa-calendar-o"></span>
                                 </div>
                                 <div class="card-content" style="padding-top: 60px;">
-                                    <div class="warp-toolbar">
-                                        <form action="" class="search">
-                                            <input type="text" id="searchbox" placeholder="Silahkan cari data disini..." class="searchbutton">
-                                            <i class="fa fa-search" aria-hidden="true"></i>
-                                        </form>
-                                    </div>
                                    
-                                    <div class="wrap-toolbar col-md-6">
-                                        <button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-success btn-fill" style="margin-right: 1rem">
-                                            <i class="fa fa-search" aria-hidden="true" style="margin-right: 10px;"></i>
-                                            <span>Cari Data</span>
-                                        </button>
-                                    </div>
-
-                                    <div class="toolbar col-md-12" style="padding: 0;">
-                                       
-                                    <h4 style="font-weight: 400;color: #AAAAAA;letter-spacing: 2px;font-size: 20px;margin-top: 2rem;">TOTAL : 80000</h4>
-                                    <div class="wrap-toolbar" style="margin: 0;">
-                                        <a href="form.html" class="btn btn-success btn-fill" style="margin-right: 1rem;">
-                                            <i class="fa fa-plus"></i>
-                                            <span>Buat Data Baru</span>  
-                                        </a>
-                                        <a href="" class="btn btn-info btn-fill">
-                                            <i class="fa fa-download"></i>
-                                            <span>Export Data Excel</span>   
-                                        </a>
-                                        
-                                        <a href="" class="btn btn-default btn-fill">
-                                            <i class="fa fa-globe"></i>
-                                            <span>Export Data CSV To Map</span>   
-                                        </a>  
-                                    </div>
-                                    </div>
-                                   
-
                                     <div class="material-datatables">
                                         <table id="datatables" class="table table-responsive  table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%;font-size: 13px;">
                                             <thead style="color: #FFFFFF;font-weight: 600;font-size: 12px;">
                                                 <tr role="row" style="background-color:#43425D;">
                                                     <th>No</th>
-                                                    <th>NAMA</th>
+                                                    <th>NAMA PERUSAHAN</th>
                                                     <th>ALAMAT</th>
                                                     <th>WILAYAH KERJA</th>
                                                     <th>BIDANG USAHA</th>
                                                     <th>KATEGORI</th>
-                                                    <th>LOKASI</th>
-                                                    <th>KOORDINAT</th>
-                                                    <th>SPESIFIKASI</th>
+                                                    <th >LOKASI</th>
                                                     <th>TERSUS / TUKS</th>
                                                     <th>LEGALITAS</th>
-                                                    <th>TERBIT</th>
                                                     <th>STATUS</th>
                                                     <th>MASA BERLAKU</th>
-                                                    <th class="disabled-sorting" style="width:50px">ACTIONS</th>
+                                                   
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -179,328 +143,82 @@
                                                     <td>NIAGA MIGAS</td>
                                                     <td>ENERGI</td>
                                                     <td>PELABUHAN MANOKWARI</td>
-                                                    <td> d + (min/60) + (sec/3600)</td>
-                                                    <td>SPESIFIKASI</td>
                                                     <td class="td-status" style="color: #A3A0FB;">TUKS</td>
                                                     <td>SK Menhub Nomor : KM. 42/AL.106/Phb-80</td>
-                                                    <td>15/02/1980</td>
-                                                    <td class="td-status" style="color: #649e07;">AKTIF</td>
+                                                    <td class="td-status" style="color: red;">NON AKTIF</td>
                                                     <td>02/12/2024</td>
-                                                    <td>
-                                                        <a href="#" class="btn btn-simple btn-warning btn-icon edit"><i class="fa fa-edit"></i></a>
-                                                        <button id="delete" data-toggle="modal" data-target="#delete-modal" class="btn btn-simple btn-danger btn-icon remove">
-                                                            <i class="fa fa-times"></i>
-                                                        </button>
-                                                    </td>
                                                 </tr>
                                                 <tr  role="row">
                                                     <td>2</td>
                                                     <td style="font-weight: bold;">PT.MEDCOPAPUA HIJAU SELARAS</td>
-                                                    <td>JL.TRUNOJOYO BLOK M 1/135 KEBAYORAN BARU JAKARTA</td>
+                                                    <td>JL. TRUNOJOYO BLOK M 1/135 KEBAYORAN BARU JAKARTA</td>
                                                     <td class="td-status2">KSOP KELAS I SORONG</td>
                                                     <td>PERKEBUNAN JELAPA SAWIT</td>
                                                     <td>PERTANIAN</td>
                                                     <td>DESA KAIRONI,DISTRIK SIDEY, KAB. MANOKWARI, PAPUA BARAT</td> 
-                                                    <td> d + (min/60) + (sec/3600)</td>
-                                                    <td>SPESIFIKASI</td>
                                                     <td class="td-status" style="color: #6bd189;">TERSUS</td>
                                                     <td>A. 1417/AL. 308/DJPL</td>
-                                                    <td>02/12/2019</td>
-                                                    <td class="td-status" style="color: #649e07;">AKTIF</td>
+                                                  
+                                                    <td class="td-status" style="color: red;">NON AKTIF</td>
                                                     <td>02/12/2024</td>
-                                                    <td>
-                                                        <a href="#" class="btn btn-simple btn-warning btn-icon edit"><i class="fa fa-edit"></i></a>
-                                                        <button id="delete" data-toggle="modal" data-target="#delete-modal" class="btn btn-simple btn-danger btn-icon remove">
-                                                            <i class="fa fa-times"></i>
-                                                        </button>
-                                                    </td>
                                                 </tr>
                                                 <tr  role="row">
                                                     <td>3</td>
                                                     <td style="font-weight: bold;">PT.PERTAMINA (PERSERO)</td>
-                                                    <td>JL.TRUNOJOYO BLOK M 1/135 KEBAYORAN BARU JAKARTA</td>
+                                                    <td>JL. TRUNOJOYO BLOK M 1/135 KEBAYORAN BARU JAKARTA</td>
                                                     <td class="td-status2">KSOP KELAS IV MANOKWARI</td>
                                                     <td>NIAGA MIGAS</td>
                                                     <td>ENERGI</td>
                                                     <td>PELABUHAN MANOKWARI</td>                                               
-                                                    <td> d + (min/60) + (sec/3600)</td>
-                                                    <td>SPESIFIKASI</td>
                                                     <td class="td-status" style="color: #A3A0FB;">TUKS</td>
                                                     <td>SK Menhub Nomor : KM. 42/AL.106/Phb-80</td>
-                                                    <td>15/02/1980</td>
-                                                    <td class="td-status" style="color: #649e07;">AKTIF</td>
+                                                   
+                                                    <td class="td-status" style="color: red;">NON AKTIF</td>
                                                     <td>02/12/2024</td>
-                                                    <td>
-                                                        <a href="#" class="btn btn-simple btn-warning btn-icon edit"><i class="fa fa-edit"></i></a>
-                                                        <button id="delete" data-toggle="modal" data-target="#delete-modal" class="btn btn-simple btn-danger btn-icon remove">
-                                                            <i class="fa fa-times"></i>
-                                                        </button>
-                                                    </td>
                                                 </tr>
-                                                <tr  role="row">
+                                                <tr role="row">
                                                     <td>4</td>
                                                     <td style="font-weight: bold;">PT.PERTAMINA (PERSERO)</td>
-                                                    <td>JL.TRUNOJOYO BLOK M 1/135 KEBAYORAN BARU JAKARTA</td>
+                                                    <td>JL. TRUNOJOYO BLOK M 1/135 KEBAYORAN BARU JAKARTA</td>
                                                     <td class="td-status2">KSOP KELAS IV MANOKWARI</td>
                                                     <td>NIAGA MIGAS</td>
                                                     <td>ENERGI</td>
                                                     <td>PELABUHAN MANOKWARI</td>
-                                                    <td> d + (min/60) + (sec/3600)</td>
-                                                    <td>SPESIFIKASI</td>
                                                     <td class="td-status" style="color: #A3A0FB;">TUKS</td>
                                                     <td>SK Menhub Nomor : KM. 42/AL.106/Phb-80</td>
-                                                    <td>15/02/1980</td>
+                                                  
                                                     <td class="td-status" style="color: red;">NON AKTIF</td>
-                                                    <td>02/12/2024</td>
-                                                    <td>
-                                                        <a href="#" class="btn btn-simple btn-warning btn-icon edit"><i class="fa fa-edit"></i></a>
-                                                        <button id="delete" data-toggle="modal" data-target="#delete-modal" class="btn btn-simple btn-danger btn-icon remove">
-                                                            <i class="fa fa-times"></i>
-                                                        </button>
-                                                    </td>
+                                                    <td>02/12/2024</td>  
                                                 </tr>
-                                                <tr  role="row">
+                                                <tr role="row">
                                                     <td>5</td>
                                                     <td style="font-weight: bold;">PT.PERTAMINA (PERSERO)</td>
-                                                    <td>JL.TRUNOJOYO BLOK M 1/135 KEBAYORAN BARU JAKARTA</td>
+                                                    <td>JL. TRUNOJOYO BLOK M 1/135 KEBAYORAN BARU JAKARTA</td>
                                                     <td class="td-status2">KSOP KELAS IV MANOKWARI</td>
                                                     <td>NIAGA MIGAS</td>
                                                     <td>ENERGI</td>
                                                     <td>PELABUHAN MANOKWARI</td>
-                                                    <td> d + (min/60) + (sec/3600)</td>
-                                                    <td>SPESIFIKASI</td>
                                                     <td class="td-status" style="color: #A3A0FB;">TUKS</td>
                                                     <td>SK Menhub Nomor : KM. 42/AL.106/Phb-80</td>
-                                                    <td>15/02/1980</td>
+                                                  
                                                     <td class="td-status" style="color: red;">NON AKTIF</td>
                                                     <td>02/12/2024</td>
-                                                    <td>
-                                                        <a href="#" class="btn btn-simple btn-warning btn-icon edit"><i class="fa fa-edit"></i></a>
-                                                        <button id="delete" data-toggle="modal" data-target="#delete-modal" class="btn btn-simple btn-danger btn-icon remove">
-                                                            <i class="fa fa-times"></i>
-                                                        </button>
-                                                    </td>
                                                 </tr>
-                                                <tr  role="row">
+                                                <tr role="row">
                                                     <td>6</td>
                                                     <td style="font-weight: bold;">PT.PERTAMINA (PERSERO)</td>
-                                                    <td>JL.TRUNOJOYO BLOK M 1/135 KEBAYORAN BARU JAKARTA</td>
+                                                    <td>JL. TRUNOJOYO BLOK M 1/135 KEBAYORAN BARU JAKARTA</td>
                                                     <td class="td-status2">KSOP KELAS IV MANOKWARI</td>
                                                     <td>NIAGA MIGAS</td>
                                                     <td>ENERGI</td>
                                                     <td>PELABUHAN MANOKWARI</td>
-                                                    <td> d + (min/60) + (sec/3600)</td>
-                                                    <td>SPESIFIKASI</td>
                                                     <td class="td-status" style="color: #A3A0FB;">TUKS</td>
                                                     <td>SK Menhub Nomor : KM. 42/AL.106/Phb-80</td>
-                                                    <td>15/02/1980</td>
-                                                    <td class="td-status" style="color: #649e07;">AKTIF</td>
+                                                   
+                                                    <td class="td-status" style="color: red;">NON AKTIF</td>
                                                     <td>02/12/2024</td>
-                                                    <td>
-                                                        <a href="#" class="btn btn-simple btn-warning btn-icon edit"><i class="fa fa-edit"></i></a>
-                                                        <button id="delete" data-toggle="modal" data-target="#delete-modal" class="btn btn-simple btn-danger btn-icon remove">
-                                                            <i class="fa fa-times"></i>
-                                                        </button>
-                                                    </td>
                                                 </tr>
-                                                <tr  role="row">
-                                                    <td>7</td>
-                                                    <td style="font-weight: bold;">PT.PERTAMINA (PERSERO)</td>
-                                                    <td>JL.TRUNOJOYO BLOK M 1/135 KEBAYORAN BARU JAKARTA</td>
-                                                    <td class="td-status2">KSOP KELAS IV MANOKWARI</td>
-                                                    <td>NIAGA MIGAS</td>
-                                                    <td>ENERGI</td>
-                                                    <td>PELABUHAN MANOKWARI</td>
-                                                    <td> d + (min/60) + (sec/3600)</td>
-                                                    <td>SPESIFIKASI</td>
-                                                    <td class="td-status" style="color: #A3A0FB;">TUKS</td>
-                                                    <td>SK Menhub Nomor : KM. 42/AL.106/Phb-80</td>
-                                                    <td>15/02/1980</td>
-                                                    <td class="td-status" style="color: #649e07;">AKTIF</td>
-                                                    <td>02/12/2024</td>
-                                                    <td>
-                                                        <a href="#" class="btn btn-simple btn-warning btn-icon edit"><i class="fa fa-edit"></i></a>
-                                                        <button id="delete" data-toggle="modal" data-target="#delete-modal" class="btn btn-simple btn-danger btn-icon remove">
-                                                            <i class="fa fa-times"></i>
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                                <tr  role="row">
-                                                    <td>8</td>
-                                                    <td style="font-weight: bold;">PT.PERTAMINA (PERSERO)</td>
-                                                    <td>JL.TRUNOJOYO BLOK M 1/135 KEBAYORAN BARU JAKARTA</td>
-                                                    <td class="td-status2">KSOP KELAS IV MANOKWARI</td>
-                                                    <td>NIAGA MIGAS</td>
-                                                    <td>ENERGI</td>
-                                                    <td>PELABUHAN MANOKWARI</td>
-                                                    <td> d + (min/60) + (sec/3600)</td>
-                                                    <td>SPESIFIKASI</td>
-                                                    <td class="td-status" style="color: #6bd189;">TERSUS</td>
-                                                    <td>SK Menhub Nomor : KM. 42/AL.106/Phb-80</td>
-                                                    <td>15/02/1980</td>
-                                                    <td class="td-status" style="color: #649e07;">AKTIF</td>
-                                                    <td>02/12/2024</td>
-                                                    <td>
-                                                        <a href="#" class="btn btn-simple btn-warning btn-icon edit"><i class="fa fa-edit"></i></a>
-                                                        <button id="delete" data-toggle="modal" data-target="#delete-modal" class="btn btn-simple btn-danger btn-icon remove">
-                                                            <i class="fa fa-times"></i>
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                                <tr  role="row">
-                                                    <td>9</td>
-                                                    <td style="font-weight: bold;">PT.PERTAMINA (PERSERO)</td>
-                                                    <td>JL.TRUNOJOYO BLOK M 1/135 KEBAYORAN BARU JAKARTA</td>
-                                                    <td class="td-status2">KSOP KELAS IV MANOKWARI</td>
-                                                    <td>NIAGA MIGAS</td>
-                                                    <td>ENERGI</td>
-                                                    <td>PELABUHAN MANOKWARI</td>
-                                                    <td> d + (min/60) + (sec/3600)</td>
-                                                    <td>SPESIFIKASI</td>
-                                                    <td class="td-status" style="color: #6bd189;">TERSUS</td>
-                                                    <td>SK Menhub Nomor : KM. 42/AL.106/Phb-80</td>
-                                                    <td>15/02/1980</td>
-                                                    <td class="td-status" style="color:RED;">NON AKTIF</td>
-                                                    <td>02/12/2024</td>
-                                                    <td>
-                                                        <a href="#" class="btn btn-simple btn-warning btn-icon edit"><i class="fa fa-edit"></i></a>
-                                                        <button id="delete" data-toggle="modal" data-target="#delete-modal" class="btn btn-simple btn-danger btn-icon remove">
-                                                            <i class="fa fa-times"></i>
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                                <tr  role="row">
-                                                    <td>10</td>
-                                                    <td style="font-weight: bold;">PT.PERTAMINA (PERSERO)</td>
-                                                    <td>JL.TRUNOJOYO BLOK M 1/135 KEBAYORAN BARU JAKARTA</td>
-                                                    <td class="td-status2">KSOP KELAS IV MANOKWARI</td>
-                                                    <td>NIAGA MIGAS</td>
-                                                    <td>ENERGI</td>
-                                                    <td>PELABUHAN MANOKWARI</td>
-                                                    <td> d + (min/60) + (sec/3600)</td>
-                                                    <td>SPESIFIKASI</td>
-                                                    <td class="td-status" style="color: #A3A0FB;">TUKS</td>
-                                                    <td>SK Menhub Nomor : KM. 42/AL.106/Phb-80</td>
-                                                    <td>15/02/1980</td>
-                                                    <td class="td-status" style="color: #649e07;">AKTIF</td>
-                                                    <td>02/12/2024</td>
-                                                    <td>
-                                                        <a href="#" class="btn btn-simple btn-warning btn-icon edit"><i class="fa fa-edit"></i></a>
-                                                        <button id="delete" data-toggle="modal" data-target="#delete-modal" class="btn btn-simple btn-danger btn-icon remove">
-                                                            <i class="fa fa-times"></i>
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                                <tr  role="row">
-                                                    <td>10</td>
-                                                    <td style="font-weight: bold;">PT.PERTAMINA (PERSERO)</td>
-                                                    <td>JL.TRUNOJOYO BLOK M 1/135 KEBAYORAN BARU JAKARTA</td>
-                                                    <td class="td-status2">KSOP KELAS IV MANOKWARI</td>
-                                                    <td>NIAGA MIGAS</td>
-                                                    <td>ENERGI</td>
-                                                    <td>PELABUHAN MANOKWARI</td>
-                                                    <td> d + (min/60) + (sec/3600)</td>
-                                                    <td>SPESIFIKASI</td>
-                                                    <td class="td-status" style="color: #A3A0FB;">TUKS</td>
-                                                    <td>SK Menhub Nomor : KM. 42/AL.106/Phb-80</td>
-                                                    <td>15/02/1980</td>
-                                                    <td  class="td-status" style="color: #649e07;">AKTIF</td>
-                                                    <td>02/12/2024</td>
-                                                    <td>
-                                                        <a href="#" class="btn btn-simple btn-warning btn-icon edit"><i class="fa fa-edit"></i></a>
-                                                        <button id="delete" data-toggle="modal" data-target="#delete-modal" class="btn btn-simple btn-danger btn-icon remove">
-                                                            <i class="fa fa-times"></i>
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                                <tr  role="row">
-                                                    <td>10</td>
-                                                    <td style="font-weight: bold;">PT.PERTAMINA (PERSERO)</td>
-                                                    <td>JL.TRUNOJOYO BLOK M 1/135 KEBAYORAN BARU JAKARTA</td>
-                                                    <td class="td-status2">KSOP KELAS IV MANOKWARI</td>
-                                                    <td>NIAGA MIGAS</td>
-                                                    <td>ENERGI</td>
-                                                    <td>PELABUHAN MANOKWARI</td>
-                                                    <td> d + (min/60) + (sec/3600)</td>
-                                                    <td>SPESIFIKASI</td>
-                                                    <td class="td-status" style="color: #A3A0FB;">TUKS</td>
-                                                    <td>SK Menhub Nomor : KM. 42/AL.106/Phb-80</td>
-                                                    <td>15/02/1980</td>
-                                                    <td class="td-status" style="color: #649e07;">AKTIF</td>
-                                                    <td>02/12/2024</td>
-                                                    <td>
-                                                        <a href="#" class="btn btn-simple btn-warning btn-icon edit"><i class="fa fa-edit"></i></a>
-                                                        <button id="delete" data-toggle="modal" data-target="#delete-modal" class="btn btn-simple btn-danger btn-icon remove">
-                                                            <i class="fa fa-times"></i>
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                                <tr  role="row">
-                                                    <td>10</td>
-                                                    <td style="font-weight: bold;" >PT.PERTAMINA (PERSERO)</td>
-                                                    <td>JL.TRUNOJOYO BLOK M 1/135 KEBAYORAN BARU JAKARTA</td>
-                                                    <td class="td-status2">KSOP KELAS IV MANOKWARI</td>
-                                                    <td>NIAGA MIGAS</td>
-                                                    <td>ENERGI</td>
-                                                    <td>PELABUHAN MANOKWARI</td>
-                                                    <td> d + (min/60) + (sec/3600)</td>
-                                                    <td>SPESIFIKASI</td>
-                                                    <td class="td-status" style="color: #A3A0FB;">TUKS</td>
-                                                    <td>SK Menhub Nomor : KM. 42/AL.106/Phb-80</td>
-                                                    <td>15/02/1980</td>
-                                                    <td class="td-status" style="color: RED;">NON AKTIF</td>
-                                                    <td>02/12/2024</td>
-                                                    <td>
-                                                        <a href="#" class="btn btn-simple btn-warning btn-icon edit"><i class="fa fa-edit"></i></a>
-                                                        <button id="delete" data-toggle="modal" data-target="#delete-modal" class="btn btn-simple btn-danger btn-icon remove">
-                                                            <i class="fa fa-times"></i>
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                                <tr  role="row">
-                                                    <td>10</td>
-                                                    <td style="font-weight: bold;">PT.PERTAMINA (PERSERO)</td>
-                                                    <td>JL.TRUNOJOYO BLOK M 1/135 KEBAYORAN BARU JAKARTA</td>
-                                                    <td class="td-status2">KSOP KELAS IV MANOKWARI</td>
-                                                    <td>NIAGA MIGAS</td>
-                                                    <td>ENERGI</td>
-                                                    <td>PELABUHAN MANOKWARI</td>
-                                                    <td> d + (min/60) + (sec/3600)</td>
-                                                    <td>SPESIFIKASI</td>
-                                                    <td class="td-status" style="color: #A3A0FB;">TUKS</td>
-                                                    <td>SK Menhub Nomor : KM. 42/AL.106/Phb-80</td>
-                                                    <td>15/02/1980</td>
-                                                    <td class="td-status" style="color: RED;">NON AKTIF</td>
-                                                    <td>02/12/2024</td>
-                                                    <td >
-                                                        <a href="#" class="btn btn-simple btn-warning btn-icon edit"><i class="fa fa-edit"></i></a>
-                                                        <button id="delete" data-toggle="modal" data-target="#delete-modal" class="btn btn-simple btn-danger btn-icon remove">
-                                                            <i class="fa fa-times"></i>
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                                <tr  role="row">
-                                                    <td>10</td>
-                                                    <td style="font-weight: bold;">PT.PERTAMINA (PERSERO)</td>
-                                                    <td>JL.TRUNOJOYO BLOK M 1/135 KEBAYORAN BARU JAKARTA</td>
-                                                    <td class="td-status2">KSOP KELAS IV MANOKWARI</td>
-                                                    <td>NIAGA MIGAS</td>
-                                                    <td>ENERGI</td>
-                                                    <td>PELABUHAN MANOKWARI</td>
-                                                    <td> d + (min/60) + (sec/3600)</td>
-                                                    <td>SPESIFIKASI</td>
-                                                    <td class="td-status" style="color: #A3A0FB;">TUKS</td>
-                                                    <td>SK Menhub Nomor : KM. 42/AL.106/Phb-80</td>
-                                                    <td>15/02/1980</td>
-                                                    <td class="td-status" style="color: #649e07;">AKTIF</td>
-                                                    <td>02/12/2024</td>
-                                                    <td>
-                                                    <a href="#" class="btn btn-simple btn-warning btn-icon edit"><i class="fa fa-edit"></i></a>
-                                                    <button id="delete" data-toggle="modal" data-target="#delete-modal" class="btn btn-simple btn-danger btn-icon remove">
-                                                        <i class="fa fa-times"></i>
-                                                    </button>
-                                                    </td>
-                                                </tr>
+                                                
                                             </tbody>
                                         </table>
                                     </div>
