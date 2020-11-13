@@ -35,5 +35,5 @@
 </head>
 <body>
         <input type="hidden" id="txtbase" value="<?php echo $baseurl;?>" />
-        <input type="hidden" id="txtsite" value="<?php echo $siteurl;?>" />
+		<input type="hidden" id="txtsite" value="<?php echo $siteurl;?>" />
 

@@ -36,7 +36,11 @@ class Dashboard extends CI_Controller
 		$data['siteurl'] = site_url();
 
 
+<<<<<<< HEAD
 		$tuks = $this->dashboard->status_aktif("TUKS");
+=======
+		$tuks = $this->Home_model->status_aktif("TUKS");
+>>>>>>> 94d2985ae8ad0b41a749e4dae5e8959b3ce87a81
 		$tuks_response = array(
 			array(
 				"name" => "AKTIF",
