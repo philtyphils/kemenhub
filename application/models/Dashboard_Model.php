@@ -4,23 +4,22 @@
 			$this->load->database();	
 		}
 		
-		public function status_aktif($status)
+		public function status_aktif()
 		{
-			$this->db->from("daftar_perusahaan");
-			$this->db->where("ter_tuk",$status);
-			$this->db->where("status","Y");
-			$aktif =  $this->db->count_all_results();
+			$this->db->select_sum('TERSUS_AKTIF');
+			$this->db->select_sum('TERSUS_NONAKTIF');
+			$this->db->select_sum('TUKS_AKTIF');
+			$this->db->select_sum('TUKS_NONAKTIF');
+			$data = $this->db->get('rekaptulasi_provinsi');
 
-			$this->db->from("daftar_perusahaan");
-			$this->db->where("ter_tuk",$status);
-			$this->db->where("status","N");
-			$nonaktif =  $this->db->count_all_results();
+			return $data;
+		}
 
-			return array(
-				"aktif" => $aktif,
-				"nonaktif" => $nonaktif,
-				"total" => $this->db->where("ter_tuk",$status)->count_all("daftar_perusahaan")
-			);
+		public function getallstatus()
+		{
+			$data = $this->db->get('rekaptulasi_provinsi');
+
+			return $data;
 		}
 		
 		

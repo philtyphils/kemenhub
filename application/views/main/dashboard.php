@@ -276,13 +276,7 @@ $(document).ready(function(){
 	        name: 'Status',
 	        colorByPoint: true,
 	        innerSize: '50%',
-	        data: [{
-	            name: 'AKTIF',
-	            y: 50000000,
-	        }, {
-	            name: 'NON AKTIF',
-	            y: 9000000
-	        }]
+	        data: <?php echo $tersus; ?>
 	    }],
 	    navigation: {
 	        buttonOptions: {
@@ -315,17 +309,7 @@ $(document).ready(function(){
 	    },
 	  
 	    xAxis: {
-	        categories: [
-	            'Aceh', 
-	            'Jakarta',
-	             'Sumatera', 
-	             'Sulawesi', 
-	             'Kalimantan',
-	             'Jawa Timur',
-	             'Papua',
-	             'Kalimantan Timur',
-	             'Jawa Barat'
-	        ],
+	        categories: <?php echo $provinsi; ?>,
 	        labels: {
 	            style: {
 	                fontSize: '16px',
@@ -372,26 +356,26 @@ $(document).ready(function(){
 	    },
 	    series: [{
 	        name: 'Tuks Non Aktif',    
-	        data: [5, 3, 4, 7, 2,10,10,5,10],
+	        data: <?php echo $tuks_nonaktif; ?>,
 	        stack: 'Tuks',
 	        // borderRadiusTopLeft: 10,
 	        // borderRadiusTopRight: 10
 	        },
 	        {
 	        name: 'Tuks Aktif',
-	        data: [10,10,50,10,20,10,30,40,],
+	        data: <?php echo $tuks_aktif; ?>,
 	        stack: 'Tuks'
 	        },
 	        {
 	        name: 'Tersus Non Aktif',
-	        data: [3, 4, 4, 2, 5,20,10,5,10],
+	        data: <?php echo $tersus_nonaktif; ?>,
 	        stack: 'Tersus',
 	        // borderRadiusTopLeft: 10,
 	        // borderRadiusTopRight: 10
 	        },
 	        {
 	        name: 'Tersus Aktif',
-	        data: [30, 40, 40, 20, 51,20,10,52,10],
+	        data: <?php echo $tersus_aktif; ?>,
 	        stack: 'Tersus'
 	        }, 
 	    ], 
