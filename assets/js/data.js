@@ -4,8 +4,7 @@ var table;
 
 $(document).ready(function(){
 
-    table = $('#datatables').DataTable({ 
-
+    table = $('#datatables').DataTable({
         "responsive": false,
         "scrollX": true,
         "processing": true, //Feature control the processing indicator.
@@ -28,104 +27,121 @@ $(document).ready(function(){
             "targets": [ -1 ], //last column
             "orderable": false, //set not orderable
         },
-        ],
+        ]
     });
 
-    // table = $('#datatables').DataTable({
 
-    //     "pagingType": "full_numbers",
-    //     "lengthMenu": [
-    //         [10, 25, 50, -1],
-    //         [10, 25, 50, "All"]
-    //     ],
-    //     "ajax": {
-    //         "url": siteurl+'/Data/ajax_list',
-    //         "type": "POST"
-    //     },
-       
-    //     // responsive: true,
-    //     language: {
-    //         search: "_INPUT_",
-    //         searchPlaceholder: "Search records",
-    //     },
-    //     "columnDefs": [
-    //     { 
-    //         "targets": [ -1 ], //last column
-    //         "orderable": false, //set not orderable
-    //     },
-    //     ],
-    //     "scrollX": true
-    // });
+    // var dataTable = $('#datatables').dataTable();
+    $("#searchbox").keyup(function() {
+        table.fnFilter(this.value);
+    }); 
 
-   
-        // var dataTable = $('#datatables').dataTable();
-        // $("#searchbox").keyup(function() {
-        //     dataTable.fnFilter(this.value);
-        // });    
-    
-        // var table = $('#datatables').DataTable();
 
-        // // Edit record
-        // table.on('click', '.edit', function() {
-        //     $tr = $(this).closest('tr');
+     $('#provinsi').change(function(option, checked){
 
-        //     var data = table.row($tr).data();
-        //     alert('You press on Row: ' + data[0] + ' ' + data[1] + ' ' + data[2] + '\'s row.');
-        // });
+          var param = {'provinsi':$('[name="provinsi[]"]').val()};
+          $.ajax({
+              url : siteurl+'/Data/get_Kota/',
+              type: "POST",
+              data: param,
+              dataType: "JSON",
+              success: function(data)
+              {
+                  $('#kota').html(data);
+                  $('#kota').selectpicker('refresh');
 
-        // // Delete a record
-        // table.on('click', '.remove', function(e) {
-        //     $tr = $(this).closest('tr');
-        //     table.row($tr).remove().draw();
-        //     e.preventDefault();
-        // });
+                  setkelas($('[name="provinsi[]"]').val());
+              },
+              error: function (jqXHR, textStatus, errorThrown)
+              {
+                  alert('Error get data'); 
+              }
+          });
+      });
 
-        // //Like record
-        // table.on('click', '.like', function() {
-        //     alert('You clicked on Like button');
-        // });
+     
 
-        // $('.card .material-datatables label').addClass('form-group');
 
-       // $('#provinsi').change(function(option, checked){
+    $('.datepicker').datepicker({
+      format: "mm-yyyy",
+      startView: "months",  
+      minViewMode: "months"
+    });
 
-       //      var param = {'provinsi':$('[name="provinsi"]').val()};
-       //      $.ajax({
-       //          url : siteurl+'/Data/get_selKelas/',
-       //          type: "POST",
-       //          data: param,
-       //          dataType: "JSON",
-       //          success: function(data)
-       //          {
-       //              $('#kelas').html(data);
-       //              $('#kelas').selectpicker('refresh');
-       //          },
-       //          error: function (jqXHR, textStatus, errorThrown)
-       //          {
-       //              alert('Error get data'); 
-       //          }
-       //      });
-       //  });
 
-        $('#provinsi').multiselect({
-            onChange:function(option, checked){
-               $('#kelas').html('');
-               $('#kelas').multiselect('rebuild');
-               var selected = this.$select.val();
-               if(selected.length > 0)
-               {
-                    $.ajax({
-                         url:siteurl+'/Data/get_selKelas/',
-                         method:"POST",
-                         data:{selected:selected},
-                         success:function(data)
-                         {
-                              $('#kelas').html(data);
-                              $('#kelas').multiselect('rebuild');
-                         }
-                    })
-                }
-            }
+    $('#delete-modal').on('show.bs.modal',function() { 
+        $('.btn-del').click('.remove',function(e) {
+          $tr = $(this).closest('tr');
+          table.row($tr).remove().draw();
+          e.preventDefault();
         });
-    
+    });
+
+
+
+
+
+
+$('#btnCari').bind('click',function(){
+
+  $.ajaxSetup({async:false});
+    var postvar = { name:$('#name').val(),
+                    provinsi:$('#provinsi').val(),
+                    kota:$('#kota').val(),
+                    kelas:$('#kelas').val(),
+                    kategori:$('#kategori').val(),
+                    bidangusaha:$('#bidangusaha').val(),
+                    dermaga:$('#dermaga').val(),
+                    meter:$('#meter').val(),
+                    kapasitas:$('#kapasitas').val(),
+                    tuk_ter:$('#tuk_ter').val(),
+                    status:$('#status').val(),
+                    tgl_akhir:$('#tgl_akhir').val()};
+    $.post(siteurl+"/Data/getData",postvar,function(data){
+      var arrData = new Array();
+        arrData = eval(data);
+
+        alert(arrData[0]["html"]);
+        $("#isiData").html(arrData[0]["html"]);
+        $('#myModal').hide();
+    });
+  $.ajaxSetup({async:true});
 });
+
+
+
+
+
+});
+
+    
+
+
+
+
+
+
+
+
+
+
+function setkelas(id){
+
+      var param = {'kota':id};
+      $.ajax({
+          url : siteurl+'/Data/get_Kelas/',
+          type: "POST",
+          data: param,
+          dataType: "JSON",
+          success: function(data)
+          {
+              $('#kelas').html(data);
+              $('#kelas').selectpicker('refresh');
+          },
+          error: function (jqXHR, textStatus, errorThrown)
+          {
+              alert('Error get data'); 
+          }
+      });
+
+}

@@ -4,8 +4,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Data_model extends CI_Model {
 
     var $table = 'daftar_perusahaan';
-    var $column_order = array('id','nm_perusahaan','ksop_id','bdgusaha_id','kategori_id','lokasi','koordinat','ter_tuk','sk','tgl_terbit','status','tgl_terbit'); //set column field database for datatable orderable
-    var $column_search = array('id','nm_perusahaan','ksop_id','bdgusaha_id','kategori_id','lokasi','koordinat','ter_tuk','sk','tgl_terbit','status','tgl_terbit'); //set column field database for datatable searchable just firstname , lastname , address are searchable
+    var $column_order = array('a.id','a.nm_perusahaan','a.ksop_id','a.bdgusaha_id','a.kategori_id','a.lokasi','a.koordinat','a.ter_tuk','a.sk','a.tgl_terbit','a.status','a.ms_berlaku'); //set column field database for datatable orderable
+    var $column_search = array('a.id','a.nm_perusahaan','c.nama','d.nama','e.nama','a.lokasi','a.koordinat','a.ter_tuk','a.sk','a.tgl_terbit','a.status','a.ms_berlaku'); //set column field database for datatable searchable just firstname , lastname , address are searchable
     var $order = array('id' => 'desc'); // default order 
     
     public function __construct()
@@ -79,13 +79,22 @@ class Data_model extends CI_Model {
 
     public function get_provinsi()
     {
-        $this->db->from('provinsi');
-        $this->db->order_by('id','asc');
+        $this->db->from('wilayah');
+        $this->db->where('length(kode) = 2');
+        $this->db->order_by('kode','asc');
         $query = $this->db->get();
         return $query->result();
     }
 
-    public function get_bidangUsaha()
+    public function get_kategori()
+    {
+        $this->db->from('kategori');
+        $this->db->order_by('kategori_id','asc');
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    public function get_bidangusaha()
     {
         $this->db->from('bdg_usaha');
         $this->db->order_by('bdg_usaha_id','asc');
@@ -93,13 +102,82 @@ class Data_model extends CI_Model {
         return $query->result();
     }
 
-    public function get_selKelas($id)
+    public function get_Kota($id)
     {
         
-        $sql ="SELECT * from ksop where provinsi_id2 IN ('".$id."')";
+        $sql ="SELECT * from wilayah where substr(kode,1,2) = '".$id."' and kode!='".$id."'";
         $query= $this->db->query($sql);
             
         return $query->result(); 
     }
 
+    public function get_Kelas($id)
+    {
+        
+        $sql ="SELECT * from ksop left join provinsi on ksop.provinsi_id=provinsi.id where provinsi_id ='".$id."'";
+        $query= $this->db->query($sql);
+            
+        return $query->result(); 
+    }
+
+    public function getData($name,$provinsi,$kota,$kelas,$kategori,$bidangusaha,$dermaga,$meter,$kapasitas,$tuk_ter,$status,$tgl_akhir)
+    {
+            
+        $arrayHasil=array();
+        $counter=0;
+        $html = "";
+        $sql ="SELECT a.* from daftar_perusahaan as a where nm_perusahaan like('%".$name."%') order by nm_perusahaan ASC ";
+        $sql1 = $this->db->query($sql);
+        
+        
+
+        // if($sql1->num_rows()>0){
+        //     foreach ($sql1->result_array() as $row){
+        //         $arrayHasil[$counter]['no'] = ($counter+1);
+        //         $arrayHasil[$counter]['nm_perusahaan'] = $row['nm_perusahaan'];
+        //         $arrayHasil[$counter]['alamat'] = $row['alamat'];
+        //         $arrayHasil[$counter]['ksop_id'] = $row['ksop_id'];
+        //         $arrayHasil[$counter]['provinsi_id'] = $row['provinsi_id'];
+        //         $arrayHasil[$counter]['bdgusaha_id'] = $row['bdgusaha_id'];
+        //         $arrayHasil[$counter]['lokasi'] = $row['lokasi'];\
+        //         $arrayHasil[$counter]['kategori_id'] = $row['kategori_id'];
+        //         $arrayHasil[$counter]['koordinat'] = $row['koordinat'];
+        //         $arrayHasil[$counter]['ter_tuk'] = $row['ter_tuk'];
+        //         $arrayHasil[$counter]['sk'] = $row['sk'];
+        //         $arrayHasil[$counter]['tgl_terbit'] = $row['tgl_terbit'];
+        //         $arrayHasil[$counter]['status'] = $row['status'];
+        //         $arrayHasil[$counter]['ms_berlaku'] = $row['ms_berlaku'];
+        //         $counter++;
+        //     }
+        // }
+
+        
+        $a=0;
+        if($sql1->num_rows()>0){
+            foreach ($sql1->result_array() as $row){
+                $html.="<tr>";
+                $html.="<td>".($a+1)."</td>";
+                $html.="<td>".$row['nm_perusahaan']."</td>";
+                $html.="<td>".$row['alamat']."</td>";
+                $html.="<td>".$row['ksop_id']."</td>";
+                $html.="<td>".$row['bdgusaha_id']."</td>";
+                $html.="<td>".$row['kategori_id']."</td>";
+                $html.="<td>".$row['lokasi']."</td>";
+                $html.="<td>".$row['koordinat']."</td>";
+                $html.="<td>".$row['spesifikasi']."</td>";
+                $html.="<td>".$row['ter_tuk']."</td>";
+                $html.="<td>".$row['sk']."</td>";
+                $html.="<td>".$row['tgl_terbit']."</td>";
+                $html.="<td>".$row['status']."</td>";
+                $html.="<td>".$row['ms_berlaku']."</td>";
+                $html.="<td></td>";
+                $html.="</tr>";
+                $a++;
+            }
+        }
+
+        $arrayhasil[0]['html']=$html;
+        echo json_encode($arrayhasil[0]['html']);
+        return $arrayHasil; 
+    }
 }

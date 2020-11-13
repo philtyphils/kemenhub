@@ -33,10 +33,10 @@ class Master extends CI_Controller
 		$data['menu'] = 'Master';
 		$data['baseurl'] = base_url();
 		$data['siteurl'] = site_url();
-		$this->load->view('templates/header',$data);
-		$this->load->view('templates/hmenu',$data);
+		// $this->load->view('templates/header',$data);
+		// $this->load->view('templates/hmenu',$data);
 		$this->load->view('main/master',$data);
-		$this->load->view('templates/footer',$data);
+		// $this->load->view('templates/footer',$data);
 		
 		// $isLoggedIn = $this->session->userdata("isLoggedIn");
 		// $validUser = $this->session->userdata("validUser");

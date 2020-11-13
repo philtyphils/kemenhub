@@ -36,11 +36,8 @@ class Dashboard extends CI_Controller
 		$data['siteurl'] = site_url();
 
 
-<<<<<<< HEAD
 		$tuks = $this->dashboard->status_aktif("TUKS");
-=======
-		$tuks = $this->Home_model->status_aktif("TUKS");
->>>>>>> 94d2985ae8ad0b41a749e4dae5e8959b3ce87a81
+
 		$tuks_response = array(
 			array(
 				"name" => "AKTIF",
@@ -53,10 +50,10 @@ class Dashboard extends CI_Controller
 		);
 		$data['tuks'] = json_encode($tuks_response);
 		
-		$this->load->view('templates/header',$data);
-		$this->load->view('templates/hmenu',$data);
+		// $this->load->view('templates/header',$data);
+		// $this->load->view('templates/hmenu',$data);
 		$this->load->view('main/dashboard',$data);
-		$this->load->view('templates/footer',$data);
+		// $this->load->view('templates/footer',$data);
 
 		
 	}

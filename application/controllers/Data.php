@@ -35,11 +35,12 @@ class Data extends CI_Controller
 		$data['baseurl'] = base_url();
 		$data['siteurl'] = site_url();
 		$data['dataProvinsi'] = $this->datax->get_provinsi();
-		$data['dataBdgUsaha'] = $this->datax->get_bidangUsaha();
-		$this->load->view('templates/header',$data);
-		$this->load->view('templates/hmenu',$data);
+		$data['dataKateg'] = $this->datax->get_kategori();
+		$data['dataBdgUsaha'] = $this->datax->get_bidangusaha();
+		// $this->load->view('templates/header',$data);
+		// $this->load->view('templates/hmenu',$data);
 		$this->load->view('main/data',$data);
-		$this->load->view('templates/footer',$data);
+		// $this->load->view('templates/footer',$data);
 		
 		// $isLoggedIn = $this->session->userdata("isLoggedIn");
 		// $validUser = $this->session->userdata("validUser");
@@ -82,18 +83,30 @@ class Data extends CI_Controller
                 $no++;
                 $row = array();
 
-                $row[] = trim($datax->id);
-                $row[] = trim($datax->nm_perusahaan);
+                $row[] = $no;
+                $row[] = "<font style='font-weight: bold;'>".trim($datax->nm_perusahaan)."</font>";
+                $row[] = "<font class='td-status2'>".trim($datax->alamat)."</font>";
                 $row[] = trim($datax->nmksop);
                 $row[] = trim($datax->nmusaha);
                 $row[] = trim($datax->nmkateg);
                 $row[] = trim($datax->lokasi);
                 $row[] = trim($datax->koordinat);
-                $row[] = trim($datax->ter_tuk);
+                $row[] = trim($datax->spesifikasi);
+                if(trim($datax->ter_tuk) =='TUKS')
+                {
+                	$row[] = "<font class='td-status' style='color: #A3A0FB;'>".trim($datax->ter_tuk)."</font>";
+                }else{
+                	$row[] = "<font class='td-status' style='color: #6bd189;'>".trim($datax->ter_tuk)."</font>";
+                }
                 $row[] = trim($datax->sk);
-                $row[] = trim($datax->tgl_terbit);
-                $row[] = trim($datax->status);
-                $row[] = trim($datax->tgl_terbit);
+                $row[] = date('d-m-Y', strtotime(trim($datax->tgl_terbit)));
+                if(trim($datax->status) =='Y')
+                {
+                	$row[] = "<font class='td-status' style='color: #649e07;'>AKTIF</font>";
+                }else{
+                	$row[] = "<font class='td-status' style='color: red;'>TIDAK AKTIF</font>";
+                }
+                $row[] = date('d-m-Y', strtotime(trim($datax->ms_berlaku)));
                 
                 //add html for action
                 $row[] = '<a class="btn btn-simple btn-warning btn-icon btnedit" href="javascript:void(0)" title="Ubah" onclick="edit_Datax('."'".$datax->id."'".')"><i class="fa fa-edit"></i></a>
@@ -117,32 +130,53 @@ class Data extends CI_Controller
         // }
     }
 	
-	public function get_selKelas()
+	public function get_Kota()
 	{
 		$html='';
-  //       $provinsi = $this->input->post('provinsi');
-		// $data = array('provinsi' => $provinsi);
-        
+        $provinsi = $this->input->post('provinsi');
 
-  //       $dataprov = $this->datax->get_selKelas($data);
-  //       foreach ($dataprov as $list) {
-  //            $html .= '<option value="'.trim($list->provinsi_id).'">'.trim($list->nama).'</option>';
-  //       }         
-
-
-        if(isset($_POST["selected"]))
-		{
-			$id = join("','", $_POST["selected"]);
-
-			$dataprov = $this->datax->get_selKelas($id);
-			foreach ($dataprov as $list) {
-	             $html .= '<option value="'.trim($list->provinsi_id).'">'.trim($list->nama).'</option>';
-	        }
+        $dataprov = $this->datax->get_Kota($provinsi);
+        foreach ($dataprov as $list) {
+             $html .= '<option value="'.trim($list->kode).'">'.trim($list->nama).'</option>';
+        	}
 	        echo json_encode($html); 
-		}  
+	} 
 
-        
+	public function get_Kelas()
+	{
+		$html='';
+        $kelas = $this->input->post('kota');
+
+        $datakelas = $this->datax->get_Kelas($kelas);
+        foreach ($datakelas as $list) {
+             $html .= '<option value="'.trim($list->ksop_id).'">'.trim($list->nama).'</option>';
+        	}
+	        echo json_encode($html); 
+	} 
+
+	public function getData()
+	{
+
+        $name = trim($this->input->post('name'));
+		$provinsi = trim($this->input->post('provinsi'));
+		// $TGL_TRANS = $this->LaporanRegisNup_model->setDate($this->input->post('TGL_TRANS'));
+		// $TGL_TRANS2 = $this->LaporanRegisNup_model->setDate($this->input->post('TGL_TRANS2'));
+		$kota = trim($this->input->post('kota'));
+		$kelas = trim($this->input->post('kelas'));
+		$kategori = trim($this->input->post('kategori'));
+		$bidangusaha = trim($this->input->post('bidangusaha'));
+		$dermaga = trim($this->input->post('dermaga'));
+		$meter = trim($this->input->post('meter'));
+		$kapasitas = trim($this->input->post('kapasitas'));
+		$tuk_ter = trim($this->input->post('tuk_ter'));
+		$status = trim($this->input->post('status'));
+		$tgl_akhir = trim($this->input->post('tgl_akhir'));
+
+		$cek=$this->datax->getData($name,$provinsi,$kota,$kelas,$kategori,$bidangusaha,$dermaga,$meter,$kapasitas,$tuk_ter,$status,$tgl_akhir);
+		echo json_encode($cek);
+		
 	}
+
 
 	// public function getDataRole()
 	// {
