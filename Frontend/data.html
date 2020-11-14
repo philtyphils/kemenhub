@@ -162,7 +162,7 @@
                                                     <th>LOKASI</th>
                                                     <th>KOORDINAT</th>
                                                     <th>SPESIFIKASI</th>
-                                                    <th>TERSUS / TUSK</th>
+                                                    <th>TERSUS / TUKS</th>
                                                     <th>LEGALITAS</th>
                                                     <th>TERBIT</th>
                                                     <th>STATUS OPERASIONAL</th>
@@ -684,30 +684,39 @@
                             <option>DERMAGA TIPE CONVENTIONAL BUOY MOORING (CBM)</option>
                         </select>
                     </div>
-                    <div class="form-group col-md-4" style="margin-bottom: 1rem;">
+                    <div class="form-group col-md-3" style="margin-bottom: 1rem;">
                         <label for="kedalaman">Kedalaman</label>
                         <div class="input-group">
                             <input type="number" name="meter[]" id="meter" class="form-control"  placeholder="Meter" aria-describedby="basic-addon1">
                             <span class="input-group-addon" id="basic-addon1">M LWS</span>
                         </div>                                                       
                     </div>
-                    <div class="col-md-4" style="margin-bottom: 1rem;">
+                    <div class="col-md-2" style="margin-bottom: 1rem;">
                         <label for="kapasitas">Kapasitas</label>
                         <input type="number" name="dermaga" id="kapasitas" class="form-control" placeholder="Kapasitas">
+                    </div>
+                    <div class="col-md-3" style="margin-bottom: 1rem;">
+                        <label for="satuan">Satuan</label>
+                        <select class="form-control" id="satuan" name="satuan[]" required>
+                            <option value="">Pilih Satuan</option>
+                            <option>FEET</option>
+                            <option>GT</option>
+                            <option>DWT</option>
+                        </select>    
                     </div>
                   </div>
 
                   <div class="row">
                     <div class="form-group col-md-4">
-                        <label for="tukstersus">TERSUS / TUSK</label>
+                        <label for="tukstersus">TERSUS / TUKS</label>
                         <select class="selectpicker form-control">
-                            <option value="">Pilih TERSUS / TUSK</option>   
+                            <option value="">Pilih TERSUS / TUKS</option>   
                             <option value="nonaktif">TERSUS</option>
                             <option value="aktif">TUKS</option>
                         </select>                       
                     </div>
                     <div class="form-group col-md-4">
-                        <label for="status">STATUS OPERASIONAL</label>
+                        <label for="status">Status Operasional</label>
                         <select class="selectpicker form-control">
                             <option value="">Pilih Status</option>
                             <option value="aktif">AKTIF</option>
