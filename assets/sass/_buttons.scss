@@ -5,7 +5,7 @@
     
     
     @include opacity(.8);
-    padding: $padding-base-vertical $padding-base-horizontal;
+    padding: 5px $padding-base-horizontal;
     
     @include btn-styles($default-color, $default-states-color);
     
@@ -74,7 +74,7 @@
 }
 .btn-simple{
     border: $none;
-    font-size: $font-size-medium;
+    font-size: 19px;
     padding: $padding-base-vertical $padding-base-horizontal;
     
     &.btn-icon{

@@ -1,11 +1,13 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Login extends CI_Controller {
+class Login extends CI_Controller 
+{
 
-	public function __construct(){
+	public function __construct()
+	{
 		parent::__construct();
-		$this->load->model('login_model');
+		$this->load->model('Login_Model');
 		$this->load->helper('url');
 		$this->load->library('session');
 		$this->load->library('encrypt');
@@ -32,28 +34,29 @@ class Login extends CI_Controller {
 		$data['title'] = 'LOGIN';
 		$data['baseurl'] = base_url();
 		$data['siteurl'] = site_url();
-		$this->load->view('templates/header',$data);
+		// $this->load->view('templates/header',$data);
 		$this->load->view('main/login',$data);
-		$this->load->view('templates/footer',$data);
+		// $this->load->view('templates/footer',$data);
 	}
 	
-	// public function cekLogin()
-	// {
-	// 	$user = trim($this->input->post('user'));
-	// 	$pass = trim($this->input->post('pass'));
-	// 	$i = 0;
-	// 	$cek = $this->login_model->cekUser($user,$pass);
-	// 	if($cek)
-	// 	{
-	// 		$arrHasil[0]["msg"] = "";
-	// 	}
-	// 	else
-	// 	{
-	// 		$arrHasil[0]["msg"] = "*Wrong username/password combination";
-	// 	}
+	public function cekLogin()
+	{
+		$user = trim($this->input->post('user'));
+		$pass = trim($this->input->post('pass'));
+		$i = 0;
+		$cek = $this->Login_Model->cekUser($user,$pass);
+		if($cek)
+		{
+			$this->session->set_userdata(array("validUser" => $row['USERID'],"isLoggedIn" => true,"validNama" => $row['USERNM']));
+			$arrHasil[0]["msg"] = "";
+		}
+		else
+		{
+			$arrHasil[0]["msg"] = "*Wrong username/password combination";
+		}
 			
-	// 	echo json_encode($arrHasil);
-	// }
+		echo json_encode($arrHasil);
+	}
 		
 	// public function ubah(){
 	// 	$arrayx=array();

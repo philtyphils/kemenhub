@@ -7,7 +7,7 @@ class Dashboard extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->model('Home_model');
+		$this->load->model('Dashboard_Model','dashboard');
 		$this->load->helper('url');
 		$this->load->library('session');
 		$this->load->library('encrypt');
@@ -36,32 +36,56 @@ class Dashboard extends CI_Controller
 		$data['siteurl'] = site_url();
 
 
-		$tuks = $this->Home_model->status_aktif("TUKS");
-		$tuks_response = array(
+		$r = $this->dashboard->status_aktif()->result();
+		$f = $this->dashboard->getallstatus()->result();
+
+		$provinsi = array();
+		$tuks_aktif = array();
+		$tersus_aktif = array();
+		$tuks_nonaktif = array();
+		$tersus_nonaktif = array();
+		foreach ($f as $key => $value)
+		{
+			$provinsi[] =  $value->provinsi;
+			$tuks_aktif[] = (int) $value->TUKS_AKTIF;
+			$tuks_nonaktif[] = (int) $value->TUKS_NONAKTIF;
+			$tersus_nonaktif[] = (int) $value->TERSUS_NONAKTIF;
+			$ersus_aktif[] = (int) $value->TERSUS_AKTIF;
+		}
+		$tersus = array(
 			array(
 				"name" => "AKTIF",
-				"y"    => $tuks['aktif']
+				"y"    => (int) $r[0]->TERSUS_AKTIF
 			),
 			array(
 				"name" => "NON AKTIF",
-				"y"	   => $tuks['nonaktif']
+				"y"	   => (int) $r[0]->TERSUS_NONAKTIF
 			)
 		);
-		$data['tuks'] = json_encode($tuks_response);
-		
-		$this->load->view('templates/header',$data);
-		$this->load->view('templates/hmenu',$data);
+
+		$tuks = array(
+			array(
+				"name" => "AKTIF",
+				"y"    => (int) $r[0]->TUKS_AKTIF
+			),
+			array(
+				"name" => "NON AKTIF",
+				"y"	   => (int) $r[0]->TUKS_NONAKTIF
+			)
+		);
+
+		$data['tuks'] = json_encode($tuks);		
+		$data['tersus'] = json_encode($tersus);
+		$data['provinsi'] = json_encode($provinsi);
+		$data['tuks_aktif'] = json_encode($tuks_aktif);
+		$data['tuks_nonaktif'] = json_encode($tuks_nonaktif);
+		$data['tersus_aktif'] = json_encode($tersus_aktif);
+		$data['tersus_nonaktif'] = json_encode($tersus_nonaktif);
 		$this->load->view('main/dashboard',$data);
-		$this->load->view('templates/footer',$data);
 
 		
 	}
 	
-	// public function getDataRole()
-	// {
-	// 	$ID_USER = trim($this->input->post('USER_ID'));
-	// 	$cek=$this->Home_model->getDataRole($ID_USER);
-	// 	echo json_encode($cek);
-	// }
+	
 	
 }

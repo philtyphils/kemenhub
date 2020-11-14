@@ -29,6 +29,22 @@
     margin: 15px 0 10px 0;
 }
 
+.title-form {
+    margin: $none;
+    color: $black-color;
+    margin-bottom: 20px;
+    display: inline-block;
+    font-size: 20px;
+}
+
+.title-form::after {
+    display: block;
+    height: 2px;
+    background-color: #f39c12;
+    content: " ";
+    width: 100%;
+    margin: 15px 0 10px 0;
+}
 
 
 .card .card-content {
@@ -41,11 +57,7 @@
     position: relative;
   }
 
-.group {
-    border-bottom: 2px solid #f39c12;
-    padding: 20px 0;
-  
-}
+
 
 .card{
     border-radius: $border-radius-base;
@@ -112,10 +124,11 @@
     }
     .category,
     label{
-        font-size: $font-size-base;
+        font-size: 16px;
         font-weight:$font-weight-bold;
         color: $black-bg;
         margin-bottom: 0px;
+        line-height: 1.5;
         
         i{
             font-size: $font-paragraph;
@@ -135,6 +148,7 @@
         letter-spacing: 8px;
         margin: 5px 0 1px 0;
         display: inline-block;
+        text-transform: uppercase;
         
     }
 

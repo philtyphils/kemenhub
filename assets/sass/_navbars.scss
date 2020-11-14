@@ -178,14 +178,14 @@
         > li > a:not(.btn):focus {
             background-color: transparent;
             border-radius: 3px;
-            color: $info-color;
+            color: $success-color;
             @include opacity(1);
         }
 
         > .dropdown > a:hover .caret,
         > .dropdown > a:focus .caret {
-            border-bottom-color: $info-color;
-            border-top-color: $info-color;
+            border-bottom-color: $success-color;
+            border-top-color: $success-color;
 
         }
 
@@ -193,7 +193,7 @@
         > .open > a:hover,
         > .open > a:focus{
             background-color: transparent;
-            color: $info-color;
+            color: $success-color;
         }
 
         .navbar-toggle:hover,.navbar-toggle:focus {
@@ -203,8 +203,8 @@
     }
 
     &:not(.navbar-transparent) .btn-default:hover{
-        color: $info-color;
-        border-color: $info-color;
+        color: $success-color;
+        border-color:$success-color;
     }
     &:not(.navbar-transparent) .btn-neutral,
     &:not(.navbar-transparent) .btn-neutral:hover,
