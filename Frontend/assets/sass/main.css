@@ -3039,6 +3039,12 @@ body {
   margin: 0 0;
 }
 
+#container-pie3 {
+  width: 100%;
+  height: 200px;
+  margin: 0 0;
+}
+
 #container-bar {
   width: 100%;
   height: 100%;

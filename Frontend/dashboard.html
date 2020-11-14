@@ -150,6 +150,7 @@
 <script src="assets/js/highchart/highcharts-access.js"></script>
 
 
+
 <script>
 Highcharts.setOptions({
 	colors: ['#A3A0FB', '#43425D']
@@ -306,34 +307,48 @@ Highcharts.setOptions({
 var chart_bar = new Highcharts.chart({
     chart: {
         renderTo: 'container-bar',
-        type: 'column',
+        type: 'bar',
         scrollablePlotArea: {
-            minWidth: 1200,
-            scrollPositionX: 0,
-        }   
+            minHeight: 1200,
+        },
     },
-  
     xAxis: {
         categories: [
-            'Aceh', 
-            'Jakarta',
-             'Sumatera', 
-             'Sulawesi', 
-             'Kalimantan',
-             'Jawa Timur',
-             'Papua',
-             'Kalimantan Timur',
-             'Jawa Barat'
+        'Aceh', 
+        'Jakarta',
+        'Sumatera', 
+        'Sulawesi', 
+        'Kalimantan',
+        'Jawa Timur',
+        'Papua',
+        'Kalimantan Timur',
+        'Jawa Barat',
+        'Jawa Tengah',
+        'Kalimantan Barat',
+        'Kalimantan Utara',
+        'Sulawesi Selatan',
+        'Sulawesi Barat',
+        'Sumatera Barat',
+        'Sumatera Utara',
+        'NTB',
         ],
         labels: {
-            style: {
-                fontSize: '16px',
-                color: '#43425D'
-            }
-        }   
+        style: {
+            fontSize: '16px',
+            color: '#43425D'
+        }
+        }, 
+        title: {
+            text: null
+        },
+        // min: 10,
+        // scrollbar: {
+        // enabled: true
+        // },
+        tickLength: 0,   
     },
     yAxis: {
-        title: false
+        title: false, 
     },
     title: {
         text: 'TERSUS & TUKS / Provinsi'
@@ -352,7 +367,7 @@ var chart_bar = new Highcharts.chart({
         series: {
             point: {}
         },
-        column: {
+        bar: {
             stacking: 'normal',
             states: {
                 inactive: {
@@ -367,7 +382,7 @@ var chart_bar = new Highcharts.chart({
         }
     },
    legend: {
-       enabled:true,
+    reversed: true
     },
     series: [{
         name: 'Tuks Non Aktif',    
@@ -378,26 +393,25 @@ var chart_bar = new Highcharts.chart({
         },
         {
         name: 'Tuks Aktif',
-        data: [10,10,50,10,20,10,30,40,],
+        data: [10,10,50,10,20,10,30,40,10,15,12,200,120,10,50,20],
         stack: 'Tuks'
         },
         {
         name: 'Tersus Non Aktif',
-        data: [3, 4, 4, 2, 5,20,10,5,10],
+        data: [3, 4, 4, 2, 5,20,10,5,200,10,15,14,150,40,50,20],
         stack: 'Tersus',
         // borderRadiusTopLeft: 10,
         // borderRadiusTopRight: 10
         },
         {
         name: 'Tersus Aktif',
-        data: [30, 40, 40, 20, 51,20,10,52,10],
+        data: [30, 40, 40, 20, 51,20,10,52,100],
         stack: 'Tersus'
         }, 
     ], 
     navigation: {
         buttonOptions: {
             verticalAlign: 'top',
-         
         }
     },
     exporting: {

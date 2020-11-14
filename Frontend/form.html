@@ -132,7 +132,7 @@
                                                
                                                 <div class="form-group col-md-6 border-right">
                                                     <label for="alamat">Alamat Kantor</label>
-                                                    <textarea name="alamat[]" id="alamat"  rows="9" class="form-control" required></textarea> 
+                                                    <textarea name="alamat[]" id="alamat"  rows="11" class="form-control" required></textarea> 
                                                 </div>
                                                 <div class="form-group col-md-6" >
                                                     <div class="form-group">
@@ -218,11 +218,11 @@
                                             </div> 
                                            
                                             <div class="wrap-2">
-                                                <div class="form-group col-md-6">
+                                                <div class="form-group col-md-5">
                                                     <label for="lokasi">Lokasi</label>
-                                                    <textarea name="lokasi[]" id="lokasi"  rows="16" class="form-control" required></textarea> 
+                                                    <textarea name="lokasi[]" id="lokasi"  rows="19" class="form-control" required></textarea> 
                                                 </div>
-                                                <div class="form-group col-md-6">
+                                                <div class="form-group col-md-7">
                                                     <div class="form-group">
                                                         <label for="provinsi">Provinsi</label>
                                                         <select name="provinsi[]" class="form-control" id="provinsi" required >
@@ -264,7 +264,7 @@
                                                         </select>
                                                     </div>
                                                     <div class="row">
-                                                        <div class="form-group col-md-4">
+                                                        <div class="form-group col-md-6" style="margin-bottom: 1rem;">
                                                             <label for="kota">Kabupaten / Kota</label>
                                                             <select name="kota[]" class="form-control" id="kota" required >
                                                                 <option value="">Pilih Kabupaten / Kota</option>
@@ -292,7 +292,7 @@
                                                                 <option value="">Kota Subulussalam</option> 
                                                             </select>
                                                         </div>
-                                                        <div class="form-group col-md-4">
+                                                        <div class="form-group col-md-6" style="margin-bottom: 1rem;">
                                                             <label for="kecamatan">Kecamatan</label>
                                                             <select name="kecamatan[]" class="form-control" id="kecamatan" required >
                                                                 <option value="">Pilih Kecamatan</option>
@@ -300,13 +300,9 @@
                                                                 <option value="kecamatan B">kecamatan B</option>
                                                             </select>
                                                         </div>
-                                                        <div class="form-group col-md-4">
-                                                            <label for="kecamatan">Kelurahan</label>
-                                                            <select name="Kelurahan[]" class="form-control" id="Kelurahan" required >
-                                                                <option value="">Pilih Kelurahan</option>
-                                                                <option value="kelurahan a">Kelurahan A</option>
-                                                                <option value="kelurahan b">Kelurahan B</option>
-                                                            </select>
+                                                        <div class="form-group col-md-12">
+                                                            <label for="kecamatan">Kelurahan / Desa</label>
+                                                            <input type="text" name="dermaga" id="dermaga" class="form-control" required placeholder="Kelurahan / Desa">
                                                         </div>
                                                         
                                                     </div>
@@ -380,7 +376,7 @@
                                                     <div id="dermagamulti" class="wrap-2">
                                                         <div class="col-md-12">
                                                             <button type="button" id="btnTambah" class="btn btn-fill btn-primary" style="margin: 10px 0 20px 0;">
-                                                            Tambah Spesifikasi
+                                                            Tambah Dermaga
                                                             </button>    
                                                         </div>  
                                                         <div class="groupdermaga">
@@ -391,14 +387,11 @@
                                                                 </div>
 
                                                                 <div class="col-md-3" style="padding-left:0;margin-top: 1rem;">
-                                                                    <label for="ukuran">Ukuran</label>
-                                                                    <div class="input-group">
-                                                                        <input type="number" name="ukuran[]" id="ukuran" class="form-control" required placeholder="Ukuran" aria-describedby="basic-addon1">
-                                                                        <span class="input-group-addon" id="basic-addon1">&#13217;</span>
-                                                                    </div>  
+                                                                    <label for="spesifikasi">Spesifikasi</label>
+                                                                    <input type="text" name="spesifikasi" id="spesifikasi" class="form-control" required placeholder="Spesifikasi">
                                                                 </div>
 
-                                                                <div class="col-md-5" style="padding-left:0;margin-top: 1rem;">
+                                                                <div class="col-md-6" style="padding-left:0;margin-top: 1rem;">
                                                                     <label for="peruntukan">Peruntukan</label>
                                                                     <input type="text" name="peruntukan[]" id="peruntukan" class="form-control" required placeholder="Peruntukan">
                                                                 </div>
@@ -412,13 +405,13 @@
                                                                     <!-- <input type="number" name="meter[]" id="kedalaman" class="form-control" required placeholder="Meter"> -->
                                                                 </div>
                                                                 
-                                                                <div class="col-md-2" style="padding-left:0;margin-top: 1rem;">
+                                                                <div class="col-md-3" style="padding-left:0;margin-top: 1rem;">
                                                                     <label for="kapasitas">Kapasitas</label>
                                                                     <input type="number" name="dermaga" id="kapasitas" class="form-control" required placeholder="Kapasitas">
                                                                 </div>
 
-                                                                <div class="col-md-2"style="padding-left:0;margin-top: 1rem;">
-                                                                    <label for="satuan">satuan</label>
+                                                                <div class="col-md-3"style="padding-left:0;margin-top: 1rem;">
+                                                                    <label for="satuan">Satuan</label>
                                                                     <select class="form-control" id="satuan" name="satuan[]" required>
                                                                         <option value="">Pilih Satuan</option>
                                                                         <option>FEET</option>
@@ -437,6 +430,20 @@
                                                         <div class="form-group col-md-6">
                                                             <label for="name">Legalitas</label>
                                                             <input type="text" name="nosk" id="" class="form-control" required placeholder="Input No SK">
+                                                        </div>
+
+                                                        <div class="form-group col-md-6">
+                                                            <label for="jenissk">Jenis SK / Legalitas</label>
+                                                            <select name="jenissk[]" class="form-control" id="jenissk" required>
+                                                                <option value="">Pilih Jenis SK / Legalitas</option>
+                                                                <option value="">Pembangunan</option>
+                                                                <option value="">Pengembangan</option>
+                                                                <option value="">Pengoperasian</option>
+                                                                <option value="">Perpajangan / Pembangunan / Pengembangan</option>
+                                                                <option value="">Perpanjangan Pengoperasian</option>
+                                                                <option value="">Penyesuaian</option>
+                                                                <option value="">Pendaftaran</option>
+                                                            </select>
                                                         </div>
         
                                                         <div class="form-group col-md-6">
@@ -468,7 +475,7 @@
                                                         </div>
         
                                                         <div class="form-group col-md-3" >
-                                                            <label for="status">STATUS</label>
+                                                            <label for="status">STATUS OPERASIONAL</label>
                                                             <select name="status[]" class="form-control" id="status" required>
                                                                 <option value="">Pilih Status</option>
                                                                 <option value="aktif">AKTIF</option>
