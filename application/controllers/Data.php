@@ -156,6 +156,7 @@ class Data extends CI_Controller
 
 	public function getData()
 	{
+		die("AAA");
 
         $name = trim($this->input->post('name'));
 		$provinsi = trim($this->input->post('provinsi'));
@@ -164,7 +165,7 @@ class Data extends CI_Controller
 		$kategori = trim($this->input->post('kategori'));
 		$bidangusaha = trim($this->input->post('bidangusaha'));
 		$dermaga = trim($this->input->post('dermaga'));
-		$meter = trim($this->input->post('meter'));
+		$meter = trim($this->input->post('meter')); 
 		$kapasitas = trim($this->input->post('kapasitas'));
 		$tuk_ter = trim($this->input->post('tuk_ter'));
 		$status = trim($this->input->post('status'));
