@@ -26,17 +26,12 @@ $(document).ready(function(){
 //         });
 
 
-    table = $('#datatables').DataTable({
+    table = $('#datatables').dataTable({
         "responsive": false,
         "scrollX": true,
         "processing": true, //Feature control the processing indicator.
         "serverSide": true, //Feature control DataTables' server-side processing mode.
         "order": [], //Initial no order.
-        "pagingType": "full_numbers",
-        "lengthMenu": [
-            [10, 25, 50, -1],
-            [10, 25, 50, "All"]
-        ],
  
         // Load data for the table's content from an Ajax source
         "ajax": {
@@ -53,7 +48,7 @@ $(document).ready(function(){
     });
 
 
-    var dataTablex = $('#datatables').DataTable();
+    var dataTablex = $('#datatables').dataTable();
     $("#searchbox").keyup(function() {
         dataTablex.fnFilter(this.value);
     }); 
@@ -180,6 +175,28 @@ $(document).ready(function(){
 
 
 });
+
+
+function setsearch()
+{
+    // var array_final = new Array();
+    // var array_final2 = new Array();
+    // var i=0;
+    // var rows_selected = table2.column(0).checkboxes.selected();
+    //     // Iterate over all selected checkboxes
+    // $.each(rows_selected, function(index, rowId){
+    //         var cust=rowId;
+    //         var array_temp = {'cust':cust};
+    //         array_final[i] = array_temp;
+    //         i=i+1;
+    //     });
+    
+      $('#frmcari')[0].reset(); // reset form on modals
+    
+      $('#myModal').modal('show'); // show bootstrap modal
+         
+    
+};
 
     
 
