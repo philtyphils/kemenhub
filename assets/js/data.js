@@ -133,7 +133,7 @@ $(document).ready(function(){
                 barisTrans++;
                 
                 isiantbl+="<tr role='row'>";
-                isiantbl+="<td>"+barisTrans+"</font></td>";
+                isiantbl+="<td>"+barisTrans+"</td>";
                 isiantbl+="<td>"+arrData[j]["nm_perusahaan"]+"</td>";
                 isiantbl+="<td>"+arrData[j]["alamat"]+"</td>";
                 isiantbl+="<td>"+arrData[j]["ksop_id"]+"</td>";

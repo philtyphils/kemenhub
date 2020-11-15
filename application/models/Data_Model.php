@@ -126,8 +126,11 @@ class Data_model extends CI_Model {
         $arrayHasil=array();
         $counter=0;
         $html = "";
-        $sql ="SELECT a.* from daftar_perusahaan as a where nm_perusahaan like('%".$name."%') order by nm_perusahaan ASC ";
-        // $sql ="SELECT a.* from daftar_perusahaan as a limit 0,1 ";
+
+        $sql ="SELECT a.*, b.name as nmprov,c.nama as nmksop,d.nama as nmusaha,e.nama as nmkateg from daftar_perusahaanx as a left join provinsi as b on a.provinsi_id=b.id left join ksop as c on a.ksop_id=c.ksop_id left join bdg_usaha as d on a.bdgusaha_id-d.bdg_usaha_id left join kategori as e on a.kategori_id=e.kategori_id where a.nm_perusahaan like('%".$name."%') order by nm_perusahaan ASC ";
+        
+         // $sql ="SELECT a.*, b.name as nmprov,c.nama as nmksop,d.nama as nmusaha,e.nama as nmkateg from daftar_perusahaanx as a left join provinsi as b on a.provinsi_id=b.id left join ksop as c on a.ksop_id=c.ksop_id left join bdg_usaha as d on a.bdgusaha_id-d.bdg_usaha_id left join kategori as e on a.kategori_id=e.kategori_id where a.nm_perusahaan like('%".$name."%') AND b.name like('%".$provinsi."%') AND a.lokasi like('%".$kota."%') AND c.nama like('%".$kelas."%') AND e.nama like('%".$kategori."%') AND d.nama like('%".$bidangusaha."%') AND a.spesifikasi like('%".$dermaga."%') AND a.spek_kedalaman like('%".$meter."%') AND a.spek_kapasitas like('%".$kapasitas."%') AND a.ter_tuk like('%".$tuk_ter."%') AND a.status like('%".$status."%') AND a.ms_berlaku like('%".$tgl_akhir."%')  order by nm_perusahaan ASC ";
+
         $sql1 = $this->db->query($sql);
         $sql1 = $this->db->query($sql);
         
@@ -139,11 +142,11 @@ class Data_model extends CI_Model {
                 $arrayHasil[$counter]['id'] = trim($row['id']);
                 $arrayHasil[$counter]['nm_perusahaan'] = "<font style='font-weight: bold;'>".trim($row['nm_perusahaan'])."</font>";
                 $arrayHasil[$counter]['alamat'] = "<font class='td-status2'>".trim($row['alamat'])."</font>";
-                $arrayHasil[$counter]['ksop_id'] = $row['ksop_id'];
-                $arrayHasil[$counter]['provinsi_id'] = $row['provinsi_id'];
-                $arrayHasil[$counter]['bdgusaha_id'] = $row['bdgusaha_id'];
+                $arrayHasil[$counter]['ksop_id'] = $row['nmksop'];
+                $arrayHasil[$counter]['provinsi_id'] = $row['nmprov'];
+                $arrayHasil[$counter]['bdgusaha_id'] = $row['nmusaha'];
                 $arrayHasil[$counter]['lokasi'] = trim($row['lokasi']);
-                $arrayHasil[$counter]['kategori_id'] = $row['kategori_id'];
+                $arrayHasil[$counter]['kategori_id'] = $row['nmkateg'];
                 $arrayHasil[$counter]['koordinat'] = trim($row['koordinat']);
                 if(trim($row['ter_tuk'])=='TUKS')
                 {
@@ -156,9 +159,9 @@ class Data_model extends CI_Model {
                 $arrayHasil[$counter]['tgl_terbit'] = date('d-m-Y', strtotime(trim($row['tgl_terbit'])));
                 if(trim($row['status'])=='Y')
                 {
-                    $arrayHasil[$counter]['status'] = "<font class='td-status' style='color: #649e07;'>".trim($row['status'])."</font>";
+                    $arrayHasil[$counter]['status'] = "<font class='td-status' style='color: #649e07;'>AKTIF</font>";
                 }else{
-                    $arrayHasil[$counter]['status'] = "<font class='td-status' style='color: red;'>".trim($row['status'])."</font>";                
+                    $arrayHasil[$counter]['status'] = "<font class='td-status' style='color: red;'>TIDAK AKTIF</font>";                
                 }
                 $arrayHasil[$counter]['ms_berlaku'] = date('d-m-Y', strtotime(trim($row['ms_berlaku'])));
                 $counter++;

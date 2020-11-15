@@ -11,6 +11,8 @@ $(document).ready(function(){
       var postvars = {username:user,password:pwd};
 
       // $('#msg').html("<img src=\""+baseurl+"image/ajax-loader.gif\" width=\"40\" height=\"40\" alt=\"ajax-loader\" />");
+
+      $.ajaxSetup({async:false});
       $.post(siteurl+'/Login/cekLogin',postvars,function(data){
           var arrHasil = new Array();
               arrHasil = eval(data);
@@ -24,6 +26,7 @@ $(document).ready(function(){
                 window.location.replace(siteurl+'/Dashboard');
               }
       });
+      $.ajaxSetup({async:true});
 
   });
   $('#user').focus();

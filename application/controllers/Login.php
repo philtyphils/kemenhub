@@ -41,20 +41,20 @@ class Login extends CI_Controller
 	
 	public function cekLogin()
 	{
-		$user = trim($this->input->post('user'));
-		$pass = trim($this->input->post('pass'));
+		$arrHasil = array();
+		$user = trim($this->input->post('username'));
+		$pass = trim($this->input->post('password'));
 		$i = 0;
 		$cek = $this->Login_Model->cekUser($user,$pass);
-		if($cek)
+		if($cek==true)
 		{
-			$this->session->set_userdata(array("validUser" => $row['USERID'],"isLoggedIn" => true,"validNama" => $row['USERNM']));
+			$this->session->set_userdata(array("validUser" => $user,"isLoggedIn" => true));
 			$arrHasil[0]["msg"] = "";
 		}
 		else
 		{
 			$arrHasil[0]["msg"] = "*Wrong username/password combination";
 		}
-			
 		echo json_encode($arrHasil);
 	}
 		
@@ -76,3 +76,4 @@ class Login extends CI_Controller
 		
 	// }
 }
+?>

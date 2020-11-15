@@ -1,106 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo $title;?></title>
-    <link rel="stylesheet" href="<?php echo $baseurl;?>assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="<?php echo $baseurl;?>assets/sass/main.css">
-    <link href="<?php echo $baseurl;?>assets/css/font-awesome.css" rel="stylesheet" />
-    <link href="<?php echo $baseurl;?>assets/css/bootstrap-datepicker.css" rel="stylesheet" />
-    <link href="<?php echo $baseurl;?>assets/css/google-roboto-300-700.css" rel="stylesheet" />
-    
-</head>
-<body>
-<input type="hidden" id="txtsite" value="<?php echo $siteurl;?>" />
-<input type="hidden" id="txtbase" value="<?php echo $baseurl;?>" />
-    <div class="wrapper">
-        <div class="sidebar">
-            <div class="sidebar-wrapper">
-                <div class="logo">
-                    <a href="#" class="simple-text">
-                        <img src="<?php echo $baseurl;?>assets/img/logo.png" alt="logo" style="width: 100%;">
-                    </a>
-                </div>
-    
-                <ul class="nav">
-                    <li class="<?php echo ($menu == 'Dashboard')?'active':'';?>" id="">
-                        <a href="<?php echo $baseurl;?>Dashboard">
-                            <i class="fa fa-home"></i>
-                            <p>Home</p>
-                        </a>
-                    </li>
-                    <li class="<?php echo ($menu == 'Data')?'active':'';?>" id="">
-                        <a href="<?php echo $baseurl;?>Data">
-                            <i class="fa fa-folder-open"></i>
-                            <p>Data</p>
-                        </a>
-                    </li>
-                    <li class="<?php echo ($menu == 'Master')?'active':'';?>" id="">
-                        <a href="<?php echo $baseurl;?>Master">
-                            <i class="fa fa-tags"></i>
-                            <p>Master</p>
-                        </a>
-                    </li>
-                    <li class="active-pro">
-                        <a href="">
-                            <i class="fa fa-cogs"></i>
-                            <p>Setting</p>
-                        </a>
-                    </li>
-                </ul>
-            </div>          
-        </div>
-
-        <div class="main-panel">
-            <nav class="navbar navbar-default nabvar-fixed">
-                <div class="container-fluid">
-
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                    </div>
-
-                    <div class="collapse navbar-collapse">
-                       
-                        <ul class="nav navbar-nav navbar-right">
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <i class="fa fa-calendar-o" aria-hidden="true"></i>
-                                    <span class="notification">4</span>
-                                      <p class="hidden-md hidden-lg">
-                                      Message
-                                      <b class="caret"></b>
-                                      </p>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="masaberlaku.html">Notification 1</a></li>
-                                    <li><a href="masaberlaku.html">Notification 2</a></li>
-                                    <li><a href="masaberlaku.html">Notification 3</a></li>
-                                    <li><a href="masaberlaku.html">Notification 4</a></li>
-                                </ul>
-                            </li>      
-                            <li class="dropdown">
-                                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                        <p>
-                                        Administrator
-                                        <b class="caret"></b>
-                                        </p>
-                                  </a>
-                                  <ul class="dropdown-menu">
-                                    <li><a href="#">Logout</a></li>
-                                  </ul>
-                            </li>    
-                            <li class="separator hidden-lg"></li>
-                        </ul>
-                    </div>
-
-                </div>
-            </nav>
 
             <div class="contents">
                 <div class="container-fluid">
@@ -222,7 +119,7 @@
             <div class="modal-body" style="padding: 50px;">
                 <h5 class="title-form">Cari Data</h5>
  
-
+                <form role="form" id="frmcari">
                     <div class="row">
                         <div class="form-group col-md-8">
                             <label for="name">Nama Perusahaan</label>
@@ -238,41 +135,6 @@
                             <?php for($i=0;$i<count($dataProvinsi);$i++){?>
                                 <option value="<?php echo trim($dataProvinsi[$i]->kode); ?>"><?php echo $dataProvinsi[$i]->nama; ?></option>
                             <?php } ?>
-                            <!-- <option value="">Pilih Provinsi</option>
-                            <option value="">aceh</option>
-                            <option value="">bali</option>
-                            <option value="">bangka belitung</option>
-                            <option value="">banten</option>
-                            <option value="">bengkulu</option>
-                            <option value="">jawa tengah</option>
-                            <option value="">kalimantan tengah</option>
-                            <option value="">sulawesi tengah</option>
-                            <option value="">jawa timur</option>
-                            <option value="">kalimantan timur</option>
-                            <option value="">nusa tenggara timur</option>
-                            <option value="">gorontalo</option>
-                            <option value="">jakarta</option>
-                            <option value="">jambi</option>
-                            <option value="">lampung</option>
-                            <option value="">maluku</option>
-                            <option value="">kalimantan utara</option>
-                            <option value="">maluku utara</option>
-                            <option value="">sulawesi utara</option>
-                            <option value="">sumatra utara</option>
-                            <option value="">papua</option>
-                            <option value="">riau</option>
-                            <option value="">kepulauan riau</option>
-                            <option value="">kalimantan selatan</option>
-                            <option value="">sulawesi selatan</option>
-                            <option value="">sumatra selatan</option>
-                            <option value="">sulawesi tenggara</option>
-                            <option value="">yogyakarta</option>
-                            <option value="">jawa barat</option>
-                            <option value="">kalimantan barat</option>
-                            <option value="">nusa tenggara barat</option>
-                            <option value="">papua barat</option>
-                            <option value="">sulawesi barat</option>
-                            <option value="">sumatra barat</option> -->
                         </select>
                     </div>
 
@@ -280,28 +142,6 @@
                         <label for="kota">Kabupaten / Kota</label>
                         <select name="kota[]" class="form-control selectpicker" id="kota" data-live-search="true" required >
                             <option value="">Pilih Kabupaten / Kota</option>
-                        <!--     <option value="">Simeulue</option> 
-                            <option value="">Aceh Singkil</option>
-                            <option value="">Aceh Selatan</option> 
-                            <option value="">Aceh Tenggara</option> 
-                            <option value="">Aceh Timur</option> 
-                            <option value="">Aceh Tengah</option>
-                            <option value="">Aceh Barat</option> 
-                            <option value="">Aceh Besar</option>
-                            <option value="">Pidie</option> 
-                            <option value="">Bireuen</option> 
-                            <option value="">Aceh Utara</option> 
-                            <option value="">Aceh Barat Daya</option> 
-                            <option value="">Gayo Lues</option> 
-                            <option value="">Aceh Tamiang</option> 
-                            <option value="">Nagan Raya</option> 
-                            <option value="">Aceh Jaya</option> 
-                            <option value="">Bener Meriah</option> 
-                            <option value="">Pidie Jaya</option> 
-                            <option value="">Kota Banda Aceh</option> 
-                            <option value="">Kota Sabang</option> 
-                            <option value="">Kota Lhokseumawe</option> 
-                            <option value="">Kota Subulussalam</option> --> 
                         </select>
                     </div>
 
@@ -316,38 +156,20 @@
                   <div class="row">
                     <div class="form-group col-md-4" style="margin-bottom: 1rem;">
                         <label for="kategori">Kategori</label>
-                        <select class="selectpicker form-control" multiple data-live-search="true" title="Kategori" id="kategori">
+                        <select class="selectpicker form-control" multiple data-live-search="true" title="Kategori" name="kategori" id="kategori">
                                 <option value="">Pilih Kategori</option>
                                 <?php for($j=0;$j<count($dataKateg);$j++){?>
                                     <option value="<?php echo trim($dataKateg[$j]->kategori_id); ?>"><?php echo $dataKateg[$j]->nama; ?></option>
                                 <?php } ?>
-               <!--              <option>ENERGI</option>
-                            <option>PERTAMBANGAN</option>
-                            <option>INDUSTRI</option>
-                            <option>ENERGI</option>
-                            <option>DOK DAN GALANGAN</option>
-                            <option>PERTANIAN</option>
-                            <option>KEHUTANAN</option>
-                            <option>PARIWISATA</option>
-                            <option>PERIKANAN</option> -->
                         </select>
                     </div>
                     <div class="form-group col-md-4" style="margin-bottom: 1rem;">
                         <label for="bidangusaha">Bidang Usaha</label>
-                        <select class="selectpicker form-control" multiple data-live-search="true" title="Kategori" id="bidangusaha">
+                        <select class="selectpicker form-control" multiple data-live-search="true" title="Bidang Usaha" data-size="10" name="bidangusaha" id="bidangusaha">
                                 <option value="">Pilih Bidang Usaha</option>
                                 <?php for($k=0;$k<count($dataBdgUsaha);$k++){?>
                                     <option value="<?php echo trim($dataBdgUsaha[$k]->bdg_usaha_id); ?>"><?php echo $dataBdgUsaha[$k]->nama; ?></option>
                                 <?php } ?>
-                            <!-- <option>PENYEDIA TENAGA LISTRIK</option>
-                            <option>INDUSTRI SEMEN</option>
-                            <option>NIAGA MIGAS</option>
-                            <option>PERTAMBANGAN BATUBARA</option>
-                            <option>PEMANFAATAN HASIL HUTAN KAYU</option>
-                            <option>PLTU</option>
-                            <option>HULU MIGAS</option>
-                            <option>INDUSTRI KAYU</option>
-                            <option>PERKEBUNAN KELAPA SAWIT</option> -->
                         </select>
                     </div>
                   </div>
@@ -356,6 +178,7 @@
                     <div class="form-group col-md-4" style="margin-bottom: 1rem;">
                         <label for="dermaga">Type Dermaga</label>
                         <select class="selectpicker form-control" multiple data-live-search="true" title="Type Dermaga" id="dermaga">
+                            <option value="">Pilih Dermaga</option>
                             <option>DERMAGA I TIPE MARGINAL</option>
                             <option>DERMAGA TIPE FINGER</option>
                             <option>DERMAGA TIPE JETTY HEAD</option>
@@ -403,6 +226,7 @@
                         </div>
                     </div>
                   </div>
+              </form>
 
                     <button id="btnCari" type="button" class="btn btn-success btn-fill">Cari Data</button>
             

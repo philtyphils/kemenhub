@@ -1,3 +1,6 @@
+<?php
+  header("Cache-Control: no-cache, must-revalidate");
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,9 +15,8 @@
     
 </head>
 <body>
-    <input type="hidden" id="txtsite" value="<?php echo $siteurl;?>" />
-	<input type="hidden" id="txtbase" value="<?php echo $baseurl;?>" />
-	<!-- 
+<input type="hidden" id="txtsite" value="<?php echo $siteurl;?>" />
+<input type="hidden" id="txtbase" value="<?php echo $baseurl;?>" />
     <div class="wrapper">
         <div class="sidebar">
             <div class="sidebar-wrapper">
@@ -102,4 +104,3 @@
 
                 </div>
             </nav>
- -->

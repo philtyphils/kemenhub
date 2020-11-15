@@ -37,7 +37,7 @@ class Data extends CI_Controller
 		$data['dataProvinsi'] = $this->datax->get_provinsi();
 		$data['dataKateg'] = $this->datax->get_kategori();
 		$data['dataBdgUsaha'] = $this->datax->get_bidangusaha();
-		// $this->load->view('templates/header',$data);
+		$this->load->view('templates/header',$data);
 		// $this->load->view('templates/hmenu',$data);
 		$this->load->view('main/data',$data);
 		// $this->load->view('templates/footer',$data);
@@ -159,8 +159,6 @@ class Data extends CI_Controller
 
         $name = trim($this->input->post('name'));
 		$provinsi = trim($this->input->post('provinsi'));
-		// $TGL_TRANS = $this->LaporanRegisNup_model->setDate($this->input->post('TGL_TRANS'));
-		// $TGL_TRANS2 = $this->LaporanRegisNup_model->setDate($this->input->post('TGL_TRANS2'));
 		$kota = trim($this->input->post('kota'));
 		$kelas = trim($this->input->post('kelas'));
 		$kategori = trim($this->input->post('kategori'));
@@ -186,3 +184,4 @@ class Data extends CI_Controller
 	// }
 	
 }
+?>

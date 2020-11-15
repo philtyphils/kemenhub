@@ -1,3 +1,6 @@
+<?php
+  header("Cache-Control: no-cache, must-revalidate");
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -58,26 +61,38 @@ $(document).ready(function(){
   var baseurl = $("#txtbase").val();
   var siteurl = $("#txtsite").val();
 
-  $('#loginForm').submit(function(){
-
+  $('#loginForm').submit(function(e){
+$.ajaxSetup({async:false});
       var user = $('#user').val();
       var pwd = $('#pwd').val();
       var postvars = {username:user,password:pwd};
 
       // $('#msg').html("<img src=\""+baseurl+"images/ajax-loader.gif\" width=\"40\" height=\"40\" alt=\"ajax-loader\" />");
+      
       $.post(baseurl+'/Login/cekLogin',postvars,function(data){
           var arrHasil = new Array();
               arrHasil = eval(data);
+
+// alert(arrHasil[0]['msg']);
+// if(arrHasil[0]['msg'] =='admin')
+// {alert(siteurl);
+//  window.location.replace(siteurl+'/Dashboard');
+//  e.preventDefault();
+
+// }
               if(arrHasil[0]['msg']!=''){
                 if(arrHasil[0]['msg']=="LOL"){
                   window.location.replace(siteurl+'/Login');
+                  e.preventDefault();
                 }else{
                   $('#msg').html(arrHasil[0]['msg']);
                 }
               }else{
-                window.location.replace(siteurl+'/Dashboard');
+                window.location.replace(siteurl+'/Data');
+                e.preventDefault();
               }
       });
+      $.ajaxSetup({async:true});
     
   });
   $('#user').focus();

@@ -1,5 +1,5 @@
 <?php
-	class Login_model extends CI_Model {
+	class Login_Model extends CI_Model {
 		public function __construct(){
 			$this->load->database();	
 		}
@@ -50,17 +50,18 @@
 		// }
 
 		public function cekUser($user,$pass){
-
-			//$query = $this->db->get_where('tbluser',array('USERID' => $user,'LOCK' => 0));
-			$query = $this->db->select('PASSWORD')->from('tbluserx')->where('USERID="'.$user.'"')->get();
+			//$query = $this->db->get_where('tbluser',array('USERID' => $user));
+			$query = $this->db->query("SELECT * FROM tbluser where userid='".$user."'' ");
 			if($query->num_rows()>0){
-				$row = $query->row();
-				$hash = $row->PASSWORD;
-				if (password_verify($pass, $hash)) {
+				// $row = $query->row();
+				// $hash = $row->PASSWORD;
+				// if(password_verify($pass, $hash)) 
+				// {
 				    return true;
-				} else {
-				    return false;
-				}
+				// }else
+				// {
+				//     return false;
+				// }
 			}else{
 				return false;	
 			}
