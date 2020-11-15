@@ -127,57 +127,117 @@ class Data_model extends CI_Model {
         $counter=0;
         $html = "";
         $sql ="SELECT a.* from daftar_perusahaan as a where nm_perusahaan like('%".$name."%') order by nm_perusahaan ASC ";
+        // $sql ="SELECT a.* from daftar_perusahaan as a limit 0,1 ";
+        $sql1 = $this->db->query($sql);
         $sql1 = $this->db->query($sql);
         
         
 
-        // if($sql1->num_rows()>0){
-        //     foreach ($sql1->result_array() as $row){
-        //         $arrayHasil[$counter]['no'] = ($counter+1);
-        //         $arrayHasil[$counter]['nm_perusahaan'] = $row['nm_perusahaan'];
-        //         $arrayHasil[$counter]['alamat'] = $row['alamat'];
-        //         $arrayHasil[$counter]['ksop_id'] = $row['ksop_id'];
-        //         $arrayHasil[$counter]['provinsi_id'] = $row['provinsi_id'];
-        //         $arrayHasil[$counter]['bdgusaha_id'] = $row['bdgusaha_id'];
-        //         $arrayHasil[$counter]['lokasi'] = $row['lokasi'];\
-        //         $arrayHasil[$counter]['kategori_id'] = $row['kategori_id'];
-        //         $arrayHasil[$counter]['koordinat'] = $row['koordinat'];
-        //         $arrayHasil[$counter]['ter_tuk'] = $row['ter_tuk'];
-        //         $arrayHasil[$counter]['sk'] = $row['sk'];
-        //         $arrayHasil[$counter]['tgl_terbit'] = $row['tgl_terbit'];
-        //         $arrayHasil[$counter]['status'] = $row['status'];
-        //         $arrayHasil[$counter]['ms_berlaku'] = $row['ms_berlaku'];
-        //         $counter++;
-        //     }
-        // }
-
-        
-        $a=0;
         if($sql1->num_rows()>0){
             foreach ($sql1->result_array() as $row){
-                $html.="<tr>";
-                $html.="<td>".($a+1)."</td>";
-                $html.="<td>".$row['nm_perusahaan']."</td>";
-                $html.="<td>".$row['alamat']."</td>";
-                $html.="<td>".$row['ksop_id']."</td>";
-                $html.="<td>".$row['bdgusaha_id']."</td>";
-                $html.="<td>".$row['kategori_id']."</td>";
-                $html.="<td>".$row['lokasi']."</td>";
-                $html.="<td>".$row['koordinat']."</td>";
-                $html.="<td>".$row['spesifikasi']."</td>";
-                $html.="<td>".$row['ter_tuk']."</td>";
-                $html.="<td>".$row['sk']."</td>";
-                $html.="<td>".$row['tgl_terbit']."</td>";
-                $html.="<td>".$row['status']."</td>";
-                $html.="<td>".$row['ms_berlaku']."</td>";
-                $html.="<td></td>";
-                $html.="</tr>";
-                $a++;
+                $arrayHasil[$counter]['no'] = ($counter+1);
+                $arrayHasil[$counter]['id'] = trim($row['id']);
+                $arrayHasil[$counter]['nm_perusahaan'] = "<font style='font-weight: bold;'>".trim($row['nm_perusahaan'])."</font>";
+                $arrayHasil[$counter]['alamat'] = "<font class='td-status2'>".trim($row['alamat'])."</font>";
+                $arrayHasil[$counter]['ksop_id'] = $row['ksop_id'];
+                $arrayHasil[$counter]['provinsi_id'] = $row['provinsi_id'];
+                $arrayHasil[$counter]['bdgusaha_id'] = $row['bdgusaha_id'];
+                $arrayHasil[$counter]['lokasi'] = trim($row['lokasi']);
+                $arrayHasil[$counter]['kategori_id'] = $row['kategori_id'];
+                $arrayHasil[$counter]['koordinat'] = trim($row['koordinat']);
+                if(trim($row['ter_tuk'])=='TUKS')
+                {
+                    $arrayHasil[$counter]['ter_tuk'] = "<font class='td-status' style='color: #A3A0FB;'>".trim($row['ter_tuk'])."</font>";
+                }else{
+                    $arrayHasil[$counter]['ter_tuk'] = "<font class='td-status' style='color: #6bd189;'>".trim($row['ter_tuk'])."</font>";
+                }
+
+                $arrayHasil[$counter]['sk'] = trim($row['sk']);
+                $arrayHasil[$counter]['tgl_terbit'] = date('d-m-Y', strtotime(trim($row['tgl_terbit'])));
+                if(trim($row['status'])=='Y')
+                {
+                    $arrayHasil[$counter]['status'] = "<font class='td-status' style='color: #649e07;'>".trim($row['status'])."</font>";
+                }else{
+                    $arrayHasil[$counter]['status'] = "<font class='td-status' style='color: red;'>".trim($row['status'])."</font>";                
+                }
+                $arrayHasil[$counter]['ms_berlaku'] = date('d-m-Y', strtotime(trim($row['ms_berlaku'])));
+                $counter++;
             }
         }
 
-        $arrayhasil[0]['html']=$html;
-        echo json_encode($arrayhasil[0]['html']);
         return $arrayHasil; 
+
+        // $html.="<table id='datatables' class='table table-responsive  table-no-bordered table-hover' cellspacing='0' width='100%'' style='width:100%;font-size: 13px;'>";
+        // $html.="<thead style='color: #FFFFFF;font-weight: 600;font-size: 12px;'>";
+        //     $html.="<tr role='row' style='background-color:#43425D;'>";
+        //     $html.="<th>No</th>
+        //             <th>NAMA</th>
+        //             <th>ALAMAT</th>
+        //             <th>WILAYAH KERJA</th>
+        //             <th>BIDANG USAHA</th>
+        //             <th>KATEGORI</th>
+        //             <th>LOKASI</th>
+        //             <th>KOORDINAT</th>
+        //             <th>SPESIFIKASI</th>
+        //             <th>TERSUS / TUKS</th>
+        //             <th>LEGALITAS</th>
+        //             <th>TERBIT</th>
+        //             <th>STATUS</th>
+        //             <th>MASA BERLAKU</th>
+        //             <th class='disabled-sorting' style='idth:50px'>ACTIONS</th>
+        //         </tr>
+        //     </thead>
+        //     <tbody>";
+
+        // $a=0;
+        // if($sql1->num_rows()>0){
+        //     foreach ($sql1->result_array() as $row){
+        //         $html.="<tr role='row'>";
+        //         $html.="<td>".($a+1)."</td>";
+        //         $html.="<td>".$row['nm_perusahaan']."</td>";
+        //         $html.="<td>".$row['alamat']."</td>";
+        //         $html.="<td>".$row['ksop_id']."</td>";
+        //         $html.="<td>".$row['bdgusaha_id']."</td>";
+        //         $html.="<td>".$row['kategori_id']."</td>";
+        //         $html.="<td>".$row['lokasi']."</td>";
+        //         $html.="<td>".$row['koordinat']."</td>";
+        //         $html.="<td>".$row['spesifikasi']."</td>";
+        //         $html.="<td>".$row['ter_tuk']."</td>";
+        //         $html.="<td>".$row['sk']."</td>";
+        //         $html.="<td>".$row['tgl_terbit']."</td>";
+        //         $html.="<td>".$row['status']."</td>";
+        //         $html.="<td>".$row['ms_berlaku']."</td>";
+        //         $html.="<td></td>";
+        //         $html.="</tr>";
+        //         $a++;
+        //     }
+            // $html.="<tr role='row'>";
+            //     $html.="<td>1</td>";
+            //     $html.="<td>2</td>";
+            //     $html.="<td>3</td>";
+            //     $html.="<td>4</td>";
+            //     $html.="<td>5</td>";
+            //     $html.="<td>6</td>";
+            //     $html.="<td>7</td>";
+            //     $html.="<td>8</td>";
+            //     $html.="<td>9</td>";
+            //     $html.="<td>10</td>";
+            //     $html.="<td>11</td>";
+            //     $html.="<td>12</td>";
+            //     $html.="<td>13</td>";
+            //     $html.="<td>14</td>";
+            //     $html.="<td>15</td>";
+            //     $html.="</tr>";
+        
+
+
+        //     $html.="</tbody>";
+        // $html.="</table>";
+
+
+
+        // $arrayHasil[0]['html']=$html;
+        // echo json_encode($arrayhasil[0]['html']);
+        
     }
 }

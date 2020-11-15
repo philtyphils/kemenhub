@@ -1,8 +1,30 @@
 var siteurl = $("#txtsite").val();
 var baseurl = $("#txtbase").val();
 var table;
+var tablex;
 
 $(document).ready(function(){
+
+// table = $('#datatables').DataTable({
+//           "scrollX": true,
+//           "iDisplayLength": 10,
+//           "responsive":false,
+//           "bLengthChange": false,
+//           "pagingType": "full_numbers",
+//           "lengthMenu": [
+//               [10, 25, 50, -1],
+//               [10, 25, 50, "All"]
+//           ],
+//           "destroy":true,
+//           "order": [],
+//           "columnDefs": [
+//           { 
+//               "targets": [ -1 ], //last column
+//               "orderable": false, //set not orderable
+//           },
+//           ]
+//         });
+
 
     table = $('#datatables').DataTable({
         "responsive": false,
@@ -31,9 +53,9 @@ $(document).ready(function(){
     });
 
 
-    // var dataTable = $('#datatables').dataTable();
+    var dataTablex = $('#datatables').DataTable();
     $("#searchbox").keyup(function() {
-        table.fnFilter(this.value);
+        dataTablex.fnFilter(this.value);
     }); 
 
 
@@ -78,35 +100,80 @@ $(document).ready(function(){
     });
 
 
+    $('#btnCari').bind('click',function(){
+
+
+      var barisTrans = 0;
+      $("#isiData").html('');
+      isiantbl="";
+
+
+      $.ajaxSetup({async:false});
+        var postvar = { name:$('#name').val(),
+                        provinsi:$('#provinsi').val(),
+                        kota:$('#kota').val(),
+                        kelas:$('#kelas').val(),
+                        kategori:$('#kategori').val(),
+                        bidangusaha:$('#bidangusaha').val(),
+                        dermaga:$('#dermaga').val(),
+                        meter:$('#meter').val(),
+                        kapasitas:$('#kapasitas').val(),
+                        tuk_ter:$('#tuk_ter').val(),
+                        status:$('#status').val(),
+                        tgl_akhir:$('#tgl_akhir').val()};
+        $.post(siteurl+"/Data/getData",postvar,function(dataxx){
+
+          var arrData = new Array();
+            arrData = eval(dataxx);
+
+
+            if(arrData.length > 0){
+        
+              for(var j=0;j<arrData.length;j++){
+                barisTrans++;
+                
+                isiantbl+="<tr role='row'>";
+                isiantbl+="<td>"+barisTrans+"</font></td>";
+                isiantbl+="<td>"+arrData[j]["nm_perusahaan"]+"</td>";
+                isiantbl+="<td>"+arrData[j]["alamat"]+"</td>";
+                isiantbl+="<td>"+arrData[j]["ksop_id"]+"</td>";
+                isiantbl+="<td>"+arrData[j]["provinsi_id"]+"</td>";
+                isiantbl+="<td>"+arrData[j]["bdgusaha_id"]+"</td>";
+                isiantbl+="<td>"+arrData[j]["lokasi"]+"</td>";
+                isiantbl+="<td>"+arrData[j]["kategori_id"]+"</td>";
+                isiantbl+="<td>"+arrData[j]["koordinat"]+"</td>";
+                isiantbl+="<td>"+arrData[j]["ter_tuk"]+"</td>";
+                isiantbl+="<td>"+arrData[j]["sk"]+"</td>";
+                isiantbl+="<td>"+arrData[j]["tgl_terbit"]+"</td>";
+                isiantbl+="<td>"+arrData[j]["status"]+"</td>";
+                isiantbl+="<td>"+arrData[j]["ms_berlaku"]+"</td>";
+                isiantbl+="<td><a class='btn btn-simple btn-warning btn-icon btnedit' title='Ubah' onclick='edit_Datax("+arrData[j]['id']+")'><i class='fa fa-edit'></i></a><a class='btn btn-simple btn-danger btn-icon btndelete' title='Hapus' onclick='delete_Datax("+arrData[j]['id']+")'><i class='fa fa-times'></i></a></td></tr>";
+                
+              }
+
+              $("#isiData").html(isiantbl);
+                $('#myModal').hide();
+                $('body').removeClass('modal-open');
+                $('.modal-backdrop').remove();
+            }else{
+              $("#isiData").html('');
+            }
+
+           
+
+            // $("#isiData").html(arrData[0]["html"]);
+            // $('#myModal').hide();
+            // $('#data_perusahaanx').hide();
+            // $('#data_perusahaan').show();
+            // $('body').removeClass('modal-open');
+            // $('.modal-backdrop').remove();
+        });
 
 
 
 
-$('#btnCari').bind('click',function(){
-
-  $.ajaxSetup({async:false});
-    var postvar = { name:$('#name').val(),
-                    provinsi:$('#provinsi').val(),
-                    kota:$('#kota').val(),
-                    kelas:$('#kelas').val(),
-                    kategori:$('#kategori').val(),
-                    bidangusaha:$('#bidangusaha').val(),
-                    dermaga:$('#dermaga').val(),
-                    meter:$('#meter').val(),
-                    kapasitas:$('#kapasitas').val(),
-                    tuk_ter:$('#tuk_ter').val(),
-                    status:$('#status').val(),
-                    tgl_akhir:$('#tgl_akhir').val()};
-    $.post(siteurl+"/Data/getData",postvar,function(data){
-      var arrData = new Array();
-        arrData = eval(data);
-
-        alert(arrData[0]["html"]);
-        $("#isiData").html(arrData[0]["html"]);
-        $('#myModal').hide();
+      $.ajaxSetup({async:true});
     });
-  $.ajaxSetup({async:true});
-});
 
 
 

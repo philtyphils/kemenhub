@@ -49,6 +49,9 @@
 
 <script src="<?php echo $baseurl;?>assets/js/jquery.3.2.1.min.js" type="text/javascript"></script>
 
+
+<!-- <script type="text/javascript" src="<?php echo $baseurl;?>assets/js/login.js?v=<?php echo uniqid(); ?>"></script>  -->
+
 <script type="text/javascript">
 
 $(document).ready(function(){ 

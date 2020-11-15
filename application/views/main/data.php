@@ -12,7 +12,7 @@
     
 </head>
 <body>
-    <input type="hidden" id="txtsite" value="<?php echo $siteurl;?>" />
+<input type="hidden" id="txtsite" value="<?php echo $siteurl;?>" />
 <input type="hidden" id="txtbase" value="<?php echo $baseurl;?>" />
     <div class="wrapper">
         <div class="sidebar">
@@ -152,6 +152,7 @@
                                    
 
                                     <div class="material-datatables">
+
                                         <table id="datatables" class="table table-responsive  table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%;font-size: 13px;">
                                             <thead style="color: #FFFFFF;font-weight: 600;font-size: 12px;">
                                                 <tr role="row" style="background-color:#43425D;">
@@ -173,7 +174,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody id="isiData">
-                                                
+
                                             </tbody>
                                         </table>
                                     </div>
@@ -186,7 +187,7 @@
             </div>
 
         </div>
-
+    </div>
 
 <!-- MODAL DELETE-->
         <div class="modal fade" id="delete-modal" role="dialog">
@@ -371,7 +372,7 @@
                     </div>
                     <div class="col-md-4" style="margin-bottom: 1rem;">
                         <label for="kapasitas">Kapasitas</label>
-                        <input type="number" name="dermaga" id="kapasitas" class="form-control" required placeholder="Kapasitas">
+                        <input type="number" name="kapasitas" id="kapasitas" class="form-control" required placeholder="Kapasitas">
                     </div>
                   </div>
 
@@ -403,7 +404,7 @@
                     </div>
                   </div>
 
-                    <button id="btnCari" type="submit" class="btn btn-success btn-fill">Cari Data</button>
+                    <button id="btnCari" type="button" class="btn btn-success btn-fill">Cari Data</button>
             
             </div>
         </div>

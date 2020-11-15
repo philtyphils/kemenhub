@@ -24,6 +24,7 @@ $(document).ready(function(){
                 window.location.replace(siteurl+'/Dashboard');
               }
       });
+
   });
   $('#user').focus();
 });
