@@ -8,20 +8,20 @@
                 </div>
     
                 <ul class="nav">
-                    <li>
-                        <a href="dashboard.html">
+                    <li class="<?php echo ($menu == 'Dashboard')?'active':'';?>" id="">
+                        <a href="<?php echo $baseurl;?>Dashboard">
                             <i class="fa fa-home"></i>
                             <p>Home</p>
                         </a>
                     </li>
-                    <li class="active">
-                        <a href="data.html">
+                    <li class="<?php echo ($menu == 'Data')?'active':'';?>" id="">
+                        <a href="<?php echo $baseurl;?>Data">
                             <i class="fa fa-folder-open"></i>
                             <p>Data</p>
                         </a>
                     </li>
-                    <li>
-                        <a href="master.html">
+                    <li class="<?php echo ($menu == 'Master')?'active':'';?>" id="">
+                        <a href="<?php echo $baseurl;?>Master">
                             <i class="fa fa-tags"></i>
                             <p>Master</p>
                         </a>

@@ -142,6 +142,24 @@
                             </div>
                         </div>
 
+                        <div class="col-md-5">
+                            <div class="card">
+                                <div class="header-master">
+                                    <div class="header">
+                                        <h4 class="title">BIDANG USAHA</h4>
+                                        <p class="category" style="color: #AAAAAA; font-weight: 300;">Jumlah Bidang Usaha</p>
+                                    </div>
+                                    <span class="fa fa-bar-chart"></span>
+                                </div>
+                                <div class="content">
+                                    <div id="container-pie3"></div>   
+                                </div>
+                                <div class="footer">
+                                    <a href="bidangusaha.html" class="btn btn-fill btn-primary">VIEW</a>
+                                </div>
+                            </div>
+                        </div>
+
                        
                     </div>
                 </div>
@@ -157,7 +175,7 @@
 <script src="<?php echo $baseurl;?>assets/js/highchart/highcharts-exporting.js"></script>
 <script src="<?php echo $baseurl;?>assets/js/highchart/highcharts-export.js"></script>
 <script src="<?php echo $baseurl;?>assets/js/highchart/highcharts-access.js"></script>
-<script>
+<script> 
 var Total = 0;
 var chart_tusk = new Highcharts.chart({
     chart: {
@@ -190,10 +208,10 @@ var chart_tusk = new Highcharts.chart({
     },
    legend: {
         useHTML: true,
-        labelFormatter: function() {
+		labelFormatter: function() {
             Total += this.y;
-            return '<div style="width:auto"><span style="float:left">'+ this.name +' :'+'</span><span style="float:left;color:#9A9A9A;font-weight: 400;">' + this.y + '</span></div>';
-        },
+			return '<div style="width:auto"><span style="float:left">'+ this.name +' :'+'</span><span style="float:left;color:#9A9A9A;font-weight: 400;">' + this.y + '</span></div>';
+		},
         layout: 'vertical',
         align: 'right',
         verticalAlign: 'top',
@@ -286,10 +304,10 @@ var chart_tusk = new Highcharts.chart({
     },
    legend: {
         useHTML: true,
-        labelFormatter: function() {
+		labelFormatter: function() {
             Total += this.y;
-            return '<div style="width:auto"><span style="float:left">'+ this.name +' :'+'</span><span style="float:left;color:#9A9A9A;font-weight: 400;">' + this.y + '</span></div>';
-        },
+			return '<div style="width:auto"><span style="float:left">'+ this.name +' :'+'</span><span style="float:left;color:#9A9A9A;font-weight: 400;">' + this.y + '</span></div>';
+		},
         layout: 'vertical',
         align: 'right',
         verticalAlign: 'top',
@@ -331,6 +349,101 @@ var chart_tusk = new Highcharts.chart({
         {
             name: 'KUPP KELAS III DARUBA',
             y: 555
+        },
+        ]
+    }],
+    navigation: {
+        buttonOptions: {
+            verticalAlign: 'top',
+            align: 'left',
+        }
+    },
+    exporting: {
+        buttons: {
+            contextButton: {
+                menuItems: ['downloadXLS','viewData']
+            }
+        }
+    } 
+});
+
+var Total = 0;
+var chart_tusk = new Highcharts.chart({
+    chart: {
+        renderTo: 'container-pie3',
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false,
+        type: 'pie',
+        events: {
+            load: function(event) {
+            $('.highcharts-legend-item').last().append('<br/><div style="margin-left:2rem;"><hr/><span style="float:left;font-weight: bold;padding-bottom:2px;">Total:</span><span style="float:left;color:#9A9A9A;font-weight: 700;"> ' + Total + '</span> </div>')
+            }
+        }  
+    },
+    title: {
+        text: ''
+    },
+    credits: {
+    enabled: false
+    },
+    plotOptions: {
+        pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+                enabled: false
+            },
+            showInLegend: true
+        }
+    },
+   legend: {
+        useHTML: true,
+		labelFormatter: function() {
+            Total += this.y;
+			return '<div style="width:auto"><span style="float:left">'+ this.name +' :'+'</span><span style="float:left;color:#9A9A9A;font-weight: 400;">' + this.y + '</span></div>';
+		},
+        layout: 'vertical',
+        align: 'right',
+        verticalAlign: 'top',
+        x:-10,
+        itemMarginTop: 2,
+        itemMarginBottom: 2,
+        
+    },
+    series: [{
+        name: 'Jumlah',
+        colorByPoint: true,
+        innerSize: '50%',
+        data: [{
+            name: 'GALANGAN KAPAL',
+            y: 20,
+        }, {
+            name: 'INDUSTRI BETON',
+            y: 10
+        },{
+            name: 'PEMANFAATAN HASIL HUTAN KAYU',
+            y: 8
+        },
+        {
+            name: 'PERTAMBANGAN BATUBARA',
+            y: 12
+        },
+        {
+            name: 'INDUSTRI PEMBUATAN KAPAL',
+            y: 11
+        },
+        {
+            name: 'PENYEDIA TENAGA LISTRIK',
+            y: 50
+        },
+        {
+            name: 'INDUSTRI SEMEN',
+            y: 52
+        },
+        {
+            name: 'NIAGA MIGAS',
+            y: 50
         },
         ]
     }],
