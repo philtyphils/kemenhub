@@ -7,6 +7,7 @@ class Master extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
+		$this->load->model('Master_User_Model','master');
 		$this->load->helper('url');
 		$this->load->library('session');
 		$this->load->library('encrypt');
@@ -33,38 +34,16 @@ class Master extends CI_Controller
 		$data['menu'] = 'Master';
 		$data['baseurl'] = base_url();
 		$data['siteurl'] = site_url();
-		// $this->load->view('templates/header',$data);
-		// $this->load->view('templates/hmenu',$data);
-		$this->load->view('main/master',$data);
-		// $this->load->view('templates/footer',$data);
-		
-		// $isLoggedIn = $this->session->userdata("isLoggedIn");
-		// $validUser = $this->session->userdata("validUser");
-		// $validPass = $this->session->userdata("validPass");
-		// $validLevel = $this->session->userdata("validLevel");
-		// $validNama = $this->session->userdata("validNama");
-		// $validSession = $this->session->userdata("validSession");
-		// $validRole = $this->session->userdata("validRole");
+		$kat_chart = json_encode($this->master->kategori_chart());
+		$wilayah_kerja = json_encode($this->master->wilayah_kerja_chart());
+		$data['kategori_chart'] = $kat_chart;
+		$data['wilayah_kerja'] = $wilayah_kerja;
 
-		// if(!$isLoggedIn){
-		// 	$data['title'] = 'LOGIN';
-		// 	$this->load->view('templates/header',$data);
-		// 	$this->load->view('main/index',$data);
-		// 	$this->load->view('templates/footer',$data);
-		// }else{
-		// 	$data['judul'] = 'HOME';
-		// 	$data['validUser'] = $validUser;
-		// 	$data['validNama'] = $validNama;
-		// 	$data['menu']='';
-		// 	$data['validUser']=$validUser;
-		// 	$data['validSession']=$validSession;
-		// 	$data['validLevel']=$validLevel;
-		// 	$this->load->view('templates/header',$data);
-		// 	$this->load->view('templates/hmenu',$data);
-		// 	$this->load->view('main/frmhome',$data);
-		// 	$this->load->view('templates/footer',$data);
-			
-		// }
+		
+
+		$this->load->view('templates/header',$data);
+		$this->load->view('main/master',$data);
+		
 	}
 	
 	// public function getDataRole()

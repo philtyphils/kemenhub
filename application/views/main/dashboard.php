@@ -13,7 +13,7 @@
 </head>
 <body>
     <input type="hidden" id="txtsite" value="<?php echo $siteurl;?>" />
-<input type="hidden" id="txtbase" value="<?php echo $baseurl;?>" />
+    <input type="hidden" id="txtbase" value="<?php echo $baseurl;?>" />
     <div class="wrapper">
         <div class="sidebar">
             <div class="sidebar-wrapper">
@@ -299,100 +299,108 @@ $(document).ready(function(){
 	});
 	
 	var chart_bar = new Highcharts.chart({
-	    chart: {
-	        renderTo: 'container-bar',
-	        type: 'column',
-	        scrollablePlotArea: {
-	            minWidth: 1200,
-	            scrollPositionX: 0,
-	        }   
-	    },
-	  
-	    xAxis: {
-	        categories: <?php echo $provinsi; ?>,
-	        labels: {
-	            style: {
-	                fontSize: '16px',
-	                color: '#43425D'
-	            }
-	        }   
-	    },
-	    yAxis: {
-	        title: false
-	    },
-	    title: {
-	        text: 'TERSUS & TUKS / Provinsi'
-	    },
-	    credits: {
-	    enabled: false
-	    },
-	    tooltip: {
-	        formatter: function () {
-	        return '<b>' + this.x + '</b><br/>' +
-	        '<b>'+ this.series.name +'</b>'+ ' : '+'<b>' + this.y + '</b>'+'<br/>' + 
-	        'Total ' + this.series.userOptions.stack + ' : '+  this.point.stackTotal ;
-	        }
-	    },
-	    plotOptions: {
-	        series: {
-	            point: {}
-	        },
-	        column: {
-	            stacking: 'normal',
-	            states: {
-	                inactive: {
-	                enabled: false
-	                },
-	                hover: {
-	                color: '#4baee3',  
-	                }
-	            },
-	            cursor: 'pointer',
-	            showInLegend: true,
-	        }
-	    },
-	   legend: {
-	       enabled:true,
-	    },
-	    series: [{
-	        name: 'Tuks Non Aktif',    
-	        data: <?php echo $tuks_nonaktif; ?>,
-	        stack: 'Tuks',
-	        // borderRadiusTopLeft: 10,
-	        // borderRadiusTopRight: 10
-	        },
-	        {
-	        name: 'Tuks Aktif',
-	        data: <?php echo $tuks_aktif; ?>,
-	        stack: 'Tuks'
-	        },
-	        {
-	        name: 'Tersus Non Aktif',
-	        data: <?php echo $tersus_nonaktif; ?>,
-	        stack: 'Tersus',
-	        // borderRadiusTopLeft: 10,
-	        // borderRadiusTopRight: 10
-	        },
-	        {
-	        name: 'Tersus Aktif',
-	        data: <?php echo $tersus_aktif; ?>,
-	        stack: 'Tersus'
-	        }, 
-	    ], 
-	    navigation: {
-	        buttonOptions: {
-	            verticalAlign: 'top',
-	         
-	        }
-	    },
-	    exporting: {
-	        buttons: {
-	            contextButton: {
-	                menuItems: ['downloadXLS','viewData']
-	            }
-	        }
-	    }  
-	});
+    chart: {
+        renderTo: 'container-bar',
+        type: 'bar',
+        scrollablePlotArea: {
+            minHeight: 1200,
+        },
+    },
+    xAxis: {
+        categories: <?php echo $provinsi; ?>,
+        labels: {
+        style: {
+            fontSize: '16px',
+            color: '#43425D'
+        }
+        }, 
+        title: {
+            text: null
+        },
+        // min: 10,
+        // scrollbar: {
+        // enabled: true
+        // },
+        tickLength: 0,   
+    },
+    yAxis: {
+        title: false, 
+    },
+    title: {
+        text: 'TERSUS & TUKS PROVINSI'
+    },
+    credits: {
+    enabled: false
+    },
+    tooltip: {
+        formatter: function () {
+        return '<b>' + this.x + '</b><br/>' +
+        '<b>'+ this.series.name +'</b>'+ ' : '+'<b>' + this.y + '</b>'+'<br/>' + 
+        'Total ' + this.series.userOptions.stack + ' : '+  this.point.stackTotal ;
+        }
+    },
+    plotOptions: {
+        series: {
+            point: {}
+        },
+        bar: {
+            stacking: 'normal',
+            states: {
+                inactive: {
+                enabled: false
+                },
+                hover: {
+                color: '#4baee3',  
+                }
+            },
+            cursor: 'pointer',
+            showInLegend: true,
+        }
+    },
+//    legend: {
+//     reversed: true
+//     },
+    series: [   
+        {
+        name: 'Tersus Aktif',
+        data: <?php echo $tersus_aktif;?>,
+        stack: 'Tersus'
+        },   
+        {
+        name: 'Tersus Non Aktif',
+        data: <?php echo $tersus_nonaktif;?>,
+        stack: 'Tersus',
+        // borderRadiusTopLeft: 10,
+        // borderRadiusTopRight: 10
+        },
+        {
+        name: 'Tuks Aktif',
+        data: <?php echo $tuks_aktif;?>,
+        stack: 'Tuks'
+        }, 
+        {
+        name: 'Tuks Non Aktif',    
+        data: <?php echo $tuks_nonaktif;?>,
+        stack: 'Tuks',
+        // borderRadiusTopLeft: 10,
+        // borderRadiusTopRight: 10
+        },
+          
+    ], 
+    navigation: {
+        buttonOptions: {
+            verticalAlign: 'top',
+        }
+    },
+    exporting: {
+        buttons: {
+            contextButton: {
+                menuItems: ['downloadXLS','viewData']
+            }
+        }
+    }  
+});
+
 	
 });
 </script>

@@ -120,125 +120,155 @@ class Data_model extends CI_Model {
         return $query->result(); 
     }
 
-    public function getData($name,$provinsi,$kota,$kelas,$kategori,$bidangusaha,$dermaga,$meter,$kapasitas,$tuk_ter,$status,$tgl_akhir)
-    {
+    // public function getData($name,$provinsi,$kota,$kelas,$kategori,$bidangusaha,$dermaga,$meter,$kapasitas,$tuk_ter,$status,$tgl_akhir)
+    // {
             
-        $arrayHasil=array();
-        $counter=0;
-        $html = "";
+    //     $arrayHasil=array();
+    //     $counter=0;
+    //     $html = "";
 
-        $sql ="SELECT a.*, b.name as nmprov,c.nama as nmksop,d.nama as nmusaha,e.nama as nmkateg from daftar_perusahaan as a left join provinsi as b on a.provinsi_id=b.id left join ksop as c on a.ksop_id=c.ksop_id left join bdg_usaha as d on a.bdgusaha_id-d.bdg_usaha_id left join kategori as e on a.kategori_id=e.kategori_id where a.nm_perusahaan like('%".$name."%') AND a.provinsi_id like('%".$provinsi."%') AND a.ksop_id like('%".$kelas."%') AND a.kategori_id like('%".$kategori."%') AND a.bdgusaha_id like('%".$bidangusaha."%') order by nm_perusahaan ASC ";
-        
-         // $sql ="SELECT a.*, b.name as nmprov,c.nama as nmksop,d.nama as nmusaha,e.nama as nmkateg from daftar_perusahaanx as a left join provinsi as b on a.provinsi_id=b.id left join ksop as c on a.ksop_id=c.ksop_id left join bdg_usaha as d on a.bdgusaha_id-d.bdg_usaha_id left join kategori as e on a.kategori_id=e.kategori_id where a.nm_perusahaan like('%".$name."%') AND a.provinsi_id like('%".$provinsi."%') AND a.lokasi like('%".$kota."%') AND c.nama like('%".$kelas."%') AND e.nama like('%".$kategori."%') AND d.nama like('%".$bidangusaha."%') AND a.spesifikasi like('%".$dermaga."%') AND a.spek_kedalaman like('%".$meter."%') AND a.spek_kapasitas like('%".$kapasitas."%') AND a.ter_tuk like('%".$tuk_ter."%') AND a.status like('%".$status."%') AND a.ms_berlaku like('%".$tgl_akhir."%')  order by nm_perusahaan ASC ";
-
-        $sql1 = $this->db->query($sql);
-        
+    //     $sql ="SELECT a.*, b.name as nmprov,c.nama as nmksop,d.nama as nmusaha,e.nama as nmkateg from daftar_perusahaan as a left join provinsi as b on a.provinsi_id=b.id left join ksop as c on a.ksop_id=c.ksop_id left join bdg_usaha as d on a.bdgusaha_id=d.bdg_usaha_id left join kategori as e on a.kategori_id=e.kategori_id where a.nm_perusahaan like('%".$name."%') AND a.provinsi_id like('%".$provinsi."%') AND a.ksop_id like('%".$kelas."%') AND a.kategori_id like('%".$kategori."%') AND a.bdgusaha_id like('%".$bidangusaha."%') order by nm_perusahaan ASC ";
         
 
-        if($sql1->num_rows()>0){
-            foreach ($sql1->result_array() as $row){
-                $arrayHasil[$counter]['no'] = ($counter+1);
-                $arrayHasil[$counter]['id'] = trim($row['id']);
-                $arrayHasil[$counter]['nm_perusahaan'] = "<font style='font-weight: bold;'>".trim($row['nm_perusahaan'])."</font>";
-                $arrayHasil[$counter]['alamat'] = "<font class='td-status2'>".trim($row['alamat'])."</font>";
-                $arrayHasil[$counter]['ksop_id'] = $row['nmksop'];
-                $arrayHasil[$counter]['provinsi_id'] = $row['nmprov'];
-                $arrayHasil[$counter]['bdgusaha_id'] = $row['nmusaha'];
-                $arrayHasil[$counter]['lokasi'] = trim($row['lokasi']);
-                $arrayHasil[$counter]['kategori_id'] = $row['nmkateg'];
-                $arrayHasil[$counter]['koordinat'] = trim($row['koordinat']);
-                if(trim($row['ter_tuk'])=='TUKS')
-                {
-                    $arrayHasil[$counter]['ter_tuk'] = "<font class='td-status' style='color: #A3A0FB;'>".trim($row['ter_tuk'])."</font>";
-                }else{
-                    $arrayHasil[$counter]['ter_tuk'] = "<font class='td-status' style='color: #6bd189;'>".trim($row['ter_tuk'])."</font>";
-                }
+    //      // $sql ="SELECT a.*, b.name as nmprov,c.nama as nmksop,d.nama as nmusaha,e.nama as nmkateg from daftar_perusahaanx as a left join provinsi as b on a.provinsi_id=b.id left join ksop as c on a.ksop_id=c.ksop_id left join bdg_usaha as d on a.bdgusaha_id-d.bdg_usaha_id left join kategori as e on a.kategori_id=e.kategori_id where a.nm_perusahaan like('%".$name."%') AND a.provinsi_id like('%".$provinsi."%') AND a.lokasi like('%".$kota."%') AND a.ksop_id like('%".$kelas."%') AND a.kategori_id like('%".$kategori."%') AND a.bdgusaha_id like('%".$bidangusaha."%') AND a.spesifikasi like('%".$dermaga."%') AND a.spek_kedalaman like('%".$meter."%') AND a.spek_kapasitas like('%".$kapasitas."%') AND a.ter_tuk like('%".$tuk_ter."%') AND a.status like('%".$status."%') AND a.ms_berlaku like('%".$tgl_akhir."%')  order by nm_perusahaan ASC ";
 
-                $arrayHasil[$counter]['sk'] = trim($row['sk']);
-                $arrayHasil[$counter]['tgl_terbit'] = date('d-m-Y', strtotime(trim($row['tgl_terbit'])));
-                if(trim($row['status'])=='Y')
-                {
-                    $arrayHasil[$counter]['status'] = "<font class='td-status' style='color: #649e07;'>AKTIF</font>";
-                }else{
-                    $arrayHasil[$counter]['status'] = "<font class='td-status' style='color: red;'>TIDAK AKTIF</font>";                
-                }
-                $arrayHasil[$counter]['ms_berlaku'] = date('d-m-Y', strtotime(trim($row['ms_berlaku'])));
-                $counter++;
+
+    //     $sql1 = $this->db->query($sql);
+        
+        
+
+    //     if($sql1->num_rows()>0){
+    //         foreach ($sql1->result_array() as $row){
+    //             $arrayHasil[$counter]['no'] = ($counter+1);
+    //             $arrayHasil[$counter]['id'] = trim($row['id']);
+    //             $arrayHasil[$counter]['nm_perusahaan'] = "<font style='font-weight: bold;'>".trim($row['nm_perusahaan'])."</font>";
+    //             $arrayHasil[$counter]['alamat'] = "<font class='td-status2'>".trim($row['alamat'])."</font>";
+    //             $arrayHasil[$counter]['ksop_id'] = $row['nmksop'];
+    //             $arrayHasil[$counter]['provinsi_id'] = $row['nmprov'];
+    //             $arrayHasil[$counter]['bdgusaha_id'] = $row['nmusaha'];
+    //             $arrayHasil[$counter]['lokasi'] = trim($row['lokasi']);
+    //             $arrayHasil[$counter]['kategori_id'] = $row['nmkateg'];
+    //             $arrayHasil[$counter]['koordinat'] = trim($row['koordinat']);
+    //             if(trim($row['ter_tuk'])=='TUKS')
+    //             {
+    //                 $arrayHasil[$counter]['ter_tuk'] = "<font class='td-status' style='color: #A3A0FB;'>".trim($row['ter_tuk'])."</font>";
+    //             }else{
+    //                 $arrayHasil[$counter]['ter_tuk'] = "<font class='td-status' style='color: #6bd189;'>".trim($row['ter_tuk'])."</font>";
+    //             }
+
+    //             $arrayHasil[$counter]['sk'] = trim($row['sk']);
+    //             $arrayHasil[$counter]['tgl_terbit'] = date('d-m-Y', strtotime(trim($row['tgl_terbit'])));
+    //             if(trim($row['status'])=='Y')
+    //             {
+    //                 $arrayHasil[$counter]['status'] = "<font class='td-status' style='color: #649e07;'>AKTIF</font>";
+    //             }else{
+    //                 $arrayHasil[$counter]['status'] = "<font class='td-status' style='color: red;'>TIDAK AKTIF</font>";                
+    //             }
+    //             $arrayHasil[$counter]['ms_berlaku'] = date('d-m-Y', strtotime(trim($row['ms_berlaku'])));
+    //             $counter++;
+    //         }
+    //     }
+    //     return $arrayHasil; 
+
+    //     // $html.="<table id='datatables' class='table table-responsive  table-no-bordered table-hover' cellspacing='0' width='100%'' style='width:100%;font-size: 13px;'>";
+    //     // $html.="<thead style='color: #FFFFFF;font-weight: 600;font-size: 12px;'>";
+    //     //     $html.="<tr role='row' style='background-color:#43425D;'>";
+    //     //     $html.="<th>No</th>
+    //     //             <th>NAMA</th>
+    //     //             <th>ALAMAT</th>
+    //     //             <th>WILAYAH KERJA</th>
+    //     //             <th>BIDANG USAHA</th>
+    //     //             <th>KATEGORI</th>
+    //     //             <th>LOKASI</th>
+    //     //             <th>KOORDINAT</th>
+    //     //             <th>SPESIFIKASI</th>
+    //     //             <th>TERSUS / TUKS</th>
+    //     //             <th>LEGALITAS</th>
+    //     //             <th>TERBIT</th>
+    //     //             <th>STATUS</th>
+    //     //             <th>MASA BERLAKU</th>
+    //     //             <th class='disabled-sorting' style='idth:50px'>ACTIONS</th>
+    //     //         </tr>
+    //     //     </thead>
+    //     //     <tbody>";
+
+    //     // $a=0;
+    //     // if($sql1->num_rows()>0){
+    //     //     foreach ($sql1->result_array() as $row){
+    //     //         $html.="<tr role='row'>";
+    //     //         $html.="<td>".($a+1)."</td>";
+    //     //         $html.="<td>".$row['nm_perusahaan']."</td>";
+    //     //         $html.="<td>".$row['alamat']."</td>";
+    //     //         $html.="<td>".$row['ksop_id']."</td>";
+    //     //         $html.="<td>".$row['bdgusaha_id']."</td>";
+    //     //         $html.="<td>".$row['kategori_id']."</td>";
+    //     //         $html.="<td>".$row['lokasi']."</td>";
+    //     //         $html.="<td>".$row['koordinat']."</td>";
+    //     //         $html.="<td>".$row['spesifikasi']."</td>";
+    //     //         $html.="<td>".$row['ter_tuk']."</td>";
+    //     //         $html.="<td>".$row['sk']."</td>";
+    //     //         $html.="<td>".$row['tgl_terbit']."</td>";
+    //     //         $html.="<td>".$row['status']."</td>";
+    //     //         $html.="<td>".$row['ms_berlaku']."</td>";
+    //     //         $html.="<td></td>";
+    //     //         $html.="</tr>";
+    //     //         $a++;
+    //     //     }
+    //         // $html.="<tr role='row'>";
+    //         //     $html.="<td>1</td>";
+    //         //     $html.="<td>2</td>";
+    //         //     $html.="<td>3</td>";
+    //         //     $html.="<td>4</td>";
+    //         //     $html.="<td>5</td>";
+    //         //     $html.="<td>6</td>";
+    //         //     $html.="<td>7</td>";
+    //         //     $html.="<td>8</td>";
+    //         //     $html.="<td>9</td>";
+    //         //     $html.="<td>10</td>";
+    //         //     $html.="<td>11</td>";
+    //         //     $html.="<td>12</td>";
+    //         //     $html.="<td>13</td>";
+    //         //     $html.="<td>14</td>";
+    //         //     $html.="<td>15</td>";
+    //         //     $html.="</tr>";
+        
+
+
+    //     //     $html.="</tbody>";
+    //     // $html.="</table>";
+
+
+
+    //     // $arrayHasil[0]['html']=$html;
+    //     // echo json_encode($arrayhasil[0]['html']);
+        
+    // }
+
+    public function getData($param1)
+    {
+        $a=array();
+        $prm= explode("|",$param1);
+        $xa = count($prm);
+        $where1 = "";
+        $where2 = "";
+        
+        for($a=0; $a<$xa; $a++) 
+        {               
+            $prm2=explode("~",$prm[$a]);
+
+            if($prm2[2] ==''){
+                $where2 .="";
+            }else{
+                $where2 .= " AND a.".$prm2[1]." like '%".$prm2[2]."%'";
             }
+
         }
-        return $arrayHasil; 
 
-        // $html.="<table id='datatables' class='table table-responsive  table-no-bordered table-hover' cellspacing='0' width='100%'' style='width:100%;font-size: 13px;'>";
-        // $html.="<thead style='color: #FFFFFF;font-weight: 600;font-size: 12px;'>";
-        //     $html.="<tr role='row' style='background-color:#43425D;'>";
-        //     $html.="<th>No</th>
-        //             <th>NAMA</th>
-        //             <th>ALAMAT</th>
-        //             <th>WILAYAH KERJA</th>
-        //             <th>BIDANG USAHA</th>
-        //             <th>KATEGORI</th>
-        //             <th>LOKASI</th>
-        //             <th>KOORDINAT</th>
-        //             <th>SPESIFIKASI</th>
-        //             <th>TERSUS / TUKS</th>
-        //             <th>LEGALITAS</th>
-        //             <th>TERBIT</th>
-        //             <th>STATUS</th>
-        //             <th>MASA BERLAKU</th>
-        //             <th class='disabled-sorting' style='idth:50px'>ACTIONS</th>
-        //         </tr>
-        //     </thead>
-        //     <tbody>";
+        $where1 = "IS NOT NULL";
+        $query1 = "SELECT a.*, b.name as nmprov,c.nama as nmksop,d.nama as nmusaha,e.nama as nmkateg from daftar_perusahaan as a left join provinsi as b on a.provinsi_id=b.id left join ksop as c on a.ksop_id=c.ksop_id left join bdg_usaha as d on a.bdgusaha_id=d.bdg_usaha_id left join kategori as e on a.kategori_id=e.kategori_id where a.id ".$where1." ".$where2." order by nm_perusahaan ASC";
 
-        // $a=0;
-        // if($sql1->num_rows()>0){
-        //     foreach ($sql1->result_array() as $row){
-        //         $html.="<tr role='row'>";
-        //         $html.="<td>".($a+1)."</td>";
-        //         $html.="<td>".$row['nm_perusahaan']."</td>";
-        //         $html.="<td>".$row['alamat']."</td>";
-        //         $html.="<td>".$row['ksop_id']."</td>";
-        //         $html.="<td>".$row['bdgusaha_id']."</td>";
-        //         $html.="<td>".$row['kategori_id']."</td>";
-        //         $html.="<td>".$row['lokasi']."</td>";
-        //         $html.="<td>".$row['koordinat']."</td>";
-        //         $html.="<td>".$row['spesifikasi']."</td>";
-        //         $html.="<td>".$row['ter_tuk']."</td>";
-        //         $html.="<td>".$row['sk']."</td>";
-        //         $html.="<td>".$row['tgl_terbit']."</td>";
-        //         $html.="<td>".$row['status']."</td>";
-        //         $html.="<td>".$row['ms_berlaku']."</td>";
-        //         $html.="<td></td>";
-        //         $html.="</tr>";
-        //         $a++;
-        //     }
-            // $html.="<tr role='row'>";
-            //     $html.="<td>1</td>";
-            //     $html.="<td>2</td>";
-            //     $html.="<td>3</td>";
-            //     $html.="<td>4</td>";
-            //     $html.="<td>5</td>";
-            //     $html.="<td>6</td>";
-            //     $html.="<td>7</td>";
-            //     $html.="<td>8</td>";
-            //     $html.="<td>9</td>";
-            //     $html.="<td>10</td>";
-            //     $html.="<td>11</td>";
-            //     $html.="<td>12</td>";
-            //     $html.="<td>13</td>";
-            //     $html.="<td>14</td>";
-            //     $html.="<td>15</td>";
-            //     $html.="</tr>";
-        
-
-
-        //     $html.="</tbody>";
-        // $html.="</table>";
-
-
-
-        // $arrayHasil[0]['html']=$html;
-        // echo json_encode($arrayhasil[0]['html']);
+        $query = $this->db->query($query1); 
+        return $query->result();
         
     }
 }

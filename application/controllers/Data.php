@@ -137,7 +137,7 @@ class Data extends CI_Controller
 
         $dataprov = $this->datax->get_Kota($provinsi);
         foreach ($dataprov as $list) {
-             $html .= '<option value="'.trim($list->kode).'">'.trim($list->nama).'</option>';
+             $html .= '<option value="'.trim($list->nama).'">'.trim($list->nama).'</option>';
         	}
 	        echo json_encode($html); 
 	} 
@@ -156,22 +156,66 @@ class Data extends CI_Controller
 
 	public function getData()
 	{
+  //       $name = trim($this->input->post('name'));
+		// $provinsi = trim($this->input->post('provinsi'));
+		// $kota = trim($this->input->post('kota'));
+		// $kelas = trim($this->input->post('kelas'));
+		// $kategori = trim($this->input->post('kategori'));
+		// $bidangusaha = $this->input->post('bidangusaha');
+		// $dermaga = trim($this->input->post('dermaga'));
+		// $meter = trim($this->input->post('meter')); 
+		// $kapasitas = trim($this->input->post('kapasitas'));
+		// $tuk_ter = trim($this->input->post('tuk_ter'));
+		// $status = trim($this->input->post('status'));
+		// $tgl_akhir = trim($this->input->post('tgl_akhir'));
 
-        $name = trim($this->input->post('name'));
-		$provinsi = trim($this->input->post('provinsi'));
-		$kota = trim($this->input->post('kota'));
-		$kelas = trim($this->input->post('kelas'));
-		$kategori = trim($this->input->post('kategori'));
-		$bidangusaha = trim($this->input->post('bidangusaha'));
-		$dermaga = trim($this->input->post('dermaga'));
-		$meter = trim($this->input->post('meter'));
-		$kapasitas = trim($this->input->post('kapasitas'));
-		$tuk_ter = trim($this->input->post('tuk_ter'));
-		$status = trim($this->input->post('status'));
-		$tgl_akhir = trim($this->input->post('tgl_akhir'));
+		// $cek=$this->datax->getData($name,$provinsi,$kota,$kelas,$kategori,$bidangusaha,$dermaga,$meter,$kapasitas,$tuk_ter,$status,$tgl_akhir);
+		// echo json_encode($cek);
 
-		$cek=$this->datax->getData($name,$provinsi,$kota,$kelas,$kategori,$bidangusaha,$dermaga,$meter,$kapasitas,$tuk_ter,$status,$tgl_akhir);
-		echo json_encode($cek);
+		$html ="";
+		$param1 = $this->security->xss_clean($this->input->post("param"));
+		$data = $this->datax->getData($param1);
+
+		$i=1;
+            
+        foreach($data as $row)
+        {
+           	$html .="<tr role='row'>";
+           	$html .="<td>".$i."</td>";
+            $html .="<td><font style='font-weight: bold;'>".trim($row->nm_perusahaan)."</font></td>";
+           	$html .="<td><font class='td-status2'>".trim($row->alamat)."</font></td>";
+            $html .="<td>".$row->nmksop."</td>";
+            // $html .="<td>".$row['nmprov']."</td>";
+            $html .="<td>".$row->nmusaha."</td>";
+            $html .="<td>".$row->nmkateg."</td>";
+            $html .="<td>".trim($row->lokasi)."</td>";
+            $html .="<td>".trim($row->koordinat)."</td>";
+            $html .="<td>".trim($row->spesifikasi)."</td>";
+            if(trim($row->ter_tuk)=='TUKS')
+            {
+                $html .="<td><font class='td-status' style='color: #A3A0FB;'>".trim($row->ter_tuk)."</font></td>";
+            }else{
+                $html .="<td>.<font class='td-status' style='color: #6bd189;'>".trim($row->ter_tuk)."</font></td>";
+            }
+
+            $html .="<td>".trim($row->sk)."</td>";
+            $html .="<td>".date('d-m-Y', strtotime(trim($row->tgl_terbit)))."</td>";
+            if(trim($row->status)=='Y')
+            {
+                $html .="<td><font class='td-status' style='color: #649e07;'>AKTIF</font></td>";
+            }else{
+                $html .="<td><font class='td-status' style='color: red;'>TIDAK AKTIF</font></td>";                
+            }
+            $html .="<td>".date('d-m-Y', strtotime(trim($row->ms_berlaku)))."</td>";
+            $html .='<td><a class="btn btn-simple btn-warning btn-icon btnedit" href="javascript:void(0)" title="Ubah" onclick="edit_Datax('."'".$row->id."'".')"><i class="fa fa-edit"></i></a>
+                <a class="btn btn-simple btn-danger btn-icon btndelete" href="javascript:void(0)" title="Hapus" onclick="delete_Datax('."'".$row->id."'".')"><i class="fa fa-times"></i></a></td>';
+			$html .='</tr>';
+			
+            $i++;
+        
+        }  
+        
+        echo json_encode($html);
 		
 	}
 

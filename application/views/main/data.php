@@ -21,7 +21,7 @@
                                     </div>
                                    
                                     <div class="wrap-toolbar col-md-6">
-                                        <button type="button" id="btnsearch" onclick="setsearch()" class="btn btn-success btn-fill" style="margin-right: 1rem">
+                                        <button type="button" id="btnsearch" class="btn btn-success btn-fill" style="margin-right: 1rem">
                                             <i class="fa fa-search" aria-hidden="true" style="margin-right: 10px;"></i>
                                             <span>Cari Data</span>
                                         </button>
@@ -50,7 +50,8 @@
 
                                     <div class="material-datatables">
 
-                                        <table id="datatables" class="table table-responsive  table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%;font-size: 13px;">
+                                            
+                                        <table id="datatables" class="table table-responsive  table-no-bordered table-hover" cellspacing="0" width="100%" style="font-size: 13px;">
                                             <thead style="color: #FFFFFF;font-weight: 600;font-size: 12px;">
                                                 <tr role="row" style="background-color:#43425D;">
                                                     <th>No</th>
@@ -74,6 +75,8 @@
 
                                             </tbody>
                                         </table>
+
+                                        
                                     </div>
                                 </div>
 
@@ -123,14 +126,18 @@
                     <div class="row">
                         <div class="form-group col-md-8">
                             <label for="name">Nama Perusahaan</label>
-                            <input type="text" name="name" id="name" placeholder="Nama Perusahaan" class="form-control">
+                            <input id="Param01" value="nm_perusahaan"  type="hidden">
+                            <input type="text" name="name" id="Filt01" placeholder="Nama Perusahaan" class="form-control">  
+                            <!-- <input type="text" name="name" id="name" placeholder="Nama Perusahaan" class="form-control"> -->
                         </div>
                     </div>
 
                   <div class="row">
                     <div class="form-group col-md-4" style="margin-bottom: 1rem;">
                         <label for="provinsi">Provinsi</label>
-                        <select name="provinsi[]" class="form-control selectpicker" id="provinsi" data-live-search="true" required >
+                        <input id="Param02" value="provinsi_id"  type="hidden">
+                        <select name="provinsi[]" class="form-control selectpicker" id="Filt02" data-live-search="true" required >
+                        <!-- <select name="provinsi[]" class="form-control selectpicker" id="provinsi" data-live-search="true" required > -->
                             <option value="">Pilih Provinsi</option>
                             <?php for($i=0;$i<count($dataProvinsi);$i++){?>
                                 <option value="<?php echo trim($dataProvinsi[$i]->kode); ?>"><?php echo $dataProvinsi[$i]->nama; ?></option>
@@ -140,14 +147,18 @@
 
                     <div class="form-group col-md-4" style="margin-bottom: 1rem;">
                         <label for="kota">Kabupaten / Kota</label>
-                        <select name="kota[]" class="form-control selectpicker" id="kota" data-live-search="true" required >
+                        <input id="Param03" value="lokasi"  type="hidden">
+                        <select name="kota[]" class="form-control selectpicker" id="Filt03" data-live-search="true" required >
+                        <!-- <select name="kota[]" class="form-control selectpicker" id="kota" data-live-search="true" required > -->
                             <option value="">Pilih Kabupaten / Kota</option>
                         </select>
                     </div>
 
                     <div class="form-group col-md-4" style="margin-bottom: 1rem;">
                         <label for="kelas">Wilayah Kerja</label>
-                        <select name="kelas[]" class="form-control" id="kelas" required>
+                        <input id="Param04" value="ksop_id"  type="hidden">
+                        <select name="kelas[]" class="form-control" id="Filt04" required>
+                        <!-- <select name="kelas[]" class="form-control" id="kelas" required> -->
                            <option value="">Pilih Wilayah Kerja</option>
                         </select>
                     </div>
@@ -156,7 +167,9 @@
                   <div class="row">
                     <div class="form-group col-md-4" style="margin-bottom: 1rem;">
                         <label for="kategori">Kategori</label>
-                        <select class="selectpicker form-control" multiple data-live-search="true" title="Kategori" name="kategori" id="kategori">
+                        <input id="Param05" value="kategori_id"  type="hidden">
+                        <select class="selectpicker form-control" multiple data-live-search="true" title="Kategori" name="kategori" id="Filt05">
+                        <!-- <select class="selectpicker form-control" multiple data-live-search="true" title="Kategori" name="kategori" id="kategori"> -->
                                 <option value="">Pilih Kategori</option>
                                 <?php for($j=0;$j<count($dataKateg);$j++){?>
                                     <option value="<?php echo trim($dataKateg[$j]->kategori_id); ?>"><?php echo $dataKateg[$j]->nama; ?></option>
@@ -165,7 +178,9 @@
                     </div>
                     <div class="form-group col-md-4" style="margin-bottom: 1rem;">
                         <label for="bidangusaha">Bidang Usaha</label>
-                        <select class="selectpicker form-control" multiple data-live-search="true" title="Bidang Usaha" data-size="10" name="bidangusaha" id="bidangusaha">
+                        <input id="Param06" value="bdgusaha_id"  type="hidden">
+                        <select class="selectpicker form-control" multiple data-live-search="true" title="Bidang Usaha" name="bidangusaha" id="Filt06">
+                        <!-- <select class="selectpicker form-control" multiple data-live-search="true" title="Bidang Usaha" name="bidangusaha" id="bidangusaha"> -->
                                 <option value="">Pilih Bidang Usaha</option>
                                 <?php for($k=0;$k<count($dataBdgUsaha);$k++){?>
                                     <option value="<?php echo trim($dataBdgUsaha[$k]->bdg_usaha_id); ?>"><?php echo $dataBdgUsaha[$k]->nama; ?></option>
@@ -177,7 +192,9 @@
                   <div class="row">
                     <div class="form-group col-md-4" style="margin-bottom: 1rem;">
                         <label for="dermaga">Type Dermaga</label>
-                        <select class="selectpicker form-control" multiple data-live-search="true" title="Type Dermaga" id="dermaga">
+                        <input id="Param07" value="spesifikasi"  type="hidden">
+                        <select class="selectpicker form-control" multiple data-live-search="true" title="Type Dermaga" id="Filt07">
+                        <!-- <select class="selectpicker form-control" multiple data-live-search="true" title="Type Dermaga" id="dermaga"> -->
                             <option value="">Pilih Dermaga</option>
                             <option>DERMAGA I TIPE MARGINAL</option>
                             <option>DERMAGA TIPE FINGER</option>
@@ -188,21 +205,27 @@
                     </div>
                     <div class="form-group col-md-4" style="margin-bottom: 1rem;">
                         <label for="kedalaman">Kedalaman</label>
+                        <input id="Param08" value="spek_kedalaman"  type="hidden">
                         <div class="input-group">
-                            <input type="number" name="meter[]" id="meter" class="form-control" required placeholder="Meter" aria-describedby="basic-addon1">
+                            <input type="number" name="meter" id="Filt08" class="form-control" required placeholder="Meter" aria-describedby="basic-addon1">
+                            <!-- <input type="number" name="meter" id="meter" class="form-control" required placeholder="Meter" aria-describedby="basic-addon1"> -->
                             <span class="input-group-addon" id="basic-addon1">M LWS</span>
                         </div>                                                       
                     </div>
                     <div class="col-md-4" style="margin-bottom: 1rem;">
                         <label for="kapasitas">Kapasitas</label>
-                        <input type="number" name="kapasitas" id="kapasitas" class="form-control" required placeholder="Kapasitas">
+                        <input id="Param09" value="spek_kapasitas"  type="hidden">
+                        <input type="number" name="kapasitas" id="Filt09" class="form-control" required placeholder="Kapasitas">
+                        <!-- <input type="number" name="kapasitas" id="kapasitas" class="form-control" required placeholder="Kapasitas"> -->
                     </div>
                   </div>
 
                   <div class="row">
                     <div class="form-group col-md-4">
                         <label for="tukstersus">TUKS /  TERSUS</label>
-                        <select class="selectpicker form-control" id="tuk_ter" name="tuk_ter">
+                        <input id="Param10" value="ter_tuk"  type="hidden">
+                        <select class="selectpicker form-control" id="Filt10" name="tuk_ter">
+                        <!-- <select class="selectpicker form-control" id="tuk_ter" name="tuk_ter"> -->
                             <option value="">Pilih TUKS / TERSUS</option>
                             <option value="TUKS">TUKS</option>
                             <option value="TERSUS">TERSUS</option>
@@ -210,7 +233,9 @@
                     </div>
                     <div class="form-group col-md-4">
                         <label for="status">STATUS</label>
-                        <select class="selectpicker form-control" id="status" name="status">
+                        <input id="Param11" value="status"  type="hidden">
+                        <select class="selectpicker form-control" id="Filt11" name="status">
+                        <!-- <select class="selectpicker form-control" id="status" name="status"> -->
                             <option value="">Pilih Status</option>
                             <option value="Y">AKTIF</option>
                             <option value="N">NON AKTIF</option>
@@ -218,11 +243,13 @@
                     </div>
                     <div class="form-group col-md-4">
                         <label for="akhir">Masa Berlaku</label>
+                        <input id="Param12" value="tglakhir"  type="hidden">
                         <div class="input-group date">
                             <div class="input-group-addon">
                                 <span class="glyphicon glyphicon-th"></span>
                             </div>
-                            <input placeholder="Masa Berlaku" type="text" class="form-control datepicker" id="tgl_akhir" name="tgl_akhir[]" autocomplete="off">
+                            <input placeholder="Masa Berlaku" type="text" class="form-control datepicker" id="Filt12" name="tgl_akhir" autocomplete="off">
+                            <!-- <input placeholder="Masa Berlaku" type="text" class="form-control datepicker" id="tgl_akhir" name="tgl_akhir" autocomplete="off"> -->
                         </div>
                     </div>
                   </div>

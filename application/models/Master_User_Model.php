@@ -140,5 +140,37 @@ class Master_User_model extends CI_Model {
         return $query;
     }
      
+
+    public function kategori_chart()
+    {
+        $data = $this->db->get('rekaptulasi_kategori')->result();
+        $r = array();
+        foreach($data as $key => $value)
+        {
+            $f      = array(
+                "name" => $value->kategori,
+                "y" => (int) $value->TOTAL
+            );
+            $r[]    = $f;
+        }
+
+        return $r;
+    }
+
+    public function wilayah_kerja_chart()
+    {
+        $data = $this->db->order_by("provinsi_id","ASC")->order_by("order","ASC")->get('rekaptulasi_wilayah_kerja')->result();
+        $r = array();
+        foreach($data as $key => $value)
+        {
+            $f      = array(
+                "name" => $value->wilayah_kerja,
+                "y" => (int) $value->TOTAL
+            );
+            $r[]    = $f;
+        }
+
+        return $r;
+    }
 }
 ?>
