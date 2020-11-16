@@ -49,27 +49,27 @@
 
     </div>
 </div>
-<!-- MODAL DELETE-->
-<div class="modal fade" id="delete-modal" role="dialog">
-        <div class="modal-dialog modal-sm">
-            <!--modal delete content start-->
-            <div class="modal-content">
-                <div class="modal-header" style="background-color: #43425D;color: #ffff;">
-                    <button type="button" class="close" data-dismiss="modal" style="color: #ffff;">&times;</button>
+    <!-- MODAL DELETE-->
+    <div class="modal fade" id="delete-modal" role="dialog">
+            <div class="modal-dialog modal-sm">
+                <!--modal delete content start-->
+                <div class="modal-content">
+                    <div class="modal-header" style="background-color: #43425D;color: #ffff;">
+                        <button type="button" class="close" data-dismiss="modal" style="color: #ffff;">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <h5>Apakah anda Yakin akan Delete ?</h5>
+                    </div>
+                    <div class="modal-footer" style="border-top: none;">
+                        <button type="button" class="btn btn-default btn-fill" data-dismiss="modal">Cancel</button>
+                        <button id="del-alert" class="btn btn-danger btn-fill btn-del remove">Delete</button>
+                    </div>
                 </div>
-                <div class="modal-body">
-                    <h5>Apakah anda Yakin akan Delete ?</h5>
-                </div>
-                <div class="modal-footer" style="border-top: none;">
-                    <button type="button" class="btn btn-default btn-fill" data-dismiss="modal">Cancel</button>
-                    <button id="del-alert" class="btn btn-danger btn-fill btn-del remove">Delete</button>
-                </div>
+                <!--modal delete content end-->
             </div>
-            <!--modal delete content end-->
-        </div>
     </div>
     <!-- MODAL DELETE-->
-
+</body>
 <script src="<?php echo $baseurl;?>assets/js/jquery.3.2.1.min.js" type="text/javascript"></script>
 <script src="<?php echo $baseurl;?>assets/js/bootstrap.min.js" type="text/javascript"></script>
 <script src="<?php echo $baseurl;?>assets/js/light-bootstrap-dashboard.js"></script>
@@ -78,6 +78,8 @@
 <script type="text/javascript">
     $(document).ready(function() {
         $('#datatables').DataTable({
+            "processing": true, //Feature control the processing indicator.
+            "serverSide": true,
             "pagingType": "full_numbers",
             "lengthMenu": [
                 [10, 25, 50, -1],
@@ -151,3 +153,4 @@
 
     });
 </script>
+</html>

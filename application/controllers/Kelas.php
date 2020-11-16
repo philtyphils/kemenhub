@@ -7,6 +7,7 @@ class Kelas extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
+		$this->load->model('Kelas_model','kelas');
 		$this->load->helper('url');
 		$this->load->library('session');
 		$this->load->library('encrypt');
@@ -33,45 +34,93 @@ class Kelas extends CI_Controller
 		$data['menu'] = 'Kelas';
 		$data['baseurl'] = base_url();
 		$data['siteurl'] = site_url();
+		$data['wilayah_kerja'] = $this->kelas->wilayah_kerja();
+	
 		$this->load->view('templates/header',$data);
-		$this->load->view('templates/hmenu',$data);
-		$this->load->view('main/Kelas',$data);
-		$this->load->view('templates/footer',$data);
+		$this->load->view('main/Kelas',$data);	
 		
-		// $isLoggedIn = $this->session->userdata("isLoggedIn");
-		// $validUser = $this->session->userdata("validUser");
-		// $validPass = $this->session->userdata("validPass");
-		// $validLevel = $this->session->userdata("validLevel");
-		// $validNama = $this->session->userdata("validNama");
-		// $validSession = $this->session->userdata("validSession");
-		// $validRole = $this->session->userdata("validRole");
+	}
 
-		// if(!$isLoggedIn){
-		// 	$data['title'] = 'LOGIN';
-		// 	$this->load->view('templates/header',$data);
-		// 	$this->load->view('main/index',$data);
-		// 	$this->load->view('templates/footer',$data);
-		// }else{
-		// 	$data['judul'] = 'HOME';
-		// 	$data['validUser'] = $validUser;
-		// 	$data['validNama'] = $validNama;
-		// 	$data['menu']='';
-		// 	$data['validUser']=$validUser;
-		// 	$data['validSession']=$validSession;
-		// 	$data['validLevel']=$validLevel;
-		// 	$this->load->view('templates/header',$data);
-		// 	$this->load->view('templates/hmenu',$data);
-		// 	$this->load->view('main/frmhome',$data);
-		// 	$this->load->view('templates/footer',$data);
-			
-		// }
+	public function get_kelas()
+	{
+		$data = $this->kelas->get_kelas($this->input->post());
+		$result = array(); $no = 0;
+		foreach($data->result() as $key => $value)
+		{
+			$row = array();$no++;
+			$row[] = $no;
+			$row[] = $value->nama;
+			$row[] = $value->provinsi;
+			$edit_url = base_url()."kelas/edit/".$value->ksop_id;
+			$row[] = '<a href="'.$edit_url.'" class="btn btn-simple btn-warning btn-icon edit">
+							<i class="fa fa-edit"></i>
+					  </a>
+                      <button id="delete" personal-id="'. $value->ksop_id.'" data-toggle="modal" data-target="#delete-modal" class="btn btn-simple btn-danger btn-icon remove">
+                          <i class="fa fa-times"></i>
+					  </button>';
+			$result[] = $row;
+		}
+		$output = array(
+			"draw" => 1,
+			"recordsTotal" => count($data->result()),
+			"recordsFiltered" => count($data->result()),
+			"data" => $result,
+		);
+		//output to json format
+		echo json_encode($output);
+	}
+
+	public function create()
+	{
+		$data['title'] = 'Create Wilayah Kerja';
+		$data['menu'] = 'Wilayah Kerja';
+		$data['baseurl'] = base_url();
+		$data['siteurl'] = site_url();
+		$data['provinsi'] = $this->kelas->wilayah_kerja();
+
+		$this->load->view('templates/header',$data);
+		$this->load->view('main/kelas_create',$data);
+	}
+
+	public function submit($action)
+	{
+		if($action == "edit")
+		{
+			$data = $this->kategori->edit($this->input->post());
+			$alert = array('teks'=>'<div class="alert-error text-center" role="alert"><b> UPDATE DATA GAGAL!</b></div>');
+			if($data)
+			{
+				$alert = array('teks'=>'<div class="alert-success text-center" role="alert"><b> UPDATE DATA BERHASIL !</b></div>');
+			}
+			$this->session->set_flashdata($alert);
+			$id = (int) $this->input->post("id");
+			redirect(base_url()."Kategori/edit/".$id);
+		}
+
+		if($action == "create")
+		{
+			$data = $this->kelas->create($this->input->post());
+			$alert = array('teks'=>'<div class="alert-error text-center" role="alert"><b> CREATE DATA GAGAL!</b></div>');
+			if($data)
+			{
+				$alert = array('teks'=>'<div class="alert-success text-center" role="alert"><b> CREATE DATA BERHASIL !</b></div>');
+			}
+			$this->session->set_flashdata($alert);
+			redirect(base_url()."kelas/create");
+		}
+
+		if($action == "delete")
+		{
+			$data = $this->kategori->delete($this->input->post());
+			$alert = array('teks'=>'<div class="alert-error text-center" role="alert"><b> DELETE DATA GAGAL!</b></div>');
+			if($data)
+			{
+				$alert = array('teks'=>'<div class="alert-success text-center" role="alert"><b> DELETE DATA BERHASIL !</b></div>');
+			}
+			$this->session->set_flashdata($alert);
+			echo json_encode(["result" => "always Fine."]);
+		}
 	}
 	
-	// public function getDataRole()
-	// {
-	// 	$ID_USER = trim($this->input->post('USER_ID'));
-	// 	$cek=$this->Home_model->getDataRole($ID_USER);
-	// 	echo json_encode($cek);
-	// }
 	
 }
