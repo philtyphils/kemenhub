@@ -134,8 +134,8 @@ class Data extends CI_Controller
 	{
 		$html='';
         $provinsi = $this->input->post('provinsi');
-
         $dataprov = $this->datax->get_Kota($provinsi);
+        $html .='<option value="">Pilih Kabupaten / Kota</option>';
         foreach ($dataprov as $list) {
              $html .= '<option value="'.trim($list->nama).'">'.trim($list->nama).'</option>';
         	}
@@ -148,6 +148,7 @@ class Data extends CI_Controller
         $kelas = $this->input->post('kota');
 
         $datakelas = $this->datax->get_Kelas($kelas);
+        $html .='<option value="">Pilih Wilayah Kerja</option>';
         foreach ($datakelas as $list) {
              $html .= '<option value="'.trim($list->ksop_id).'">'.trim($list->nama).'</option>';
         	}

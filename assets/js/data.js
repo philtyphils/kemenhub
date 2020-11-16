@@ -144,9 +144,9 @@ table2 = $('#datatables2').DataTable({
           var postVar={'param':strPerus};
           $.post(siteurl+'/Data/getData',postVar,function (data) {
               $('#isiData').append(data);
-              $('body').removeClass('modal-open');
-                $('.modal-backdrop').remove();
-              $('#myModal').hide();
+              // $('body').removeClass('modal-open');
+              //   $('.modal-backdrop').remove();
+              $("#myModal").modal('hide');
           },"JSON");
 
       $.ajaxSetup({async:true});
