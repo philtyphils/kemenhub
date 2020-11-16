@@ -123,7 +123,7 @@ $(document).ready(function(){
 
 
             if(arrData.length > 0){
-        
+
               for(var j=0;j<arrData.length;j++){
                 barisTrans++;
                 

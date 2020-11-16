@@ -31,7 +31,7 @@
                                        
                                     <h4 style="font-weight: 400;color: #AAAAAA;letter-spacing: 2px;font-size: 20px;margin-top: 2rem;">TOTAL : 80000</h4>
                                     <div class="wrap-toolbar" style="margin: 0;">
-                                        <a href="form.html" class="btn btn-success btn-fill" style="margin-right: 1rem;">
+                                        <a href="<?php echo $baseurl;?>Form" class="btn btn-success btn-fill" style="margin-right: 1rem;">
                                             <i class="fa fa-plus"></i>
                                             <span>Buat Data Baru</span>  
                                         </a>
