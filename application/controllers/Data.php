@@ -63,23 +63,17 @@ class Data extends CI_Controller
 			if($namaPerusahaan != ''){
 				$this->db->like('a.nm_perusahaan', $namaPerusahaan);
 			}
-			if($provinsi != NULL)
+			if($provinsi != '')
 			{
-				for($f = 0; $f < count($provinsi); $f++){
-					$this->db->or_like('a.provinsi_id', $provinsi[$f]);
-				}	
+				$this->db->or_like('a.provinsi_id', $provinsi);	
 			}
-			if($kota != NULL)
+			if($kota != '')
 			{
-				for($g = 0; $g < count($kota); $g++){
-					$this->db->or_like('a.lokasi', $kota[$g]);
-				}		
+				$this->db->or_like('a.lokasi', $kota);		
 			}
-			if($kelas != NULL)
+			if($kelas != '')
 			{
-				for($h = 0; $h < count($kelas); $h++){
-					$this->db->or_like('a.ksop_id', $kelas[$h]);
-				}	
+				$this->db->or_like('a.ksop_id', $kelas);	
 			}
 			for($i = 0; $i < count($kategori); $i++){
 				$this->db->or_like('a.kategori_id', $kategori[$i]);
