@@ -4,11 +4,9 @@ var table;
 var table2;
 
 
-
   if ( window.history.replaceState ) {
     window.history.replaceState( null, null, window.location.href );
   }
-
 
 
 $(document).ready(function(){
@@ -70,8 +68,40 @@ $(document).ready(function(){
            
    });
 
+    /* klik button export */
+    $(".export-excel").click(function(e){
+        var redirect = baseurl + "Export";
+        var param   = {
+            nm_perusahaan   : $("#Filt01").val(),
+            provinsi        : $("#Filt02").val(),
+            lokasi          : $("#Filt03").val(),
+            wilayah_kerja   : $("#Filt04").val(),
+            kategori        : $("#Filt05").val(),
+            bidangusaha     : $("#Filt06").val(),
+            dermagaType     : $("#Filt07").val(),
+            kedalaman       : $("#Filt08").val(),
+            kapasitas       : $("#Filt09").val(),
+            ter_tuk         : $("#Filt10").val(),
+            status          : $("#Filt11").val(),
+            ms_berlaku      : $("#Filt12").val()
+        };
+        $.redirectPost(redirect, param);
+     });
 
+});
 
+/* Extender for posting Export Excel */
+$.extend(
+{
+    redirectPost: function(location, args)
+    {
+        var form = '';
+        $.each( args, function( key, value ) {
+            //value = value.split('"').join('\"')
+            form += '<input type="hidden" name="'+key+'" value="'+value+'">';
+        });
+        $('<form action="' + location + '" method="POST" target="_BLANK">' + form + '</form>').appendTo($(document.body)).submit();
+    }
 });
 
 

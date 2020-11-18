@@ -35,7 +35,7 @@
                                             <i class="fa fa-plus"></i>
                                             <span>Buat Data Baru</span>  
                                         </a>
-                                        <a href="" class="btn btn-info btn-fill">
+                                        <a href="#" class="btn btn-info btn-fill export-excel">
                                             <i class="fa fa-download"></i>
                                             <span>Export Data Excel</span>   
                                         </a>
@@ -50,8 +50,7 @@
 
                                     <div class="material-datatables">
 
-                                            
-                                        <table id="datatables" class="table table-responsive  table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%;font-size: 13px;">
+                                        <table id="datatables" class="table table-responsive  table-no-bordered table-hover" cellspacing="0" width="100%" style="font-size: 13px;">
                                             <thead style="color: #FFFFFF;font-weight: 600;font-size: 12px;">
                                                 <tr role="row" style="background-color:#43425D;">
                                                     <th>No</th>

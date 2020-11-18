@@ -27,13 +27,81 @@ class Export extends CI_Controller
 	public function index()
 	{
         //sample paramter
-        $provinsi_id = array('11','19');
-        $kategori_id = array();
+        //Array
+        //(
+        //    [nm_perusahaan] => 
+        //    [provinsi] => 11
+        //    [lokasi] => Keude Bakongan
+        //    [wilayah_kerja] => 2
+        //    [kategori] => 13,14
+        //    [bidangusaha] => 7,9,11
+        //    [dermagaType] => DERMAGA I TIPE MARGINAL
+        //    [kedalaman] => -30
+        //    [kapasitas] => 200
+        //    [ter_tuk] => TUKS
+        //    [status] => Y
+        //    [ms_berlaku] => 07-2035
+        //)
+        $post = $this->input->post();
+        
+        //echo "<pre>";print_r($provinsi_id);die();
+        /* Filter Provinsi */        
+        $provinsi_id = array();
+        if(isset($post['provinsi']) && $post['provinsi'] != "")
+        {
+            $prov = explode(",",$post['provinsi']);
+            if(count($prov) > 0 && is_array($prov))
+            {
+                $provinsi_id = $prov;
+            }
+        }
+        
+        /* filter by lokasi */
+        $lokasi = "";
+        if(isset($post['lokasi']) && $post['lokasi'] !== "")
+        {
+            $lokasi = $post['lokasi'];
+        }
+
+        /** Filter by Wilayah Kerja **/
         $wilayah_kerja = array();
-        $data                   = $this->Export_model->getData($provinsi_id,$kategori_id,$wilayah_kerja);
+        if(isset($post['wilayah_kerja']) && $post['wilayah_kerja'] !== "")
+        {
+            $r = explode(",",$post['wilayah_kerja']);
+           
+            if(count($r) > 0 && is_array($r))
+            {
+                $wilayah_kerja = $r;
+            }
+        }
+
+        /** Filter By Kategori **/
+        $kategori_id = array();
+        if(isset($post['kategori']) && $post['kategori'] !== "")
+        {
+            $r = explode(",",$post['kategori']);
+            if(count($r) > 0 && is_array($r))
+            {
+                $kategori_id = $r;
+            }
+        }
+
+        /** Filter By Bidang Usaha **/
+        $bdgusaha_id = array();
+        if(isset($post['bidangusaha']) && $post['bidangusaha'] !== "")
+        {
+            $r = explode(",",$post['bidangusaha']);
+            if(count($r) > 0 && is_array($r))
+            {
+                $bdgusaha_id = $r;
+            }
+        }
+        
+        $data                   = $this->Export_model->getData($provinsi_id,$kategori_id,$wilayah_kerja,$bdgusaha_id);     
         $rekap_provinsi         = $this->Export_model->rekapProvinsi($provinsi_id);
         $rekap_wilayah_kerja    = $this->Export_model->rekapWilayahkerja($provinsi_id);
-        $rekap_kategori         = $this->Export_model->rekapKategori($provinsi_id);
+        $rekap_kategori         = $this->Export_model->rekapKategori($provinsi_id,$kategori_id);
+        //echo "<pre>";print_r($rekap_kategori);die();
         $spreadsheet = new Spreadsheet();
         $index = 0;
         $wilayah = "";$row = 8;$no = 0;
@@ -332,7 +400,7 @@ class Export extends CI_Controller
 
         $index++;
         /* rekaptulasi wilayah kerja */
-        $myWorkSheet = new \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet($spreadsheet, "REKAPiTULASI KATEGORI");
+        $myWorkSheet = new \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet($spreadsheet, "REKAPITULASI KATEGORI");
         $spreadsheet->addSheet($myWorkSheet, $index);
         $sheet = $spreadsheet->setActiveSheetIndex($index);
 
@@ -393,8 +461,8 @@ class Export extends CI_Controller
             $sheet->getStyle($columns.$rows)->getAlignment()->setVertical('center');
             $sheet->getStyle($columns.$rows)->getAlignment()->setHorizontal('center');
             $sheet->getStyle($columns.$rows)->applyFromArray($styleData);
-            $sheet->setCellValue($columns.$rows, $value['JUMLAH']);
-            $nomor++;$columns = "B"; $rows++; $tersus+=$value['TERSUS'];$tuks+=$value['TUKS'];$lainlain=$value['LAINNYA'];$jumlah+=$value['JUMLAH'];
+            $sheet->setCellValue($columns.$rows, $value['TOTAL']);
+            $nomor++;$columns = "B"; $rows++; $tersus+=$value['TERSUS'];$tuks+=$value['TUKS'];$lainlain=$value['LAINNYA'];$jumlah+=$value['TOTAL'];
         }
         
         $sheet->mergeCells("B".$rows.":C".$rows);

@@ -34,9 +34,9 @@ class Kategori extends CI_Controller
 		$data['menu'] = 'Kategori';
 		$data['baseurl'] = base_url();
 		$data['siteurl'] = site_url();
+	
 		$this->load->view('templates/header',$data);
 		$this->load->view('main/kategori',$data);
-		//$this->load->view('templates/footer',$data);
 			
 	}
 

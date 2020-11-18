@@ -172,5 +172,21 @@ class Master_User_model extends CI_Model {
 
         return $r;
     }
+
+    public function bidangusaha()
+    {
+        $data = $this->db->order_by("provinsi_id","ASC")->order_by("order","ASC")->get('rekaptulasi_wilayah_kerja')->result();
+        $r = array();
+        foreach($data as $key => $value)
+        {
+            $f      = array(
+                "name" => $value->wilayah_kerja,
+                "y" => (int) $value->TOTAL
+            );
+            $r[]    = $f;
+        }
+
+        return $r;
+    }
 }
 ?>
