@@ -37,6 +37,8 @@ class Data extends CI_Controller
 		$data['dataProvinsi'] = $this->datax->get_provinsi();
 		$data['dataKateg'] = $this->datax->get_kategori();
 		$data['dataBdgUsaha'] = $this->datax->get_bidangusaha();
+		$trigger ='';
+		$trigger =$this->input->post('trigger');
 		$namaPerusahaan = $this->input->post('name');
 		$provinsi = $this->input->post('provinsi');
 		$kota = $this->input->post('kota');
@@ -50,7 +52,7 @@ class Data extends CI_Controller
 		$status = $this->input->post('status');
 		$tglakhir = $this->input->post('tglakhir');
 
-		if($provinsi){
+		if($trigger){
 
 			$this->db->select('a.*,b.name as nmprov,c.nama as nmksop,d.nama as nmusaha,e.nama as nmkateg');
 	        $this->db->from('daftar_perusahaan as a');
@@ -61,14 +63,17 @@ class Data extends CI_Controller
 			if($namaPerusahaan != ''){
 				$this->db->like('a.nm_perusahaan', $namaPerusahaan);
 			}
-			for($f = 0; $f < count($provinsi); $f++){
-				$this->db->or_like('a.provinsi_id', $provinsi[$f]);
+			if($provinsi != '')
+			{
+				$this->db->or_like('a.provinsi_id', $provinsi);	
 			}
-			for($g = 0; $g < count($kota); $g++){
-				$this->db->or_like('a.lokasi', $kota[$g]);
+			if($kota != '')
+			{
+				$this->db->or_like('a.lokasi', $kota);		
 			}
-			for($h = 0; $h < count($kelas); $h++){
-				$this->db->or_like('a.ksop_id', $kelas[$h]);
+			if($kelas != '')
+			{
+				$this->db->or_like('a.ksop_id', $kelas);	
 			}
 			for($i = 0; $i < count($kategori); $i++){
 				$this->db->or_like('a.kategori_id', $kategori[$i]);
@@ -98,7 +103,13 @@ class Data extends CI_Controller
 			$this->load->view('templates/header',$data);
 			$this->load->view('main/data',$data);
 		} else {
-			$data['company'] = $this->db->get('daftar_perusahaan')->result();
+			$this->db->select('a.*,b.name as nmprov,c.nama as nmksop,d.nama as nmusaha,e.nama as nmkateg');
+	        $this->db->from('daftar_perusahaan as a');
+	        $this->db->join('provinsi as b','a.provinsi_id=b.id','left');
+	        $this->db->join('ksop as c','a.ksop_id=c.ksop_id','left');
+	        $this->db->join('bdg_usaha as d','a.bdgusaha_id=d.bdg_usaha_id');
+	        $this->db->join('kategori as e','a.kategori_id=e.kategori_id','left');
+			$data['company'] = $this->db->get()->result();
 			$this->load->view('templates/header',$data);
 			$this->load->view('main/data',$data);
 		}
