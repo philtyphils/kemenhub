@@ -44,6 +44,7 @@ class Login extends CI_Controller
 		$arrHasil = array();
 		$user = trim($this->input->post('username'));
 		$pass = trim($this->input->post('password'));
+
 		$i = 0;
 		$cek = $this->Login_Model->cekUser($user,$pass);
 		if($cek==true)

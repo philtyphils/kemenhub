@@ -28,7 +28,7 @@
                       <h1 class="title-h1">Selamat Datang</h1>
                       <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>
 
-                      <form id="loginForm" method="post" name="loginForm" style="margin-top: 3rem;">
+                      <form id="loginForm" method="post" action="<?= base_url('Login/ceklogin'); ?>" name="loginForm" style="margin-top: 3rem;">
                         <div class="form-group mb-4">
                           <input type="text" id="user" name="username" placeholder="Username or Email address" class="form-control" autofocus>
                         </div>
@@ -69,17 +69,9 @@ $.ajaxSetup({async:false});
 
       // $('#msg').html("<img src=\""+baseurl+"images/ajax-loader.gif\" width=\"40\" height=\"40\" alt=\"ajax-loader\" />");
       
-      $.post(baseurl+'/Login/cekLogin',postvars,function(data){
+      $.post(baseurl+'/Login/cekLogin/',postvars,function(data){
           var arrHasil = new Array();
               arrHasil = eval(data);
-
-// alert(arrHasil[0]['msg']);
-// if(arrHasil[0]['msg'] =='admin')
-// {alert(siteurl);
-//  window.location.replace(siteurl+'/Dashboard');
-//  e.preventDefault();
-
-// }
               if(arrHasil[0]['msg']!=''){
                 if(arrHasil[0]['msg']=="LOL"){
                   window.location.replace(siteurl+'/Login');
