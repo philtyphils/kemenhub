@@ -40,7 +40,7 @@ $(document).ready(function(){
  
    $('#provinsi').change(function(option, checked){
 
-        var param = {'provinsi':$('[name="provinsi[]"]').val()};
+        var param = {'provinsi':$('[name="provinsi"]').val()};
         $.ajax({
             url : siteurl+'/Data/get_Kota/',
             type: "POST",
@@ -51,7 +51,7 @@ $(document).ready(function(){
                 $('#kota').html(data);
                 $('#kota').selectpicker('refresh');
 
-                setkelas($('[name="provinsi[]"]').val());
+                setkelas($('[name="provinsi"]').val());
             },
             error: function (jqXHR, textStatus, errorThrown)
             {

@@ -37,6 +37,8 @@ class Data extends CI_Controller
 		$data['dataProvinsi'] = $this->datax->get_provinsi();
 		$data['dataKateg'] = $this->datax->get_kategori();
 		$data['dataBdgUsaha'] = $this->datax->get_bidangusaha();
+		$trigger ='';
+		$trigger =$this->input->post('trigger');
 		$namaPerusahaan = $this->input->post('name');
 		$provinsi = $this->input->post('provinsi');
 		$kota = $this->input->post('kota');
@@ -50,7 +52,7 @@ class Data extends CI_Controller
 		$status = $this->input->post('status');
 		$tglakhir = $this->input->post('tglakhir');
 
-		if($provinsi){
+		if($trigger){
 
 			$this->db->select('a.*,b.name as nmprov,c.nama as nmksop,d.nama as nmusaha,e.nama as nmkateg');
 	        $this->db->from('daftar_perusahaan as a');
@@ -61,23 +63,23 @@ class Data extends CI_Controller
 			if($namaPerusahaan != ''){
 				$this->db->like('a.nm_perusahaan', $namaPerusahaan);
 			}
-			if($provinsi !='x')
+			if($provinsi != NULL)
 			{
 				for($f = 0; $f < count($provinsi); $f++){
-				$this->db->or_like('a.provinsi_id', $provinsi[$f]);
-				}
+					$this->db->or_like('a.provinsi_id', $provinsi[$f]);
+				}	
 			}
-			if(count($kota)==0)
+			if($kota != NULL)
 			{
 				for($g = 0; $g < count($kota); $g++){
 					$this->db->or_like('a.lokasi', $kota[$g]);
-				}
+				}		
 			}
-			if(count($kelas)==0)
+			if($kelas != NULL)
 			{
 				for($h = 0; $h < count($kelas); $h++){
 					$this->db->or_like('a.ksop_id', $kelas[$h]);
-				}
+				}	
 			}
 			for($i = 0; $i < count($kategori); $i++){
 				$this->db->or_like('a.kategori_id', $kategori[$i]);

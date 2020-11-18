@@ -153,6 +153,7 @@
  
                 <form role="form" id="frmcari" action="<?= base_url('Data'); ?>" method="post">
                     <div class="row">
+                        <input type="hidden" value="1" name="trigger">
                         <div class="form-group col-md-8">
                             <label for="name">Nama Perusahaan</label>
                             <!-- <input id="Param01" value="nm_perusahaan"  type="hidden"> -->
@@ -165,7 +166,7 @@
                         <label for="provinsi">Provinsi</label>
                         <!-- <input id="Param02" value="provinsi_id"  type="hidden"> -->
                         <!-- <select name="provinsi[]" class="form-control selectpicker" id="Filt02" data-live-search="true" required > -->
-                        <select name="provinsi[]" class="form-control selectpicker" id="provinsi" data-live-search="true" >
+                        <select name="provinsi" class="form-control selectpicker" id="provinsi" data-live-search="true" >
                             <option value="">Pilih Provinsi</option>
                             <?php for($i=0;$i<count($dataProvinsi);$i++){?>
                                 <option value="<?php echo trim($dataProvinsi[$i]->kode); ?>"><?php echo $dataProvinsi[$i]->nama; ?></option>
@@ -177,7 +178,7 @@
                         <label for="kota">Kabupaten / Kota</label>
                         <!-- <input id="Param03" value="lokasi"  type="hidden"> -->
                         <!-- <select name="kota[]" class="form-control selectpicker" id="Filt03" data-live-search="true" required > -->
-                        <select name="kota[]" class="form-control selectpicker" id="kota" data-live-search="true">
+                        <select name="kota" class="form-control selectpicker" id="kota" data-live-search="true">
                             <option value="">Pilih Kabupaten / Kota</option>
                         </select>
                     </div>
@@ -186,7 +187,7 @@
                         <label for="kelas">Wilayah Kerja</label>
                         <!-- <input id="Param04" value="ksop_id"  type="hidden"> -->
                         <!-- <select name="kelas[]" class="form-control" id="Filt04" required> -->
-                        <select name="kelas[]" class="form-control" id="kelas">
+                        <select name="kelas" class="form-control" id="kelas">
                            <option value="">Pilih Wilayah Kerja</option>
                         </select>
                     </div>
