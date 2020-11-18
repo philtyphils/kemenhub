@@ -102,7 +102,7 @@
                                                         <td class="td-status" style="color: #649e07;"><?php echo $val->ter_tuk; ?></td>
                                                     <?php } ?>
                                                     <td><?php echo $val->sk; ?></td>
-                                                    <td><?php echo $val->tgl_terbit; ?></td>
+                                                    <td><?php echo date("d M Y",strtotime($val->tgl_terbit)); ?></td>
                                                     <?php if($val->status == 'Y') 
                                                     {?> 
                                                         <td class="td-status" style="color: #649e07;">AKTIF</td>
@@ -110,7 +110,7 @@
                                                     else{ ?>
                                                         <td class="td-status" style="color: #649e07;">TIDAK AKTIF</td>
                                                     <?php } ?>
-                                                    <td><?php echo $val->ms_berlaku; ?></td>
+                                                    <td><?php echo date("d M Y",strtotime($val->ms_berlaku)); ?></td>
                                                     <td></td>                           
                                                 </tr>
                                                 <?php endforeach; ?>
