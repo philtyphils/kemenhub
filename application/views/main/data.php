@@ -71,8 +71,14 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                            <?php $no = 1; if (isset($company)) foreach ($company as $val) : ?>                        
-                                                <tr>
+                                            <?php $no = 1; if (isset($company)) foreach ($company as $val) : ?> 
+                                                <?php if($val->tgl_terbit == '0000-00-00 00:00:00'):?>
+                                                    <tr class="alert alert-warning">
+                                                <?php elseif($val->ms_berlaku <= date('Y/m/d h:i:s a', time())):?>
+                                                    <tr class="alert alert-danger">
+                                                <?php else:?>                   
+                                                    <tr>
+                                                <?php endif; ?>   
                                                     <td><?php echo $no++; ?></td>
                                                     <td style="font-weight: bold;"><?php echo $val->nm_perusahaan; ?></td>
                                                     <td><?php echo $val->alamat; ?></td>
@@ -81,7 +87,13 @@
                                                     <td><?php echo $val->nmkateg; ?></td>
                                                     <td><?php echo $val->lokasi; ?></td>
                                                     <td><?php echo $val->koordinat; ?></td>
-                                                    <td><?php echo $val->spesifikasi; ?></td>
+                                                    <td>
+                                                        <a class="" data-toggle="collapse" data-target="#demo<?php echo $no;?>"><i class="glyphicon glyphicon-collapse-down"></i></a>
+                                                        <!-- <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo">Simple collapsible</button> -->
+                                                        <div id="demo<?php echo $no;?>" class="collapse">
+                                                            <?php echo $val->spesifikasi; ?>
+                                                        </div>
+                                                    </td>
                                                     <?php if ($val->ter_tuk == 'TUKS') 
                                                     {?>
                                                         <td class="td-status" style="color: #A3A0FB;"><?php echo $val->ter_tuk; ?></td>
@@ -187,7 +199,7 @@
                         <label for="kelas">Wilayah Kerja</label>
                         <!-- <input id="Param04" value="ksop_id"  type="hidden"> -->
                         <!-- <select name="kelas[]" class="form-control" id="Filt04" required> -->
-                        <select name="kelas[]" class="form-control" id="kelas" >
+                        <select name="kelas" class="form-control" id="kelas" >
                            <option value="">Pilih Wilayah Kerja</option>
                         </select>
                     </div>

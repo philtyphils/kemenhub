@@ -36,42 +36,8 @@ class Form extends CI_Controller
 		$this->load->view('templates/header',$data);
 		// $this->load->view('templates/hmenu',$data);
 		$this->load->view('main/form',$data);
-		// $this->load->view('templates/footer',$data);
-		
-		// $isLoggedIn = $this->session->userdata("isLoggedIn");
-		// $validUser = $this->session->userdata("validUser");
-		// $validPass = $this->session->userdata("validPass");
-		// $validLevel = $this->session->userdata("validLevel");
-		// $validNama = $this->session->userdata("validNama");
-		// $validSession = $this->session->userdata("validSession");
-		// $validRole = $this->session->userdata("validRole");
-
-		// if(!$isLoggedIn){
-		// 	$data['title'] = 'LOGIN';
-		// 	$this->load->view('templates/header',$data);
-		// 	$this->load->view('main/index',$data);
-		// 	$this->load->view('templates/footer',$data);
-		// }else{
-		// 	$data['judul'] = 'HOME';
-		// 	$data['validUser'] = $validUser;
-		// 	$data['validNama'] = $validNama;
-		// 	$data['menu']='';
-		// 	$data['validUser']=$validUser;
-		// 	$data['validSession']=$validSession;
-		// 	$data['validLevel']=$validLevel;
-		// 	$this->load->view('templates/header',$data);
-		// 	$this->load->view('templates/hmenu',$data);
-		// 	$this->load->view('main/frmhome',$data);
-		// 	$this->load->view('templates/footer',$data);
-			
-		// }
+	
 	}
 	
-	// public function getDataRole()
-	// {
-	// 	$ID_USER = trim($this->input->post('USER_ID'));
-	// 	$cek=$this->Home_model->getDataRole($ID_USER);
-	// 	echo json_encode($cek);
-	// }
 	
 }

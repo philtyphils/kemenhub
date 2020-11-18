@@ -50,7 +50,7 @@ class Data extends CI_Controller
 		$kapasitas = $this->input->post('kapasitas');
 		$tukter = $this->input->post('tuk_ter');
 		$status = $this->input->post('status');
-		$tglakhir = $this->input->post('tglakhir');
+		$tglakhir = $this->input->post('tgl_akhir');
 
 		if($trigger){
 
@@ -65,39 +65,63 @@ class Data extends CI_Controller
 			}
 			if($provinsi != '')
 			{
-				$this->db->or_like('a.provinsi_id', $provinsi);	
+				$this->db->where('a.provinsi_id', $provinsi);	
 			}
 			if($kota != '')
 			{
-				$this->db->or_like('a.lokasi', $kota);		
+				$this->db->like('a.lokasi', $kota);		
 			}
 			if($kelas != '')
 			{
-				$this->db->or_like('a.ksop_id', $kelas);	
+				$this->db->where('a.ksop_id', $kelas);	
 			}
-			for($i = 0; $i < count($kategori); $i++){
-				$this->db->or_like('a.kategori_id', $kategori[$i]);
-			}
-			for($j = 0; $j < count($bidangusaha); $j++){
-				$this->db->or_like('a.bdgusaha_id', $bidangusaha[$j]);
-			}
+			if(count($kategori) > 0)
+            {
+                $query ="(";
+                foreach($kategori as $k)
+                {
+                    $query = $query."a.kategori_id=".$k. " OR ";
+                }
+                $query = substr($query,0,-4);
+                $query= $query.")";
+                $this->db->where($query);
+            }
+			// for($i = 0; $i < count($kategori); $i++){
+			// 	$this->db->or_like('a.kategori_id', $kategori[$i]);
+			// }
+			if(count($bidangusaha) > 0)
+            {
+                $query ="(";
+                foreach($bidangusaha as $b)
+                {
+                    $query = $query."a.bdgusaha_id=".$b. " OR ";
+                }
+                $query = substr($query,0,-4);
+                $query= $query.")";
+                $this->db->where($query);
+            }
+			// for($j = 0; $j < count($bidangusaha); $j++){
+			// 	$this->db->or_like('a.bdgusaha_id', $bidangusaha[$j]);
+			// }
 			if($dermaga != ''){
 				$this->db->like('a.spesifikasi', $dermaga);
 			}
 			if($meter != ''){
-				$this->db->like('a.spek_kedalaman', $meter);
+				$this->db->like('a.spesifikasi', $meter);
 			}
 			if($kapasitas != ''){
-				$this->db->like('a.spek_kapasitas', $kapasitas);
+				$this->db->like('a.spesifikasi', $kapasitas);
 			}
 			if($tukter != ''){
-				$this->db->like('a.ter_tuk', $tukter);
+				$this->db->where('a.ter_tuk', $tukter);
 			}
 			if($status != ''){
-				$this->db->like('a.status', $status);
+				$this->db->where('a.status', $status);
 			}
 			if($tglakhir != ''){
-				$this->db->like('a.ms_berlaku', $tglakhir);
+				$tgl =explode("-", $tglakhir);
+				$t = $tgl[1].'-'.$tgl[0];
+				$this->db->where('substr(a.tgl_terbit,1,7)', $t);
 			}
 			$data['company'] = $this->db->get()->result();
 			$this->load->view('templates/header',$data);

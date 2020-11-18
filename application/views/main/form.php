@@ -1,4 +1,3 @@
-
             <div class="contents">
                 <div class="container-fluid">
                     <div class="row">
@@ -435,9 +434,8 @@
 <script src="<?php echo $baseurl;?>assets/js/bootstrap.min.js" type="text/javascript"></script>
 <script src="<?php echo $baseurl;?>assets/js/light-bootstrap-dashboard.js"></script>
 <script src="<?php echo $baseurl;?>assets/js/bootstrap-select.min.js"></script>
-<script src="<?php echo $baseurl;?>assets/js/jquery.datatables.js"></script>
+<script src="<?php echo $baseurl;?>assets/js/jquery.multifield.js"></script>
 <script src="<?php echo $baseurl;?>assets/js/bootstrap-datepicker.js"></script>
-
 <script>
     $('select').selectpicker();
 </script>
