@@ -78,8 +78,7 @@
 <script type="text/javascript">
     $(document).ready(function() {
         $('#datatables').DataTable({
-            "processing": true, //Feature control the processing indicator.
-            "serverSide": true,
+            "processing": true, 
             "pagingType": "full_numbers",
             "lengthMenu": [
                 [10, 25, 50, -1],

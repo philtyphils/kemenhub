@@ -1,6 +1,6 @@
 <div class="contents">
     <div class="container-fluid">
-                    <div class="row">
+        <div class="row">
                         <h2 class="title"></h2>
                         <div class="col-md-12">
                             <div class="card">
@@ -28,7 +28,7 @@
                                                 <option value="<?php echo $value->kode;?>"><?php echo $value->nama; ?></option>
                                             <?php endforeach; ?>
                                         </select>
-                                        <a href="<?php echo $baseurl."kelas/submit/create";?>" class="btn btn-success btn-fill" style="float: right;">
+                                        <a href="<?php echo $baseurl."kelas/create";?>" class="btn btn-success btn-fill" style="float: right;">
                                             <i class="fa fa-plus"></i>
                                             <span>Buat Kelas Baru</span>  
                                         </a>
@@ -53,32 +53,31 @@
                                 
                             </div>
                         </div>
-                    </div>
+        </div>
     </div>
 </div>
 
-    <!-- MODAL DELETE-->
-    <div class="modal fade" id="delete-modal" role="dialog">
-        <div class="modal-dialog modal-sm">
-            <!--modal delete content start-->
-            <div class="modal-content">
-                <div class="modal-header" style="background-color: #43425D;color: #ffff;">
-                    <button type="button" class="close" data-dismiss="modal" style="color: #ffff;">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <h5>Apakah anda Yakin akan Delete ?</h5>
-                </div>
-                <div class="modal-footer" style="border-top: none;">
-                    <button type="button" class="btn btn-default btn-fill" data-dismiss="modal">Cancel</button>
-                    <button id="del-alert" class="btn btn-danger btn-fill btn-del remove">Delete</button>
-                </div>
+<!-- MODAL DELETE-->
+<div class="modal fade" id="delete-modal" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <!--modal delete content start-->
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #43425D;color: #ffff;">
+                <button type="button" class="close" data-dismiss="modal" style="color: #ffff;">&times;</button>
             </div>
-            <!--modal delete content end-->
+            <div class="modal-body">
+                <h5>Apakah anda Yakin akan Delete ?</h5>
+            </div>
+            <div class="modal-footer" style="border-top: none;">
+                <button type="button" class="btn btn-default btn-fill" data-dismiss="modal">Cancel</button>
+                <button id="del-alert" class="btn btn-danger btn-fill btn-del remove">Delete</button>
+            </div>
         </div>
+        <!--modal delete content end-->
     </div>
-    <!-- MODAL DELETE-->
+</div>
+<!-- MODAL DELETE-->
 
-    </body>
 <script src="<?php echo $baseurl;?>assets/js/jquery.3.2.1.min.js" type="text/javascript"></script>
 <script src="<?php echo $baseurl;?>assets/js/bootstrap.min.js" type="text/javascript"></script>
 <script src="<?php echo $baseurl;?>assets/js/light-bootstrap-dashboard.js"></script>
@@ -88,6 +87,7 @@
 <script type="text/javascript">
     $(document).ready(function() {
         var table =  $('#datatables').DataTable({
+            "processing": true, 
             "pagingType": "full_numbers",
             "lengthMenu": [
                 [10, 25, 50, -1],
@@ -111,6 +111,13 @@
                 {},
                 {}
             ],
+            fnRowCallback: function(nRow,aData){
+                //console.log(aData[2]);
+                //if(aData[2] == "ACEH")
+                //{
+                //    $(nRow).addClass('alert alert-success');
+                //}
+            },
             "ordering": false,
             "scrollX": true
         });
@@ -124,13 +131,7 @@
         });
         
 
-        // Edit record
-        table.on('click', '.edit', function() {
-            $tr = $(this).closest('tr');
-
-            var data = table.row($tr).data();
-            alert('You press on Row: ' + data[0] + ' ' + data[1] + ' ' + data[2] + '\'s row.');
-        });
+        
 
         // Delete a record
         // table.on('click', '.remove', function(e) {
@@ -158,5 +159,4 @@
     });
 
 </script>
-
 </html>

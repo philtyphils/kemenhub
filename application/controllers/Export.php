@@ -99,9 +99,8 @@ class Export extends CI_Controller
         
         $data                   = $this->Export_model->getData($provinsi_id,$kategori_id,$wilayah_kerja,$bdgusaha_id);     
         $rekap_provinsi         = $this->Export_model->rekapProvinsi($provinsi_id);
-        $rekap_wilayah_kerja    = $this->Export_model->rekapWilayahkerja($provinsi_id);
+        //$rekap_wilayah_kerja    = $this->Export_model->rekapWilayahkerja($provinsi_id);
         $rekap_kategori         = $this->Export_model->rekapKategori($provinsi_id,$kategori_id);
-        //echo "<pre>";print_r($rekap_kategori);die();
         $spreadsheet = new Spreadsheet();
         $index = 0;
         $wilayah = "";$row = 8;$no = 0;

@@ -91,6 +91,14 @@
 
 			return $data;
 		}
+
+		public function _get($id)
+		{
+			$id 	= (int) $id;
+			$data 	= $this->db->where("ksop_id",$id)->get('ksop');
+			return $data->result_array();
+
+		}
 		
 		
 	}

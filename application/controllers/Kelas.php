@@ -82,6 +82,19 @@ class Kelas extends CI_Controller
 		$this->load->view('main/kelas_create',$data);
 	}
 
+	public function edit($id)
+	{
+		$data['title'] 			= 'Edit Wilayah Kerja';
+		$data['menu'] 			= 'Wilayah Kerja';
+		$data['baseurl'] 		= base_url();
+		$data['siteurl'] 		= site_url();
+		$data['provinsi'] 		= $this->kelas->wilayah_kerja();
+		$data['kategori_id'] 	= $this->kelas->_get($id);
+
+		$this->load->view('templates/header',$data);
+		$this->load->view('main/kelas_create',$data);
+	}
+
 	public function submit($action)
 	{
 		if($action == "edit")
@@ -94,7 +107,7 @@ class Kelas extends CI_Controller
 			}
 			$this->session->set_flashdata($alert);
 			$id = (int) $this->input->post("id");
-			redirect(base_url()."Kategori/edit/".$id);
+			redirect(base_url()."kelas/edit/".$id);
 		}
 
 		if($action == "create")

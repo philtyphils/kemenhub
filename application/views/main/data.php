@@ -153,7 +153,7 @@
                         <label for="provinsi">Provinsi</label>
                         <!-- <input id="Param02" value="provinsi_id"  type="hidden"> -->
                         <!-- <select name="provinsi[]" class="form-control selectpicker" id="Filt02" data-live-search="true" required > -->
-                        <select name="provinsi[]" class="form-control selectpicker" id="provinsi" data-live-search="true" required >
+                        <select name="provinsi[]" class="form-control selectpicker" id="provinsi" data-live-search="true"  >
                             <option value="">Pilih Provinsi</option>
                             <?php for($i=0;$i<count($dataProvinsi);$i++){?>
                                 <option value="<?php echo trim($dataProvinsi[$i]->kode); ?>"><?php echo $dataProvinsi[$i]->nama; ?></option>
@@ -165,7 +165,7 @@
                         <label for="kota">Kabupaten / Kota</label>
                         <!-- <input id="Param03" value="lokasi"  type="hidden"> -->
                         <!-- <select name="kota[]" class="form-control selectpicker" id="Filt03" data-live-search="true" required > -->
-                        <select name="kota[]" class="form-control selectpicker" id="kota" data-live-search="true" required >
+                        <select name="kota[]" class="form-control selectpicker" id="kota" data-live-search="true"  >
                             <option value="">Pilih Kabupaten / Kota</option>
                         </select>
                     </div>
@@ -174,7 +174,7 @@
                         <label for="kelas">Wilayah Kerja</label>
                         <!-- <input id="Param04" value="ksop_id"  type="hidden"> -->
                         <!-- <select name="kelas[]" class="form-control" id="Filt04" required> -->
-                        <select name="kelas[]" class="form-control" id="kelas" required>
+                        <select name="kelas[]" class="form-control" id="kelas" >
                            <option value="">Pilih Wilayah Kerja</option>
                         </select>
                     </div>
@@ -224,7 +224,7 @@
                         <!-- <input id="Param08" value="spek_kedalaman"  type="hidden"> -->
                         <div class="input-group">
                             <!-- <input type="number" name="meter" id="Filt08" class="form-control" required placeholder="Meter" aria-describedby="basic-addon1"> -->
-                            <input type="number" name="meter" id="meter" class="form-control" required placeholder="Meter" aria-describedby="basic-addon1">
+                            <input type="number" name="meter" id="meter" class="form-control" placeholder="Meter" aria-describedby="basic-addon1">
                             <span class="input-group-addon" id="basic-addon1">M LWS</span>
                         </div>                                                       
                     </div>
@@ -232,7 +232,7 @@
                         <label for="kapasitas">Kapasitas</label>
                         <!-- <input id="Param09" value="spek_kapasitas"  type="hidden"> -->
                         <!-- <input type="number" name="kapasitas" id="Filt09" class="form-control" required placeholder="Kapasitas"> -->
-                        <input type="number" name="kapasitas" id="kapasitas" class="form-control" required placeholder="Kapasitas">
+                        <input type="number" name="kapasitas" id="kapasitas" class="form-control" placeholder="Kapasitas">
                     </div>
                   </div>
 
@@ -311,7 +311,7 @@
                         <label for="satuan">Satuan</label>
                         <select class="form-control" id="satuan" name="satuan[]" required>
                             <option value="">Pilih Satuan</option>
-                            <option>FIT</option>
+                            <option>FEET</option>
                             <option>GT</option>
                             <option>DWT</option>
                         </select>                      
