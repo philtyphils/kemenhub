@@ -105,20 +105,6 @@
     
         var table = $('#datatables').DataTable();
 
-        // Edit record
-        //table.on('click', '.edit', function() {
-        //    $tr = $(this).closest('tr');
-//
-        //    var data = table.row($tr).data();
-        //    
-        //});
-
-        // Delete a record
-        // table.on('click', '.remove', function(e) {
-        //     $tr = $(this).closest('tr');
-        //     table.row($tr).remove().draw();
-        //     e.preventDefault();
-        // });
 
         //Like record
         table.on('click', '.like', function() {
@@ -131,18 +117,15 @@
         $('#delete-modal').on('show.bs.modal',function() { 
             $('.btn-del').click('.remove',function(e) {
                 var id = $(".remove").attr("personal-id");
-                console.log(id);
                 var param = {"id" : id}
-            
-
                 $.ajax({
-                  type: "POST",
-                  url: "<?php echo $baseurl;?>Kategori/submit/delete",
-                  data: param,
-                  success: function(e){
-                    window.location.href="<?php echo $baseurl;?>Kategori";
-                  },
-                  dataType: "JSON"
+                    type: "POST",
+                    url: "<?php echo $baseurl;?>Kategori/submit/delete",
+                    data: param,
+                    success: function(e){
+                      window.location.href="<?php echo $baseurl;?>Kategori";
+                    },
+                    dataType: "JSON"
                 });
             
             

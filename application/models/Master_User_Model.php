@@ -173,14 +173,14 @@ class Master_User_model extends CI_Model {
         return $r;
     }
 
-    public function bidangusaha()
+    public function bdg_usaha_chart()
     {
-        $data = $this->db->order_by("provinsi_id","ASC")->order_by("order","ASC")->get('rekaptulasi_wilayah_kerja')->result();
+        $data = $this->db->order_by("bidang_usaha","ASC")->get('rekaptulasi_bidang_usaha')->result();
         $r = array();
         foreach($data as $key => $value)
         {
             $f      = array(
-                "name" => $value->wilayah_kerja,
+                "name" => $value->bidang_usaha,
                 "y" => (int) $value->TOTAL
             );
             $r[]    = $f;

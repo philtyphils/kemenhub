@@ -68,7 +68,7 @@
                                     <div id="container-pie3"></div>   
                                 </div>
                                 <div class="footer">
-                                    <a href="bidangusaha.html" class="btn btn-fill btn-primary">VIEW</a>
+                                    <a href="<?php echo $baseurl;?>bidang_usaha" class="btn btn-fill btn-primary">VIEW</a>
                                 </div>
                             </div>
                         </div>
@@ -265,40 +265,10 @@ var chart_tusk = new Highcharts.chart({
         
     },
     series: [{
-        name: 'Jumlah',
+        name: 'Jumlah', 
         colorByPoint: true,
         innerSize: '50%',
-        data: [{
-            name: 'GALANGAN KAPAL',
-            y: 20,
-        }, {
-            name: 'INDUSTRI BETON',
-            y: 10
-        },{
-            name: 'PEMANFAATAN HASIL HUTAN KAYU',
-            y: 8
-        },
-        {
-            name: 'PERTAMBANGAN BATUBARA',
-            y: 12
-        },
-        {
-            name: 'INDUSTRI PEMBUATAN KAPAL',
-            y: 11
-        },
-        {
-            name: 'PENYEDIA TENAGA LISTRIK',
-            y: 50
-        },
-        {
-            name: 'INDUSTRI SEMEN',
-            y: 52
-        },
-        {
-            name: 'NIAGA MIGAS',
-            y: 50
-        },
-        ]
+        data: <?php echo $bidang_usaha;?>
     }],
     navigation: {
         buttonOptions: {
