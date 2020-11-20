@@ -7,21 +7,21 @@
                                 <div class="header-master">
                                     <div class="header">
                                         <h4 class="title">BIDANG USAHA</h4>
-                                        <p class="category" style="color: #AAAAAA; font-weight: 300;">Jumlah Bidang Usaha</p>
+                                        <p class="category" style="color: #AAAAAA; font-weight: 300;"><?php echo $total;?> Bidang Usaha </p>
                                     </div>
                                     <span class="fa fa-bar-chart"></span>
                                 </div>
                                
                                 <div class="content">
 
-                                    <h2 class="description">Total Bidang Usaha : </h4> 
+                                    <h2 class="description">Total Bidang Usaha : <?php echo $total;?></h4> 
 
                                     <div class="warp-toolbar" style="margin: 1rem 0;">
                                         <form action="" style="display: contents;">
                                             <input type="text" id="searchbox" class="searchbutton" placeholder="Silahkan cari data disini">
                                         </form>
                                       
-                                        <a href="formbidang.html" class="btn btn-success btn-fill" style="float: right;">
+                                        <a href="<?php echo $baseurl;?>bidang_usaha/create" class="btn btn-success btn-fill" style="float: right;">
                                             <i class="fa fa-plus"></i>
                                             <span>Buat Bidang Usaha Baru</span>  
                                         </a>
@@ -146,12 +146,11 @@
     </div>
 <!-- MODAL DELETE-->
 
-</body>
-<script src="assets/js/jquery.3.2.1.min.js" type="text/javascript"></script>
-<script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
-<script src="assets/js/light-bootstrap-dashboard.js"></script>
-<script src="assets/js/bootstrap-select.min.js"></script>
-<script src="assets/js/jquery.datatables.js"></script>
+<script src="<?php echo $baseurl;?>assets/js/jquery.3.2.1.min.js" type="text/javascript"></script>
+<script src="<?php echo $baseurl;?>assets/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="<?php echo $baseurl;?>assets/js/light-bootstrap-dashboard.js"></script>
+<script src="<?php echo $baseurl;?>assets/js/bootstrap-select.min.js"></script>
+<script src="<?php echo $baseurl;?>assets/js/jquery.datatables.js"></script>
 
 <script type="text/javascript">
     $(document).ready(function() {
@@ -166,9 +165,21 @@
                 search: "_INPUT_",
                 searchPlaceholder: "Search records",
             },
+            "ajax": {
+                "url": '<?php echo $siteurl;?>/bidang_usaha/gets',
+                "type": "POST"
+                
+            },
             "ordering": false,
-            "scrollX": true
-        });
+            "scrollX": true,
+            columns : [
+                { width : '5%' },
+                { width : '40%' },
+                { },
+                { className : "text-center"},        
+                { }
+            ],
+            });
 
    
         var dataTable = $('#datatables').dataTable();

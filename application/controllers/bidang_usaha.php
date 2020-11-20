@@ -7,7 +7,7 @@ class bidang_usaha extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->model('Kelas_model','kelas');
+		$this->load->model('usaha_model','usaha');
 		$this->load->helper('url');
 		$this->load->library('session');
 		$this->load->library('encrypt');
@@ -34,27 +34,29 @@ class bidang_usaha extends CI_Controller
 		$data['menu'] = 'Kelas';
 		$data['baseurl'] = base_url();
 		$data['siteurl'] = site_url();
+		$data['total']  = $this->usaha->_getTotal_usaha();
 	
 		$this->load->view('templates/header',$data);
 		$this->load->view('main/bidang_usaha',$data);	
 		
 	}
 
-	public function get_kelas()
+	public function gets()
 	{
-		$data = $this->kelas->get_kelas($this->input->post());
+		$data = $this->usaha->gets($this->input->post());
 		$result = array(); $no = 0;
 		foreach($data->result() as $key => $value)
 		{
 			$row = array();$no++;
-			$row[] = $no;
-			$row[] = $value->nama;
-			$row[] = $value->provinsi;
-			$edit_url = base_url()."kelas/edit/".$value->ksop_id;
-			$row[] = '<a href="'.$edit_url.'" class="btn btn-simple btn-warning btn-icon edit">
+			$row[] 		= $no;
+			$row[] 		= $value->bidang_usaha;
+			$row[] 		= $value->nama_kategori;
+			$row[] 		= $value->TOTAL . " Perusahaan";
+			$edit_url 	= base_url()."BIDA_USAHA/edit/".$value->bdg_usaha_id;
+			$row[] 		= '<a href="'.$edit_url.'" class="btn btn-simple btn-warning btn-icon edit">
 							<i class="fa fa-edit"></i>
 					  </a>
-                      <button id="delete" personal-id="'. $value->ksop_id.'" data-toggle="modal" data-target="#delete-modal" class="btn btn-simple btn-danger btn-icon remove">
+                      <button id="delete" personal-id="'. $value->bdg_usaha_id.'" data-toggle="modal" data-target="#delete-modal" class="btn btn-simple btn-danger btn-icon remove">
                           <i class="fa fa-times"></i>
 					  </button>';
 			$result[] = $row;
@@ -71,14 +73,14 @@ class bidang_usaha extends CI_Controller
 
 	public function create()
 	{
-		$data['title'] = 'Create Wilayah Kerja';
-		$data['menu'] = 'Wilayah Kerja';
+		$data['title'] = 'Create Bidang Usaha';
+		$data['menu'] = 'Bidang Usaha';
 		$data['baseurl'] = base_url();
 		$data['siteurl'] = site_url();
-		$data['provinsi'] = $this->kelas->wilayah_kerja();
+		$data['kategori'] = $this->usaha->_getKategori();
 
 		$this->load->view('templates/header',$data);
-		$this->load->view('main/kelas_create',$data);
+		$this->load->view('main/bidang_usaha_create',$data);
 	}
 
 	public function edit($id)
@@ -98,7 +100,7 @@ class bidang_usaha extends CI_Controller
 	{
 		if($action == "edit")
 		{
-			$data = $this->kelas->edit($this->input->post());
+			$data = $this->usaha->edit($this->input->post());
 			$alert = array('teks'=>'<div class="alert-error text-center" role="alert"><b> UPDATE DATA GAGAL!</b></div>');
 			if($data)
 			{
@@ -111,14 +113,14 @@ class bidang_usaha extends CI_Controller
 
 		if($action == "create")
 		{
-			$data = $this->kelas->create($this->input->post());
+			$data = $this->usaha->create($this->input->post());
 			$alert = array('teks'=>'<div class="alert-error text-center" role="alert"><b> CREATE DATA GAGAL!</b></div>');
 			if($data)
 			{
 				$alert = array('teks'=>'<div class="alert-success text-center" role="alert"><b> CREATE DATA BERHASIL !</b></div>');
 			}
 			$this->session->set_flashdata($alert);
-			redirect(base_url()."kelas/create");
+			redirect(base_url()."bidang_usaha/create");
 		}
 
 		if($action == "delete")
