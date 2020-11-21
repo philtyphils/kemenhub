@@ -110,7 +110,7 @@ class Export extends CI_Controller
                 $bdgusaha_id = $r;
             }
         }
-        
+
         $data                   = $this->Export_model->getData($provinsi_id,$kategori_id,$wilayah_kerja,$bdgusaha_id); 
         $rekap_provinsi         = $this->Export_model->rekapProvinsi($provinsi_id);
         //$rekap_wilayah_kerja    = $this->Export_model->rekapWilayahkerja($provinsi_id);
@@ -531,11 +531,9 @@ class Export extends CI_Controller
         $provinsi_id = array();
         if(isset($post['provinsi']) && $post['provinsi'] != "")
         {
-            $prov = explode(",",$post['provinsi']);
-            if(count($prov) > 0 && is_array($prov))
-            {
-                $provinsi_id = $prov;
-            }
+            
+            $provinsi_id = $post['provinsi'];
+           
         }
         
         /* filter by lokasi */
@@ -584,8 +582,35 @@ class Export extends CI_Controller
         header("Pragma: no-cache");
         header("Expires: 0");
         $handle = fopen('php://output', 'w');
+        $no = 1;
         foreach ($data->result_array() as $data_array => $value) {
+            if($no==1)
+            {
+                $header_array = array(
+                    "Provinsi",                    
+                    "Wilayah kerja",
+                    "Perusahaan",
+                    "Bidang Usaha",
+                    "Kategori",
+                    "Lokasi",
+                    "Alamat",
+                    "Penanggung Jawab",
+                    "NPWP",
+                    "Koordinat",
+                    "TERSUS/TUKS",
+                    "Spesifikasi",
+                    "Legalitas",
+                    "Tanggal Terbit",
+                    "status",
+                    "Masa Berlaku",
+                    "latitude",
+                    "longitude"
+
+                );
+                fputcsv($handle, $header_array);
+            }
             fputcsv($handle, $value);
+            $no++;
         }
         fclose($handle);
         exit;
