@@ -38,9 +38,10 @@ $(document).ready(function(){
 
 
  
-   $('#provinsi').change(function(option, checked){
+   $('#Filt02').change(function(option, checked){
 
-        var param = {'provinsi':$('[name="provinsi"]').val()};
+        var param = {'provinsi':$(this).val()};  
+       
         $.ajax({
             url : siteurl+'/Data/get_Kota/',
             type: "POST",
@@ -48,8 +49,8 @@ $(document).ready(function(){
             dataType: "JSON",
             success: function(data)
             {
-                $('#kota').html(data);
-                $('#kota').selectpicker('refresh');
+                $('#Filt03').html(data);
+                $('#Filt03').selectpicker('refresh');
 
                 setkelas($('[name="provinsi"]').val());
             },
@@ -145,8 +146,8 @@ function setkelas(id){
           dataType: "JSON",
           success: function(data)
           {
-              $('#kelas').html(data);
-              $('#kelas').selectpicker('refresh');
+              $('#Filt04').html(data);
+              $('#Filt04').selectpicker('refresh');
           },
           error: function (jqXHR, textStatus, errorThrown)
           {

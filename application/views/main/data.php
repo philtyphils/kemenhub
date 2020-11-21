@@ -23,7 +23,7 @@
                                     <div class="wrap-toolbar col-md-2">
                                         <button type="button" id="btnsearch" class="btn btn-success btn-fill" style="margin-right: 1rem">
                                             <i class="fa fa-search" aria-hidden="true" style="margin-right: 10px;"></i>
-                                            <span>Cari Data</span>
+                                            <span>Filter</span>
                                         </button>
                                     </div>
 

@@ -42,18 +42,32 @@ class Export extends CI_Controller
         //    [status] => Y
         //    [ms_berlaku] => 07-2035
         //)
-        $post = $this->input->post();
+        $session_data = array(
+            "nm_perusahaan" => $this->session->userdata('nm_perusahaan'),
+            "provinsi"      => $this->session->userdata('provinsi'),
+            "lokasi"        => $this->session->userdata('kota'),
+            "wilayah_kerja" => $this->session->userdata('kelas'),
+            "kategori"      => $this->session->userdata('kategori'),
+            "bidangusaha"   => $this->session->userdata('bidangusaha')
+        );
+        $post = $session_data;
         
-        //echo "<pre>";print_r($provinsi_id);die();
+        /* Filter Nama Perusahaan */
+        $nm_perusahaan = "";
+        if($post['nm_perusahaan'] != "")
+        {
+            $nm_perusahaan = $nm_perusahaan;
+        }
+
         /* Filter Provinsi */        
         $provinsi_id = array();
         if(isset($post['provinsi']) && $post['provinsi'] != "")
         {
-            $prov = explode(",",$post['provinsi']);
-            if(count($prov) > 0 && is_array($prov))
-            {
-                $provinsi_id = $prov;
-            }
+            //$prov = explode(",",$post['provinsi']);
+            //if(count($prov) > 0 && is_array($prov))
+            //{
+                $provinsi_id = $post['provinsi'];
+            //}
         }
         
         /* filter by lokasi */
@@ -96,8 +110,8 @@ class Export extends CI_Controller
                 $bdgusaha_id = $r;
             }
         }
-        $data                   = $this->Export_model->getData($provinsi_id,$kategori_id,$wilayah_kerja,$bdgusaha_id);    
         
+        $data                   = $this->Export_model->getData($provinsi_id,$kategori_id,$wilayah_kerja,$bdgusaha_id); 
         $rekap_provinsi         = $this->Export_model->rekapProvinsi($provinsi_id);
         //$rekap_wilayah_kerja    = $this->Export_model->rekapWilayahkerja($provinsi_id);
         $rekap_kategori         = $this->Export_model->rekapKategori($provinsi_id,$kategori_id);
@@ -501,8 +515,17 @@ class Export extends CI_Controller
 	
     public function csv()
     {
-        $post = $this->input->post();
+
+        $session_data = array(
+            "provinsi"      => $this->session->userdata('provinsi'),
+            "lokasi"        => $this->session->userdata('kota'),
+            "wilayah_kerja" => $this->session->userdata('kelas'),
+            "kategori"      => $this->session->userdata('kategori'),
+            "bidangusaha"   => $this->session->userdata('bidangusaha')
+        );
         
+        //$post = $this->input->post();
+        $post = $session_data;
         //echo "<pre>";print_r($provinsi_id);die();
         /* Filter Provinsi */        
         $provinsi_id = array();

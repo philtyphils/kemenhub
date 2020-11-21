@@ -38,13 +38,13 @@ class Data extends CI_Controller
 		$data['dataKateg'] = $this->datax->get_kategori();
 		$data['dataBdgUsaha'] = $this->datax->get_bidangusaha();
 		$trigger ='';
-		$trigger =$this->input->post('trigger');
+		$trigger 		= $this->input->post('trigger');
 		$namaPerusahaan = $this->input->post('name');
-		$provinsi = $this->input->post('provinsi');
-		$kota = $this->input->post('kota');
-		$kelas = $this->input->post('kelas');
-		$kategori = $this->input->post('kategori');
-		$bidangusaha = $this->input->post('bidangusaha');
+		$provinsi 		= $this->input->post('provinsi');
+		$kota 			= $this->input->post('kota');
+		$kelas 			= $this->input->post('kelas');
+		$kategori 		= $this->input->post('kategori');
+		$bidangusaha 	= $this->input->post('bidangusaha');
 		$dermaga = $this->input->post('dermaga');
 		$meter = $this->input->post('meter');
 		$kapasitas = $this->input->post('kapasitas');
@@ -53,6 +53,18 @@ class Data extends CI_Controller
 		$tglakhir = $this->input->post('tgl_akhir');
 		
 		if($trigger){
+			/* set session data for exporting */
+			$this->session->set_userdata("nm_perusahaan",$namaPerusahaan);
+			$this->session->set_userdata("provinsi",$provinsi);
+			$this->session->set_userdata("kota",$kota);
+			$this->session->set_userdata("kelas",$kelas);
+			$this->session->set_userdata("kategori",$kategori);
+			$this->session->set_userdata("bidangusaha",$bidangusaha);
+			$this->session->set_userdata("meter",$meter);
+			$this->session->set_userdata("kapasitas",$kapasitas);
+			$this->session->set_userdata("tukter",$tukter);
+			$this->session->set_userdata("status",$status);
+			$this->session->set_userdata("tglakhir",$tglakhir);
 
 			$this->db->select('a.*,b.name as nmprov,c.nama as nmksop,d.nama as nmusaha,e.nama as nmkateg');
 	        $this->db->from('daftar_perusahaan as a');
@@ -152,13 +164,14 @@ class Data extends CI_Controller
 	public function get_Kota()
 	{
 		$html='';
-        $provinsi = $this->input->post('provinsi');
-        $dataprov = $this->datax->get_Kota($provinsi);
-        $html .='<option value="">Pilih Kabupaten / Kota</option>';
+		$provinsi = $this->input->post('provinsi');
+		$dataprov = $this->datax->get_Kota($provinsi);
+		
+        $html .='<option value="" readonly>Pilih Kabupaten / Kota</option>';
         foreach ($dataprov as $list) {
-             $html .= '<option value="'.trim($list->nama).'">'.trim($list->nama).'</option>';
-        	}
-	        echo json_encode($html); 
+         $html .= '<option value="'.trim($list->nama).'">'.trim($list->nama).'</option>';
+        }
+	    echo json_encode($html); 
 	} 
 
 	public function get_Kelas()
