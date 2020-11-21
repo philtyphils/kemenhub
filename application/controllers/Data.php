@@ -45,12 +45,12 @@ class Data extends CI_Controller
 		$kelas 			= $this->input->post('kelas');
 		$kategori 		= $this->input->post('kategori');
 		$bidangusaha 	= $this->input->post('bidangusaha');
-		$dermaga = $this->input->post('dermaga');
-		$meter = $this->input->post('meter');
-		$kapasitas = $this->input->post('kapasitas');
-		$tukter = $this->input->post('tuk_ter');
-		$status = $this->input->post('status');
-		$tglakhir = $this->input->post('tgl_akhir');
+		$dermaga 		= $this->input->post('dermaga');
+		$meter 			= $this->input->post('meter');
+		$kapasitas 		= $this->input->post('kapasitas');
+		$tukter 		= $this->input->post('tuk_ter');
+		$status 		= $this->input->post('status');
+		$tglakhir 		= $this->input->post('tgl_akhir');
 		
 		if($trigger){
 			/* set session data for exporting */
@@ -144,7 +144,9 @@ class Data extends CI_Controller
 				$t = $tgl[1].'-'.$tgl[0];
 				$this->db->where('substr(a.tgl_terbit,1,7)', $t);
 			}
-			$data['company'] = $this->db->get()->result();
+			$return 		= $this->db->get()->result();
+			$data['jumlah'] = count($return);
+			$data['company'] = $return;
 			$this->load->view('templates/header',$data);
 			$this->load->view('main/data',$data);
 		} else {
@@ -154,7 +156,9 @@ class Data extends CI_Controller
 	        $this->db->join('ksop as c','a.ksop_id=c.ksop_id','left');
 	        $this->db->join('bdg_usaha as d','a.bdgusaha_id=d.bdg_usaha_id');
 	        $this->db->join('kategori as e','a.kategori_id=e.kategori_id','left');
-			$data['company'] = $this->db->get()->result();
+			$return 		= $this->db->get()->result();
+			$data['jumlah'] = count($return);
+			$data['company'] = $return;
 			$this->load->view('templates/header',$data);
 			$this->load->view('main/data',$data);
 		}

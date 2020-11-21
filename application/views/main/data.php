@@ -29,7 +29,7 @@
 
                                     <div class="toolbar col-md-12" style="padding: 0;">
                                        
-                                    <h4 style="font-weight: 400;color: #AAAAAA;letter-spacing: 2px;font-size: 20px;margin-top: 2rem;">TOTAL : 80000</h4>
+                                    <h4 style="font-weight: 400;color: #AAAAAA;letter-spacing: 2px;font-size: 20px;margin-top: 2rem;">TOTAL : <?php echo number_format($jumlah,0,',','.');?></h4>
                                     <div class="wrap-toolbar" style="margin: 0;">
                                         <a href="<?php echo $baseurl;?>Form" class="btn btn-success btn-fill" style="margin-right: 1rem;">
                                             <i class="fa fa-plus"></i>
@@ -249,7 +249,7 @@
                         <!-- <input id="Param08" value="spek_kedalaman"  type="hidden"> -->
                         <div class="input-group">
                             <!-- <input type="number" name="meter" id="Filt08" class="form-control" required placeholder="Meter" aria-describedby="basic-addon1"> -->
-                            <input type="number" name="meter" id="Filt08" class="form-control" placeholder="Meter" aria-describedby="basic-addon1">
+                            <input type="text" name="meter" id="Filt08" class="form-control" placeholder="Meter" >
                             <span class="input-group-addon" id="basic-addon1">M LWS</span>
                         </div>                                                       
                     </div>
