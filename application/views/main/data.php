@@ -40,7 +40,7 @@
                                             <span>Export Data Excel</span>   
                                         </a>
                                         
-                                        <a href="" class="btn btn-default btn-fill">
+                                        <a href="#" class="btn btn-default btn-fill export-csv">
                                             <i class="fa fa-globe"></i>
                                             <span>Export Data CSV To Map</span>   
                                         </a>  
@@ -169,7 +169,7 @@
                         <div class="form-group col-md-8">
                             <label for="name">Nama Perusahaan</label>
                             <!-- <input id="Param01" value="nm_perusahaan"  type="hidden"> -->
-                            <input type="text" name="name" id="name" placeholder="Nama Perusahaan" class="form-control">
+                            <input type="text" name="name" id="Filt01" placeholder="Nama Perusahaan" class="form-control">
                         </div>
                     </div>
 
@@ -178,8 +178,8 @@
                         <label for="provinsi">Provinsi</label>
                         <!-- <input id="Param02" value="provinsi_id"  type="hidden"> -->
                         <!-- <select name="provinsi[]" class="form-control selectpicker" id="Filt02" data-live-search="true" required > -->
-                        <select name="provinsi" class="form-control selectpicker" id="provinsi" data-live-search="true" >
-                            <option value="">Pilih Provinsi</option>
+                        <select name="provinsi[]"  class="form-control selectpicker" id="Filt02" multiple data-live-search="true" >
+                            <option value="" disabled>Pilih Provinsi</option>
                             <?php for($i=0;$i<count($dataProvinsi);$i++){?>
                                 <option value="<?php echo trim($dataProvinsi[$i]->kode); ?>"><?php echo $dataProvinsi[$i]->nama; ?></option>
                             <?php } ?>
@@ -190,7 +190,7 @@
                         <label for="kota">Kabupaten / Kota</label>
                         <!-- <input id="Param03" value="lokasi"  type="hidden"> -->
                         <!-- <select name="kota[]" class="form-control selectpicker" id="Filt03" data-live-search="true" required > -->
-                        <select name="kota" class="form-control selectpicker" id="kota" data-live-search="true">
+                        <select name="kota" class="form-control selectpicker" id="Filt03" data-live-search="true">
                             <option value="">Pilih Kabupaten / Kota</option>
                         </select>
                     </div>
@@ -199,7 +199,7 @@
                         <label for="kelas">Wilayah Kerja</label>
                         <!-- <input id="Param04" value="ksop_id"  type="hidden"> -->
                         <!-- <select name="kelas[]" class="form-control" id="Filt04" required> -->
-                        <select name="kelas" class="form-control" id="kelas" >
+                        <select name="kelas" class="form-control" id="Filt04" >
                            <option value="">Pilih Wilayah Kerja</option>
                         </select>
                     </div>
@@ -210,7 +210,7 @@
                         <label for="kategori">Kategori</label>
                         <!-- <input id="Param05" value="kategori_id"  type="hidden"> -->
                         <!-- <select class="selectpicker form-control" multiple data-live-search="true" title="Kategori" name="kategori[]" id="Filt05"> -->
-                        <select class="selectpicker form-control" multiple data-live-search="true" title="Kategori" name="kategori[]" id="kategori">
+                        <select class="selectpicker form-control" multiple data-live-search="true" title="Kategori" name="kategori[]" id="Filt05">
                                 <option value="">Pilih Kategori</option>
                                 <?php for($j=0;$j<count($dataKateg);$j++){?>
                                     <option value="<?php echo trim($dataKateg[$j]->kategori_id); ?>"><?php echo $dataKateg[$j]->nama; ?></option>
@@ -221,7 +221,7 @@
                         <label for="bidangusaha">Bidang Usaha</label>
                         <!-- <input id="Param06" value="bdgusaha_id"  type="hidden"> -->
                         <!-- <select class="selectpicker form-control" multiple data-live-search="true" title="Bidang Usaha" name="bidangusaha" id="Filt06"> -->
-                        <select class="selectpicker form-control" multiple data-live-search="true" title="Bidang Usaha" name="bidangusaha[]" id="bidangusaha">
+                        <select class="selectpicker form-control" multiple data-live-search="true" title="Bidang Usaha" name="bidangusaha[]" id="Filt06">
                                 <option value="">Pilih Bidang Usaha</option>
                                 <?php for($k=0;$k<count($dataBdgUsaha);$k++){?>
                                     <option value="<?php echo trim($dataBdgUsaha[$k]->bdg_usaha_id); ?>"><?php echo $dataBdgUsaha[$k]->nama; ?></option>
@@ -235,7 +235,7 @@
                         <label for="dermaga">Type Dermaga</label>
                         <!-- <input id="Param07" value="spesifikasi"  type="hidden"> -->
                         <!-- <select class="selectpicker form-control" multiple data-live-search="true" title="Type Dermaga" id="Filt07"> -->
-                        <select class="selectpicker form-control" multiple data-live-search="true" title="Type Dermaga" id="dermaga" name="dermaga">
+                        <select class="selectpicker form-control" multiple data-live-search="true" title="Type Dermaga" id="Filt07" name="dermaga">
                             <option value="">Pilih Dermaga</option>
                             <option>DERMAGA I TIPE MARGINAL</option>
                             <option>DERMAGA TIPE FINGER</option>
@@ -249,7 +249,7 @@
                         <!-- <input id="Param08" value="spek_kedalaman"  type="hidden"> -->
                         <div class="input-group">
                             <!-- <input type="number" name="meter" id="Filt08" class="form-control" required placeholder="Meter" aria-describedby="basic-addon1"> -->
-                            <input type="number" name="meter" id="meter" class="form-control" placeholder="Meter" aria-describedby="basic-addon1">
+                            <input type="number" name="meter" id="Filt08" class="form-control" placeholder="Meter" aria-describedby="basic-addon1">
                             <span class="input-group-addon" id="basic-addon1">M LWS</span>
                         </div>                                                       
                     </div>
@@ -257,7 +257,7 @@
                         <label for="kapasitas">Kapasitas</label>
                         <!-- <input id="Param09" value="spek_kapasitas"  type="hidden"> -->
                         <!-- <input type="number" name="kapasitas" id="Filt09" class="form-control" required placeholder="Kapasitas"> -->
-                        <input type="number" name="kapasitas" id="kapasitas" class="form-control" placeholder="Kapasitas">
+                        <input type="number" name="kapasitas" id="Filt09" class="form-control" placeholder="Kapasitas">
                     </div>
                   </div>
 
@@ -266,7 +266,7 @@
                         <label for="tukstersus">TUKS /  TERSUS</label>
                         <!-- <input id="Param10" value="ter_tuk"  type="hidden"> -->
                         <!-- <select class="selectpicker form-control" id="Filt10" name="tuk_ter"> -->
-                        <select class="selectpicker form-control" id="tuk_ter" name="tuk_ter">
+                        <select class="selectpicker form-control" id="Filt10" name="tuk_ter">
                             <option value="">Pilih TUKS / TERSUS</option>
                             <option value="TUKS">TUKS</option>
                             <option value="TERSUS">TERSUS</option>
@@ -276,7 +276,7 @@
                         <label for="status">STATUS</label>
                         <!-- <input id="Param11" value="status"  type="hidden">
                         <select class="selectpicker form-control" id="Filt11" name="status"> -->
-                        <select class="selectpicker form-control" id="status" name="status">
+                        <select class="selectpicker form-control" id="Filt11" name="status">
                             <option value="">Pilih Status</option>
                             <option value="Y">AKTIF</option>
                             <option value="N">NON AKTIF</option>
@@ -290,7 +290,7 @@
                                 <span class="glyphicon glyphicon-th"></span>
                             </div>
                             <!-- <input placeholder="Masa Berlaku" type="text" class="form-control datepicker" id="Filt12" name="tgl_akhir" autocomplete="off"> -->
-                            <input placeholder="Masa Berlaku" type="text" class="form-control datepicker" id="tgl_akhir" name="tgl_akhir" autocomplete="off">
+                            <input placeholder="Masa Berlaku" type="text" class="form-control datepicker" id="Filt12" name="tgl_akhir" autocomplete="off">
                         </div>
                     </div>
                   </div>

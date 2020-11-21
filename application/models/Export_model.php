@@ -64,7 +64,6 @@
                 $query= $query.")";
                 $this->db->where($query);
             }
-            unset($query);
             $this->db->where("LENGTH(wilayah.kode)","2");
             $this->db->join("wilayah","daftar_perusahaan.provinsi_id=wilayah.kode");
             $this->db->join("ksop","daftar_perusahaan.ksop_id=ksop.ksop_id");
@@ -101,18 +100,15 @@
             $no = 0;
             if(count($provinsi_id) > 0)
             {
+                $query ="(";
                 foreach($provinsi_id as $p)
                 {
-                    if($no > 0)
-                    {
-                        $this->db->or_where("provinsi_id",$p);
-                    }
-                    else
-                    {
-                        $this->db->where("provinsi_id",$p);
-                    }
-                    $no++;
+                    $query = $query."provinsi_id=".$p. " OR ";
                 }
+                $query = substr($query,0,-4);
+                $query= $query.")";
+                $this->db->where($query);
+                
             }
             
             $data = $this->db->get('rekaptulasi_provinsi');

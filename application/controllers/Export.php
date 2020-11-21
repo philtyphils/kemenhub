@@ -96,8 +96,8 @@ class Export extends CI_Controller
                 $bdgusaha_id = $r;
             }
         }
+        $data                   = $this->Export_model->getData($provinsi_id,$kategori_id,$wilayah_kerja,$bdgusaha_id);    
         
-        $data                   = $this->Export_model->getData($provinsi_id,$kategori_id,$wilayah_kerja,$bdgusaha_id);     
         $rekap_provinsi         = $this->Export_model->rekapProvinsi($provinsi_id);
         //$rekap_wilayah_kerja    = $this->Export_model->rekapWilayahkerja($provinsi_id);
         $rekap_kategori         = $this->Export_model->rekapKategori($provinsi_id,$kategori_id);
@@ -499,6 +499,73 @@ class Export extends CI_Controller
 		
 	}
 	
-	
+    public function csv()
+    {
+        $post = $this->input->post();
+        
+        //echo "<pre>";print_r($provinsi_id);die();
+        /* Filter Provinsi */        
+        $provinsi_id = array();
+        if(isset($post['provinsi']) && $post['provinsi'] != "")
+        {
+            $prov = explode(",",$post['provinsi']);
+            if(count($prov) > 0 && is_array($prov))
+            {
+                $provinsi_id = $prov;
+            }
+        }
+        
+        /* filter by lokasi */
+        $lokasi = "";
+        if(isset($post['lokasi']) && $post['lokasi'] !== "")
+        {
+            $lokasi = $post['lokasi'];
+        }
+
+        /** Filter by Wilayah Kerja **/
+        $wilayah_kerja = array();
+        if(isset($post['wilayah_kerja']) && $post['wilayah_kerja'] !== "")
+        {
+            $r = explode(",",$post['wilayah_kerja']);
+           
+            if(count($r) > 0 && is_array($r))
+            {
+                $wilayah_kerja = $r;
+            }
+        }
+
+        /** Filter By Kategori **/
+        $kategori_id = array();
+        if(isset($post['kategori']) && $post['kategori'] !== "")
+        {
+            $r = explode(",",$post['kategori']);
+            if(count($r) > 0 && is_array($r))
+            {
+                $kategori_id = $r;
+            }
+        }
+
+        /** Filter By Bidang Usaha **/
+        $bdgusaha_id = array();
+        if(isset($post['bidangusaha']) && $post['bidangusaha'] !== "")
+        {
+            $r = explode(",",$post['bidangusaha']);
+            if(count($r) > 0 && is_array($r))
+            {
+                $bdgusaha_id = $r;
+            }
+        }
+        $data = $this->Export_model->getData($provinsi_id,$kategori_id,$wilayah_kerja,$bdgusaha_id); 
+        header("Content-type: application/csv");
+        header("Content-Disposition: attachment; filename=\"test".".csv\"");
+        header("Pragma: no-cache");
+        header("Expires: 0");
+        $handle = fopen('php://output', 'w');
+        foreach ($data->result_array() as $data_array => $value) {
+            fputcsv($handle, $value);
+        }
+        fclose($handle);
+        exit;
+    }
 	
 }

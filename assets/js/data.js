@@ -62,7 +62,7 @@ $(document).ready(function(){
    
    $('#btnsearch').bind('click',function()
    {
-      $('#frmcari')[0].reset(); // reset form on modals
+      //$('#frmcari')[0].reset(); // reset form on modals
       $('.selectpicker').selectpicker('refresh');
       $('#myModal').modal('show'); // show bootstrap modal
            
@@ -71,6 +71,25 @@ $(document).ready(function(){
     /* klik button export */
     $(".export-excel").click(function(e){
         var redirect = baseurl + "Export";
+        var param   = {
+            nm_perusahaan   : $("#Filt01").val(),
+            provinsi        : $("#Filt02").val(),
+            lokasi          : $("#Filt03").val(),
+            wilayah_kerja   : $("#Filt04").val(),
+            kategori        : $("#Filt05").val(),
+            bidangusaha     : $("#Filt06").val(),
+            dermagaType     : $("#Filt07").val(),
+            kedalaman       : $("#Filt08").val(),
+            kapasitas       : $("#Filt09").val(),
+            ter_tuk         : $("#Filt10").val(),
+            status          : $("#Filt11").val(),
+            ms_berlaku      : $("#Filt12").val()
+        };
+        $.redirectPost(redirect, param);
+     });
+     /* klik button export CSV */
+     $(".export-csv").click(function(e){
+        var redirect = baseurl + "Export/csv";
         var param   = {
             nm_perusahaan   : $("#Filt01").val(),
             provinsi        : $("#Filt02").val(),
@@ -108,8 +127,7 @@ $.extend(
 
 function setsearch()
 {
-    alert(1);
-      $('#frmcari')[0].reset(); // reset form on modals
+      ///$('#frmcari')[0].reset(); // reset form on modals
     
       $('#myModal').modal('show'); // show bootstrap modal
          

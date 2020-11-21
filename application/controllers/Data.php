@@ -51,7 +51,7 @@ class Data extends CI_Controller
 		$tukter = $this->input->post('tuk_ter');
 		$status = $this->input->post('status');
 		$tglakhir = $this->input->post('tgl_akhir');
-
+		
 		if($trigger){
 
 			$this->db->select('a.*,b.name as nmprov,c.nama as nmksop,d.nama as nmusaha,e.nama as nmkateg');
@@ -63,10 +63,19 @@ class Data extends CI_Controller
 			if($namaPerusahaan != ''){
 				$this->db->like('a.nm_perusahaan', $namaPerusahaan);
 			}
-			if($provinsi != '')
-			{
-				$this->db->where('a.provinsi_id', $provinsi);	
+			
+			if(count($provinsi) > 0)
+            {
+                $query ="(";
+                foreach($provinsi as $k)
+                {
+                    $query = $query."a.provinsi_id=".$k. " OR ";
+                }
+                $query = substr($query,0,-4);
+                $query= $query.")";
+                $this->db->where($query);
 			}
+			
 			if($kota != '')
 			{
 				$this->db->like('a.lokasi', $kota);		
