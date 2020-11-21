@@ -6,7 +6,7 @@
 		
 		public function _getTotal_usaha()
 		{
-			return $this->db->count_all_results("bdg_usaha");
+			return $this->db->where('flag',1)->count_all_results("bdg_usaha");
 		}
 		public function gets($post = array())
 		{
@@ -20,7 +20,7 @@
 			//{
 			//	$this->db->like("ksop.nama",trim(htmlentities($post['searchbox'])));
 			//}
-			
+			//$this->db->where('flag',1);
 			$data = $this->db->get('rekaptulasi_bidang_usaha');
 			return $data;
         }
@@ -45,11 +45,13 @@
 		public function edit($data)
 		{
 			$id = (int) $data['id'];
-			$nama = $data['name'];
+			$nama = $data['nama'];
+			$kategori_id = $data['kategori_id'];
 			
-			$this->db->where("kategori_id",$id);
-			$data = $this->db->update("kategori",array(
-				"nama" => $nama
+			$this->db->where("bdg_usaha_id",$id);
+			$data = $this->db->update("bdg_usaha",array(
+				"nama" => $nama,
+				"kategori_id" => $kategori_id
 			));
 
 			return $data;
@@ -69,8 +71,8 @@
 
 		public function delete($data)
 		{ 
-			$this->db->where("ksop_id",$data['id']);
-			$data = $this->db->update("ksop",array(
+			$this->db->where("bdg_usaha_id",$data['id']);
+			$data = $this->db->update("bdg_usaha",array(
 				"flag" => "0"
 			));
 			return $data;
@@ -79,7 +81,7 @@
 		public function _get($id)
 		{
 			$id 	= (int) $id;
-			$data 	= $this->db->where("ksop_id",$id)->get('ksop');
+			$data 	= $this->db->where("bdg_usaha_id",$id)->get('bdg_usaha');
 			return $data->result_array();
 
 		}

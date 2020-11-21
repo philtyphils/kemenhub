@@ -52,7 +52,7 @@ class bidang_usaha extends CI_Controller
 			$row[] 		= $value->bidang_usaha;
 			$row[] 		= $value->nama_kategori;
 			$row[] 		= $value->TOTAL . " Perusahaan";
-			$edit_url 	= base_url()."BIDA_USAHA/edit/".$value->bdg_usaha_id;
+			$edit_url 	= base_url()."bidang_usaha/edit/".$value->bdg_usaha_id;
 			$row[] 		= '<a href="'.$edit_url.'" class="btn btn-simple btn-warning btn-icon edit">
 							<i class="fa fa-edit"></i>
 					  </a>
@@ -85,15 +85,15 @@ class bidang_usaha extends CI_Controller
 
 	public function edit($id)
 	{
-		$data['title'] 			= 'Edit Wilayah Kerja';
-		$data['menu'] 			= 'Wilayah Kerja';
+		$data['title'] 			= 'Edit Bidang Usaha';
+		$data['menu'] 			= 'Bidang Usaha';
 		$data['baseurl'] 		= base_url();
 		$data['siteurl'] 		= site_url();
-		$data['provinsi'] 		= $this->kelas->wilayah_kerja();
-		$data['kategori'] 		= $this->kelas->_get($id);
+		$data['bidang_usaha']	= $this->usaha->_get($id);
+		$data['kategori'] 		= $this->usaha->_getKategori();
 
 		$this->load->view('templates/header',$data);
-		$this->load->view('main/kelas_edit',$data);
+		$this->load->view('main/bidang_usaha_edit',$data);
 	}
 
 	public function submit($action)
@@ -108,7 +108,7 @@ class bidang_usaha extends CI_Controller
 			}
 			$this->session->set_flashdata($alert);
 			$id = (int) $this->input->post("id");
-			redirect(base_url()."kelas/edit/".$id);
+			redirect(base_url()."bidang_usaha/edit/".$id);
 		}
 
 		if($action == "create")
@@ -125,7 +125,7 @@ class bidang_usaha extends CI_Controller
 
 		if($action == "delete")
 		{ 
-			$data = $this->kelas->delete($this->input->post());
+			$data = $this->usaha->delete($this->input->post());
 			$alert = array('teks'=>'<div class="alert-error text-center" role="alert"><b> DELETE DATA GAGAL!</b></div>');
 			$return = array(
 				"status" => 400,

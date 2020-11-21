@@ -180,7 +180,8 @@ var chart_tusk = new Highcharts.chart({
             allowPointSelect: true,
             cursor: 'pointer',
             dataLabels: {
-                enabled: false
+                enabled: false,
+                padding:0
             },
             showInLegend: true
         }
