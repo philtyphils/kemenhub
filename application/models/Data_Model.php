@@ -208,8 +208,6 @@ class Data_model extends CI_Model {
 
         };
 
-        var_dump($data_spesifikasi);
-die();
 
         $data2 = array ('nm_perusahaan' => $data['name'],  
                         'provinsi_id' => $provinsi[0],
@@ -232,6 +230,18 @@ die();
 
 
         
+    }
+
+    public function _getSingleData($id)
+    {
+        $data       = $this->db->where("id",$id)->get("daftar_perusahaan")->row();
+        $kecamatan  = $this->db->where("substr(kode,1,2)",$data->provinsi_id)->where("LENGTH(kode)",5)->get("wilayah")->result();
+        $kelurahan  = $this->db->where("substr(kode,1,2)",$data->provinsi_id)->where("LENGTH(kode)>5")->get("wilayah")->result();
+        return array(
+            "data" => $data,
+            "kecamatan" => $kecamatan,
+            "kelurahan" => $kelurahan
+        );
     }
 
 

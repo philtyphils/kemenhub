@@ -165,6 +165,18 @@ class Data extends CI_Controller
 	
 	}
 	
+	public function load_view($id)
+	{
+		$data['id'] = (int) $id;
+		$data['dataProvinsi'] = $this->datax->get_provinsi();
+		$data['dataBdgUsaha'] = $this->datax->get_bidangusaha();
+
+		$this->load->view('main/load_view',$data);
+		
+	}
+
+
+
 	public function get_Kota()
 	{
 		$html='';
@@ -254,6 +266,20 @@ class Data extends CI_Controller
 
 		$this->load->view('templates/header',$data);
 		$this->load->view('main/data_create',$data);
+	}
+
+	public function edit($id)
+	{
+		$data['title'] = 'Edit Data';
+		$data['menu'] = 'Edit Data';
+		$data['baseurl'] = base_url();
+		$data['siteurl'] = site_url();
+		$data['data']		  = $this->datax->_getSingleData($id);	
+		$data['dataProvinsi'] = $this->datax->get_provinsi();
+		$data['dataBdgUsaha'] = $this->datax->get_bidangusaha();
+
+		$this->load->view('templates/header',$data);
+		$this->load->view('main/data_edit',$data);
 	}
 
 	public function submit($action)

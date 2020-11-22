@@ -4,75 +4,79 @@
                         <div class="col-md-10">
                             <div class="card">
                                 <div class="header" style="background-color: #43425D">
-                                    <h4 class="title" style="color: #ffff;">Create Data</h4>
+                                    <h4 class="title" style="color: #ffff;">Edit Data</h4>
                                 </div>
                                 <div class="card-form">
                                 <?php echo $this->session->flashdata('teks'); ?>
-                                <form action="<?php echo $baseurl."Data/submit/create";?>" method="POST">
+                                <form action="<?php echo $baseurl."Data/submit/edit";?>" method="POST">
                                     <div id="multifield" class="col" style="margin-bottom: 2rem;">
                                         <div class="row">
                                             <div class="form-group col-md-12" style="padding:0">
                                                 <label for="name" class="label-font" style="margin-bottom: 1rem;">Nama Perusahaan</label>
-                                                <input type="text" name="name" id="name" class="form-control" placeholder="Nama Perusahaan" >
+                                                <input type="text" name="name" value="<?php echo $data['data']->nm_perusahaan;?>" id="name" class="form-control" placeholder="Nama Perusahaan" >
                                             </div>
 
-                                            <!-- <div class="form-group col-md-12" style="padding:0">
-                                                <label for="kategori usaha"  class="label-font" style="margin-bottom: 1rem;">KATEGORI USAHA</label>
-                                                <select class="form-control selectpicker" multiple data-live-search="true" title="Kategori Usaha" id="box" name="kategori_usaha[]">
-                                                        <option >ENERGI</option>
-                                                        <option>PERTAMBANGAN</option>
-                                                        <option>INDUSTRI</option>
-                                                        <option>ENERGI</option>
-                                                        <option>DOK DAN GALANGAN</option>
-                                                        <option>PERTANIAN</option>
-                                                        <option>KEHUTANAN</option>
-                                                        <option>PARIWISATA</option>
-                                                        <option>PERIKANAN</option>
-                                                </select>                 
-                                            </div> -->
                                             <div class="wrap">
                                                
                                                 <div class="form-group col-md-6 border-right">
                                                     <label for="alamat">Alamat Kantor</label>
-                                                    <textarea name="alamat" id="alamat"  rows="11" class="form-control"></textarea> 
+                                                    <textarea name="alamat" id="alamat"rows="11" class="form-control"><?php echo $data['data']->alamat;?></textarea> 
                                                 </div>
                                                 <div class="form-group col-md-6" >
                                                     <div class="form-group">
                                                         <label for="provinsi">Provinsi</label>
                                                         <select name="provinsi" class="form-control" id="provinsi" >
-                                                           <option value="">Pilih Provinsi</option>
+                                                           <option value="" readonly>Pilih Provinsi</option>
                                                             <?php for($i=0;$i<count($dataProvinsi);$i++){?>
-                                                                <option value="<?php echo trim($dataProvinsi[$i]->kode);?>|<?php echo trim($dataProvinsi[$i]->nama);?>"><?php echo $dataProvinsi[$i]->nama; ?></option>
+                                                                <?php if($dataProvinsi[$i]->kode == $data['data']->provinsi_id):?>
+                                                                    <option value="<?php echo trim($dataProvinsi[$i]->kode);?>|<?php echo trim($dataProvinsi[$i]->nama);?>" selected><?php echo $dataProvinsi[$i]->nama; ?></option>
+                                                                <?php else: ?>
+                                                                    <option value="<?php echo trim($dataProvinsi[$i]->kode);?>|<?php echo trim($dataProvinsi[$i]->nama);?>"><?php echo $dataProvinsi[$i]->nama; ?></option>
+                                                                <?php endif;?>
                                                             <?php } ?>
                                                         </select>
                                                     </div>
-                                                   
                                                     <div class="row">
                                                         <div class="form-group col-md-4">
                                                             <label for="kecamatan">Kecamatan</label>
                                                             <select name="kecamatan" class="form-control" id="kecamatan" >
-                                                                <option value="">Pilih Kecamatan</option>
+                                                                <option value="" readonly>Pilih Kecamatan</option>
+                                                                <?php foreach ($data['kecamatan'] as $key => $value):?>
+                                                                    <?php if($value->kode == $data['data']->alamat_kecamatan):?>
+                                                                        <option value="<?php echo trim($value->kode);?>" selected><?php echo trim($value->nama);?></option>
+                                                                    <?php else:?>
+                                                                        <option value="<?php echo trim($value->kode);?>"><?php echo trim($value->nama);?></option>
+                                                                    <?php endif;?>
+                                                                <?php endforeach;?>
+            
                                                             </select>
                                                         </div>
                                                         <div class="form-group col-md-4">
                                                             <label for="kelurahan">Kelurahan</label>
                                                             <select name="kelurahan" class="form-control" id="kelurahan" >
                                                                 <option value="">Pilih Kelurahan</option>
+                                                                <?php foreach ($data['kelurahan'] as $key => $value):?>
+                                                                    <?php if($value->kode == $data['data']->alamat_kelurahan):?>
+                                                                        <option value="<?php echo trim($value->kode);?>" selected><?php echo trim($value->nama);?></option>
+                                                                    <?php else:?>
+                                                                        <option value="<?php echo trim($value->kode);?>"><?php echo trim($value->nama);?></option>
+                                                                    <?php endif;?>
+                                                                <?php endforeach;?>
                                                             </select>
                                                         </div>
                                                         <div class="form-group col-md-4">
                                                             <label for="kodepos">KodePos</label>
-                                                            <input type="number" name="kodepos" id="kodepos" class="form-control" placeholder="KodePos">  
+                                                            <input type="number" name="kodepos" value="<?php echo $data['data']->alamat_kodepos;?>" id="kodepos" class="form-control" placeholder="KodePos">  
                                                         </div>
                                                     </div>
                                                     <div class="row">
                                                         <div class="form-group col-md-6">
                                                             <label for="contactperson">Contact Person</label>
-                                                            <input type="number" name="contactperson" id="contactperson" class="form-control" placeholder="Contact Person"> 
+                                                            <input type="number" name="contactperson" value="<?php echo $data['data']->no_tlp;?>" id="contactperson" class="form-control" placeholder="Contact Person"> 
                                                         </div>
                                                         <div class="form-group col-md-6">
                                                             <label for="email">Email</label>
-                                                            <input type="email" name="email" id="email" class="form-control" placeholder="Email">
+                                                            <input type="email" name="email" id="email"  value="<?php echo $data['data']->alamat_email;?>" class="form-control" placeholder="Email">
                                                         </div>
                                                     </div>  
                                                 </div>
@@ -185,12 +189,7 @@
 
                                             <div class="row">
                                                 <div class="form-group col-md-12">
-                                                    <div id="dermagamulti" class="wrap-2">
-                                                        <div class="col-md-12">
-                                                            <button type="button" id="btnTambah" onclick="addFields()" class="btn btn-fill btn-primary" style="margin: 10px 0 20px 0;">
-                                                            Tambah Dermaga
-                                                            </button>    
-                                                        </div>  
+                                                    <div id="dermagamulti" class="wrap-2">  
                                                         <div id="groupdermaga">
                                                             <div class="form-group col-md-12" id="dermaga type">  
                                                                 <div class="col-md-3" style="padding-left:0;margin-top: 1rem;">
@@ -314,22 +313,12 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                           
-                                            <div class="wrap-3" style="padding-left: 0;">
-                                                <button type="button" id="btnAdd" class="btn btn-fill btn-primary btnAdd" style="margin-right: 1rem;">
-                                                <i class="fa fa-plus" style="margin-right: 5px;"></i>
-                                                Tambah Lokasi
-                                                </button>
-                                                <button type="button" class="btn btn-fill btn-danger btnRemove">Hapus</button>
-                                            </div>
                                         </div>
                                     </div>
-                                    <div id="loadhere"></div>
                                    
                                     <button type="submit" class="btn btn-fill btn-success" style="margin-right: 1rem;margin-left: -15px;">SIMPAN DATA</button>
                                     <a href="<?php echo $baseurl;?>Data"  class="btn btn-fill btn-default" >KEMBALI</a> 
                                 </form>
-                                <input type="text" id="count" value="1"/>
 
                                 </div>
                             </div>
