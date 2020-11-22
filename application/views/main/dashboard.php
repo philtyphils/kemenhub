@@ -109,8 +109,8 @@
                         <div class="col-md-4">
                             <div class="card">
                                 <div class="header">
-                                    <h4 class="title">TUKS</h4>
-                                    <p class="category" style="color: #AAAAAA; font-weight: 300;">Jumlah Total TUKS semua Provinsi</p>
+                                    <h4 class="title">TERSUS</h4>
+                                    <p class="category" style="color: #AAAAAA; font-weight: 300;">Jumlah Total TERSUS semua Provinsi</p>
                                 </div>
                                 <div id="container-pie"></div>  
                             </div>
@@ -118,8 +118,8 @@
                         <div class="col-md-4">
                             <div class="card">
                                 <div class="header">
-                                    <h4 class="title">TERSUS</h4>
-                                    <p class="category" style="color: #AAAAAA; font-weight: 300;">Jumlah Total TERSUS semua Provinsi</p>
+                                    <h4 class="title">TUKS</h4>
+                                    <p class="category" style="color: #AAAAAA; font-weight: 300;">Jumlah Total TUKS semua Provinsi</p>
                                 </div>
                                 <div id="container-pie2"></div>  
                             </div>
@@ -130,7 +130,7 @@
                             <div class="card">
                                 <div class="header">
                                     <h4 class="title">TERSUS & TUKS</h4>
-                                    <p class="category" style="color: #AAAAAA; font-weight: 300;">Jumlah Per / Provinsi</p>
+                                    <p class="category" style="color: #AAAAAA; font-weight: 300;">Jumlah Per Provinsi</p>
                                 </div>
                                 <div id="container-bar"></div>  
                             </div>
@@ -156,7 +156,8 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	Highcharts.setOptions({
-		colors: ['#A3A0FB', '#43425D']
+        colors: ['#A3A0FB', '#43425D']
+      
 	});
 	var Total = 0;
 
@@ -207,7 +208,7 @@ $(document).ready(function(){
 	        name: 'Status',
 	        colorByPoint: true,
 	        innerSize: '50%',
-	        data: <?php echo $tuks; ?>
+	        data: <?php echo $tersus; ?>
 	    }],
 	    navigation: {
 	        buttonOptions: {
@@ -276,7 +277,7 @@ $(document).ready(function(){
 	        name: 'Status',
 	        colorByPoint: true,
 	        innerSize: '50%',
-	        data: <?php echo $tersus; ?>
+	        data:<?php echo $tuks; ?>
 	    }],
 	    navigation: {
 	        buttonOptions: {
@@ -295,7 +296,7 @@ $(document).ready(function(){
 
 
 	Highcharts.setOptions({
-		colors: ['#43425D','#A3A0FB','#ffb700','#6bd189']
+		colors: ['#A3A0FB','#43425D','#6bd189','#fcbf1e']
 	});
 	
 	var chart_bar = new Highcharts.chart({
@@ -310,7 +311,7 @@ $(document).ready(function(){
         categories: <?php echo $provinsi; ?>,
         labels: {
         style: {
-            fontSize: '16px',
+            fontSize: '14px',
             color: '#43425D'
         }
         }, 

@@ -7,9 +7,9 @@
                                 <div class="header-master">
                                     <div class="header">
                                         <h4 class="title">WILAYAH KERJA</h4>
-                                        <p class="category" style="color: #AAAAAA; font-weight: 300;">Jumlah KELAS KUPP KSOP & OP</p>
+                                        <p class="category" style="color: #AAAAAA; font-weight: 300;">Jumlah KELAS OP KSOP & KUPP</p>
                                     </div>
-                                    <span class="fa fa-bar-chart"></span>
+                                    <span class="fa fa-map-marker"></span>
                                 </div>
                                
                                 <div class="content">

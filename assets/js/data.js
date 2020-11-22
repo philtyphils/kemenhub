@@ -13,6 +13,7 @@ $(document).ready(function(){
 
 
     $('#datatables').DataTable({
+        "ordering": false,
         "scrollX": true
     });
 
