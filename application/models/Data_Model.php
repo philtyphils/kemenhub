@@ -104,8 +104,19 @@ class Data_model extends CI_Model {
 
     public function get_Kota($id)
     {
-        
-        $sql ="SELECT * from wilayah where substr(kode,1,2) = '".$id."' and kode!='".$id."'";
+        $where = "";
+        if(count($id) > 0)
+        {
+            $query =" WHERE (";
+            foreach($id as $p)
+            {
+                $query = $query." (substr(kode,1,2) =".$p. " and kode!='".$p."') OR ";
+            }
+            $query = substr($query,0,-4);
+            $where = $query.")";
+            
+        }
+        $sql ="SELECT * from wilayah ".$where;
         $query= $this->db->query($sql);
             
         return $query->result(); 
@@ -149,8 +160,19 @@ class Data_model extends CI_Model {
 
     public function get_Kelas($id)
     {
-        
-        $sql ="SELECT * from ksop left join provinsi on ksop.provinsi_id=provinsi.id where provinsi_id ='".$id."'";
+        $where = "";
+        if(count($id) > 0)
+        {
+            $query =" WHERE (";
+            foreach($id as $p)
+            {
+                $query = $query." provinsi_id ='".$p."') OR ";
+            }
+            $query = substr($query,0,-4);
+            $where = $query.")";
+            
+        }
+        $sql ="SELECT * from ksop left join provinsi on ksop.provinsi_id=provinsi.id ".$where;
         $query= $this->db->query($sql);
             
         return $query->result(); 

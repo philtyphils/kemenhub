@@ -36,8 +36,10 @@ class Master extends CI_Controller
 		$data['siteurl'] = site_url();
 		$kat_chart = json_encode($this->master->kategori_chart());
 		$wilayah_kerja = json_encode($this->master->wilayah_kerja_chart());
+		$bidang_usaha = json_encode($this->master->bdg_usaha_chart());
 		$data['kategori_chart'] = $kat_chart;
 		$data['wilayah_kerja'] = $wilayah_kerja;
+		$data['bidang_usaha'] = $bidang_usaha;
 
 		
 

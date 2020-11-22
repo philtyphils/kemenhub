@@ -17,7 +17,8 @@
 				$this->db->like("ksop.nama",trim(htmlentities($post['searchbox'])));
 			}
 			
-            $this->db->where("LENGTH(wilayah.kode)",2);
+			$this->db->where("LENGTH(wilayah.kode)",2);
+			$this->db->where("ksop.flag","1");
             $this->db->select("ksop.ksop_id as ksop_id,ksop.nama as nama, wilayah.kode as provinsi_id, wilayah.nama as provinsi,");
             $this->db->join("wilayah","wilayah.kode=ksop.provinsi_id");
             $this->db->order_by("ksop.provinsi_id","ASC");
@@ -82,13 +83,11 @@
 		}
 
 		public function delete($data)
-		{
-			$id = (int) $data['id'];
-			$this->db->where("kategori_id",$id);
-			$data = $this->db->update("kategori",array(
+		{ 
+			$this->db->where("ksop_id",$data['id']);
+			$data = $this->db->update("ksop",array(
 				"flag" => "0"
 			));
-
 			return $data;
 		}
 

@@ -89,17 +89,17 @@ class Kelas extends CI_Controller
 		$data['baseurl'] 		= base_url();
 		$data['siteurl'] 		= site_url();
 		$data['provinsi'] 		= $this->kelas->wilayah_kerja();
-		$data['kategori_id'] 	= $this->kelas->_get($id);
+		$data['kategori'] 		= $this->kelas->_get($id);
 
 		$this->load->view('templates/header',$data);
-		$this->load->view('main/kelas_create',$data);
+		$this->load->view('main/kelas_edit',$data);
 	}
 
 	public function submit($action)
 	{
 		if($action == "edit")
 		{
-			$data = $this->kategori->edit($this->input->post());
+			$data = $this->kelas->edit($this->input->post());
 			$alert = array('teks'=>'<div class="alert-error text-center" role="alert"><b> UPDATE DATA GAGAL!</b></div>');
 			if($data)
 			{
@@ -123,15 +123,24 @@ class Kelas extends CI_Controller
 		}
 
 		if($action == "delete")
-		{
-			$data = $this->kategori->delete($this->input->post());
+		{ 
+			$data = $this->kelas->delete($this->input->post());
 			$alert = array('teks'=>'<div class="alert-error text-center" role="alert"><b> DELETE DATA GAGAL!</b></div>');
+			$return = array(
+				"status" => 400,
+				"text"   => "Request can not proccessed."
+			);
 			if($data)
 			{
 				$alert = array('teks'=>'<div class="alert-success text-center" role="alert"><b> DELETE DATA BERHASIL !</b></div>');
+				$return = array(
+					"status" => 200,
+					"text"   => "Successfully"
+				);
+
 			}
 			$this->session->set_flashdata($alert);
-			echo json_encode(["result" => "always Fine."]);
+			echo json_encode($return);
 		}
 	}
 	

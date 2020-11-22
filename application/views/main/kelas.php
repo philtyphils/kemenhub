@@ -56,6 +56,7 @@
         </div>
     </div>
 </div>
+</div>
 
 <!-- MODAL DELETE-->
 <div class="modal fade" id="delete-modal" role="dialog">
@@ -131,27 +132,25 @@
         });
         
 
-        
-
-        // Delete a record
-        // table.on('click', '.remove', function(e) {
-        //     $tr = $(this).closest('tr');
-        //     table.row($tr).remove().draw();
-        //     e.preventDefault();
-        // });
-
-        //Like record
-        table.on('click', '.like', function() {
-            alert('You clicked on Like button');
-        });
-
         $('.card .material-datatables label').addClass('form-group');
 
         // MODAL DELETE
         $('#delete-modal').on('show.bs.modal',function() { 
             $('.btn-del').click('.remove',function(e) {
-              $tr = $(this).closest('tr');
-              table.row($tr).remove().draw();
+                var id = $(".remove").attr("personal-id");
+                var param = {"id" : id}
+
+               $.ajax({
+                 type: "POST",
+                 url: "<?php echo $baseurl;?>Kelas/submit/delete",
+                 data: param,
+                 success: function(e){
+                     window.location.href="<?php echo $baseurl;?>Kelas";
+                   },
+                 dataType: "JSON"
+               });
+            
+            
               e.preventDefault();
             });
         });
