@@ -7,8 +7,8 @@
                             <div class="card">
                                 <div class="header-master">
                                     <div class="header">
-                                        <h4 class="title">TUKS & TERSUS DATATABLE</h4>
-                                        <p class="category" style="color: #AAAAAA; font-weight: 300;">REKAPITULASI TERSUS & TUKS DATATABLE </p>
+                                        <h4 class="title">TERSUS & TUKS DATATABLE</h4>
+                                        <!-- <p class="category" style="color: #AAAAAA; font-weight: 300;">REKAPITULASI TERSUS & TUKS DATATABLE </p> -->
                                     </div>
                                     <span class="fa fa-folder-open"></span>
                                 </div>
@@ -31,7 +31,7 @@
                                        
                                     <h4 style="font-weight: 400;color: #AAAAAA;letter-spacing: 2px;font-size: 20px;margin-top: 2rem;">TOTAL : 80000</h4>
                                     <div class="wrap-toolbar" style="margin: 0;">
-                                        <a href="<?php echo $baseurl;?>Form" class="btn btn-success btn-fill" style="margin-right: 1rem;">
+                                        <a href="<?php echo $baseurl."Data/create";?>" class="btn btn-success btn-fill" style="margin-right: 1rem;">
                                             <i class="fa fa-plus"></i>
                                             <span>Buat Data Baru</span>  
                                         </a>
@@ -211,7 +211,7 @@
                         <!-- <input id="Param05" value="kategori_id"  type="hidden"> -->
                         <!-- <select class="selectpicker form-control" multiple data-live-search="true" title="Kategori" name="kategori[]" id="Filt05"> -->
                         <select class="selectpicker form-control" multiple data-live-search="true" title="Kategori" name="kategori[]" id="kategori">
-                                <option value="">Pilih Kategori</option>
+                                <option value="" disabled>Pilih Kategori</option>
                                 <?php for($j=0;$j<count($dataKateg);$j++){?>
                                     <option value="<?php echo trim($dataKateg[$j]->kategori_id); ?>"><?php echo $dataKateg[$j]->nama; ?></option>
                                 <?php } ?>
@@ -222,7 +222,7 @@
                         <!-- <input id="Param06" value="bdgusaha_id"  type="hidden"> -->
                         <!-- <select class="selectpicker form-control" multiple data-live-search="true" title="Bidang Usaha" name="bidangusaha" id="Filt06"> -->
                         <select class="selectpicker form-control" multiple data-live-search="true" title="Bidang Usaha" name="bidangusaha[]" id="bidangusaha">
-                                <option value="">Pilih Bidang Usaha</option>
+                                <option value="" disabled>Pilih Bidang Usaha</option>
                                 <?php for($k=0;$k<count($dataBdgUsaha);$k++){?>
                                     <option value="<?php echo trim($dataBdgUsaha[$k]->bdg_usaha_id); ?>"><?php echo $dataBdgUsaha[$k]->nama; ?></option>
                                 <?php } ?>
@@ -236,7 +236,7 @@
                         <!-- <input id="Param07" value="spesifikasi"  type="hidden"> -->
                         <!-- <select class="selectpicker form-control" multiple data-live-search="true" title="Type Dermaga" id="Filt07"> -->
                         <select class="selectpicker form-control" multiple data-live-search="true" title="Type Dermaga" id="dermaga" name="dermaga">
-                            <option value="">Pilih Dermaga</option>
+                            <option value="" disabled>Pilih Dermaga</option>
                             <option>DERMAGA I TIPE MARGINAL</option>
                             <option>DERMAGA TIPE FINGER</option>
                             <option>DERMAGA TIPE JETTY HEAD</option>

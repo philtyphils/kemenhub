@@ -111,6 +111,42 @@ class Data_model extends CI_Model {
         return $query->result(); 
     }
 
+    public function get_Kota2($id)
+    {
+        
+        $sql ="SELECT * from wilayah where substr(kode,1,2) = '".$id."' and kode!='".$id."' and length(kode) = 5";
+        $query= $this->db->query($sql);
+            
+        return $query->result(); 
+    }
+
+    public function get_Kecamatan($id)
+    {
+        
+        $sql ="SELECT * from wilayah where substr(kode,1,5) = '".$id."' and kode!='".$id."'";
+        $query= $this->db->query($sql);
+            
+        return $query->result(); 
+    }
+
+    public function get_Kecamatan2($id)
+    {
+        
+        $sql ="SELECT * from wilayah where length(kode) = 8 and substr(kode,1,2) = '".$id."'";
+        $query= $this->db->query($sql);
+            
+        return $query->result(); 
+    }
+
+    public function get_Kelurahan($id)
+    {
+        
+        $sql ="SELECT * from wilayah where length(kode) = 13 and substr(kode,1,8) = '".$id."'";
+        $query= $this->db->query($sql);
+            
+        return $query->result(); 
+    }
+
     public function get_Kelas($id)
     {
         
@@ -119,6 +155,63 @@ class Data_model extends CI_Model {
             
         return $query->result(); 
     }
+
+    public function create($data)
+    {
+        $provinsi = explode("|", $data['provinsi']);
+        $kecamatan = explode("|", $data['kecamatan']);
+        $kelurahan = explode("|", $data['kelurahan']);
+        $provinsi_f = explode("|",$data['provinsi_f'][0]);
+        $kota_f = explode("|",$data['kota_f'][0]);
+        $kecamatan_f = explode("|",$data['kecamatan_f'][0]);
+
+        $kantor = array($provinsi[1],$kecamatan[1],$kelurahan[1],$data['kodepos'],$data['contactperson'],$data['email']);
+        $lokasi = array($data['lokasi_f'][0],$provinsi_f[1],$kota_f[1],$kecamatan_f[1],$data['kelurahan_f'][0]); 
+        // $koordinat_lat = array($data['d_lat'][0]."°",$data['m_lat'][0]."'",$data['s_lat'][0].'"',$data['direction_lat'][0]);
+        // $koordinat_long = array($data['d_long'][0]."°",$data['m_long'][0]."'",$data['s_long'][0].'"',$data['direction_long'][0]);
+        $koordinat =array($data['d_lat'][0]."°",$data['m_lat'][0]."'",$data['s_lat'][0].'"',$data['direction_lat'][0],"/ ".$data['d_long'][0]."°",$data['m_long'][0]."'",$data['s_long'][0].'"',$data['direction_longx'][0]);
+        // $spesifikasi = array('Tipe:'.$data['dermaga'][0],'Spesifikasi:'.$data['spesifikasi'][0],'Peruntukan:'.$data['peruntukan'][0],'Meter:'.$data['meter'][0],'Kapasitas:'.$data['kapasitas'][0],'Satuan:'.$data['satuan'][0]);
+
+
+
+        for($i=0;$i<sizeof($data['dermaga']);$i++) 
+        {
+
+            $data_spesifikasi =array ('Tipe:' => $data['dermaga'][$i],
+                                        'Spesifikasi:' => $data['spesifikasi'][$i],
+                                        'Peruntukan:'=> $data['peruntukan'][$i],
+                                        'Meter:' => $data['meter'][$i],
+                                        'Kapasitas:' => $data['kapasitas'][$i],
+                                        'Satuan:'=> $data['satuan'][$i].' |');  
+
+        };
+
+        var_dump($data_spesifikasi);
+die();
+
+        $data2 = array ('nm_perusahaan' => $data['name'],  
+                        'provinsi_id' => $provinsi[0],
+                        'bdgusaha_id' => $data['bidangusaha'][0],
+                        'ksop_id' => $data['kelas'][0],
+                        'alamat' => implode(" ", $kantor),
+                        'lokasi' => implode(" ", $lokasi),
+                        'koordinat' => implode(" ",$koordinat),
+                        'spesifikasi' => $data_spesifikasi,
+                        'sk' => $data['nosk'][0]."".$data['jenissk'][0],
+                        'ter_tuk' => $data['tersus_tuks'][0],
+                        'status' => $data['status'][0],
+                        'tgl_terbit' => date("Y-m-d", strtotime($data['tgl_terbit'][0])),
+                        'ms_berlaku' => date("Y-m-d", strtotime($data['tgl_akhir'][0]))
+
+                        );            
+
+        $exec = $this->db->insert('daftar_perusahaanx', $data2);
+        return $exec;
+
+
+        
+    }
+
 
     // public function getData($name,$provinsi,$kota,$kelas,$kategori,$bidangusaha,$dermaga,$meter,$kapasitas,$tuk_ter,$status,$tgl_akhir)
     // {
@@ -244,31 +337,31 @@ class Data_model extends CI_Model {
         
     // }
 
-    public function getData($param1)
-    {
-        $a=array();
-        $prm= explode("|",$param1);
-        $xa = count($prm);
-        $where1 = "";
-        $where2 = "";
+    // public function getData($param1)
+    // {
+    //     $a=array();
+    //     $prm= explode("|",$param1);
+    //     $xa = count($prm);
+    //     $where1 = "";
+    //     $where2 = "";
         
-        for($a=0; $a<$xa; $a++) 
-        {               
-            $prm2=explode("~",$prm[$a]);
+    //     for($a=0; $a<$xa; $a++) 
+    //     {               
+    //         $prm2=explode("~",$prm[$a]);
 
-            if($prm2[2] ==''){
-                $where2 .="";
-            }else{
-                $where2 .= " AND a.".$prm2[1]." like '%".$prm2[2]."%'";
-            }
+    //         if($prm2[2] ==''){
+    //             $where2 .="";
+    //         }else{
+    //             $where2 .= " AND a.".$prm2[1]." like '%".$prm2[2]."%'";
+    //         }
 
-        }
+    //     }
 
-        $where1 = "IS NOT NULL";
-        $query1 = "SELECT a.*, b.name as nmprov,c.nama as nmksop,d.nama as nmusaha,e.nama as nmkateg from daftar_perusahaan as a left join provinsi as b on a.provinsi_id=b.id left join ksop as c on a.ksop_id=c.ksop_id left join bdg_usaha as d on a.bdgusaha_id=d.bdg_usaha_id left join kategori as e on a.kategori_id=e.kategori_id where a.id ".$where1." ".$where2." order by nm_perusahaan ASC";
+    //     $where1 = "IS NOT NULL";
+    //     $query1 = "SELECT a.*, b.name as nmprov,c.nama as nmksop,d.nama as nmusaha,e.nama as nmkateg from daftar_perusahaan as a left join provinsi as b on a.provinsi_id=b.id left join ksop as c on a.ksop_id=c.ksop_id left join bdg_usaha as d on a.bdgusaha_id=d.bdg_usaha_id left join kategori as e on a.kategori_id=e.kategori_id where a.id ".$where1." ".$where2." order by nm_perusahaan ASC";
 
-        $query = $this->db->query($query1); 
-        return $query->result();
+    //     $query = $this->db->query($query1); 
+    //     return $query->result();
         
-    }
+    // }
 }
