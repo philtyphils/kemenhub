@@ -270,13 +270,18 @@ class Data extends CI_Controller
 
 	public function edit($id)
 	{
-		$data['title'] = 'Edit Data';
-		$data['menu'] = 'Edit Data';
-		$data['baseurl'] = base_url();
-		$data['siteurl'] = site_url();
-		$data['data']		  = $this->datax->_getSingleData($id);	
-		$data['dataProvinsi'] = $this->datax->get_provinsi();
-		$data['dataBdgUsaha'] = $this->datax->get_bidangusaha();
+		/* Split the koordinat value */
+		$selected 			  	= $this->datax->_getSingleData($id);
+		$split 					= preg_split("/[°º⁰˚'\"”\/]+/",str_replace(",",".",$selected['data']->koordinat));
+		$selected['data']->koordinat= $split;
+
+		$data['title'] 			= 'Edit Data';
+		$data['menu'] 			= 'Edit Data';
+		$data['baseurl'] 		= base_url();
+		$data['siteurl'] 	  	= site_url();
+		$data['data']		  	= $selected;	
+		$data['dataProvinsi'] 	= $this->datax->get_provinsi();
+		$data['dataBdgUsaha'] 	= $this->datax->get_bidangusaha();
 
 		$this->load->view('templates/header',$data);
 		$this->load->view('main/data_edit',$data);

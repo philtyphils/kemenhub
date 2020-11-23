@@ -20,7 +20,7 @@
                                                
                                                 <div class="form-group col-md-6 border-right">
                                                     <label for="alamat">Alamat Kantor</label>
-                                                    <textarea name="alamat" id="alamat"rows="11" class="form-control"><?php echo $data['data']->alamat;?></textarea> 
+                                                    <textarea name="alamat" id="alamat" rows="11" class="form-control"><?php echo $data['data']->alamat;?></textarea> 
                                                 </div>
                                                 <div class="form-group col-md-6" >
                                                     <div class="form-group">
@@ -127,30 +127,30 @@
                                                         <div class="form-group col-md-3" >
                                                             <label for="dms">Degrees</label>
                                                             <div class="input-group">
-                                                                <input type="number" name="d_lat[]" id="d_lat" class="form-control" placeholder="Degrees" aria-describedby="basic-addon1">
+                                                                <input type="number" value="<?php echo trim($data['data']->koordinat[0]);?>" name="d_lat" id="d_lat" class="form-control" placeholder="Degrees" aria-describedby="basic-addon1">
                                                                 <span class="input-group-addon" id="basic-addon1">°</span>
                                                             </div>
                                                         </div>
                                                         <div class="form-group col-md-3">
                                                             <label for="dms">Minutes</label>
                                                             <div class="input-group">  
-                                                                <input type="number" name="m_lat[]" id="m_lat" class="form-control" placeholder="Minutes" aria-describedby="basic-addon1">
+                                                                <input type="number" value="<?php echo trim($data['data']->koordinat[1]);?>" name="m_lat" id="m_lat" class="form-control" placeholder="Minutes" aria-describedby="basic-addon1">
                                                                 <span class="input-group-addon" id="basic-addon1">'</span>
                                                             </div>
                                                         </div>
                                                         <div class="form-group col-md-3">
                                                             <label for="dms">Seconds</label>
                                                             <div class="input-group">    
-                                                                <input type="number" name="s_lat[]" id="s_lat" class="form-control" placeholder="Seconds" aria-describedby="basic-addon1">
+                                                                <input type="number" value="<?php echo trim($data['data']->koordinat[2]);?>" name="s_lat[]" id="s_lat" class="form-control" placeholder="Seconds" aria-describedby="basic-addon1">
                                                                 <span class="input-group-addon" id="basic-addon1">"</span>
                                                             </div>
                                                         </div>
                                                         <div class="form-group col-md-3">
                                                             <label for="direction">Direction</label>
                                                             <select name="direction_lat[]" id="direction_lat" class="form-control" >
-                                                                <option value="">Pilih</option>
-                                                                <option value="LU">LU</option>
-                                                                <option value="LS">LS</option>
+                                                                <option value="" readonly>Pilih</option>
+                                                                <option value="LU" <?php echo (trim($data['data']->koordinat[3]) == "LU") ? "selected" : ""; ?>>LU</option>
+                                                                <option value="LS" <?php echo (trim($data['data']->koordinat[3]) == "LS") ? "selected" : ""; ?>>LS</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -159,28 +159,28 @@
                                                         <div class="form-group col-md-3" >
                                                             <label for="dms">Degrees</label>
                                                             <div class="input-group">
-                                                                <input type="number" name="d_long[]" id="d_long" class="form-control"  placeholder="Degrees" aria-describedby="basic-addon1">
+                                                                <input type="number" value="<?php echo trim($data['data']->koordinat[4]);?>" name="d_long" id="d_long" class="form-control"  placeholder="Degrees" aria-describedby="basic-addon1">
                                                                 <span class="input-group-addon" id="basic-addon1">°</span>
                                                             </div>
                                                         </div>
                                                         <div class="form-group col-md-3">
                                                             <label for="dms">Minutes</label>
                                                             <div class="input-group">
-                                                                <input type="number" name="m_long[]" id="m_long" class="form-control"  placeholder="Minutes" aria-describedby="basic-addon1">
+                                                                <input type="number"value="<?php echo trim($data['data']->koordinat[5]);?>"  name="m_long" id="m_long" class="form-control"  placeholder="Minutes" aria-describedby="basic-addon1">
                                                                 <span class="input-group-addon" id="basic-addon1">'</span>
                                                             </div>
                                                         </div>
                                                         <div class="form-group col-md-3">
                                                             <label for="dms">Seconds</label>
                                                             <div class="input-group">
-                                                                <input type="number" name="s_long[]" id="s_long" class="form-control"  placeholder="Seconds" aria-describedby="basic-addon1">
+                                                                <input type="number" value="<?php echo trim($data['data']->koordinat[6]);?>" name="s_long" id="s_long" class="form-control"  placeholder="Seconds" aria-describedby="basic-addon1">
                                                                 <span class="input-group-addon" id="basic-addon1">"</span>
                                                             </div>
                                                         </div>
                                                         <div class="form-group col-md-3">
                                                             <label for="direction">Direction</label>
                                                             <select name="direction_long[]" id="direction_long" class="form-control"  disabled>
-                                                                <option value="BT">BT</option>
+                                                                <option value="BT" readonly>BT</option>
                                                             </select>
                                                         </div>
                                                     </div>
