@@ -178,212 +178,144 @@ class Data_model extends CI_Model {
         return $query->result(); 
     }
 
+    public function get_Kelas2($id)
+    {
+       
+        $sql ="SELECT * from ksop left join provinsi on ksop.provinsi_id=provinsi.id where provinsi_id ='".$id."'";
+        $query= $this->db->query($sql);
+            
+        return $query->result(); 
+    }
+
+    function DMStoDD($deg,$min,$sec)
+    {
+
+        // Converting DMS ( Degrees / minutes / seconds ) to decimal format
+        return $deg+((($min*60)+($sec))/3600);
+    }    
+
+
     public function create($data)
     {
         $provinsi = explode("|", $data['provinsi']);
         $kecamatan = explode("|", $data['kecamatan']);
         $kelurahan = explode("|", $data['kelurahan']);
-        $provinsi_f = explode("|",$data['provinsi_f'][0]);
-        $kota_f = explode("|",$data['kota_f'][0]);
-        $kecamatan_f = explode("|",$data['kecamatan_f'][0]);
+        // $provinsi_f = explode("|",$data['provinsi_f'][0]);
+        // $kota_f = explode("|",$data['kota_f'][0]);
+        // $kecamatan_f = explode("|",$data['kecamatan_f'][0]);
 
         $kantor = array($provinsi[1],$kecamatan[1],$kelurahan[1],$data['kodepos'],$data['contactperson'],$data['email']);
-        $lokasi = array($data['lokasi_f'][0],$provinsi_f[1],$kota_f[1],$kecamatan_f[1],$data['kelurahan_f'][0]); 
-        // $koordinat_lat = array($data['d_lat'][0]."°",$data['m_lat'][0]."'",$data['s_lat'][0].'"',$data['direction_lat'][0]);
-        // $koordinat_long = array($data['d_long'][0]."°",$data['m_long'][0]."'",$data['s_long'][0].'"',$data['direction_long'][0]);
-        $koordinat =array($data['d_lat'][0]."°",$data['m_lat'][0]."'",$data['s_lat'][0].'"',$data['direction_lat'][0],"/ ".$data['d_long'][0]."°",$data['m_long'][0]."'",$data['s_long'][0].'"',$data['direction_longx'][0]);
-        // $spesifikasi = array('Tipe:'.$data['dermaga'][0],'Spesifikasi:'.$data['spesifikasi'][0],'Peruntukan:'.$data['peruntukan'][0],'Meter:'.$data['meter'][0],'Kapasitas:'.$data['kapasitas'][0],'Satuan:'.$data['satuan'][0]);
 
+        // $lokasi = array($data['lokasi_f'][0],$provinsi_f[1],$kota_f[1],$kecamatan_f[1],$data['kelurahan_f'][0]); 
 
+        // $koordinat =array($data['d_lat'][0]."°",$data['m_lat'][0]."'",$data['s_lat'][0].'"',$data['direction_lat'][0],"/ ".$data['d_long'][0]."°",$data['m_long'][0]."'",$data['s_long'][0].'"',$data['direction_long'][0]);
 
-        for($i=0;$i<sizeof($data['dermaga']);$i++) 
+        // $koordinat_lat = $this->DMStoDD($data['d_lat'][0],$data['m_lat'][0],$data['s_lat'][0]);
+        // $koordinat_long = $this->DMStoDD($data['d_long'][0],$data['m_long'][0],$data['s_long'][0]);
+
+        $spek = "";
+        // for($i=0;$i<count($data['dermaga']);$i++) 
+        // {
+
+        //     $data_spesifikasi =array ('TIPE:'.$data['dermaga'][$i].',',
+        //                                 'SPESIFIKASI:'.$data['spesifikasi'][$i].',',
+        //                                 'PERUNTUKAN:'.$data['peruntukan'][$i].',',
+        //                                 'KEDALAMAN:'.$data['meter'][$i].'M LWS, ',
+        //                                 'KAPASITAS:'.$data['kapasitas'][$i]." ".$data['satuan'][$i].' |');
+        //     $spek = $spek.implode(" ",$data_spesifikasi);
+        // };
+        // $spek = substr($spek,0,-3);
+
+// echo "<pre>";echo print_r($spek);
+// die;
+        for($j=0;$j<count($data['lokasi_f']);$j++)
         {
 
-            $data_spesifikasi =array ('Tipe:' => $data['dermaga'][$i],
-                                        'Spesifikasi:' => $data['spesifikasi'][$i],
-                                        'Peruntukan:'=> $data['peruntukan'][$i],
-                                        'Meter:' => $data['meter'][$i],
-                                        'Kapasitas:' => $data['kapasitas'][$i],
-                                        'Satuan:'=> $data['satuan'][$i].' |');  
+            $provinsi_f = explode("|",$data['provinsi_f'][$j]);
+            $kota_f = explode("|",$data['kota_f'][$j]);
+            $kecamatan_f = explode("|",$data['kecamatan_f'][$j]);
 
-        };
+            $lokasi = array($data['lokasi_f'][$j],$provinsi_f[1],$kota_f[1],$kecamatan_f[1],$data['kelurahan_f'][$j]); 
+            $koordinat =array($data['d_lat'][$j]."°",$data['m_lat'][$j]."'",$data['s_lat'][$j].'"',$data['direction_lat'][$j],"/ ".$data['d_long'][$j]."°",$data['m_long'][$j]."'",$data['s_long'][$j].'"',$data['direction_long'][$j]);
+            $koordinat_lat = $this->DMStoDD($data['d_lat'][$j],$data['m_lat'][$j],$data['s_lat'][$j]);
+            $koordinat_long = $this->DMStoDD($data['d_long'][$j],$data['m_long'][$j],$data['s_long'][$j]);
 
-        var_dump($data_spesifikasi);
-die();
+            for($i=0;$i<count($data['dermaga']);$i++) 
+            {
 
-        $data2 = array ('nm_perusahaan' => $data['name'],  
+
+                $data_spesifikasi =array ('TIPE:'.$data['dermaga'][$i].',',
+                                            'SPESIFIKASI:'.$data['spesifikasi'][$i].',',
+                                            'PERUNTUKAN:'.$data['peruntukan'][$i].',',
+                                            'KEDALAMAN:'.$data['meter'][$i].'M LWS, ',
+                                            'KAPASITAS:'.$data['kapasitas'][$i]." ".$data['satuan'][$i].' |');
+                $spek = $spek.implode(" ",$data_spesifikasi);
+            };
+            $spek = substr($spek,0,-2);
+
+            $data2 = array ('nm_perusahaan' => $data['name'],  
                         'provinsi_id' => $provinsi[0],
-                        'bdgusaha_id' => $data['bidangusaha'][0],
-                        'ksop_id' => $data['kelas'][0],
+                        'bdgusaha_id' => $data['bidangusaha'][$j],
+                        'ksop_id' => $data['kelas'][$j],
                         'alamat' => implode(" ", $kantor),
                         'lokasi' => implode(" ", $lokasi),
                         'koordinat' => implode(" ",$koordinat),
-                        'spesifikasi' => $data_spesifikasi,
-                        'sk' => $data['nosk'][0]."".$data['jenissk'][0],
-                        'ter_tuk' => $data['tersus_tuks'][0],
-                        'status' => $data['status'][0],
-                        'tgl_terbit' => date("Y-m-d", strtotime($data['tgl_terbit'][0])),
-                        'ms_berlaku' => date("Y-m-d", strtotime($data['tgl_akhir'][0]))
+                        'koordinat_dd' => $koordinat_long." ".$koordinat_lat,
+                        'k_lat' => $koordinat_lat,
+                        'k_long' => $koordinat_long,
+                        'spesifikasi' => $spek,
+                        'sk' => $data['nosk'][$j],
+                        'ter_tuk' => $data['tersus_tuks'][$j],
+                        'status' => $data['status'][$j],
+                        'tgl_terbit' => date("Y-m-d", strtotime($data['tgl_terbit'][$j])),
+                        'ms_berlaku' => date("Y-m-d", strtotime($data['tgl_akhir'][$j]))
 
                         );            
 
-        $exec = $this->db->insert('daftar_perusahaanx', $data2);
+            $exec = $this->db->insert('daftar_perusahaan', $data2);
+
+
+        };
+
+//         echo "<pre>";echo print_r($spek);
+// die;
+
+        // $data2 = array ('nm_perusahaan' => $data['name'],  
+        //                 'provinsi_id' => $provinsi[0],
+        //                 'bdgusaha_id' => $data['bidangusaha'][0],
+        //                 'ksop_id' => $data['kelas'][0],
+        //                 'alamat' => implode(" ", $kantor),
+        //                 'lokasi' => implode(" ", $lokasi),
+        //                 'koordinat' => implode(" ",$koordinat),
+        //                 'koordinat_dd' => $koordinat_long." ".$koordinat_lat,
+        //                 'k_lat' => $koordinat_lat,
+        //                 'k_long' => $koordinat_long,
+        //                 'spesifikasi' => $spek,
+        //                 'sk' => $data['nosk'][0],
+        //                 'ter_tuk' => $data['tersus_tuks'][0],
+        //                 'status' => $data['status'][0],
+        //                 'tgl_terbit' => date("Y-m-d", strtotime($data['tgl_terbit'][0])),
+        //                 'ms_berlaku' => date("Y-m-d", strtotime($data['tgl_akhir'][0]))
+
+        //                 );            
+
+        // $exec = $this->db->insert('daftar_perusahaan', $data2);
         return $exec;
 
 
         
     }
 
+    public function _getSingleData($id)
+    {
+        $data       = $this->db->where("id",$id)->get("daftar_perusahaan")->row();
+        $kecamatan  = $this->db->where("substr(kode,1,2)",$data->provinsi_id)->where("LENGTH(kode)",5)->get("wilayah")->result();
+        $kelurahan  = $this->db->where("substr(kode,1,2)",$data->provinsi_id)->where("LENGTH(kode)>5")->get("wilayah")->result();
+        return array(
+            "data" => $data,
+            "kecamatan" => $kecamatan,
+            "kelurahan" => $kelurahan
+        );
+    }
 
-    // public function getData($name,$provinsi,$kota,$kelas,$kategori,$bidangusaha,$dermaga,$meter,$kapasitas,$tuk_ter,$status,$tgl_akhir)
-    // {
-            
-    //     $arrayHasil=array();
-    //     $counter=0;
-    //     $html = "";
-
-    //     $sql ="SELECT a.*, b.name as nmprov,c.nama as nmksop,d.nama as nmusaha,e.nama as nmkateg from daftar_perusahaan as a left join provinsi as b on a.provinsi_id=b.id left join ksop as c on a.ksop_id=c.ksop_id left join bdg_usaha as d on a.bdgusaha_id=d.bdg_usaha_id left join kategori as e on a.kategori_id=e.kategori_id where a.nm_perusahaan like('%".$name."%') AND a.provinsi_id like('%".$provinsi."%') AND a.ksop_id like('%".$kelas."%') AND a.kategori_id like('%".$kategori."%') AND a.bdgusaha_id like('%".$bidangusaha."%') order by nm_perusahaan ASC ";
-        
-
-    //      // $sql ="SELECT a.*, b.name as nmprov,c.nama as nmksop,d.nama as nmusaha,e.nama as nmkateg from daftar_perusahaanx as a left join provinsi as b on a.provinsi_id=b.id left join ksop as c on a.ksop_id=c.ksop_id left join bdg_usaha as d on a.bdgusaha_id-d.bdg_usaha_id left join kategori as e on a.kategori_id=e.kategori_id where a.nm_perusahaan like('%".$name."%') AND a.provinsi_id like('%".$provinsi."%') AND a.lokasi like('%".$kota."%') AND a.ksop_id like('%".$kelas."%') AND a.kategori_id like('%".$kategori."%') AND a.bdgusaha_id like('%".$bidangusaha."%') AND a.spesifikasi like('%".$dermaga."%') AND a.spek_kedalaman like('%".$meter."%') AND a.spek_kapasitas like('%".$kapasitas."%') AND a.ter_tuk like('%".$tuk_ter."%') AND a.status like('%".$status."%') AND a.ms_berlaku like('%".$tgl_akhir."%')  order by nm_perusahaan ASC ";
-
-
-    //     $sql1 = $this->db->query($sql);
-        
-        
-
-    //     if($sql1->num_rows()>0){
-    //         foreach ($sql1->result_array() as $row){
-    //             $arrayHasil[$counter]['no'] = ($counter+1);
-    //             $arrayHasil[$counter]['id'] = trim($row['id']);
-    //             $arrayHasil[$counter]['nm_perusahaan'] = "<font style='font-weight: bold;'>".trim($row['nm_perusahaan'])."</font>";
-    //             $arrayHasil[$counter]['alamat'] = "<font class='td-status2'>".trim($row['alamat'])."</font>";
-    //             $arrayHasil[$counter]['ksop_id'] = $row['nmksop'];
-    //             $arrayHasil[$counter]['provinsi_id'] = $row['nmprov'];
-    //             $arrayHasil[$counter]['bdgusaha_id'] = $row['nmusaha'];
-    //             $arrayHasil[$counter]['lokasi'] = trim($row['lokasi']);
-    //             $arrayHasil[$counter]['kategori_id'] = $row['nmkateg'];
-    //             $arrayHasil[$counter]['koordinat'] = trim($row['koordinat']);
-    //             if(trim($row['ter_tuk'])=='TUKS')
-    //             {
-    //                 $arrayHasil[$counter]['ter_tuk'] = "<font class='td-status' style='color: #A3A0FB;'>".trim($row['ter_tuk'])."</font>";
-    //             }else{
-    //                 $arrayHasil[$counter]['ter_tuk'] = "<font class='td-status' style='color: #6bd189;'>".trim($row['ter_tuk'])."</font>";
-    //             }
-
-    //             $arrayHasil[$counter]['sk'] = trim($row['sk']);
-    //             $arrayHasil[$counter]['tgl_terbit'] = date('d-m-Y', strtotime(trim($row['tgl_terbit'])));
-    //             if(trim($row['status'])=='Y')
-    //             {
-    //                 $arrayHasil[$counter]['status'] = "<font class='td-status' style='color: #649e07;'>AKTIF</font>";
-    //             }else{
-    //                 $arrayHasil[$counter]['status'] = "<font class='td-status' style='color: red;'>TIDAK AKTIF</font>";                
-    //             }
-    //             $arrayHasil[$counter]['ms_berlaku'] = date('d-m-Y', strtotime(trim($row['ms_berlaku'])));
-    //             $counter++;
-    //         }
-    //     }
-    //     return $arrayHasil; 
-
-    //     // $html.="<table id='datatables' class='table table-responsive  table-no-bordered table-hover' cellspacing='0' width='100%'' style='width:100%;font-size: 13px;'>";
-    //     // $html.="<thead style='color: #FFFFFF;font-weight: 600;font-size: 12px;'>";
-    //     //     $html.="<tr role='row' style='background-color:#43425D;'>";
-    //     //     $html.="<th>No</th>
-    //     //             <th>NAMA</th>
-    //     //             <th>ALAMAT</th>
-    //     //             <th>WILAYAH KERJA</th>
-    //     //             <th>BIDANG USAHA</th>
-    //     //             <th>KATEGORI</th>
-    //     //             <th>LOKASI</th>
-    //     //             <th>KOORDINAT</th>
-    //     //             <th>SPESIFIKASI</th>
-    //     //             <th>TERSUS / TUKS</th>
-    //     //             <th>LEGALITAS</th>
-    //     //             <th>TERBIT</th>
-    //     //             <th>STATUS</th>
-    //     //             <th>MASA BERLAKU</th>
-    //     //             <th class='disabled-sorting' style='idth:50px'>ACTIONS</th>
-    //     //         </tr>
-    //     //     </thead>
-    //     //     <tbody>";
-
-    //     // $a=0;
-    //     // if($sql1->num_rows()>0){
-    //     //     foreach ($sql1->result_array() as $row){
-    //     //         $html.="<tr role='row'>";
-    //     //         $html.="<td>".($a+1)."</td>";
-    //     //         $html.="<td>".$row['nm_perusahaan']."</td>";
-    //     //         $html.="<td>".$row['alamat']."</td>";
-    //     //         $html.="<td>".$row['ksop_id']."</td>";
-    //     //         $html.="<td>".$row['bdgusaha_id']."</td>";
-    //     //         $html.="<td>".$row['kategori_id']."</td>";
-    //     //         $html.="<td>".$row['lokasi']."</td>";
-    //     //         $html.="<td>".$row['koordinat']."</td>";
-    //     //         $html.="<td>".$row['spesifikasi']."</td>";
-    //     //         $html.="<td>".$row['ter_tuk']."</td>";
-    //     //         $html.="<td>".$row['sk']."</td>";
-    //     //         $html.="<td>".$row['tgl_terbit']."</td>";
-    //     //         $html.="<td>".$row['status']."</td>";
-    //     //         $html.="<td>".$row['ms_berlaku']."</td>";
-    //     //         $html.="<td></td>";
-    //     //         $html.="</tr>";
-    //     //         $a++;
-    //     //     }
-    //         // $html.="<tr role='row'>";
-    //         //     $html.="<td>1</td>";
-    //         //     $html.="<td>2</td>";
-    //         //     $html.="<td>3</td>";
-    //         //     $html.="<td>4</td>";
-    //         //     $html.="<td>5</td>";
-    //         //     $html.="<td>6</td>";
-    //         //     $html.="<td>7</td>";
-    //         //     $html.="<td>8</td>";
-    //         //     $html.="<td>9</td>";
-    //         //     $html.="<td>10</td>";
-    //         //     $html.="<td>11</td>";
-    //         //     $html.="<td>12</td>";
-    //         //     $html.="<td>13</td>";
-    //         //     $html.="<td>14</td>";
-    //         //     $html.="<td>15</td>";
-    //         //     $html.="</tr>";
-        
-
-
-    //     //     $html.="</tbody>";
-    //     // $html.="</table>";
-
-
-
-    //     // $arrayHasil[0]['html']=$html;
-    //     // echo json_encode($arrayhasil[0]['html']);
-        
-    // }
-
-    // public function getData($param1)
-    // {
-    //     $a=array();
-    //     $prm= explode("|",$param1);
-    //     $xa = count($prm);
-    //     $where1 = "";
-    //     $where2 = "";
-        
-    //     for($a=0; $a<$xa; $a++) 
-    //     {               
-    //         $prm2=explode("~",$prm[$a]);
-
-    //         if($prm2[2] ==''){
-    //             $where2 .="";
-    //         }else{
-    //             $where2 .= " AND a.".$prm2[1]." like '%".$prm2[2]."%'";
-    //         }
-
-    //     }
-
-    //     $where1 = "IS NOT NULL";
-    //     $query1 = "SELECT a.*, b.name as nmprov,c.nama as nmksop,d.nama as nmusaha,e.nama as nmkateg from daftar_perusahaan as a left join provinsi as b on a.provinsi_id=b.id left join ksop as c on a.ksop_id=c.ksop_id left join bdg_usaha as d on a.bdgusaha_id=d.bdg_usaha_id left join kategori as e on a.kategori_id=e.kategori_id where a.id ".$where1." ".$where2." order by nm_perusahaan ASC";
-
-    //     $query = $this->db->query($query1); 
-    //     return $query->result();
-        
-    // }
 }

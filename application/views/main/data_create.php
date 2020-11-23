@@ -16,20 +16,6 @@
                                                 <input type="text" name="name" id="name" class="form-control" placeholder="Nama Perusahaan" >
                                             </div>
 
-                                            <!-- <div class="form-group col-md-12" style="padding:0">
-                                                <label for="kategori usaha"  class="label-font" style="margin-bottom: 1rem;">KATEGORI USAHA</label>
-                                                <select class="form-control selectpicker" multiple data-live-search="true" title="Kategori Usaha" id="box" name="kategori_usaha[]">
-                                                        <option >ENERGI</option>
-                                                        <option>PERTAMBANGAN</option>
-                                                        <option>INDUSTRI</option>
-                                                        <option>ENERGI</option>
-                                                        <option>DOK DAN GALANGAN</option>
-                                                        <option>PERTANIAN</option>
-                                                        <option>KEHUTANAN</option>
-                                                        <option>PARIWISATA</option>
-                                                        <option>PERIKANAN</option>
-                                                </select>                 
-                                            </div> -->
                                             <div class="wrap">
                                                
                                                 <div class="form-group col-md-6 border-right">
@@ -92,7 +78,7 @@
                                                 <div class="form-group col-md-7">
                                                     <div class="form-group">
                                                         <label for="provinsi">Provinsi</label>
-                                                        <select name="provinsi_f[]" class="form-control" id="provinsi_f" >
+                                                        <select name="provinsi_f[]" class="form-control provinsi_f" id="provinsi_f" >
                                                            <option value="">Pilih Provinsi</option>
                                                             <?php for($i=0;$i<count($dataProvinsi);$i++){?>
                                                                 <option value="<?php echo trim($dataProvinsi[$i]->kode);?>|<?php echo trim($dataProvinsi[$i]->nama);?>"><?php echo $dataProvinsi[$i]->nama; ?></option>
@@ -314,20 +300,24 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                               
+                                           
                                             <div class="wrap-3" style="padding-left: 0;">
-                                                <button type="button" id="btnAdd" class="btn btn-fill btn-primary" style="margin-right: 1rem;">
+                                                <button type="button" id="btnAdd" class="btn btn-fill btn-primary btnAdd" style="margin-right: 1rem;">
                                                 <i class="fa fa-plus" style="margin-right: 5px;"></i>
                                                 Tambah Lokasi
                                                 </button>
-                                                <button type="button" class="btn btn-fill btn-danger btnRemove">Hapus</button>
+                                                <!-- <button type="button" class="btn btn-fill btn-danger btnRemove">Hapus</button> -->
                                             </div>
                                         </div>
+
+                                            <div id="loadhere"></div>
                                     </div>
-                                  
+                                    <div id="loadhere"></div>
+                                   
                                     <button type="submit" class="btn btn-fill btn-success" style="margin-right: 1rem;margin-left: -15px;">SIMPAN DATA</button>
                                     <a href="<?php echo $baseurl;?>Data"  class="btn btn-fill btn-default" >KEMBALI</a> 
                                 </form>
+                                <input type="hidden" id="count" value="1"/>
 
                                 </div>
                             </div>
@@ -358,17 +348,30 @@ $(document).ready(function(){
 
     $('.datepicker').datepicker();
 
-     $('#multifield').multifield({
-        section: '.group',
-        btnAdd:'#btnAdd',
-        btnRemove:'.btnRemove',
+    $(".btnAdd").click(function(){
+      
+        var val = $("#count").val();
+        var val = eval(val) + 1;
+        $("#count").val(val);
+
+        $.get(baseurl+"Data/load_view/"+val, function(data, status){
+            $("#loadhere").append(data);
+        });
+
     });
 
-    // $('#dermagamulti').multifield({
-    //     section: '.groupdermaga',
-    //     btnAdd:'#btnTambah',
-    //     btnRemove:'.btnHapus',
-    // });
+
+    $(".btnAdd").click(function(){
+      
+        var val = $("#count").val();
+        var val = eval(val) + 1;
+        $("#count").val(val);
+
+        $.get(baseurl+"Data/load_view/"+val, function(data, status){
+            $("#loadhere").append(data);
+        });
+
+    });
 
 
     $('#provinsi').change(function(option, checked){
@@ -408,7 +411,7 @@ $(document).ready(function(){
                 $('#kota_f').html(data);
                 $('#kota_f').selectpicker('refresh');
 
-                setkelas(provinsi[0]);
+                setkelas2(provinsi[0]);
 
             },
             error: function (jqXHR, textStatus, errorThrown)
@@ -485,6 +488,27 @@ function setkelas(id){
 
 }
 
+function setkelas2(id){
+
+      var param = {'kota':id};
+      $.ajax({
+          url : siteurl+'/Data/get_Kelas2/',
+          type: "POST",
+          data: param,
+          dataType: "JSON",
+          success: function(data)
+          {
+              $('#kelas').html(data);
+              $('#kelas').selectpicker('refresh');
+          },
+          error: function (jqXHR, textStatus, errorThrown)
+          {
+              alert('Error get data'); 
+          }
+      });
+
+}
+
 function addFields(){
 
    var idField = Math.random();
@@ -493,6 +517,7 @@ function addFields(){
 
 }
 
+
 function rmvFields(id){
     if(confirm('Remove fields?'))
     {
@@ -500,7 +525,6 @@ function rmvFields(id){
         x.remove(); 
     }
 }
-
 
 
 </script>
