@@ -88,10 +88,13 @@
                                                     <td><?php echo $val->lokasi; ?></td>
                                                     <td><?php echo $val->koordinat; ?></td>
                                                     <td>
-                                                        <a class="" data-toggle="collapse" data-target="#demo<?php echo $no;?>"><i class="glyphicon glyphicon-collapse-down"></i></a>
-                                                        <!-- <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo">Simple collapsible</button> -->
-                                                        <div id="demo<?php echo $no;?>" class="collapse">
-                                                            <?php echo $val->spesifikasi; ?>
+                                                        <div data-singlespesifikasi="<?php echo $no;?>" class="singleSpesifikasi">
+                                                        <p class="namaperusahaan" style="display: none;"><?php echo $val->nm_perusahaan; ?></p>
+                                                        <p class="wilayahkerja" style="display: none;"><?php echo $val->nmksop; ?></p>
+                                                        <p class="spesifikasi" style="display: none;">
+                                                        <?php echo $val->spesifikasi; ?>
+                                                        </p>
+                                                        <a class="showspesifikasi btn btn-success btn-fill" data-target="<?php echo $no;?>">Lihat</a>
                                                         </div>
                                                     </td>
                                                     <?php if ($val->ter_tuk == 'TUKS') 
@@ -353,6 +356,40 @@
 </div>
 <!-- MODAL SEARCH-->
 
+<!--======================================== MODAL SINGLE SPESIFICATION  ======================================-->
+
+<div class="modal fade" role="dialog" id="modal-spesifikasi">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #43425D;color: #ffff;">
+                <button type="button" class="close" data-dismiss="modal" style="color: #ffff;outline: none;opacity:1;">&times;</button>
+            </div>
+           <div class="modal-body">
+                <div class="card-modal--warp">
+                <h5 class="title-form" style="margin-bottom: 0;">Spesifikasi</h5>
+                </div>
+               
+                <h4 style="font-size: 1.8rem;margin-top: 10px;">Nama Perusahaan 
+                <span class="card-namaperusahaan" style="font-weight: bold;padding-left:10px;font-size:1.6rem;"></span> 
+                </h4>
+                <h4 style="font-size: 1.8rem;margin-top: 10px;display:inline-block;padding-right: 50px;">Wilayah Kerja</h4>
+                <span class="card-wilayahkerja" style="font-weight: bold;"></span>
+                <h4 style="font-size: 1.8rem;margin-top: 0;">Spesifikasi</h4>
+                <div class="textarea" style="border:1px solid #43425D; padding:10px;border-radius:5px;">
+                <span class="card-desc"></span>
+                </div>
+               
+                <div class="card-menu--room-1"></div>
+           </div>
+           <div class="modal-footer">
+            <a href="#" type="button" class="btn btn-success btn-fill"  data-dismiss="modal" style="float: left;">Kembali</a>
+          </div>
+        </div>
+     </div>
+</div>
+
+<!--============================================================================================================-->
+
 </body>
 
 
@@ -364,6 +401,24 @@
 <script src="<?php echo $baseurl;?>assets/js/bootstrap-datepicker.js"></script>
 
 <script type="text/javascript" src="<?php echo $baseurl;?>assets/js/data.js?v=<?php echo uniqid(); ?>"></script> 
+
+<script>
+    $('.showspesifikasi').on('click', function (event) {
+    event.preventDefault();
+
+    const modalNamaPerusahaan   = $(this).parents('.singleSpesifikasi').find('.namaperusahaan').text();
+    const modalWilayahKerja     = $(this).parents('.singleSpesifikasi').find('.wilayahkerja').text();
+    const modalSpefikasi        = $(this).parents('.singleSpesifikasi').find('.spesifikasi').html();
+
+    $('#modal-spesifikasi .modal-body>h4>.card-namaperusahaan').text(modalNamaPerusahaan);
+    $('#modal-spesifikasi .modal-body>.card-wilayahkerja').text(modalWilayahKerja);
+    $('#modal-spesifikasi .modal-body>.textarea>.card-desc').html(modalSpefikasi);
+
+ 
+    $('#modal-spesifikasi').modal();
+ 
+});
+</script>
 <!-- 
 <script type="text/javascript">
 var siteurl = $("#txtsite").val();
