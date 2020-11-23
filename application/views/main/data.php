@@ -111,7 +111,14 @@
                                                         <td class="td-status" style="color: #649e07;">TIDAK AKTIF</td>
                                                     <?php } ?>
                                                     <td><?php echo date("d M Y",strtotime($val->ms_berlaku)); ?></td>
-                                                    <td></td>                           
+                                                    <td>
+                                                        <a href="<?php echo $baseurl."Data/edit/".$val->id;?>" class="btn btn-simple btn-warning btn-icon edit">
+							                                <i class="fa fa-edit"></i>
+					                                    </a>
+                                                        <button id="delete" personal-id="<?php echo $baseurl."Data/edit/".$val->id;?>" data-toggle="modal" data-target="#delete-modal" class="btn btn-simple btn-danger btn-icon remove">
+                                                            <i class="fa fa-times"></i>
+					                                    </button>
+                                                    </td>                         
                                                 </tr>
                                                 <?php endforeach; ?>
                                             </tbody>

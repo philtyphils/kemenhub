@@ -24,7 +24,6 @@
                                                             <label for="kota">Kabupaten / Kota</label>
                                                             <select name="kota_f[]" class="form-control" id="kota_f<?php echo $id;?>"  >
                                                                 <option value="">Pilih Kabupaten / Kota</option>
-                                                                
                                                             </select>
                                                         </div>
                                                         <div class="form-group col-md-6" style="margin-bottom: 1rem;">
@@ -112,6 +111,7 @@
                                                             </button>    
                                                         </div>  
                                                         <div id="groupdermaga<?php echo $id;?>">
+
                                                             <div class="form-group col-md-12" id="dermaga type">  
                                                                 <div class="col-md-3" style="padding-left:0;margin-top: 1rem;">
                                                                     <label for="dermaga">Dermaga Tipe</label>
@@ -235,6 +235,7 @@
                                                 </div>
                                             </div>
 
+
                                             <input type="hidden" id="count" value="<?php echo $id;?>"/>
 
                                             <div class="wrap-3" style="padding-left: 0;">
@@ -278,7 +279,9 @@ $(".addFields").click(function(){
 
     });
 
-    $('#provinsi_f<?php echo $id;?>').change(function(option, checked){
+   
+
+$('#provinsi_f<?php echo $id;?>').change(function(option, checked){
         var str = $('#provinsi_f<?php echo $id;?>').val();
         var provinsi = str.split("|");
         var param = {'provinsi':provinsi[0]};
