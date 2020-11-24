@@ -28,7 +28,7 @@
                                                         <select name="provinsi" class="form-control" id="provinsi" >
                                                            <option value="" readonly>Pilih Provinsi</option>
                                                             <?php for($i=0;$i<count($dataProvinsi);$i++){?>
-                                                                <?php if($dataProvinsi[$i]->kode == $data['data']->provinsi_id):?>
+                                                                <?php if($dataProvinsi[$i]->kode == $data['data']->alamat_provinsi_id):?>
                                                                     <option value="<?php echo trim($dataProvinsi[$i]->kode);?>|<?php echo trim($dataProvinsi[$i]->nama);?>" selected><?php echo $dataProvinsi[$i]->nama; ?></option>
                                                                 <?php else: ?>
                                                                     <option value="<?php echo trim($dataProvinsi[$i]->kode);?>|<?php echo trim($dataProvinsi[$i]->nama);?>"><?php echo $dataProvinsi[$i]->nama; ?></option>
@@ -91,35 +91,48 @@
                                             <div class="wrap-2">
                                                 <div class="form-group col-md-5">
                                                     <label for="lokasi">Lokasi</label>
-                                                    <textarea name="lokasi_f[]" id="lokasi_f"  rows="19" class="form-control"></textarea> 
+                                                    <textarea name="lokasi_f" id="lokasi_f"  rows="19" class="form-control"></textarea> 
                                                 </div>
                                                 <div class="form-group col-md-7">
                                                     <div class="form-group">
                                                         <label for="provinsi">Provinsi</label>
-                                                        <select name="provinsi_f[]" class="form-control" id="provinsi_f" >
+                                                        <select name="provinsi_f" class="form-control" id="provinsi_f" >
                                                            <option value="">Pilih Provinsi</option>
                                                             <?php for($i=0;$i<count($dataProvinsi);$i++){?>
-                                                                <option value="<?php echo trim($dataProvinsi[$i]->kode);?>|<?php echo trim($dataProvinsi[$i]->nama);?>"><?php echo $dataProvinsi[$i]->nama; ?></option>
+                                                                <?php if($dataProvinsi[$i]->kode == $data['data']->provinsi_id):?>
+                                                                    <option value="<?php echo trim($dataProvinsi[$i]->kode);?>|<?php echo trim($dataProvinsi[$i]->nama);?>" selected><?php echo $dataProvinsi[$i]->nama; ?></option>
+                                                                    <?php else: ?>
+                                                                    <option value="<?php echo trim($dataProvinsi[$i]->kode);?>|<?php echo trim($dataProvinsi[$i]->nama);?>"><?php echo $dataProvinsi[$i]->nama; ?></option>
+                                                                <?php endif;?>                                                                
                                                             <?php } ?>
                                                         </select>
                                                     </div>
                                                     <div class="row">
                                                         <div class="form-group col-md-6" style="margin-bottom: 1rem;">
-                                                            <label for="kota">Kabupaten / Kota</label>
-                                                            <select name="kota_f[]" class="form-control" id="kota_f"  >
-                                                                <option value="">Pilih Kabupaten / Kota</option>
-                                                                
-                                                            </select>
-                                                        </div>
-                                                        <div class="form-group col-md-6" style="margin-bottom: 1rem;">
                                                             <label for="kecamatan">Kecamatan</label>
-                                                            <select name="kecamatan_f[]" class="form-control" id="kecamatan_f" >
+                                                            <select name="kecamatan_f" class="form-control" id="kecamatan_f" >
                                                                 <option value="">Pilih Kecamatan</option>
+                                                                <?php foreach ($data['kecamatan'] as $key => $value):?>
+                                                                    <?php if($value->kode == $data['data']->lokasi_kecamatan):?>
+                                                                        <option value="<?php echo trim($value->kode);?>" selected><?php echo trim($value->nama);?></option>
+                                                                    <?php else:?>
+                                                                        <option value="<?php echo trim($value->kode);?>"><?php echo trim($value->nama);?></option>
+                                                                    <?php endif;?>
+                                                                <?php endforeach;?>
                                                             </select>
                                                         </div>
-                                                        <div class="form-group col-md-12">
+                                                        <div class="form-group col-md-6">
                                                             <label for="kelurahan">Kelurahan / Desa</label>
-                                                            <input type="text" name="kelurahan_f[]" id="kelurahan_f" class="form-control" placeholder="Kelurahan / Desa">
+                                                            <select name="kelurahan_f" class="form-control" id="kelurahan" >
+                                                                <option value="">Pilih Kelurahan</option>
+                                                                <?php foreach ($data['kelurahan'] as $key => $value):?>
+                                                                    <?php if($value->kode == $data['data']->lokasi_kelurahan):?>
+                                                                        <option value="<?php echo trim($value->kode);?>" selected><?php echo trim($value->nama);?></option>
+                                                                    <?php else:?>
+                                                                        <option value="<?php echo trim($value->kode);?>"><?php echo trim($value->nama);?></option>
+                                                                    <?php endif;?>
+                                                                <?php endforeach;?>
+                                                            </select>
                                                         </div>
                                                         
                                                     </div>
@@ -147,7 +160,7 @@
                                                         </div>
                                                         <div class="form-group col-md-3">
                                                             <label for="direction">Direction</label>
-                                                            <select name="direction_lat[]" id="direction_lat" class="form-control" >
+                                                            <select name="direction_lat" id="direction_lat" class="form-control" >
                                                                 <option value="" readonly>Pilih</option>
                                                                 <option value="LU" <?php echo (trim($data['data']->koordinat[3]) == "LU") ? "selected" : ""; ?>>LU</option>
                                                                 <option value="LS" <?php echo (trim($data['data']->koordinat[3]) == "LS") ? "selected" : ""; ?>>LS</option>
@@ -194,39 +207,39 @@
                                                             <div class="form-group col-md-12" id="dermaga type">  
                                                                 <div class="col-md-3" style="padding-left:0;margin-top: 1rem;">
                                                                     <label for="dermaga">Dermaga Tipe</label>
-                                                                    <input type="text" name="dermaga[]" id="dermaga" class="form-control"  placeholder="Dermaga Type">
+                                                                    <input type="text" name="dermaga" id="dermaga" class="form-control"  placeholder="Dermaga Type">
                                                                 </div>
 
                                                                 <div class="col-md-3" style="padding-left:0;margin-top: 1rem;">
                                                                     <label for="spesifikasi">Spesifikasi</label>
-                                                                    <input type="text" name="spesifikasi[]" id="spesifikasi" class="form-control"  placeholder="Spesifikasi">
+                                                                    <input type="text" name="spesifikasi" id="spesifikasi" class="form-control"  placeholder="Spesifikasi">
                                                                 </div>
 
                                                                 <div class="col-md-6" style="padding-left:0;margin-top: 1rem;">
                                                                     <label for="peruntukan">Peruntukan</label>
-                                                                    <input type="text" name="peruntukan[]" id="peruntukan" class="form-control"  placeholder="Peruntukan">
+                                                                    <input type="text" name="peruntukan" id="peruntukan" class="form-control"  placeholder="Peruntukan">
                                                                 </div>
 
                                                                 <div class="col-md-3" style="padding-left:0;margin-top: 1rem;">
                                                                     <label for="kedalaman">Kedalaman</label>
                                                                     <div class="input-group">
-                                                                        <input type="number" name="meter[]" id="meter" class="form-control"  placeholder="Meter" aria-describedby="basic-addon1">
+                                                                        <input type="number" value="<?php echo trim($data['data']->spek_kedalaman);?>" name="meter" id="meter" class="form-control"  placeholder="Meter" aria-describedby="basic-addon1">
                                                                         <span class="input-group-addon" id="basic-addon1">M LWS</span>
                                                                     </div>                  
                                                                 </div>
                                                                 
                                                                 <div class="col-md-3" style="padding-left:0;margin-top: 1rem;">
                                                                     <label for="kapasitas">Kapasitas</label>
-                                                                    <input type="number" name="kapasitas[]" id="kapasitas" class="form-control"  placeholder="Kapasitas">
+                                                                    <input type="number"  value="<?php echo trim($data['data']->spek_kapasitas);?>" name="kapasitas[]" id="kapasitas" class="form-control"  placeholder="Kapasitas">
                                                                 </div>
 
                                                                 <div class="col-md-3"style="padding-left:0;margin-top: 1rem;">
                                                                     <label for="satuan">Satuan</label>
                                                                     <select name="satuan[]" class="form-control" id="satuan" >
                                                                         <option value="">Pilih Satuan</option>
-                                                                        <option>FEET</option>
-                                                                        <option>GT</option>
-                                                                        <option>DWT</option>
+                                                                        <option value="FEET" <?php echo (trim($data['data']->spek_satuan) == "FEET") ? "selected" : ""; ?>>FEET</option>
+                                                                        <option value ="GT" <?php echo (trim($data['data']->spek_satuan) == "GT") ? "selected" : ""; ?>>GT</option>
+                                                                        <option value="DWT" <?php echo (trim($data['data']->spek_satuan) == "DWT") ? "selected" : ""; ?>>DWT</option>
                                                                     </select>    
                                                                 </div>
 

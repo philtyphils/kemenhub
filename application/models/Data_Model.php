@@ -244,6 +244,14 @@ class Data_model extends CI_Model {
         );
     }
 
+    public function _getspesifikasi($id)
+    {
+        $this->db->where("id",$id);
+        $data = $this->db->get('daftar_perusahaan')->result();
+        return $data;
+
+    }
+
 
     // public function getData($name,$provinsi,$kota,$kelas,$kategori,$bidangusaha,$dermaga,$meter,$kapasitas,$tuk_ter,$status,$tgl_akhir)
     // {
