@@ -86,7 +86,7 @@
                                                         </select>
                                                     </div>
                                                     <div class="row">
-                                                        <div class="form-group col-md-6" style="margin-bottom: 1rem;">
+                                                        <div class="form-group col-md-12" style="margin-bottom: 1rem;">
                                                             <label for="kota">Kabupaten / Kota</label>
                                                             <select name="kota_f[]" class="form-control" id="kota_f"  >
                                                                 <option value="">Pilih Kabupaten / Kota</option>
@@ -99,9 +99,11 @@
                                                                 <option value="">Pilih Kecamatan</option>
                                                             </select>
                                                         </div>
-                                                        <div class="form-group col-md-12">
+                                                        <div class="form-group col-md-6">
                                                             <label for="kelurahan">Kelurahan / Desa</label>
-                                                            <input type="text" name="kelurahan_f[]" id="kelurahan_f" class="form-control" placeholder="Kelurahan / Desa">
+                                                            <select name="kelurahan_f[]" class="form-control" id="kelurahan_f" >
+                                                                <option value="">Pilih Kelurahan</option>
+                                                            </select>
                                                         </div>
                                                         
                                                     </div>
@@ -430,7 +432,7 @@ $(document).ready(function(){
     });
 
     $('#kecamatan').change(function(option, checked){
-        var str = $('[name="kecamatan"]').val();
+        var str = $(this).val();
         var kecamatan = str.split("|");
         var param = {'kecamatan':kecamatan[0]};
         $.ajax({
@@ -442,6 +444,28 @@ $(document).ready(function(){
             {
                 $('#kelurahan').html(data);
                 $('#kelurahan').selectpicker('refresh');
+
+            },
+            error: function (jqXHR, textStatus, errorThrown)
+            {
+                alert('Error get data'); 
+            }
+        });
+    });
+
+    $('#kecamatan_f').change(function(option, checked){
+        var str = $(this).val();
+        var kecamatan = str.split("|");
+        var param = {'kecamatan':kecamatan[0]};
+        $.ajax({
+            url : siteurl+'/Data/get_Kelurahan/',
+            type: "POST",
+            data: param,
+            dataType: "JSON",
+            success: function(data)
+            {
+                $('#kelurahan_f').html(data);
+                $('#kelurahan_f').selectpicker('refresh');
 
             },
             error: function (jqXHR, textStatus, errorThrown)
@@ -492,6 +516,27 @@ function setkelas2(id){
               alert('Error get data'); 
           }
       });
+
+}
+
+function setKelasExtra(id,counter){
+
+    var param = {'kota':id};
+    $.ajax({
+        url : siteurl+'/Data/get_Kelas2/',
+        type: "POST",
+        data: param,
+        dataType: "JSON",
+        success: function(data)
+        {
+            $('#kelas'+counter).html(data);
+            $('#kelas'+counter).selectpicker('refresh');
+        },
+        error: function (jqXHR, textStatus, errorThrown)
+        {
+            alert('Error get data'); 
+        }
+    });
 
 }
 

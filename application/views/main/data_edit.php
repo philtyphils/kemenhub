@@ -10,6 +10,7 @@
                                 <?php echo $this->session->flashdata('teks'); ?>
                                 <form action="<?php echo $baseurl."Data/submit/edit";?>" method="POST">
                                     <div id="multifield" class="col" style="margin-bottom: 2rem;">
+                                        <input type="hidden" value="<?php echo $data['data']->id;?>" name="_id"/>
                                         <div class="row">
                                             <div class="form-group col-md-12" style="padding:0">
                                                 <label for="name" class="label-font" style="margin-bottom: 1rem;">Nama Perusahaan</label>
@@ -41,7 +42,7 @@
                                                             <label for="kecamatan">Kecamatan</label>
                                                             <select name="kecamatan" class="form-control" id="kecamatan" >
                                                                 <option value="" readonly>Pilih Kecamatan</option>
-                                                                <?php foreach ($data['kecamatan'] as $key => $value):?>
+                                                                <?php foreach ($data['alamat_kecamatan'] as $key => $value):?>
                                                                     <?php if($value->kode == $data['data']->alamat_kecamatan):?>
                                                                         <option value="<?php echo trim($value->kode);?>" selected><?php echo trim($value->nama);?></option>
                                                                     <?php else:?>
@@ -140,21 +141,21 @@
                                                         <div class="form-group col-md-3" >
                                                             <label for="dms">Degrees</label>
                                                             <div class="input-group">
-                                                                <input type="number" value="<?php echo trim($data['data']->koordinat[0]);?>" name="d_lat" id="d_lat" class="form-control" placeholder="Degrees" aria-describedby="basic-addon1">
+                                                                <input type="number" value="<?php echo (array_key_exists(0,$data['data']->koordinat)) ? trim($data['data']->koordinat[0]) : "";?>" name="d_lat" id="d_lat" class="form-control" placeholder="Degrees" aria-describedby="basic-addon1">
                                                                 <span class="input-group-addon" id="basic-addon1">°</span>
                                                             </div>
                                                         </div>
                                                         <div class="form-group col-md-3">
                                                             <label for="dms">Minutes</label>
                                                             <div class="input-group">  
-                                                                <input type="number" value="<?php echo trim($data['data']->koordinat[1]);?>" name="m_lat" id="m_lat" class="form-control" placeholder="Minutes" aria-describedby="basic-addon1">
+                                                                <input type="number" value="<?php echo (array_key_exists(1,$data['data']->koordinat)) ? trim($data['data']->koordinat[1]) : "";?>" name="m_lat" id="m_lat" class="form-control" placeholder="Minutes" aria-describedby="basic-addon1">
                                                                 <span class="input-group-addon" id="basic-addon1">'</span>
                                                             </div>
                                                         </div>
                                                         <div class="form-group col-md-3">
                                                             <label for="dms">Seconds</label>
                                                             <div class="input-group">    
-                                                                <input type="number" value="<?php echo trim($data['data']->koordinat[2]);?>" name="s_lat" id="s_lat" class="form-control" placeholder="Seconds" aria-describedby="basic-addon1">
+                                                                <input type="number" value="<?php echo (array_key_exists(2,$data['data']->koordinat)) ? trim($data['data']->koordinat[2]) : "";?>" name="s_lat" id="s_lat" class="form-control" placeholder="Seconds" aria-describedby="basic-addon1">
                                                                 <span class="input-group-addon" id="basic-addon1">"</span>
                                                             </div>
                                                         </div>
@@ -162,31 +163,31 @@
                                                             <label for="direction">Direction</label>
                                                             <select name="direction_lat" id="direction_lat" class="form-control" >
                                                                 <option value="" readonly>Pilih</option>
-                                                                <option value="LU" <?php echo (trim($data['data']->koordinat[3]) == "LU") ? "selected" : ""; ?>>LU</option>
-                                                                <option value="LS" <?php echo (trim($data['data']->koordinat[3]) == "LS") ? "selected" : ""; ?>>LS</option>
+                                                                <option value="LU" <?php echo (array_key_exists(3,$data['data']->koordinat) && trim($data['data']->koordinat[3]) == "LU") ? "selected" : ""; ?>>LU</option>
+                                                                <option value="LS" <?php echo (array_key_exists(3,$data['data']->koordinat) && trim($data['data']->koordinat[3]) == "LS") ? "selected" : ""; ?>>LS</option>
                                                             </select>
                                                         </div>
                                                     </div>
-    
+                                                                
                                                     <div class="row" id="longitude">
                                                         <div class="form-group col-md-3" >
                                                             <label for="dms">Degrees</label>
                                                             <div class="input-group">
-                                                                <input type="number" value="<?php echo trim($data['data']->koordinat[4]);?>" name="d_long" id="d_long" class="form-control"  placeholder="Degrees" aria-describedby="basic-addon1">
+                                                                <input type="number" value="<?php echo (array_key_exists(4,$data['data']->koordinat)) ? trim($data['data']->koordinat[4]) : "";?>" name="d_long" id="d_long" class="form-control"  placeholder="Degrees" aria-describedby="basic-addon1">
                                                                 <span class="input-group-addon" id="basic-addon1">°</span>
                                                             </div>
                                                         </div>
                                                         <div class="form-group col-md-3">
                                                             <label for="dms">Minutes</label>
                                                             <div class="input-group">
-                                                                <input type="number"value="<?php echo trim($data['data']->koordinat[5]);?>"  name="m_long" id="m_long" class="form-control"  placeholder="Minutes" aria-describedby="basic-addon1">
+                                                                <input type="number"value="<?php echo (array_key_exists(5,$data['data']->koordinat)) ? trim($data['data']->koordinat[5]) : "";?>"  name="m_long" id="m_long" class="form-control"  placeholder="Minutes" aria-describedby="basic-addon1">
                                                                 <span class="input-group-addon" id="basic-addon1">'</span>
                                                             </div>
                                                         </div>
                                                         <div class="form-group col-md-3">
                                                             <label for="dms">Seconds</label>
                                                             <div class="input-group">
-                                                                <input type="number" value="<?php echo trim($data['data']->koordinat[6]);?>" name="s_long" id="s_long" class="form-control"  placeholder="Seconds" aria-describedby="basic-addon1">
+                                                                <input type="number" value="<?php echo (array_key_exists(6,$data['data']->koordinat)) ? trim($data['data']->koordinat[6]) : "";?>" name="s_long" id="s_long" class="form-control"  placeholder="Seconds" aria-describedby="basic-addon1">
                                                                 <span class="input-group-addon" id="basic-addon1">"</span>
                                                             </div>
                                                         </div>
@@ -246,8 +247,9 @@
                                                                     <select name="satuan[]" class="form-control" id="satuan" >
                                                                         <option value="">Pilih Satuan</option>
                                                                         <option value="FEET" <?php echo (trim($value['satuan']) == "FEET") ? "selected" : ""; ?>>FEET</option>
-                                                                        <option value ="GT" <?php echo (trim($value['satuan']) == "GT") ? "selected" : ""; ?>>GT</option>
+                                                                        <option value ="DT" <?php echo (trim($value['satuan']) == "DT") ? "selected" : ""; ?>>DT</option>
                                                                         <option value="DWT" <?php echo (trim($value['satuan']) == "DWT") ? "selected" : ""; ?>>DWT</option>
+                                                                        <option value="TON" <?php echo (trim($value['satuan']) == "TON") ? "selected" : ""; ?>>TON</option>
                                                                     </select>    
                                                                 </div>
 
@@ -269,13 +271,13 @@
                                                             <label for="jenissk">Jenis SK / Legalitas</label>
                                                             <select name="jenissk" class="form-control" id="jenissk" >
                                                                 <option value="">Pilih Jenis SK / Legalitas</option>
-                                                                <option value="Pembangunan">Pembangunan</option>
-                                                                <option value="Pengembangan">Pengembangan</option>
-                                                                <option value="Pengoperasian">Pengoperasian</option>
-                                                                <option value="Perpajangan/Pembangunan/Pengembangan">Perpajangan / Pembangunan / Pengembangan</option>
-                                                                <option value="PerpanjanganPengoperasian">Perpanjangan Pengoperasian</option>
-                                                                <option value="Penyesuaian">Penyesuaian</option>
-                                                                <option value="Pendaftaran">Pendaftaran</option>
+                                                                <option value="7">Pembangunan</option>
+                                                                <option value="1">Pengembangan</option>
+                                                                <option value="2">Pengoperasian</option>
+                                                                <option value="3">Perpajangan / Pembangunan / Pengembangan</option>
+                                                                <option value="4">Perpanjangan Pengoperasian</option>
+                                                                <option value="5">Penyesuaian</option>
+                                                                <option value="6">Pendaftaran</option>
                                                             </select>
                                                         </div>
                                                         <div class="form-group col-md-6">
@@ -291,7 +293,6 @@
                                                                     <?php } ?>
                                                             </select>
                                                         </div>
-
                                                         <div class="form-group col-md-6">
                                                             <label for="kelas">Wilayah Kerja</label>
                                                             <select name="wilayah_kerja" class="form-control" id="kelas" >

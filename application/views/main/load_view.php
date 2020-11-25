@@ -20,7 +20,7 @@
                                                         </select>
                                                     </div>
                                                     <div class="row">
-                                                        <div class="form-group col-md-6" style="margin-bottom: 1rem;">
+                                                        <div class="form-group col-md-12" style="margin-bottom: 1rem;">
                                                             <label for="kota">Kabupaten / Kota</label>
                                                             <select name="kota_f[]" class="form-control" id="kota_f<?php echo $id;?>"  >
                                                                 <option value="">Pilih Kabupaten / Kota</option>
@@ -32,9 +32,11 @@
                                                                 <option value="">Pilih Kecamatan</option>
                                                             </select>
                                                         </div>
-                                                        <div class="form-group col-md-12">
+                                                        <div class="form-group col-md-6">
                                                             <label for="kelurahan">Kelurahan / Desa</label>
-                                                            <input type="text" name="kelurahan_f[]" id="kelurahan_f" class="form-control" placeholder="Kelurahan / Desa">
+                                                            <select name="kelurahan_f[]" class="form-control" id="kelurahan_f<?php echo $id;?>" >
+                                                                <option value="">Pilih Kelurahan</option>
+                                                            </select>
                                                         </div>
                                                         
                                                     </div>
@@ -145,9 +147,10 @@
                                                                     <label for="satuan">Satuan</label>
                                                                     <select name="satuan[<?php echo $id;?>][]" class="form-control" id="satuan" >
                                                                         <option value="">Pilih Satuan</option>
-                                                                        <option>FEET</option>
-                                                                        <option>GT</option>
-                                                                        <option>DWT</option>
+                                                                        <option value="FEET">FEET</option>
+                                                                        <option value="GT">GT</option>
+                                                                        <option value="DWT">DWT</option>
+                                                                        <option value="TON">TON</option>
                                                                     </select>    
                                                                 </div>
 
@@ -196,7 +199,7 @@
     
                                                         <div class="form-group col-md-3" >
                                                             <label for="tersus_tuks">TERSUS / TUKS</label>
-                                                            <select name="tersus_tuks[]" class="form-control" id="tersus_tuks" >
+                                                            <select name="tersus_tuks[]" class="form-control" id="tersus_tuks<?php echo $id;?>" >
                                                                 <option value="">Pilih</option>
                                                                 <option value="TERSUS">TERSUS</option>
                                                                 <option value="TUKS">TUKS</option>
@@ -205,7 +208,7 @@
         
                                                         <div class="form-group col-md-3" >
                                                             <label for="status">STATUS OPERASIONAL</label>
-                                                            <select name="status[]" class="form-control" id="status" >
+                                                            <select name="status[]" class="form-control" id="status<?php echo $id;?>" >
                                                                 <option value="">Pilih Status</option>
                                                                 <option value="Y">AKTIF</option>
                                                                 <option value="N">NON AKTIF</option>
@@ -291,7 +294,7 @@ $('#provinsi_f<?php echo $id;?>').change(function(option, checked){
                 $('#kota_f<?php echo $id;?>').html(data);
                 $('#kota_f<?php echo $id;?>').selectpicker('refresh');
 
-                setkelas2(provinsi[0]);
+                setKelasExtra(provinsi[0],<?php echo $id;?>);
 
             },
             error: function (jqXHR, textStatus, errorThrown)
@@ -324,7 +327,31 @@ $('#provinsi_f<?php echo $id;?>').change(function(option, checked){
     });
 
 
+
+
 });
+
+$('#kecamatan_f<?php echo $id;?>').change(function(option, checked){
+        var str = $(this).val();
+        var kecamatan = str.split("|");
+        var param = {'kecamatan':kecamatan[0]};
+        $.ajax({
+            url : siteurl+'/Data/get_Kelurahan/',
+            type: "POST",
+            data: param,
+            dataType: "JSON",
+            success: function(data)
+            {
+                $('#kelurahan_f<?php echo $id;?>').html(data);
+                $('#kelurahan_f<?php echo $id;?>').selectpicker('refresh');
+
+            },
+            error: function (jqXHR, textStatus, errorThrown)
+            {
+                alert('Error get data'); 
+            }
+        });
+    });
 
 
 // function addFields(){
@@ -336,43 +363,6 @@ $('#provinsi_f<?php echo $id;?>').change(function(option, checked){
 // }
 
 
-function rmvFields(id){
-    if(confirm('Remove fields?'))
-    {
-        var x = document.getElementById(id); 
-        alert(x);
-        x.remove(); 
-    }
-}
-
-function removeLokasi(id){
-
-    if(confirm('Remove fields?'))
-    {
-        $("#loadhere"+id+"").remove();
-    }
-}
-
-function setkelas2(id){
-
-      var param = {'kota':id};
-      $.ajax({
-          url : siteurl+'/Data/get_Kelas2/',
-          type: "POST",
-          data: param,
-          dataType: "JSON",
-          success: function(data)
-          {
-              $('#kelas<?php echo $id;?>').html(data);
-              $('#kelas<?php echo $id;?>').selectpicker('refresh');
-          },
-          error: function (jqXHR, textStatus, errorThrown)
-          {
-              alert('Error get data'); 
-          }
-      });
-
-}
 
 
 </script>

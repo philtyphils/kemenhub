@@ -144,12 +144,16 @@ class Data extends CI_Controller
 				$t = $tgl[1].'-'.$tgl[0];
 				$this->db->where('substr(a.tgl_terbit,1,7)', $t);
 			}
+			$this->db->order_by('a.provinsi_id','asc');
+			$this->db->order_by('a.nm_perusahaan','asc');
 			$return 		= $this->db->get()->result();
 			$data['jumlah'] = count($return);
 			$data['company'] = $return;
 			$this->load->view('templates/header',$data);
 			$this->load->view('main/data',$data);
 		} else {
+			$this->db->order_by('a.provinsi_id','asc');
+			$this->db->order_by('a.nm_perusahaan','asc');
 			$this->db->select('a.*,b.name as nmprov,c.nama as nmksop,d.nama as nmusaha,e.nama as nmkateg');
 	        $this->db->from('daftar_perusahaan as a');
 	        $this->db->join('provinsi as b','a.provinsi_id=b.id','left');
@@ -175,7 +179,6 @@ class Data extends CI_Controller
 		
 	}
 
-	
 	
 	public function get_Kota()
 	{
@@ -263,9 +266,9 @@ class Data extends CI_Controller
         $datakelurahan = $this->datax->get_Kelurahan($kelurahan);
         $html .='<option value="">Pilih Kelurahan</option>';
         foreach ($datakelurahan as $list) {
-             $html .= '<option value="'.trim($list->kode).'|'.trim($list->nama).'">'.trim($list->nama).'</option>';
-        	}
-	        echo json_encode($html); 
+         $html .= '<option value="'.trim($list->kode).'|'.trim($list->nama).'">'.trim($list->nama).'</option>';
+        }
+	    echo json_encode($html); 
 	} 
 
 	public function create()
@@ -308,12 +311,12 @@ class Data extends CI_Controller
 					$f 			= preg_match("/MAKSIMUM\s+[0-9.\s*]+([a-zA-Z+]{3,4})/",$value,$satuan);
 					
 					$result = array(
-						"tipe" 			=> (count($tipe) > 1) ? $tipe[1] : "",
-						"spesifikasi" 	=> (count($spesifikasi) > 1) ? $spesifikasi[1] : "",
-						"peruntukan" 	=> (count($peruntukan) > 1) ? $peruntukan[1] : "",
-						"kedalaman" 	=> (count($kedalaman) > 1) ? $kedalaman[1] : "",
-						"kapasitas" 	=> (count($kapasitas) > 1) ? str_replace(",",".",$kapasitas[1]) : "",
-						"satuan" 	=> (count($satuan) > 1) ? $satuan[1] : "",
+						"tipe" 			=> (count($tipe) > 1) ? trim($tipe[1]) : "",
+						"spesifikasi" 	=> (count($spesifikasi) > 1) ? trim($spesifikasi[1]) : "",
+						"peruntukan" 	=> (count($peruntukan) > 1) ? trim($peruntukan[1]) : "",
+						"kedalaman" 	=> (count($kedalaman) > 1) ? trim($kedalaman[1]) : "",
+						"kapasitas" 	=> (count($kapasitas) > 1) ? str_replace(",",".",trim($kapasitas[1])) : "",
+						"satuan" 	=> (count($satuan) > 1) ? trim($satuan[1]) : "",
 					);
 					$results[] = $result;
 
@@ -325,37 +328,38 @@ class Data extends CI_Controller
 				$a 			= preg_match("/TIPE:([a-zA-Z\s()*]+),/",$split[0],$tipe);
 				$b 			= preg_match("/TIPE:[a-zA-Z\s0-9()]+,(.*), KEDALAMAN:/",$split[0],$spesifikasi);
 				$c 			= preg_match("/PERUNTUKAN:([a-zA-Z\s]+)/",$split[0],$peruntukan);
-				$d 			= preg_match("/KEDALAMAN:(.*)\sM LWS,/",$split[0],$kedalaman);
+				$d 			= preg_match("/KEDALAMAN:(.*)\sM LWS/",$split[0],$kedalaman);
 				$e 			= preg_match("/MAKSIMUM\s+([0-9*]+)/",$split[0],$kapasitas);
 				$f 			= preg_match("/MAKSIMUM\s+[0-9.\s*]+([a-zA-Z+]{3,4})/",$split[0],$satuan);
 
 			
 				$result = array(
-					"tipe" 			=> (count($tipe) > 1) ? $tipe[1] : "",
-					"spesifikasi" 	=> (count($spesifikasi) > 1) ? $spesifikasi[1] : "",
-					"peruntukan" 	=> (count($peruntukan) > 1) ? $peruntukan[1] : "",
-					"kedalaman" 	=> (count($kedalaman) > 1) ? $kedalaman[1] : "",
-					"kapasitas" 	=> (count($kapasitas) > 1) ? str_replace(",",".",$kapasitas[1]) : "",
-					"satuan" 	=> (count($satuan) > 1) ? $satuan[1] : "",
+					"tipe" 			=> (count($tipe) > 1) ? trim($tipe[1]) : "",
+					"spesifikasi" 	=> (count($spesifikasi) > 1) ? trim($spesifikasi[1]) : "",
+					"peruntukan" 	=> (count($peruntukan) > 1) ? trim($peruntukan[1]) : "",
+					"kedalaman" 	=> (count($kedalaman) > 1) ? trim($kedalaman[1]) : "",
+					"kapasitas" 	=> (count($kapasitas) > 1) ? str_replace(",",".",trim($kapasitas[1])) : "",
+					"satuan" 	=> (count($satuan) > 1) ? trim($satuan[1]) : "",
 				);
 				$results[] = $result;
 			}
 			
 		}
-		//echo "<pre>";print_r($results);die();
+		//echo "<pre>";print_r($this->input->post());die();
 		/* Split the koordinat value */
-		$selected 			  	= $this->datax->_getSingleData($id);
-		$split 					= preg_split("/[°º⁰˚'\"”\/]+/",str_replace(",",".",$selected['data']->koordinat));
-		$selected['data']->koordinat= $split;
-
-		$data['title'] 			= 'Edit Data';
-		$data['menu'] 			= 'Edit Data';
-		$data['baseurl'] 		= base_url();
-		$data['siteurl'] 	  	= site_url();
-		$data['data']		  	= $selected;
-		$data['dermaga']		= $results;	
-		$data['dataProvinsi'] 	= $this->datax->get_provinsi();
-		$data['dataBdgUsaha'] 	= $this->datax->get_bidangusaha();
+		$selected 			  			= $this->datax->_getSingleData($id);
+		$selected['data']->koordinat	= str_replace("-","",$selected['data']->koordinat);
+		$split 							= preg_split("/[°º⁰˚'\"”\/]+/",str_replace(",",".",$selected['data']->koordinat));
+		$selected['data']->koordinat	= $split;
+		//echo "<pre>";print_r($selected);die();
+		$data['title'] 					= 'Edit Data';
+		$data['menu'] 					= 'Edit Data';
+		$data['baseurl'] 				= base_url();
+		$data['siteurl'] 	  			= site_url();
+		$data['data']		  			= $selected;
+		$data['dermaga']				= $results;	
+		$data['dataProvinsi'] 			= $this->datax->get_provinsi();
+		$data['dataBdgUsaha'] 			= $this->datax->get_bidangusaha();
 
 		$this->load->view('templates/header',$data);
 		$this->load->view('main/data_edit',$data);
@@ -364,19 +368,79 @@ class Data extends CI_Controller
 	public function submit($action)
 	{
 		$post = $this->input->post();
-		echo "<pre>";print_r($this->input->post());die();
+		//echo "<pre>";print_r($post);die();
 		if($action == "create")
 		{
-			$data = $this->datax->create($this->input->post());
-			$alert = array('teks'=>'<div class="alert-error text-center" role="alert"><b> CREATE DATA GAGAL!</b></div>');
-			if($data)
-			{
-				$alert = array('teks'=>'<div class="alert-success text-center" role="alert"><b> CREATE DATA BERHASIL !</b></div>');
+			$this->load->library('form_validation');
+            $this->form_validation->set_rules('name', 'Nama Perusahaan', 'required',
+                    array('required' => 'Pastikan %s telah terisi.')
+            );
+            $this->form_validation->set_rules('email', 'Email', 'required',
+					array('required' => 'Pastikan %s telah terisi.')
+			);
+
+			$this->form_validation->set_rules('nosk', 'Nomor SK', 'required|check_nosk_callback',
+					array('required' => 'Pastikan %s telah terisi dan belum terdaftar.')
+			);
+			
+            if ($this->form_validation->run() == FALSE)
+            {
+				$alert = array('teks'=> '<div class="alert-danger text-center" role="alert"><b>'. validation_errors().'</b></div>');
+				$this->session->set_flashdata($alert);
+				redirect(base_url()."Data/create");
+            }
+            else
+            {
+                $data = $this->datax->create($this->input->post());
+			
+				$alert = array('teks'=>'<div class="alert-danger text-center" role="alert"><b> CREATE DATA GAGAL!</b></div>');
+				if($data)
+				{
+					$alert = array('teks'=>'<div style="padding:10%" class="alert-success text-center" role="alert"><b> CREATE DATA BERHASIL !</b></div>');
+				}
+				$this->session->set_flashdata($alert);
+				redirect(base_url()."Data");
+				
 			}
-			$this->session->set_flashdata($alert);
-			redirect(base_url()."Data/create");
+
+			
 		}
 
+		if($action == "edit")
+		{
+			$data 	= $this->datax->edit($post);
+			$alert 	= array('teks'=>'<div class="alert-danger text-center" role="alert"><b> EDIT DATA GAGAL!</b></div>');
+			if($data)
+			{
+				$alert = array('teks'=>'<div class="alert-success text-center" role="alert"><b> EDIT DATA BERHASIL !</b></div>');
+			}
+			$this->session->set_flashdata($alert);
+			redirect(base_url()."Data/edit/".$post['_id']);
+		}
+
+	}
+
+	public function check_nosk($arr)
+	{
+		foreach($arr as $key => $value)
+		{
+			if($value == "" || empty($value))
+			{
+				return FALSE;
+			}
+			else
+			{
+				$data = $this->datax->check_sk($value);
+				if($data > 0)
+				{
+					return FALSE;
+				}
+				else
+				{
+					return TRUE;
+				}
+			}
+		}
 	}
 	
 }
