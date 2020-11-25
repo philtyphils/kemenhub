@@ -22,9 +22,8 @@
                                                     <div class="row">
                                                         <div class="form-group col-md-6" style="margin-bottom: 1rem;">
                                                             <label for="kota">Kabupaten / Kota</label>
-                                                            <select name="kota_f[]" class="form-control" id="kota_f"  >
+                                                            <select name="kota_f[]" class="form-control" id="kota_f<?php echo $id;?>"  >
                                                                 <option value="">Pilih Kabupaten / Kota</option>
-                                                                
                                                             </select>
                                                         </div>
                                                         <div class="form-group col-md-6" style="margin-bottom: 1rem;">
@@ -107,43 +106,44 @@
                                                 <div class="form-group col-md-12">
                                                     <div id="dermagamulti" class="wrap-2">
                                                         <div class="col-md-12">
-                                                            <button type="button" id="btnTambah" onclick="addFields()" class="btn btn-fill btn-primary" style="margin: 10px 0 20px 0;">
+                                                            <button type="button" id="btnTambah" class="btn btn-fill btn-primary addFields" style="margin: 10px 0 20px 0;">
                                                             Tambah Dermaga
                                                             </button>    
                                                         </div>  
-                                                        <div id="groupdermaga">
+                                                        <div id="groupdermaga<?php echo $id;?>">
+
                                                             <div class="form-group col-md-12" id="dermaga type">  
                                                                 <div class="col-md-3" style="padding-left:0;margin-top: 1rem;">
                                                                     <label for="dermaga">Dermaga Tipe</label>
-                                                                    <input type="text" name="dermaga[]" id="dermaga" class="form-control"  placeholder="Dermaga Type">
+                                                                    <input type="text" name="dermaga[<?php echo $id;?>][]" id="dermaga" class="form-control"  placeholder="Dermaga Type">
                                                                 </div>
 
                                                                 <div class="col-md-3" style="padding-left:0;margin-top: 1rem;">
                                                                     <label for="spesifikasi">Spesifikasi</label>
-                                                                    <input type="text" name="spesifikasi[]" id="spesifikasi" class="form-control"  placeholder="Spesifikasi">
+                                                                    <input type="text" name="spesifikasi[<?php echo $id;?>][]" id="spesifikasi" class="form-control"  placeholder="Spesifikasi">
                                                                 </div>
 
                                                                 <div class="col-md-6" style="padding-left:0;margin-top: 1rem;">
                                                                     <label for="peruntukan">Peruntukan</label>
-                                                                    <input type="text" name="peruntukan[]" id="peruntukan" class="form-control"  placeholder="Peruntukan">
+                                                                    <input type="text" name="peruntukan[<?php echo $id;?>][]" id="peruntukan" class="form-control"  placeholder="Peruntukan">
                                                                 </div>
 
                                                                 <div class="col-md-3" style="padding-left:0;margin-top: 1rem;">
                                                                     <label for="kedalaman">Kedalaman</label>
                                                                     <div class="input-group">
-                                                                        <input type="number" name="meter[]" id="meter" class="form-control"  placeholder="Meter" aria-describedby="basic-addon1">
+                                                                        <input type="number" name="meter[<?php echo $id;?>][]" id="meter" class="form-control"  placeholder="Meter" aria-describedby="basic-addon1">
                                                                         <span class="input-group-addon" id="basic-addon1">M LWS</span>
                                                                     </div>                  
                                                                 </div>
                                                                 
                                                                 <div class="col-md-3" style="padding-left:0;margin-top: 1rem;">
                                                                     <label for="kapasitas">Kapasitas</label>
-                                                                    <input type="number" name="kapasitas[]" id="kapasitas" class="form-control"  placeholder="Kapasitas">
+                                                                    <input type="number" name="kapasitas[<?php echo $id;?>][]" id="kapasitas" class="form-control"  placeholder="Kapasitas">
                                                                 </div>
 
                                                                 <div class="col-md-3"style="padding-left:0;margin-top: 1rem;">
                                                                     <label for="satuan">Satuan</label>
-                                                                    <select name="satuan[]" class="form-control" id="satuan" >
+                                                                    <select name="satuan[<?php echo $id;?>][]" class="form-control" id="satuan" >
                                                                         <option value="">Pilih Satuan</option>
                                                                         <option>FEET</option>
                                                                         <option>GT</option>
@@ -189,7 +189,7 @@
         
                                                         <div class="form-group col-md-6">
                                                             <label for="kelas">Wilayah Kerja</label>
-                                                            <select name="kelas[]" class="form-control" id="kelas" >
+                                                            <select name="kelas[]" class="form-control" id="kelas<?php echo $id;?>" >
                                                                 <option value="">Pilih Wilayah Kerja</option>
                                                             </select>
                                                         </div>
@@ -234,24 +234,79 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <input type="text" id="count" value="1"/>
+
+
+
                                             <div class="wrap-3" style="padding-left: 0;">
-                                                <button type="button" id="btnAdd" class="btn btn-fill btn-primary" style="margin-right: 1rem;">
+                                                <button type="button" id="btnAdd" class="btn btn-fill btn-primary btnAdd" style="margin-right: 1rem;">
                                                 <i class="fa fa-plus" style="margin-right: 5px;"></i>
                                                 Tambah Lokasi
                                                 </button>
-                                                <button type="button" class="btn btn-fill btn-danger btnRemove">Hapus</button>
+                                                <button type="button" class="btn btn-fill btn-danger btnRemove" onclick="removeLokasi('<?php echo $id;?>')">Hapus</button>
                                             </div>
                                         </div>
+
+                                        <div id="loadhere<?php echo $id;?>"></div>
+
 <script type="text/javascript">
 
-$('#provinsi_f<?php echo $id;?>').change(function(option, checked){
+
+
+$(document).ready(function(){
+
+    $('select').selectpicker();
+
+    $('.datepicker').datepicker();
+
+
+    $(".btnAdd").click(function(){
       
+        var val = localStorage.getItem('aCounter');
+        var val = eval(val) + eval(1);
+        localStorage.setItem('aCounter',val);
+        $.get(baseurl+"Data/load_view/"+val, function(data, status){
+            $("#loadhere<?php echo $id;?>").append(data);
+        });
+
+    });
+
+$(".addFields").click(function(){
+    var idField =localStorage.getItem('aCounter');
+    $('#groupdermaga<?php echo $id;?>').append('<div class="form-group col-md-12" id="'+idField+'"><div class="col-md-3" style="padding-left:0;margin-top: 1rem;"><label for="dermaga">Dermaga Tipe</label><input type="text" namame="dermaga["'+idField+'"][]" id="dermaga" class="form-control" required placeholder="Dermaga Type"></div><div class="col-md-3" style="padding-left:0;margin-top: 1rem;"><label for="spesifikasi">Spesifikasi</label><input type="text" name="spesifikasi["'+idField+'"][]" id="spesifikasi" class="form-control" required placeholder="Spesifikasi"></div><div class="col-md-6" style="padding-left:0;margin-top: 1rem;"><label for="peruntukan">Peruntukan</label><input type="text" name="peruntukan["'+idField+'"][]" id="peruntukan" class="form-control" required placeholder="Peruntukan"></div><div class="col-md-3" style="padding-left:0;margin-top: 1rem;"><label for="kedalaman">Kedalaman</label><div class="input-group"><input type="number" name="meter["'+idField+'"][]" id="meter" class="form-control" required placeholder="Meter" aria-describedby="basic-addon1"><span class="input-group-addon" id="basic-addon1">M LWS</span></div></div><div class="col-md-3" style="padding-left:0;margin-top: 1rem;"><label for="kapasitas">Kapasitas</label><input type="number" name="kapasitas["'+idField+'"][]" id="kapasitas" class="form-control" required placeholder="Kapasitas"></div><div class="col-md-3"style="padding-left:0;margin-top: 1rem;"><label for="satuan">Satuan</label><select name="satuan["'+idField+'"][]" class="form-control" id="satuan" required><option value="">Pilih Satuan</option><option>FEET</option><option>GT</option><option>DWT</option></select></div><button type="button" class="btn btn-fill btn-danger btnHapus" onclick="rmvFields('+idField+')" style="margin-top: 3.3rem;margin-left: 10px;">Hapus</button></div>');
+});
+
+   
+
+$('#provinsi_f<?php echo $id;?>').change(function(option, checked){
         var str = $('#provinsi_f<?php echo $id;?>').val();
         var provinsi = str.split("|");
         var param = {'provinsi':provinsi[0]};
         $.ajax({
-            url : siteurl+'/Data/get_Kecamatan2/',
+            url : siteurl+'/Data/get_Kota2/',
+            type: "POST",
+            data: param,
+            dataType: "JSON",
+            success: function(data)
+            {
+                $('#kota_f<?php echo $id;?>').html(data);
+                $('#kota_f<?php echo $id;?>').selectpicker('refresh');
+
+                setkelas2(provinsi[0]);
+
+            },
+            error: function (jqXHR, textStatus, errorThrown)
+            {
+                alert('Error get data'); 
+            }
+        });
+    });
+
+    $('#kota_f<?php echo $id;?>').change(function(option, checked){
+        var str = $('#kota_f<?php echo $id;?>').val();
+        var kota_f = str.split("|");
+        var param = {'kota':kota_f[0]};
+        $.ajax({
+            url : siteurl+'/Data/get_Kecamatan/',
             type: "POST",
             data: param,
             dataType: "JSON",
@@ -267,4 +322,57 @@ $('#provinsi_f<?php echo $id;?>').change(function(option, checked){
             }
         });
     });
+
+
+});
+
+
+// function addFields(){
+
+//    var idField = Math.random();
+
+//    $('#groupdermaga<?php echo $id;?>').append('<div class="form-group col-md-12" id="'+idField+'"><div class="col-md-3" style="padding-left:0;margin-top: 1rem;"><label for="dermaga">Dermaga Tipe</label><input type="text" namame="dermaga[]" id="dermaga" class="form-control" required placeholder="Dermaga Type"></div><div class="col-md-3" style="padding-left:0;margin-top: 1rem;"><label for="spesifikasi">Spesifikasi</label><input type="text" name="spesifikasi[]" id="spesifikasi" class="form-control" required placeholder="Spesifikasi"></div><div class="col-md-6" style="padding-left:0;margin-top: 1rem;"><label for="peruntukan">Peruntukan</label><input type="text" name="peruntukan[]" id="peruntukan" class="form-control" required placeholder="Peruntukan"></div><div class="col-md-3" style="padding-left:0;margin-top: 1rem;"><label for="kedalaman">Kedalaman</label><div class="input-group"><input type="number" name="meter[]" id="meter" class="form-control" required placeholder="Meter" aria-describedby="basic-addon1"><span class="input-group-addon" id="basic-addon1">M LWS</span></div></div><div class="col-md-3" style="padding-left:0;margin-top: 1rem;"><label for="kapasitas">Kapasitas</label><input type="number" name="kapasitas[]" id="kapasitas" class="form-control" required placeholder="Kapasitas"></div><div class="col-md-3"style="padding-left:0;margin-top: 1rem;"><label for="satuan">Satuan</label><select name="satuan[]" class="form-control" id="satuan" required><option value="">Pilih Satuan</option><option>FEET</option><option>GT</option><option>DWT</option></select></div><button type="button" class="btn btn-fill btn-danger btnHapus" onclick="rmvFields('+idField+')" style="margin-top: 3.3rem;margin-left: 10px;">Hapus</button></div>');
+
+// }
+
+
+function rmvFields(id){
+    if(confirm('Remove fields?'))
+    {
+        var x = document.getElementById(id); 
+        alert(x);
+        x.remove(); 
+    }
+}
+
+function removeLokasi(id){
+
+    if(confirm('Remove fields?'))
+    {
+        $("#loadhere"+id+"").remove();
+    }
+}
+
+function setkelas2(id){
+
+      var param = {'kota':id};
+      $.ajax({
+          url : siteurl+'/Data/get_Kelas2/',
+          type: "POST",
+          data: param,
+          dataType: "JSON",
+          success: function(data)
+          {
+              $('#kelas<?php echo $id;?>').html(data);
+              $('#kelas<?php echo $id;?>').selectpicker('refresh');
+          },
+          error: function (jqXHR, textStatus, errorThrown)
+          {
+              alert('Error get data'); 
+          }
+      });
+
+}
+
+
 </script>

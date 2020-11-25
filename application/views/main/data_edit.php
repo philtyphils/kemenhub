@@ -1,11 +1,11 @@
-            <div class="contents">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-10">
-                            <div class="card">
-                                <div class="header" style="background-color: #43425D">
-                                    <h4 class="title" style="color: #ffff;">Edit Data</h4>
-                                </div>
+        <div class="contents">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-10">
+                        <div class="card">
+                            <div class="header" style="background-color: #43425D">
+                                <h4 class="title" style="color: #ffff;">Edit Data</h4>
+                            </div>
                                 <div class="card-form">
                                 <?php echo $this->session->flashdata('teks'); ?>
                                 <form action="<?php echo $baseurl."Data/submit/edit";?>" method="POST">
@@ -91,7 +91,7 @@
                                             <div class="wrap-2">
                                                 <div class="form-group col-md-5">
                                                     <label for="lokasi">Lokasi</label>
-                                                    <textarea name="lokasi_f" id="lokasi_f"  rows="19" class="form-control"></textarea> 
+                                                    <textarea name="lokasi_f" id="lokasi_f"  rows="19" class="form-control"><?php echo $data['data']->lokasi;?></textarea> 
                                                 </div>
                                                 <div class="form-group col-md-7">
                                                     <div class="form-group">
@@ -154,7 +154,7 @@
                                                         <div class="form-group col-md-3">
                                                             <label for="dms">Seconds</label>
                                                             <div class="input-group">    
-                                                                <input type="number" value="<?php echo trim($data['data']->koordinat[2]);?>" name="s_lat[]" id="s_lat" class="form-control" placeholder="Seconds" aria-describedby="basic-addon1">
+                                                                <input type="number" value="<?php echo trim($data['data']->koordinat[2]);?>" name="s_lat" id="s_lat" class="form-control" placeholder="Seconds" aria-describedby="basic-addon1">
                                                                 <span class="input-group-addon" id="basic-addon1">"</span>
                                                             </div>
                                                         </div>
@@ -192,7 +192,7 @@
                                                         </div>
                                                         <div class="form-group col-md-3">
                                                             <label for="direction">Direction</label>
-                                                            <select name="direction_long[]" id="direction_long" class="form-control"  disabled>
+                                                            <select name="direction_long" id="direction_long" class="form-control"  disabled>
                                                                 <option value="BT" readonly>BT</option>
                                                             </select>
                                                         </div>
@@ -202,62 +202,72 @@
 
                                             <div class="row">
                                                 <div class="form-group col-md-12">
-                                                    <div id="dermagamulti" class="wrap-2">  
+                                                    <div id="dermagamulti" class="wrap-2"> 
+                                                        <div class="col-md-12">
+                                                            <button type="button" id="btnTambah" onclick="addFields()" class="btn btn-fill btn-primary" style="margin: 10px 0 20px 0;">
+                                                            Tambah Dermaga
+                                                            </button>    
+                                                        </div>
+                                                       
                                                         <div id="groupdermaga">
-                                                            <div class="form-group col-md-12" id="dermaga type">  
+                                                            <?php $no =1; ?>
+                                                            <?php foreach($dermaga as $key => $value):?>
+                                                            <div class="form-group col-md-12" id="dermaga-<?php echo $no;?>-type">  
                                                                 <div class="col-md-3" style="padding-left:0;margin-top: 1rem;">
                                                                     <label for="dermaga">Dermaga Tipe</label>
-                                                                    <input type="text" name="dermaga" id="dermaga" class="form-control"  placeholder="Dermaga Type">
+                                                                    <input type="text" value="<?php echo $value['tipe'];?>" name="dermaga[]" id="dermaga" class="form-control"  placeholder="Dermaga Type">
                                                                 </div>
 
                                                                 <div class="col-md-3" style="padding-left:0;margin-top: 1rem;">
                                                                     <label for="spesifikasi">Spesifikasi</label>
-                                                                    <input type="text" name="spesifikasi" id="spesifikasi" class="form-control"  placeholder="Spesifikasi">
+                                                                    <input type="text" value="<?php echo $value['spesifikasi'];?>" name="spesifikasi[]" id="spesifikasi" class="form-control"  placeholder="Spesifikasi">
                                                                 </div>
 
                                                                 <div class="col-md-6" style="padding-left:0;margin-top: 1rem;">
                                                                     <label for="peruntukan">Peruntukan</label>
-                                                                    <input type="text" name="peruntukan" id="peruntukan" class="form-control"  placeholder="Peruntukan">
+                                                                    <input type="text" value="<?php echo $value['peruntukan'];?>" name="peruntukan[]" id="peruntukan" class="form-control"  placeholder="Peruntukan">
                                                                 </div>
 
                                                                 <div class="col-md-3" style="padding-left:0;margin-top: 1rem;">
                                                                     <label for="kedalaman">Kedalaman</label>
                                                                     <div class="input-group">
-                                                                        <input type="number" value="<?php echo trim($data['data']->spek_kedalaman);?>" name="meter" id="meter" class="form-control"  placeholder="Meter" aria-describedby="basic-addon1">
+                                                                        <input type="text" value="<?php echo $value['kedalaman'];?>" name="meter[]" id="meter" class="form-control"  placeholder="Meter" aria-describedby="basic-addon1">
                                                                         <span class="input-group-addon" id="basic-addon1">M LWS</span>
                                                                     </div>                  
                                                                 </div>
                                                                 
                                                                 <div class="col-md-3" style="padding-left:0;margin-top: 1rem;">
                                                                     <label for="kapasitas">Kapasitas</label>
-                                                                    <input type="number"  value="<?php echo trim($data['data']->spek_kapasitas);?>" name="kapasitas[]" id="kapasitas" class="form-control"  placeholder="Kapasitas">
+                                                                    <input type="text" value="<?php echo trim($value['kapasitas']);?>" name="kapasitas[]" id="kapasitas" class="form-control"  placeholder="Kapasitas">
                                                                 </div>
 
-                                                                <div class="col-md-3"style="padding-left:0;margin-top: 1rem;">
+                                                                <div class="col-md-3" style="padding-left:0;margin-top: 1rem;">
                                                                     <label for="satuan">Satuan</label>
                                                                     <select name="satuan[]" class="form-control" id="satuan" >
                                                                         <option value="">Pilih Satuan</option>
-                                                                        <option value="FEET" <?php echo (trim($data['data']->spek_satuan) == "FEET") ? "selected" : ""; ?>>FEET</option>
-                                                                        <option value ="GT" <?php echo (trim($data['data']->spek_satuan) == "GT") ? "selected" : ""; ?>>GT</option>
-                                                                        <option value="DWT" <?php echo (trim($data['data']->spek_satuan) == "DWT") ? "selected" : ""; ?>>DWT</option>
+                                                                        <option value="FEET" <?php echo (trim($value['satuan']) == "FEET") ? "selected" : ""; ?>>FEET</option>
+                                                                        <option value ="GT" <?php echo (trim($value['satuan']) == "GT") ? "selected" : ""; ?>>GT</option>
+                                                                        <option value="DWT" <?php echo (trim($value['satuan']) == "DWT") ? "selected" : ""; ?>>DWT</option>
                                                                     </select>    
                                                                 </div>
 
-                                                                <!-- <button type="button" class="btn btn-fill btn-danger btnHapus" style="margin-top: 3.3rem;margin-left: 10px;">Hapus</button>   -->
+                                                                <button type="button" class="btn btn-fill btn-danger btnHapus" attr-dermaga-id="<?php echo $no;?>" style="margin-top: 3.3rem;margin-left: 10px;">Hapus</button> 
                                                             </div>
+                                                            <?php $no++;endforeach;?>
                                                         </div>
+                                                        
                                                     </div>
                                                     
                                                  
                                                     <div class="wrap-2">
                                                         <div class="form-group col-md-6">
                                                             <label for="name">Legalitas</label>
-                                                            <input type="text" name="nosk[]" id="nosk" class="form-control"  placeholder="Input No SK">
+                                                            <input type="text" value="<?php echo trim($data['data']->sk);?>" name="nosk" id="nosk" class="form-control"  placeholder="Input No SK">
                                                         </div>
 
                                                         <div class="form-group col-md-6">
                                                             <label for="jenissk">Jenis SK / Legalitas</label>
-                                                            <select name="jenissk[]" class="form-control" id="jenissk" >
+                                                            <select name="jenissk" class="form-control" id="jenissk" >
                                                                 <option value="">Pilih Jenis SK / Legalitas</option>
                                                                 <option value="Pembangunan">Pembangunan</option>
                                                                 <option value="Pengembangan">Pengembangan</option>
@@ -268,39 +278,70 @@
                                                                 <option value="Pendaftaran">Pendaftaran</option>
                                                             </select>
                                                         </div>
-        
                                                         <div class="form-group col-md-6">
                                                             <label for="bidang usaha">BIDANG USAHA</label>
-                                                            <select class="selectpicker form-control" data-live-search="true" title="Bidang Usaha" name="bidangusaha[]" id="bidangusaha">
+                                                            <select class="selectpicker form-control" data-live-search="true" title="Bidang Usaha" name="bidangusaha" id="bidangusaha">
                                                                     <option value="" disabled>Pilih Bidang Usaha</option>
                                                                     <?php for($k=0;$k<count($dataBdgUsaha);$k++){?>
-                                                                        <option value="<?php echo trim($dataBdgUsaha[$k]->bdg_usaha_id); ?>"><?php echo $dataBdgUsaha[$k]->nama; ?></option>
+                                                                        <?php if($data['data']->bdgusaha_id == $dataBdgUsaha[$k]->bdg_usaha_id ):?>
+                                                                            <option value="<?php echo trim($dataBdgUsaha[$k]->bdg_usaha_id); ?>" selected><?php echo $dataBdgUsaha[$k]->nama; ?></option>
+                                                                        <?php else: ?>
+                                                                            <option value="<?php echo trim($dataBdgUsaha[$k]->bdg_usaha_id); ?>"><?php echo $dataBdgUsaha[$k]->nama; ?></option>
+                                                                        <?php endif;?>
                                                                     <?php } ?>
                                                             </select>
                                                         </div>
-        
+
                                                         <div class="form-group col-md-6">
                                                             <label for="kelas">Wilayah Kerja</label>
-                                                            <select name="kelas[]" class="form-control" id="kelas" >
+                                                            <select name="wilayah_kerja" class="form-control" id="kelas" >
                                                                 <option value="">Pilih Wilayah Kerja</option>
+                                                                <?php foreach($data['wilayah_kerja'] as $key => $value):?>
+                                                                    <?php if($value->ksop_id == $data['data']->ksop_id):?>
+                                                                        <option value="<?php echo trim($value->ksop_id); ?>" selected><?php echo $value->nama; ?></option>
+                                                                    <?php else:?>    
+                                                                        <option value="<?php echo trim($value->ksop_id); ?>" ><?php echo $value->nama; ?></option>
+                                                                    <?php endif;?>
+                                                                <?php endforeach;?>
                                                             </select>
                                                         </div>
     
                                                         <div class="form-group col-md-3" >
                                                             <label for="tersus_tuks">TERSUS / TUKS</label>
-                                                            <select name="tersus_tuks[]" class="form-control" id="tersus_tuks" >
-                                                                <option value="">Pilih</option>
-                                                                <option value="TERSUS">TERSUS</option>
-                                                                <option value="TUKS">TUKS</option>
+                                                            <select name="ter_tuk" class="form-control" id="tersus_tuks" >
+                                                                <?php if($data['data']->ter_tuk == "TERSUS"): ?>
+                                                                    <option value="" readonly>Pilih</option>
+                                                                    <option value="TERSUS" selected>TERSUS</option>
+                                                                    <option value="TUKS">TUKS</option>
+                                                                <?php elseif($data['data']->ter_tuk == "TUKS"):?>
+                                                                    <option value="" readonly>Pilih</option>
+                                                                    <option value="TERSUS" >TERSUS</option>
+                                                                    <option value="TUKS" selected>TUKS</option>
+                                                                <?php else: ?>
+                                                                    <option value="" readonly>Pilih</option>
+                                                                    <option value="TERSUS">TERSUS</option>
+                                                                    <option value="TUKS">TUKS</option>
+                                                                <?php endif;?>
                                                             </select>  
                                                         </div>
         
                                                         <div class="form-group col-md-3" >
                                                             <label for="status">STATUS OPERASIONAL</label>
-                                                            <select name="status[]" class="form-control" id="status" >
-                                                                <option value="">Pilih Status</option>
-                                                                <option value="Y">AKTIF</option>
-                                                                <option value="N">NON AKTIF</option>
+                                                            <select name="status" class="form-control" id="status">
+                                                                <?php if($data['data']->status == "Y"):?>
+                                                                    <option value="">Pilih Status</option>
+                                                                    <option value="Y" selected>AKTIF</option>
+                                                                    <option value="N">NON AKTIF</option>
+                                                                <?php elseif($data['data']->status == "N"):?>
+                                                                    <option value="">Pilih Status</option>
+                                                                    <option value="Y" >AKTIF</option>
+                                                                    <option value="N" selected>NON AKTIF</option>
+                                                                <?php else: ?>
+                                                                    <option value="" selected readonly>Pilih Status</option>
+                                                                    <option value="Y" >AKTIF</option>
+                                                                    <option value="N" >NON AKTIF</option>
+                                                                <?php endif; ?>
+                                                                
                                                             </select>  
                                                         </div>
         
@@ -310,7 +351,7 @@
                                                                 <div class="input-group-addon">
                                                                     <span class="glyphicon glyphicon-th"></span>
                                                                 </div>
-                                                                <input placeholder="Tanggal Terbit" type="text" class="form-control datepicker" id="tgl_terbit" name="tgl_terbit[]" autocomplete="off">
+                                                                <input placeholder="Tanggal Terbit" value="<?php echo date("m/d/Y",strtotime($data['data']->tgl_terbit));?>" type="text" class="form-control datepicker" id="tgl_terbit" name="tgl_terbit" autocomplete="off">
                                                             </div>
                                                         </div>
             
@@ -320,7 +361,7 @@
                                                                 <div class="input-group-addon">
                                                                     <span class="glyphicon glyphicon-th"></span>
                                                                 </div>
-                                                                <input placeholder="Masa Berlaku" type="text" class="form-control datepicker" id="tgl_akhir" name="tgl_akhir[]" autocomplete="off">
+                                                                <input placeholder="Masa Berlaku"  value="<?php echo date("m/d/Y",strtotime($data['data']->ms_berlaku));?>" type="text" class="form-control datepicker" id="tgl_akhir" name="tgl_akhir" autocomplete="off">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -334,13 +375,13 @@
                                 </form>
 
                                 </div>
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </body>
 <script src="<?php echo $baseurl;?>assets/js/jquery.3.2.1.min.js" type="text/javascript"></script>
 <script src="<?php echo $baseurl;?>assets/js/bootstrap.min.js" type="text/javascript"></script>
@@ -476,6 +517,16 @@ $(document).ready(function(){
                 alert('Error get data'); 
             }
         });
+    });
+
+    $(".btnHapus").click(function(e){
+        id = $(this).attr('attr-dermaga-id');
+        if(confirm('Remove fields?'))
+        {
+            var x = document.getElementById("dermaga-"+id+"-type"); 
+            x.remove(); 
+        }
+        e.PreventDefault();
     });
 
 });

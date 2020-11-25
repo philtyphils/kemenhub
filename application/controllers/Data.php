@@ -51,20 +51,20 @@ class Data extends CI_Controller
 		$tukter 		= $this->input->post('tuk_ter');
 		$status 		= $this->input->post('status');
 		$tglakhir 		= $this->input->post('tgl_akhir');
+		$this->session->set_userdata("nm_perusahaan",$namaPerusahaan);
+		$this->session->set_userdata("provinsi",$provinsi);
+		$this->session->set_userdata("kota",$kota);
+		$this->session->set_userdata("kelas",$kelas);
+		$this->session->set_userdata("kategori",$kategori);
+		$this->session->set_userdata("bidangusaha",$bidangusaha);
+		$this->session->set_userdata("meter",$meter);
+		$this->session->set_userdata("kapasitas",$kapasitas);
+		$this->session->set_userdata("tukter",$tukter);
+		$this->session->set_userdata("status",$status);
+		$this->session->set_userdata("tglakhir",$tglakhir);
 		
 		if($trigger){
 			/* set session data for exporting */
-			$this->session->set_userdata("nm_perusahaan",$namaPerusahaan);
-			$this->session->set_userdata("provinsi",$provinsi);
-			$this->session->set_userdata("kota",$kota);
-			$this->session->set_userdata("kelas",$kelas);
-			$this->session->set_userdata("kategori",$kategori);
-			$this->session->set_userdata("bidangusaha",$bidangusaha);
-			$this->session->set_userdata("meter",$meter);
-			$this->session->set_userdata("kapasitas",$kapasitas);
-			$this->session->set_userdata("tukter",$tukter);
-			$this->session->set_userdata("status",$status);
-			$this->session->set_userdata("tglakhir",$tglakhir);
 
 			$this->db->select('a.*,b.name as nmprov,c.nama as nmksop,d.nama as nmusaha,e.nama as nmkateg');
 	        $this->db->from('daftar_perusahaan as a');
@@ -164,7 +164,7 @@ class Data extends CI_Controller
 		}
 	
 	}
-	
+
 	public function load_view($id)
 	{
 		$data['id'] = (int) $id;
@@ -175,8 +175,8 @@ class Data extends CI_Controller
 		
 	}
 
-
-
+	
+	
 	public function get_Kota()
 	{
 		$html='';
@@ -209,6 +209,19 @@ class Data extends CI_Controller
         $kelas = $this->input->post('kota');
 
         $datakelas = $this->datax->get_Kelas($kelas);
+        $html .='<option value="">Pilih Wilayah Kerja</option>';
+        foreach ($datakelas as $list) {
+             $html .= '<option value="'.trim($list->ksop_id).'">'.trim($list->nama).'</option>';
+        	}
+	        echo json_encode($html); 
+	} 
+
+	public function get_Kelas2()
+	{
+		$html='';
+        $kelas = $this->input->post('kota');
+
+        $datakelas = $this->datax->get_Kelas2($kelas);
         $html .='<option value="">Pilih Wilayah Kerja</option>';
         foreach ($datakelas as $list) {
              $html .= '<option value="'.trim($list->ksop_id).'">'.trim($list->nama).'</option>';
@@ -270,68 +283,66 @@ class Data extends CI_Controller
 
 	public function edit($id)
 	{
-		//$data = $this->datax->_getspesifikasi($id);
-		//foreach($data as $key => $value)
-		//{
-		//	$split = preg_split("/(. DERMAGA|.DERMAGA|\s\|\s)/",$value->spesifikasi);
-		//	$tipe = array();
-		//	$spesifikasi = array();
-		//	$peruntukan = array();
-		//	$kapasitas = array();
-		//	$kedalaman = array();
-		//	$satuan  	= array();
-		//	$results = array();
-		//	
-		//	if(count($split) > 1)
-		//	{
-		//		foreach($split as $key => $value)
-		//		{
-		//		
-		//			$a 			= preg_match("/TIPE:([a-zA-Z\s]+)/",$value,$tipe);
-		//			$b 			= preg_match("/TIPE:[a-zA-Z\s]+,(.*), KEDALAMAN:/",$value,$spesifikasi);
-		//			$c 			= preg_match("/PERUNTUKAN:([a-zA-Z\s]+)/",$value,$peruntukan);
-		//			$d 			= preg_match("/KEDALAMAN:(.*)(\sM LWS|M LWS),/",$value,$kedalaman);
-		//			$e 			= preg_match("/MAKSIMUM\s+([0-9*]+.+[0-9*])+/",$value,$kapasitas);
-		//			$f 			= preg_match("/MAKSIMUM\s+[0-9.\s*]+([a-zA-Z+]{3})/",$value,$satuan);
-		//		
-		//			$result = array(
-		//				"tipe" 			=> (count($tipe) > 1) ? $tipe[1] : "",
-		//				"spesifikasi" 	=> (count($spesifikasi) > 1) ? $spesifikasi[1] : "",
-		//				"peruntukan" 	=> (count($peruntukan) > 1) ? $peruntukan[1] : "",
-		//				"kedalaman" 	=> (count($kedalaman) > 1) ? $kedalaman[1] : "",
-		//				"kapasistas" 	=> (count($kapasitas) > 1) ? str_replace(",",".",$kapasitas[1]) : "",
-		//				"satuan" 	=> (count($satuan) > 1) ? $satuan[1] : "",
-		//			);
-		//			$results[] = $result;
-//
-//
-		//		}
-		//	}
-		//	else
-		//	{
-		//		$a 			= preg_match("/TIPE:([a-zA-Z\s()*]+),/",$split[0],$tipe);
-		//		$b 			= preg_match("/TIPE:[a-zA-Z\s0-9()]+,(.*), KEDALAMAN:/",$split[0],$spesifikasi);
-		//		$c 			= preg_match("/PERUNTUKAN:([a-zA-Z\s]+)/",$split[0],$peruntukan);
-		//		$d 			= preg_match("/KEDALAMAN:(.*)\sM LWS,/",$split[0],$kedalaman);
-		//		$e 			= preg_match("/MAKSIMUM\s+([0-9*]+)/",$split[0],$kapasitas);
-		//		$f 			= preg_match("/MAKSIMUM\s+[0-9.\s*]+([a-zA-Z+]{3})/",$split[0],$satuan);
-//
-		//	
-		//		$result = array(
-		//			"tipe" 			=> (count($tipe) > 1) ? $tipe[1] : "",
-		//			"spesifikasi" 	=> (count($spesifikasi) > 1) ? $spesifikasi[1] : "",
-		//			"peruntukan" 	=> (count($peruntukan) > 1) ? $peruntukan[1] : "",
-		//			"kedalaman" 	=> (count($kedalaman) > 1) ? $kedalaman[1] : "",
-		//			"kapasistas" 	=> (count($kapasitas) > 1) ? str_replace(",",".",$kapasitas[1]) : "",
-		//			"satuan" 	=> (count($satuan) > 1) ? $satuan[1] : "",
-		//		);
-		//		$results[] = $result;
-		//	}
-		//	
-		//	echo "<pre>";print_r($split);print_r($results);echo "<br/>------------------------------<br/>";
-		//}
-		//	
-		//die();
+		$f = $this->datax->_getspesifikasi($id);
+		foreach($f as $key => $value)
+		{
+			$split = preg_split("/(. DERMAGA|.DERMAGA|\s\|\s)/",$value->spesifikasi);
+			$tipe = array();
+			$spesifikasi = array();
+			$peruntukan = array();
+			$kapasitas = array();
+			$kedalaman = array();
+			$satuan  	= array();
+			$results = array();
+			
+			if(count($split) > 1)
+			{
+				foreach($split as $key => $value)
+				{
+				
+					$a 			= preg_match("/TIPE:([a-zA-Z\s]+)/",$value,$tipe);
+					$b 			= preg_match("/TIPE:[a-zA-Z\s]+,(.*), KEDALAMAN:/",$value,$spesifikasi);
+					$c 			= preg_match("/PERUNTUKAN:([a-zA-Z\s]+)/",$value,$peruntukan);
+					$d 			= preg_match("/KEDALAMAN:(.*)(\sM LWS|M LWS),/",$value,$kedalaman);
+					$e 			= preg_match("/MAKSIMUM\s+([0-9*]+.+[0-9*])+/",$value,$kapasitas);
+					$f 			= preg_match("/MAKSIMUM\s+[0-9.\s*]+([a-zA-Z+]{3,4})/",$value,$satuan);
+					
+					$result = array(
+						"tipe" 			=> (count($tipe) > 1) ? $tipe[1] : "",
+						"spesifikasi" 	=> (count($spesifikasi) > 1) ? $spesifikasi[1] : "",
+						"peruntukan" 	=> (count($peruntukan) > 1) ? $peruntukan[1] : "",
+						"kedalaman" 	=> (count($kedalaman) > 1) ? $kedalaman[1] : "",
+						"kapasitas" 	=> (count($kapasitas) > 1) ? str_replace(",",".",$kapasitas[1]) : "",
+						"satuan" 	=> (count($satuan) > 1) ? $satuan[1] : "",
+					);
+					$results[] = $result;
+
+
+				}
+			}
+			else
+			{
+				$a 			= preg_match("/TIPE:([a-zA-Z\s()*]+),/",$split[0],$tipe);
+				$b 			= preg_match("/TIPE:[a-zA-Z\s0-9()]+,(.*), KEDALAMAN:/",$split[0],$spesifikasi);
+				$c 			= preg_match("/PERUNTUKAN:([a-zA-Z\s]+)/",$split[0],$peruntukan);
+				$d 			= preg_match("/KEDALAMAN:(.*)\sM LWS,/",$split[0],$kedalaman);
+				$e 			= preg_match("/MAKSIMUM\s+([0-9*]+)/",$split[0],$kapasitas);
+				$f 			= preg_match("/MAKSIMUM\s+[0-9.\s*]+([a-zA-Z+]{3,4})/",$split[0],$satuan);
+
+			
+				$result = array(
+					"tipe" 			=> (count($tipe) > 1) ? $tipe[1] : "",
+					"spesifikasi" 	=> (count($spesifikasi) > 1) ? $spesifikasi[1] : "",
+					"peruntukan" 	=> (count($peruntukan) > 1) ? $peruntukan[1] : "",
+					"kedalaman" 	=> (count($kedalaman) > 1) ? $kedalaman[1] : "",
+					"kapasitas" 	=> (count($kapasitas) > 1) ? str_replace(",",".",$kapasitas[1]) : "",
+					"satuan" 	=> (count($satuan) > 1) ? $satuan[1] : "",
+				);
+				$results[] = $result;
+			}
+			
+		}
+		//echo "<pre>";print_r($results);die();
 		/* Split the koordinat value */
 		$selected 			  	= $this->datax->_getSingleData($id);
 		$split 					= preg_split("/[°º⁰˚'\"”\/]+/",str_replace(",",".",$selected['data']->koordinat));
@@ -341,7 +352,8 @@ class Data extends CI_Controller
 		$data['menu'] 			= 'Edit Data';
 		$data['baseurl'] 		= base_url();
 		$data['siteurl'] 	  	= site_url();
-		$data['data']		  	= $selected;	
+		$data['data']		  	= $selected;
+		$data['dermaga']		= $results;	
 		$data['dataProvinsi'] 	= $this->datax->get_provinsi();
 		$data['dataBdgUsaha'] 	= $this->datax->get_bidangusaha();
 
@@ -351,6 +363,8 @@ class Data extends CI_Controller
 
 	public function submit($action)
 	{
+		$post = $this->input->post();
+		echo "<pre>";print_r($this->input->post());die();
 		if($action == "create")
 		{
 			$data = $this->datax->create($this->input->post());
