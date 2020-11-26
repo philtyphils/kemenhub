@@ -74,7 +74,7 @@
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                     <i class="fa fa-calendar-o" aria-hidden="true"></i>
-                                    <span class="notification">4</span>
+                                    <span class="notification" style="margin-left:-20px;"><?php echo $notification;?></span>
                                       <p class="hidden-md hidden-lg">
                                       Message
                                       <b class="caret"></b>

@@ -188,5 +188,9 @@ class Master_User_model extends CI_Model {
 
         return $r;
     }
+    public function notification()
+    {
+        return $this->db->where("ms_berlaku < '".date('Y-m-d H:i:s')."'")->count_all_results("daftar_perusahaan");
+    }
 }
 ?>

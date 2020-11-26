@@ -114,12 +114,16 @@ class Data_model extends CI_Model {
             }
             $query = substr($query,0,-4);
             $where = $query.")";
-            
+            $sql ="SELECT * from wilayah ".$where;
+            $query= $this->db->query($sql);
+                
+            return $query->result(); 
         }
-        $sql ="SELECT * from wilayah ".$where;
-        $query= $this->db->query($sql);
-            
-        return $query->result(); 
+        else
+        {
+            return (object) [];
+        }
+       
     }
 
     public function get_Kota2($id)
@@ -165,16 +169,23 @@ class Data_model extends CI_Model {
             $query =" WHERE (";
             foreach($id as $p)
             {
-                $query = $query." provinsi_id ='".$p."') OR ";
+                $query = $query." ksop.provinsi_id ='".$p."' OR ";
             }
             $query = substr($query,0,-4);
             $where = $query.")";
+
+            $sql ="SELECT * from ksop left join provinsi on ksop.provinsi_id=provinsi.id ".$where;
+            $query= $this->db->query($sql);
+
+            return $query->result();
             
         }
-        $sql ="SELECT * from ksop left join provinsi on ksop.provinsi_id=provinsi.id ".$where;
-        $query= $this->db->query($sql);
-            
-        return $query->result(); 
+        else
+        {
+            return (object) array();
+        }
+
+         
     }
 
     public function get_Kelas2($id)
@@ -196,7 +207,121 @@ class Data_model extends CI_Model {
 
     public function create($data)
     {
-        echo "<pre>";print_r($data);die("<<<<");
+        //echo "<pre>";print_r($data);die();
+        $d_provinsi = "";
+        if($data['provinsi'] != "")
+        {
+            $dData = explode("|",$data['provinsi']);
+            $d_provinsi = (int) $dData[0];
+        }
+
+        $d_kecamatan = "";
+        if( $data['kecamatan'] != "")
+        {
+            $dData = explode("|",$data['kecamatan']);
+            $d_kecamatan = (int) $dData[0];
+        }
+
+        $d_kelurahan = "";
+        if($data['kelurahan'] != "")
+        {
+            $dData = explode("|",$data['kelurahan']);
+            $d_kelurahan = (int) $dData[0];
+        }
+
+        $contactperson = "";
+        if($data['contactperson'] != "")
+        {
+            $contactperson = $data['contactperson'];
+        }
+
+        $email = "";
+        if($data['email'] != "")
+        {
+            $email = $data['email'];
+        }
+
+        for($i=0;$i<count($data['lokasi_f']);$i++)
+        {
+            $provinsi_f = "";
+            if($data['provinsi_f'][$i] != "")
+            {
+                $dData = explode("|",$data['provinsi_f'][$i]);
+                $provinsi_f = (int) $dData[0];
+            }
+
+            $kecamatan_f = "";
+            if($data['kecamatan_f'][$i] != "")
+            {
+                $dData = explode("|",$data['kecamatan_f'][$i]);
+                $kecamatan_f = (int) $dData[0];
+            }
+
+            $kelurahan_f = "";
+            if($data['kelurahan_f'][$i] != "")
+            {
+                $dData = explode("|",$data['kelurahan_f'][$i]);
+                $kelurahan_f = (int) $dData[0];
+            }
+
+            $spesifikasi = "";
+            foreach($data['dermaga'][$i] as $key=>$val){ // Loop though one array
+                
+                $val2 = $data['spesifikasi'][$i][$key];
+                $val3 = $data['peruntukan'][$i][$key]; 
+                $val4 = $data['meter'][$i][$key];
+                $val5 = $data['kapasitas'][$i][$key];
+                $val6 = $data['satuan'][$i][$key];                 
+                $spesifikasi .= "TIPE: ".$val .", SPESIFIKASI: " . $val2 .", KEDALAMAN: " .str_replace(" ","",$val4)." M LWS, PERUNTUKAN: " .$val3.", UKURAN MAKSIMUM " .$val5." ".$val6 . ". | ";
+            
+            }
+            $spesifikasi        = substr($spesifikasi,0,-3);
+
+            $bdgusaha_id        = (int) $data['bidangusaha'][$i];
+            $_get_kategori_id   = $this->db->where('bdg_usaha_id',(int) $data['bidangusaha'])->get("bdg_usaha")->row();
+            $kategori_id        = $_get_kategori_id->kategori_id;
+
+            $insert = array(
+                "provinsi_id"           => $provinsi_f,
+                "ksop_id"               => $data['kelas'][$i],
+                "bdgusaha_id"           => $bdgusaha_id,
+                "kategori_id"           => $kategori_id,
+                "nm_perusahaan"         => $data['name'],
+                "lokasi"                => $data['lokasi_f'][$i],
+                "lokasi_kecamatan"      => $kecamatan_f,
+                "lokasi_kelurahan"      => $kelurahan_f,
+                "alamat"                => $data['alamat'],
+                "alamat_provinsi_id"    => $d_provinsi,
+                "alamat_kelurahan"      => $d_kelurahan,
+                "alamat_kecamatan"      => $d_kecamatan,
+                "alamat_kodepos"        => $data['kodepos'],
+                "alamat_email"          => $email,
+                "no_tlp"                => $contactperson,
+                "koordinat"             => $data["d_lat"][$i]."°-".$data['m_lat'][$i]."'-".$data['s_lat'][$i]."\"".$data['direction_lat'][$i]."/". $data["d_long"][$i]."°-".$data['m_long'][$i]."'-".$data['s_long'][$i]."\"BT",
+                "koordinat_dd"          => $this->DMStoDD($data["d_lat"][$i],$data['m_lat'][$i],$data['s_lat'][$i]) ." ". $this->DMStoDD($data["d_long"][$i],$data['m_long'][$i],$data['s_long'][$i]),
+                "k_lat"                 => $this->DMStoDD($data["d_lat"][$i],$data['m_lat'][$i],$data['s_lat'][$i]),
+                "k_long"                => $this->DMStoDD($data["d_long"][$i],$data['m_long'][$i],$data['s_long'][$i]),
+                "ter_tuk"               => $$data['tersus_tuks'][$i],
+                "spesifikasi"           => $spesifikasi,
+                "sk"                    => $data['nosk'][$i],
+                "jns_legalitas"         => $data['jenissk'][$i],
+                "tgl_terbit"            => $data['tgl_terbit'][$i],
+                "ms_berlaku"            => $data['tgl_akhir'][$i],
+                "update_date"           => date("Y-m-d"),
+                "status"                => $data['status'][$i]
+    
+            );
+            try
+            {
+                $exec = $this->db->insert("daftar_perusahaan",$insert);
+            }
+            catch (\Exception $e)
+            {
+                die($e->getMessage());
+                //return FALSE;
+            }
+        }
+
         return $exec;
     }
 
@@ -339,6 +464,28 @@ class Data_model extends CI_Model {
         $data = $this->db->count_all_results();
         return $data;
 
+    }
+
+    public function jenis_sk()
+    {
+        return $this->db->get("jenis_sk")->result();
+    }
+
+    public function delete($id)
+    {
+        return $this->db->where("id",$id)->update("daftar_perusahaan",array(
+            "flag" => 0
+        ));
+    }
+
+    public function get_dermaga()
+    {
+        return $this->db->get("dermaga_tipe")->result();
+    }
+
+    public function notification()
+    {
+        return $this->db->where("ms_berlaku < '".date('Y-m-d H:i:s')."'")->count_all_results("daftar_perusahaan");
     }
 
 }

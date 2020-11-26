@@ -118,7 +118,7 @@
                                                         <a href="<?php echo $baseurl."Data/edit/".$val->id;?>" class="btn btn-simple btn-warning btn-icon edit">
 							                                <i class="fa fa-edit"></i>
 					                                    </a>
-                                                        <button id="delete" personal-id="<?php echo $baseurl."Data/edit/".$val->id;?>" data-toggle="modal" data-target="#delete-modal" class="btn btn-simple btn-danger btn-icon remove">
+                                                        <button id="delete" personal-id="<?php echo $val->id;?>" data-toggle="modal" data-target="#delete-modal" class="btn btn-simple btn-danger btn-icon remove">
                                                             <i class="fa fa-times"></i>
 					                                    </button>
                                                     </td>                         
@@ -188,7 +188,7 @@
                         <label for="provinsi">Provinsi</label>
                         <!-- <input id="Param02" value="provinsi_id"  type="hidden"> -->
                         <!-- <select name="provinsi[]" class="form-control selectpicker" id="Filt02" data-live-search="true" required > -->
-                        <select name="provinsi[]"  class="form-control selectpicker" id="Filt02" multiple data-live-search="true" >
+                        <select name="provinsi[]"  multiple data-live-search="true" class="form-control selectpicker" id="Filt02" >
                             <option value="" disabled>Pilih Provinsi</option>
                             <?php for($i=0;$i<count($dataProvinsi);$i++){?>
                                 <option value="<?php echo trim($dataProvinsi[$i]->kode); ?>"><?php echo $dataProvinsi[$i]->nama; ?></option>
@@ -200,8 +200,8 @@
                         <label for="kota">Kabupaten / Kota</label>
                         <!-- <input id="Param03" value="lokasi"  type="hidden"> -->
                         <!-- <select name="kota[]" class="form-control selectpicker" id="Filt03" data-live-search="true" required > -->
-                        <select name="kota" class="form-control selectpicker" id="Filt03" data-live-search="true">
-                            <option value="">Pilih Kabupaten / Kota</option>
+                        <select name="kota" class="form-control selectpicker" id="Filt03" data-live-search="true" >
+                            <option value="" readonly selected>Pilih Kabupaten / Kota</option>
                         </select>
                     </div>
 
@@ -209,7 +209,7 @@
                         <label for="kelas">Wilayah Kerja</label>
                         <!-- <input id="Param04" value="ksop_id"  type="hidden"> -->
                         <!-- <select name="kelas[]" class="form-control" id="Filt04" required> -->
-                        <select name="kelas" class="form-control" id="Filt04" >
+                        <select name="kelas" class="form-control selectpicker" id="Filt04" data-live-search="true" >
                            <option value="">Pilih Wilayah Kerja</option>
                         </select>
                     </div>
@@ -248,14 +248,11 @@
                         <label for="dermaga">Type Dermaga</label>
                         <!-- <input id="Param07" value="spesifikasi"  type="hidden"> -->
                         <!-- <select class="selectpicker form-control" multiple data-live-search="true" title="Type Dermaga" id="Filt07"> -->
-                        <select class="selectpicker form-control" multiple data-live-search="true" title="Type Dermaga" id="dermaga" name="dermaga">
+                        <select class="selectpicker form-control" multiple data-live-search="true" title="Type Dermaga" name="dermaga[]">
                             <option value="" disabled>Pilih Dermaga</option>
-
-                            <option>DERMAGA I TIPE MARGINAL</option>
-                            <option>DERMAGA TIPE FINGER</option>
-                            <option>DERMAGA TIPE JETTY HEAD</option>
-                            <option>DERMAGA A TIPE JETTY</option>
-                            <option>DERMAGA TIPE CONVENTIONAL BUOY MOORING (CBM)</option>
+                            <?php foreach($dermaga as $key => $value): ?>
+                                <option value="<?php echo $value->type;?>"><?php echo $value->type;?></option>
+                            <?php endforeach;?>
                         </select>
                     </div>
                     <div class="form-group col-md-4" style="margin-bottom: 1rem;">
@@ -281,7 +278,7 @@
                         <!-- <input id="Param10" value="ter_tuk"  type="hidden"> -->
                         <!-- <select class="selectpicker form-control" id="Filt10" name="tuk_ter"> -->
                         <select class="selectpicker form-control" id="Filt10" name="tuk_ter">
-                            <option value="">Pilih TUKS / TERSUS</option>
+                            <option value="" selected readonly>Pilih TUKS / TERSUS</option>
                             <option value="TUKS">TUKS</option>
                             <option value="TERSUS">TERSUS</option>
                         </select>                       
@@ -350,9 +347,10 @@
                         <label for="satuan">Satuan</label>
                         <select class="form-control" id="satuan" name="satuan[]" required>
                             <option value="">Pilih Satuan</option>
-                            <option>FEET</option>
-                            <option>GT</option>
-                            <option>DWT</option>
+                            <option value="FEET">FEET</option>
+                            <option value="GT">GT</option>
+                            <option value="DWT">DWT</option>
+                            <option value="TON">TON</option>
                         </select>                      
                     </div>
                     <button type="submit" class="btn btn-success btn-fill">Cari Data</button>

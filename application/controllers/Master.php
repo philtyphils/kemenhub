@@ -40,6 +40,7 @@ class Master extends CI_Controller
 		$data['kategori_chart'] = $kat_chart;
 		$data['wilayah_kerja'] = $wilayah_kerja;
 		$data['bidang_usaha'] = $bidang_usaha;
+		$data['notification']	= $this->master->notification();	
 
 		
 

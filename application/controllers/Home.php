@@ -30,9 +30,11 @@ class Home extends CI_Controller
 	 */
 	public function index()
 	{
+		die("AAA");
 		$data['title'] = 'HOME';
 		$data['baseurl'] = base_url();
 		$data['siteurl'] = site_url();
+		$data['notification']	= $this->Home_model->notification();	
 		
 		$isLoggedIn = $this->session->userdata("isLoggedIn");
 		$validUser = $this->session->userdata("validUser");

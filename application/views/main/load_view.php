@@ -1,5 +1,5 @@
 
-                                        <div class="row group">
+                                        <div class="row group" id="lokasi-<?php echo $id;?>-warp">
                                             <div class="wrap-3">
                                                 <h4 class="headingtitle">FORM LOKASI</h4> 
                                             </div> 
@@ -170,13 +170,13 @@
                                                             <label for="jenissk">Jenis SK / Legalitas</label>
                                                             <select name="jenissk[]" class="form-control" id="jenissk" >
                                                                 <option value="">Pilih Jenis SK / Legalitas</option>
-                                                                <option value="Pembangunan">Pembangunan</option>
-                                                                <option value="Pengembangan">Pengembangan</option>
-                                                                <option value="Pengoperasian">Pengoperasian</option>
-                                                                <option value="Perpajangan/Pembangunan/Pengembangan">Perpajangan / Pembangunan / Pengembangan</option>
-                                                                <option value="PerpanjanganPengoperasian">Perpanjangan Pengoperasian</option>
-                                                                <option value="Penyesuaian">Penyesuaian</option>
-                                                                <option value="Pendaftaran">Pendaftaran</option>
+                                                                <option value="7">Pembangunan</option>
+                                                                <option value="1">Pengembangan</option>
+                                                                <option value="2">Pengoperasian</option>
+                                                                <option value="3">Perpajangan / Pembangunan / Pengembangan</option>
+                                                                <option value="4">Perpanjangan Pengoperasian</option>
+                                                                <option value="5">Penyesuaian</option>
+                                                                <option value="6">Pendaftaran</option>
                                                             </select>
                                                         </div>
         
@@ -249,7 +249,7 @@
                                             </div>
                                         </div>
 
-                                        <div id="loadhere<?php echo $id;?>"></div>
+                                        
 
 <script type="text/javascript">
 

@@ -34,7 +34,7 @@ class Dashboard extends CI_Controller
 		$data['menu'] = 'Dashboard';
 		$data['baseurl'] = base_url();
 		$data['siteurl'] = site_url();
-
+		$data['notification']	= $this->dashboard->notification();	
 
 		$r = $this->dashboard->status_aktif()->result();
 		$f = $this->dashboard->getallstatus()->result();
