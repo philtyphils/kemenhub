@@ -8,6 +8,7 @@
                                 </div>
                                 <div class="card-form">
                                 <?php echo $this->session->flashdata('teks'); ?>
+                             
                                 <form action="<?php echo $baseurl."Data/submit/create";?>" method="POST">
                                     <div id="multifield" class="col" style="margin-bottom: 2rem;">
                                         <div class="row">
@@ -64,7 +65,7 @@
                                                 </div>
                                             </div>
                                         </div>
-
+                                        <div id="lokasi-section">
                                         <div class="row group">
                                             <div class="wrap-3">
                                                 <h4 class="headingtitle">FORM LOKASI</h4> 
@@ -86,7 +87,7 @@
                                                         </select>
                                                     </div>
                                                     <div class="row">
-                                                        <div class="form-group col-md-6" style="margin-bottom: 1rem;">
+                                                        <div class="form-group col-md-12" style="margin-bottom: 1rem;">
                                                             <label for="kota">Kabupaten / Kota</label>
                                                             <select name="kota_f[]" class="form-control" id="kota_f"  >
                                                                 <option value="">Pilih Kabupaten / Kota</option>
@@ -99,9 +100,11 @@
                                                                 <option value="">Pilih Kecamatan</option>
                                                             </select>
                                                         </div>
-                                                        <div class="form-group col-md-12">
+                                                        <div class="form-group col-md-6">
                                                             <label for="kelurahan">Kelurahan / Desa</label>
-                                                            <input type="text" name="kelurahan_f[]" id="kelurahan_f" class="form-control" placeholder="Kelurahan / Desa">
+                                                            <select name="kelurahan_f[]" class="form-control" id="kelurahan_f" >
+                                                                <option value="">Pilih Kelurahan</option>
+                                                            </select>
                                                         </div>
                                                         
                                                     </div>
@@ -109,21 +112,21 @@
                                                         <div class="form-group col-md-3" >
                                                             <label for="dms">Degrees</label>
                                                             <div class="input-group">
-                                                                <input type="number" name="d_lat[]" id="d_lat" class="form-control" placeholder="Degrees" aria-describedby="basic-addon1">
+                                                                <input type="number"  min="0" max="11" name="d_lat[]" id="d_lat" class="form-control" placeholder="Degrees" aria-describedby="basic-addon1">
                                                                 <span class="input-group-addon" id="basic-addon1">°</span>
                                                             </div>
                                                         </div>
                                                         <div class="form-group col-md-3">
                                                             <label for="dms">Minutes</label>
                                                             <div class="input-group">  
-                                                                <input type="number" name="m_lat[]" id="m_lat" class="form-control" placeholder="Minutes" aria-describedby="basic-addon1">
+                                                                <input type="number" min="1" max="60" name="m_lat[]" id="m_lat" class="form-control" placeholder="Minutes" aria-describedby="basic-addon1">
                                                                 <span class="input-group-addon" id="basic-addon1">'</span>
                                                             </div>
                                                         </div>
                                                         <div class="form-group col-md-3">
                                                             <label for="dms">Seconds</label>
                                                             <div class="input-group">    
-                                                                <input type="number" name="s_lat[]" id="s_lat" class="form-control" placeholder="Seconds" aria-describedby="basic-addon1">
+                                                                <input type="number" min="1" max="60" name="s_lat[]" id="s_lat" class="form-control" placeholder="Seconds" aria-describedby="basic-addon1">
                                                                 <span class="input-group-addon" id="basic-addon1">"</span>
                                                             </div>
                                                         </div>
@@ -141,21 +144,21 @@
                                                         <div class="form-group col-md-3" >
                                                             <label for="dms">Degrees</label>
                                                             <div class="input-group">
-                                                                <input type="number" name="d_long[]" id="d_long" class="form-control"  placeholder="Degrees" aria-describedby="basic-addon1">
+                                                                <input type="number" min="0" max="11" name="d_long[]" id="d_long" class="form-control"  placeholder="Degrees" aria-describedby="basic-addon1">
                                                                 <span class="input-group-addon" id="basic-addon1">°</span>
                                                             </div>
                                                         </div>
                                                         <div class="form-group col-md-3">
                                                             <label for="dms">Minutes</label>
                                                             <div class="input-group">
-                                                                <input type="number" name="m_long[]" id="m_long" class="form-control"  placeholder="Minutes" aria-describedby="basic-addon1">
+                                                                <input type="number" min="1" max="60" name="m_long[]" id="m_long" class="form-control"  placeholder="Minutes" aria-describedby="basic-addon1">
                                                                 <span class="input-group-addon" id="basic-addon1">'</span>
                                                             </div>
                                                         </div>
                                                         <div class="form-group col-md-3">
                                                             <label for="dms">Seconds</label>
                                                             <div class="input-group">
-                                                                <input type="number" name="s_long[]" id="s_long" class="form-control"  placeholder="Seconds" aria-describedby="basic-addon1">
+                                                                <input type="number" min="1" max="60" name="s_long[]" id="s_long" class="form-control"  placeholder="Seconds" aria-describedby="basic-addon1">
                                                                 <span class="input-group-addon" id="basic-addon1">"</span>
                                                             </div>
                                                         </div>
@@ -181,39 +184,40 @@
                                                             <div class="form-group col-md-12" id="dermaga type">  
                                                                 <div class="col-md-3" style="padding-left:0;margin-top: 1rem;">
                                                                     <label for="dermaga">Dermaga Tipe</label>
-                                                                    <input type="text" name="dermaga[]" id="dermaga" class="form-control"  placeholder="Dermaga Type">
+                                                                    <input type="text" name="dermaga[0][]" id="dermaga" class="form-control"  placeholder="Dermaga Type">
                                                                 </div>
 
                                                                 <div class="col-md-3" style="padding-left:0;margin-top: 1rem;">
                                                                     <label for="spesifikasi">Spesifikasi</label>
-                                                                    <input type="text" name="spesifikasi[]" id="spesifikasi" class="form-control"  placeholder="Spesifikasi">
+                                                                    <input type="text" name="spesifikasi[0][]" id="spesifikasi" class="form-control"  placeholder="Spesifikasi">
                                                                 </div>
 
                                                                 <div class="col-md-6" style="padding-left:0;margin-top: 1rem;">
                                                                     <label for="peruntukan">Peruntukan</label>
-                                                                    <input type="text" name="peruntukan[]" id="peruntukan" class="form-control"  placeholder="Peruntukan">
+                                                                    <input type="text" name="peruntukan[0][]" id="peruntukan" class="form-control"  placeholder="Peruntukan">
                                                                 </div>
 
                                                                 <div class="col-md-3" style="padding-left:0;margin-top: 1rem;">
                                                                     <label for="kedalaman">Kedalaman</label>
                                                                     <div class="input-group">
-                                                                        <input type="number" name="meter[]" id="meter" class="form-control"  placeholder="Meter" aria-describedby="basic-addon1">
+                                                                        <input type="number" name="meter[0][]" id="meter" class="form-control"  placeholder="Meter" aria-describedby="basic-addon1">
                                                                         <span class="input-group-addon" id="basic-addon1">M LWS</span>
                                                                     </div>                  
                                                                 </div>
                                                                 
                                                                 <div class="col-md-3" style="padding-left:0;margin-top: 1rem;">
                                                                     <label for="kapasitas">Kapasitas</label>
-                                                                    <input type="number" name="kapasitas[]" id="kapasitas" class="form-control"  placeholder="Kapasitas">
+                                                                    <input type="number" name="kapasitas[0][]" id="kapasitas" class="form-control"  placeholder="Kapasitas">
                                                                 </div>
 
                                                                 <div class="col-md-3"style="padding-left:0;margin-top: 1rem;">
                                                                     <label for="satuan">Satuan</label>
-                                                                    <select name="satuan[]" class="form-control" id="satuan" >
+                                                                    <select name="satuan[0][]" class="form-control" id="satuan" >
                                                                         <option value="">Pilih Satuan</option>
-                                                                        <option>FEET</option>
-                                                                        <option>GT</option>
-                                                                        <option>DWT</option>
+                                                                        <option value="FEET" >FEET</option>
+                                                                        <option value="GT" >GT</option>
+                                                                        <option value="DWT" >DWT</option>
+                                                                        <option value="TON" >TON</option>
                                                                     </select>    
                                                                 </div>
 
@@ -233,13 +237,9 @@
                                                             <label for="jenissk">Jenis SK / Legalitas</label>
                                                             <select name="jenissk[]" class="form-control" id="jenissk" >
                                                                 <option value="">Pilih Jenis SK / Legalitas</option>
-                                                                <option value="Pembangunan">Pembangunan</option>
-                                                                <option value="Pengembangan">Pengembangan</option>
-                                                                <option value="Pengoperasian">Pengoperasian</option>
-                                                                <option value="Perpajangan/Pembangunan/Pengembangan">Perpajangan / Pembangunan / Pengembangan</option>
-                                                                <option value="PerpanjanganPengoperasian">Perpanjangan Pengoperasian</option>
-                                                                <option value="Penyesuaian">Penyesuaian</option>
-                                                                <option value="Pendaftaran">Pendaftaran</option>
+                                                                <?php foreach($jenis_sk as $key => $value):?>
+                                                                    <option value="<?php echo (int) $value->id;?>"><?php echo $value->jenis_sk;?></option>
+                                                                <?php endforeach;?>
                                                             </select>
                                                         </div>
         
@@ -309,15 +309,13 @@
                                                 <!-- <button type="button" class="btn btn-fill btn-danger btnRemove">Hapus</button> -->
                                             </div>
                                         </div>
-
-                                            <div id="loadhere"></div>
+                                        </div>
+                                    
                                     </div>
-                                    <div id="loadhere"></div>
                                    
                                     <button type="submit" class="btn btn-fill btn-success" style="margin-right: 1rem;margin-left: -15px;">SIMPAN DATA</button>
                                     <a href="<?php echo $baseurl;?>Data"  class="btn btn-fill btn-default" >KEMBALI</a> 
                                 </form>
-                                <input type="hidden" id="count" value="1"/>
 
                                 </div>
                             </div>
@@ -342,33 +340,21 @@ var baseurl = $("#txtbase").val();
 
 
 $(document).ready(function(){
-
+    localStorage.setItem('aCounter', 0);
 
     $('select').selectpicker();
 
     $('.datepicker').datepicker();
 
-    $(".btnAdd").click(function(){
-      
-        var val = $("#count").val();
-        var val = eval(val) + 1;
-        $("#count").val(val);
-
-        $.get(baseurl+"Data/load_view/"+val, function(data, status){
-            $("#loadhere").append(data);
-        });
-
-    });
 
 
     $(".btnAdd").click(function(){
-      
-        var val = $("#count").val();
+        
+        var val = localStorage.getItem('aCounter');
         var val = eval(val) + 1;
-        $("#count").val(val);
-
+        localStorage.setItem('aCounter',val);
         $.get(baseurl+"Data/load_view/"+val, function(data, status){
-            $("#loadhere").append(data);
+            $("#lokasi-section").append(data);
         });
 
     });
@@ -444,7 +430,7 @@ $(document).ready(function(){
     });
 
     $('#kecamatan').change(function(option, checked){
-        var str = $('[name="kecamatan"]').val();
+        var str = $(this).val();
         var kecamatan = str.split("|");
         var param = {'kecamatan':kecamatan[0]};
         $.ajax({
@@ -456,6 +442,28 @@ $(document).ready(function(){
             {
                 $('#kelurahan').html(data);
                 $('#kelurahan').selectpicker('refresh');
+
+            },
+            error: function (jqXHR, textStatus, errorThrown)
+            {
+                alert('Error get data'); 
+            }
+        });
+    });
+
+    $('#kecamatan_f').change(function(option, checked){
+        var str = $(this).val();
+        var kecamatan = str.split("|");
+        var param = {'kecamatan':kecamatan[0]};
+        $.ajax({
+            url : siteurl+'/Data/get_Kelurahan/',
+            type: "POST",
+            data: param,
+            dataType: "JSON",
+            success: function(data)
+            {
+                $('#kelurahan_f').html(data);
+                $('#kelurahan_f').selectpicker('refresh');
 
             },
             error: function (jqXHR, textStatus, errorThrown)
@@ -509,11 +517,33 @@ function setkelas2(id){
 
 }
 
-function addFields(){
 
+
+function setKelasExtra(id,counter){
+
+    var param = {'kota':id};
+    $.ajax({
+        url : siteurl+'/Data/get_Kelas2/',
+        type: "POST",
+        data: param,
+        dataType: "JSON",
+        success: function(data)
+        {
+            $('#kelas'+counter).html(data);
+            $('#kelas'+counter).selectpicker('refresh');
+        },
+        error: function (jqXHR, textStatus, errorThrown)
+        {
+            alert('Error get data'); 
+        }
+    });
+
+}
+
+function addFields(){
    var idField = Math.random();
 
-   $('#groupdermaga').append('<div class="form-group col-md-12" id="'+idField+'"><div class="col-md-3" style="padding-left:0;margin-top: 1rem;"><label for="dermaga">Dermaga Tipe</label><input type="text" name="dermaga[]" id="dermaga" class="form-control" required placeholder="Dermaga Type"></div><div class="col-md-3" style="padding-left:0;margin-top: 1rem;"><label for="spesifikasi">Spesifikasi</label><input type="text" name="spesifikasi[]" id="spesifikasi" class="form-control" required placeholder="Spesifikasi"></div><div class="col-md-6" style="padding-left:0;margin-top: 1rem;"><label for="peruntukan">Peruntukan</label><input type="text" name="peruntukan[]" id="peruntukan" class="form-control" required placeholder="Peruntukan"></div><div class="col-md-3" style="padding-left:0;margin-top: 1rem;"><label for="kedalaman">Kedalaman</label><div class="input-group"><input type="number" name="meter[]" id="meter" class="form-control" required placeholder="Meter" aria-describedby="basic-addon1"><span class="input-group-addon" id="basic-addon1">M LWS</span></div></div><div class="col-md-3" style="padding-left:0;margin-top: 1rem;"><label for="kapasitas">Kapasitas</label><input type="number" name="kapasitas[]" id="kapasitas" class="form-control" required placeholder="Kapasitas"></div><div class="col-md-3"style="padding-left:0;margin-top: 1rem;"><label for="satuan">Satuan</label><select name="satuan[]" class="form-control" id="satuan" required><option value="">Pilih Satuan</option><option>FEET</option><option>GT</option><option>DWT</option></select></div><button type="button" class="btn btn-fill btn-danger btnHapus" onclick="rmvFields('+idField+')" style="margin-top: 3.3rem;margin-left: 10px;">Hapus</button></div>');
+   $('#groupdermaga').append('<div class="form-group col-md-12" id="'+idField+'"><div class="col-md-3" style="padding-left:0;margin-top: 1rem;"><label for="dermaga">Dermaga Tipe</label><input type="text" name="dermaga[0][]" id="dermaga" class="form-control" required placeholder="Dermaga Type"></div><div class="col-md-3" style="padding-left:0;margin-top: 1rem;"><label for="spesifikasi">Spesifikasi</label><input type="text" name="spesifikasi[0][]" id="spesifikasi" class="form-control" required placeholder="Spesifikasi"></div><div class="col-md-6" style="padding-left:0;margin-top: 1rem;"><label for="peruntukan">Peruntukan</label><input type="text" name="peruntukan[0][]" id="peruntukan" class="form-control" required placeholder="Peruntukan"></div><div class="col-md-3" style="padding-left:0;margin-top: 1rem;"><label for="kedalaman">Kedalaman</label><div class="input-group"><input type="number" name="meter[0][]" id="meter" class="form-control" required placeholder="Meter" aria-describedby="basic-addon1"><span class="input-group-addon" id="basic-addon1">M LWS</span></div></div><div class="col-md-3" style="padding-left:0;margin-top: 1rem;"><label for="kapasitas">Kapasitas</label><input type="number" name="kapasitas[0][]" id="kapasitas" class="form-control" required placeholder="Kapasitas"></div><div class="col-md-3"style="padding-left:0;margin-top: 1rem;"><label for="satuan">Satuan</label><select name="satuan[0][]" class="form-control" id="satuan" required><option value="">Pilih Satuan</option><option value="FEET">FEET</option><option value="GT">GT</option><option value="DWT">DWT</option><option value="TON">TON</option></select></div><button type="button" class="btn btn-fill btn-danger btnHapus" onclick="rmvFields('+idField+')" style="margin-top: 3.3rem;margin-left: 10px;">Hapus</button></div>');
 
 }
 
@@ -523,6 +553,18 @@ function rmvFields(id){
     {
         var x = document.getElementById(id); 
         x.remove(); 
+    }
+}
+
+function removeLokasi(id)
+{
+    if(confirm('Remove fields?'))
+    {
+        var val = localStorage.getItem('aCounter');
+        var val = eval(val) - 1;
+        localStorage.setItem('aCounter',val);
+        $("#lokasi-"+id+"-warp").remove(); 
+     
     }
 }
 

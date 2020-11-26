@@ -31,9 +31,20 @@ $(document).ready(function(){
 
     $('#delete-modal').on('show.bs.modal',function() { 
         $('.btn-del').click('.remove',function(e) {
-          $tr = $(this).closest('tr');
-          table.row($tr).remove().draw();
-          e.preventDefault();
+            var id = $(".remove").attr("personal-id");
+            var param = {"id" : id}
+            $.ajax({
+                type: "POST",
+                url: baseurl+"Data/submit/delete",
+                data: param,
+                success: function(e){
+                  window.location.href=baseurl+"Data";
+                },
+                dataType: "JSON"
+            });
+        
+        
+            e.preventDefault();
         });
     });
 
@@ -50,10 +61,9 @@ $(document).ready(function(){
             dataType: "JSON",
             success: function(data)
             {
-                $('#Filt03').html(data);
-                $('#Filt03').selectpicker('refresh');
-
-                setkelas($('[name="provinsi"]').val());
+                $('#Filt03').html(data).removeClass("selectpicker").addClass("selectpicker").selectpicker('refresh');
+               
+                setkelas($("#Filt02").val());
             },
             error: function (jqXHR, textStatus, errorThrown)
             {
@@ -147,8 +157,8 @@ function setkelas(id){
           dataType: "JSON",
           success: function(data)
           {
-              $('#Filt04').html(data);
-              $('#Filt04').selectpicker('refresh');
+              $('#Filt04').html(data).removeClass("selectpicker").addClass("selectpicker").selectpicker('refresh');
+              
           },
           error: function (jqXHR, textStatus, errorThrown)
           {

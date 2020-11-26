@@ -3,6 +3,12 @@
 		public function __construct(){
 			$this->load->database();	
 		}
+
+		public function notification()
+    	{
+    	    return $this->db->where("ms_berlaku < '".date('Y-m-d H:i:s')."'")->count_all_results("daftar_perusahaan");
+		}
+	
 		public function Set_ANSI_NULLS(){
 			$this->db->query('SET ANSI_NULLS ON');
 			$this->db->query('SET ANSI_WARNINGS ON');
