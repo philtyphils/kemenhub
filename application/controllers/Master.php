@@ -34,26 +34,17 @@ class Master extends CI_Controller
 		$data['menu'] = 'Master';
 		$data['baseurl'] = base_url();
 		$data['siteurl'] = site_url();
-<<<<<<< HEAD
-=======
-		$kat_chart = json_encode($this->master->kategori_chart());
-		$wilayah_kerja = json_encode($this->master->wilayah_kerja_chart());
-		$bidang_usaha = json_encode($this->master->bdg_usaha_chart());
-		$data['kategori_chart'] = $kat_chart;
-		$data['wilayah_kerja'] = $wilayah_kerja;
-		$data['bidang_usaha'] = $bidang_usaha;
-		$data['notification']	= $this->master->notification();	
->>>>>>> f5e949e87e308488f64fbace828ce4ffdd788fc1
+
 
 		$f = $this->master->wilayah_kerja_chart();
 		$x = $this->master->bdg_usaha_chart();
 
 
-		$nmksop 		= array();
+		$nmksop 	= array();
 		$wilayah_kerja 	= array();
 		foreach ($f as $key => $value)
 		{
-			$nmksop[] 			=  $value->wilayah_kerja;
+			$nmksop[] 		=  $value->wilayah_kerja;
 			$wilayah_kerja[] 	= (int) $value->TOTAL;
 		}
 
@@ -67,7 +58,7 @@ class Master extends CI_Controller
 
 		$kat_chart 		= json_encode($this->master->kategori_chart());
 
-		$data['nmksop'] 		= json_encode($nmksop);		
+		$data['nmksop'] 	= json_encode($nmksop);		
 		$data['wilayah_kerja'] 	= json_encode($wilayah_kerja);
 		$data['nmbidang_usaha'] = json_encode($nmbidang_usaha);		
 		$data['bidang_usaha'] 	= json_encode($bidang_usaha);
