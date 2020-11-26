@@ -303,9 +303,6 @@ $(document).ready(function(){
     chart: {
         renderTo: 'container-bar',
         type: 'bar',
-        scrollablePlotArea: {
-            minHeight: 1200,
-        },
     },
     xAxis: {
         categories: <?php echo $provinsi; ?>,
@@ -318,10 +315,11 @@ $(document).ready(function(){
         title: {
             text: null
         },
-        // min: 10,
-        // scrollbar: {
-        // enabled: true
-        // },
+        min: 0,
+        max:6,
+        scrollbar: {
+        enabled: true
+        },
         tickLength: 0,   
     },
     yAxis: {
