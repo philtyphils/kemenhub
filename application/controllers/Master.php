@@ -34,18 +34,12 @@ class Master extends CI_Controller
 		$data['menu'] = 'Master';
 		$data['baseurl'] = base_url();
 		$data['siteurl'] = site_url();
-<<<<<<< HEAD
-=======
 
->>>>>>> 8fcd27330c15e8274a98e3fe2355d592df0e9b67
 
 		$f = $this->master->wilayah_kerja_chart();
 		$x = $this->master->bdg_usaha_chart();
 
-<<<<<<< HEAD
-=======
 
->>>>>>> 8fcd27330c15e8274a98e3fe2355d592df0e9b67
 		$nmksop 	= array();
 		$wilayah_kerja 	= array();
 		foreach ($f as $key => $value)
