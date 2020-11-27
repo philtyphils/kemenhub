@@ -12,6 +12,7 @@
     <link href="<?php echo $baseurl;?>assets/css/font-awesome.css" rel="stylesheet" />
     <link href="<?php echo $baseurl;?>assets/css/bootstrap-datepicker.css" rel="stylesheet" />
     <link href="<?php echo $baseurl;?>assets/css/google-roboto-300-700.css" rel="stylesheet" />
+    <link href="<?php echo $baseurl;?>assets/img/logo-icon.png" rel="icon" >
 
 </head>
 <body>

@@ -159,34 +159,24 @@ class Master_User_model extends CI_Model {
 
     public function wilayah_kerja_chart()
     {
-        $data = $this->db->order_by("provinsi_id","ASC")->order_by("order","ASC")->get('rekaptulasi_wilayah_kerja')->result();
-        $r = array();
-        foreach($data as $key => $value)
-        {
-            $f      = array(
-                "name" => $value->wilayah_kerja,
-                "y" => (int) $value->TOTAL
-            );
-            $r[]    = $f;
-        }
+        $data = $this->db->order_by('
+            (CASE 
+                WHEN wilayah_kerja LIKE "%OP KELAS%"    THEN 1
+                WHEN wilayah_kerja LIKE "%KSOP KELAS%"  THEN 2 
+                WHEN wilayah_kerja LIKE "%KUPP%"        THEN 3  
+            END),
+            wilayah_kerja ASC')->get('rekaptulasi_wilayah_kerja')->result(); 
 
-        return $r;
+        return $data;
     }
+
+
 
     public function bdg_usaha_chart()
     {
-        $data = $this->db->order_by("bidang_usaha","ASC")->get('rekaptulasi_bidang_usaha')->result();
-        $r = array();
-        foreach($data as $key => $value)
-        {
-            $f      = array(
-                "name" => $value->bidang_usaha,
-                "y" => (int) $value->TOTAL
-            );
-            $r[]    = $f;
-        }
-
-        return $r;
+        $data = $this->db->order_by('bidang_usaha','ASC')->get('rekaptulasi_bidang_usaha')->result();
+     
+        return $data;
     }
     public function notification()
     {

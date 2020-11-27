@@ -9,6 +9,7 @@
     <link href="<?php echo $baseurl;?>assets/css/font-awesome.css" rel="stylesheet" />
     <link href="<?php echo $baseurl;?>assets/css/bootstrap-datepicker.css" rel="stylesheet" />
     <link href="<?php echo $baseurl;?>assets/css/google-roboto-300-700.css" rel="stylesheet" />
+    <link href="<?php echo $baseurl;?>assets/img/logo-icon.png" rel="icon" >
     
 </head>
 <body>
@@ -287,78 +288,16 @@ var chart_tusk = new Highcharts.chart({
 });
 </script>
 
-<!-- ===================================================== NEW BAR CHART COLUMN  WILAYAH KERJA ====================================================== -->
+<!-- ===================================================== NEW BAR CHART BAR WILAYAH KERJA & BIDANG USAHA ====================================================== -->
 
 <script>
-    const jsonWilayahKerjaName = [{
-      "name": "KUPP KELAS IV MANOKWARI"
-    }, {
-      "name": "KUPP KELAS IV MANOKWARI"
-    }, {
-      "name": "KUPP KELAS IV MANOKWARI"
-    }, {
-      "name": "KUPP KELAS IV MANOKWARI"
-    }, {
-      "name": "KUPP KELAS IV MANOKWARI"
-    }, {
-      "name": "KUPP KELAS IV MANOKWARI"
-    },{
-      "name": "KUPP KELAS IV MANOKWARI"
-    },{
-      "name": "KUPP KELAS IV MANOKWARI"
-    },{
-      "name": "KUPP KELAS IV MANOKWARI"
-    },];
-    
-    const jsonWilayahKerjaTotal = [{
-    //   "name": "GALANGAN KAPAL",
-      "jumlahWilayahKerja": "3400"
-    }, {
-    //   "name": "INDUSTRI BETON",
-      "jumlahWilayahKerja": "210"
-    }, {
-    //   "name": "PERTAMBANGAN BATUBARA",
-      "jumlahWilayahKerja": "100"
-    }, {
-    //   "name": "INDUSTRI PEMBUATAN KAPAL",
-      "jumlahWilayahKerja": "4500"
-    }, {
-    //   "name": "PENYEDIA TENAGA LISTRIK",
-      "jumlahWilayahKerja": "3400"
-    }, {
-    //   "name": "INDUSTRI SEMEN",
-      "jumlahWilayahKerja": "3300"
-    },{
-    //   "name": "NIAGA MIGAS",
-      "jumlahWilayahKerja": "33"
-    },
-    {
-    //   "name": "NIAGA MIGAS",
-      "jumlahWilayahKerja": "3300"
-    },{
-    //   "name": "NIAGA MIGAS",
-      "jumlahWilayahKerja": "33"
-    },];
-    
-    const categoriesKelas =jsonWilayahKerjaName.map(o => o.name);
-    
-    let seriesKelas = jsonWilayahKerjaTotal.map((o, i) => ({
-      name: o.name,
-      stacking: 'normal',
-      data: [{
-          x: i,
-        y: Number(o.jumlahWilayahKerja)
-      }]
-    }));
-    
     var chart_bar = new Highcharts.chart({
         chart: {
             renderTo: 'container-bar-wilayahkerja',
-            type: 'column',
-            
+            type: 'bar',   
         },
         xAxis: {
-        categories: categoriesKelas,
+            categories:<?php echo $nmksop;?>,
             labels: {
             style: {
             fontSize: '12px',
@@ -369,17 +308,16 @@ var chart_tusk = new Highcharts.chart({
                 text: null
             },
             min: 0,
-            max:5,
+            max:8,
             scrollbar: {
             enabled: true
             },
-            tickLength: 0,   
         },
-        series:seriesKelas,
-    
+       
         yAxis: {
-            min: 0,
+            min:0,
             title: false, 
+          
         },
         title: {
             text: ''
@@ -394,8 +332,8 @@ var chart_tusk = new Highcharts.chart({
             }
         },
         plotOptions: {
-            column: {
-                pointPadding: 0.2,
+            bar: {
+                stacking: 'normal',
                 states: {
                     hover: {
                     color: '#4baee3',  
@@ -404,12 +342,21 @@ var chart_tusk = new Highcharts.chart({
                 cursor: 'pointer',
                 showInLegend: false,
                 borderWidth: 0.
+            },
+            series: {
+            colorByPoint: true
             }
         },
+
+        series:[{
+            name:'Wilayah Kerja',
+            data:<?php echo $wilayah_kerja;?>,
+            stack:''
+        }],
     
         navigation: {
             buttonOptions: {
-                verticalAlign: 'top',
+                enabled: false
             }
         },
         exporting: {
@@ -420,140 +367,84 @@ var chart_tusk = new Highcharts.chart({
             }
         }  
     });
-</script>
-<!-- =============================================================================================================================================== -->
 
-<!-- ===================================================== NEW BAR CHART COLUMN BIDANG USAHA ====================================================== -->
-<script>
-const json1 = [{
-  "name": "GALANGAN KAPAL"
-}, {
-  "name": "INDUSTRI BETON"
-}, {
-  "name": "PERTAMBANGAN BATUBARA"
-}, {
-  "name": "INDUSTRI PEMBUATAN KAPAL"
-}, {
-  "name": "PENYEDIA TENAGA LISTRIK"
-}, {
-  "name": "INDUSTRI SEMEN"
-},{
-  "name": "NIAGA MIGAS"
-},{
-  "name": "Industri Makanan"
-},{
-  "name": "Industri Minuman"
-},];
-
-const json2 = [{
-//   "name": "GALANGAN KAPAL",
-  "jumlahBidangKerja": "34000"
-}, {
-//   "name": "INDUSTRI BETON",
-  "jumlahBidangKerja": "23000"
-}, {
-//   "name": "PERTAMBANGAN BATUBARA",
-  "jumlahBidangKerja": "20000"
-}, {
-//   "name": "INDUSTRI PEMBUATAN KAPAL",
-  "jumlahBidangKerja": "45000"
-}, {
-//   "name": "PENYEDIA TENAGA LISTRIK",
-  "jumlahBidangKerja": "34000"
-}, {
-//   "name": "INDUSTRI SEMEN",
-  "jumlahBidangKerja": "33000"
-},{
-//   "name": "NIAGA MIGAS",
-  "jumlahBidangKerja": "33000"
-},
-{
-//   "name": "NIAGA MIGAS",
-  "jumlahBidangKerja": "33000"
-},{
-//   "name": "NIAGA MIGAS",
-  "jumlahBidangKerja": "33000"
-},];
-
-const categoriesUsaha= json1.map(o => o.name);
-
-let  seriesUsaha = json2.map((o, i) => ({
-  name: o.name,
-  stacking: 'normal',
-  data: [{
-  	x: i,
-    y: Number(o.jumlahBidangKerja)
-  }]
-}));
-
-var chart_bar = new Highcharts.chart({
-    chart: {
-        renderTo: 'container-bar-bidangusaha',
-        type: 'column',
-        
-    },
-    xAxis: {
-    categories:categoriesUsaha,
-        labels: {
-        style: {
-        fontSize: '12px',
-        color: '#43425D'
-        }
-        }, 
-        title: {
-            text: null
+    var chart_bar = new Highcharts.chart({
+        chart: {
+            renderTo: 'container-bar-bidangusaha',
+            type: 'bar',   
         },
-        min: 0,
-        max:5,
-        scrollbar: {
-        enabled: true
-        },
-        tickLength: 0,   
-    },
-    series:seriesUsaha,
-
-    yAxis: {
-        min: 0,
-        title: false, 
-    },
-    title: {
-        text: ''
-    },
-    credits: {
-    enabled: false
-    },
-    tooltip: {
-        formatter: function () {
-        return '<b>' + this.x + '</b><br/>' +
-        '<b>'+ 'Total :' +'</b>'+' '+' ' +'<b>' + this.y + '</b>'+'<br/>'
-        }
-    },
-    plotOptions: {
-        column: {
-            pointPadding: 0.2,
-            states: {
-                hover: {
-                color: '#4baee3',  
-                }
-            },
-            cursor: 'pointer',
-            showInLegend: false,
-        }
-    },
-
-    navigation: {
-        buttonOptions: {
-            verticalAlign: 'top',
-        }
-    },
-    exporting: {
-        buttons: {
-            contextButton: {
-                menuItems: ['downloadXLS','viewData']
+        xAxis: {
+            categories:<?php echo $nmbidang_usaha;?>,
+            labels: {
+            style: {
+            fontSize: '12px',
+            color: '#43425D'
             }
-        }
-    }  
-});
+            }, 
+            title: {
+                text: null
+            },
+            min: 0,
+            max:8,
+            scrollbar: {
+            enabled: true
+            },
+        },
+       
+        yAxis: {
+            min:0,
+            title: false, 
+          
+        },
+        title: {
+            text: ''
+        },
+        credits: {
+        enabled: false
+        },
+        tooltip: {
+            formatter: function () {
+            return '<b>' + this.x + '</b><br/>' +
+            '<b>'+ 'Total :' +'</b>'+' '+' ' +'<b>' + this.y + '</b>'+'<br/>'
+            }
+        },
+        plotOptions: {
+            bar: {
+                stacking: 'normal',
+                states: {
+                    hover: {
+                    color: '#4baee3',  
+                    }
+                },
+                cursor: 'pointer',
+                showInLegend: false,
+                borderWidth: 0.
+            },
+            series: {
+            colorByPoint: true
+            }
+        },
+
+        series:[{
+            name:'Bidang Usaha',
+            data:<?php echo $bidang_usaha;?>,
+            stack:''
+        }],
+    
+        navigation: {
+            buttonOptions: {
+                enabled: false
+            }
+        },
+        exporting: {
+            buttons: {
+                contextButton: {
+                    menuItems: ['downloadXLS','viewData']
+                }
+            }
+        }  
+    });
+  
 </script>
 
 <!-- =========================================================================================================== -->

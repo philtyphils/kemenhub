@@ -91,6 +91,7 @@
                                                         <div data-singlespesifikasi="<?php echo $no;?>" class="singleSpesifikasi">
                                                         <p class="namaperusahaan" style="display: none;"><?php echo $val->nm_perusahaan; ?></p>
                                                         <p class="wilayahkerja" style="display: none;"><?php echo $val->nmksop; ?></p>
+                                                        <p class="lokasi" style="display: none;"><?php echo $val->lokasi; ?></p>
                                                         <p class="spesifikasi" style="display: none;">
                                                         <?php echo $val->spesifikasi; ?>
                                                         </p>
@@ -384,8 +385,13 @@
                 <h4 style="font-size: 1.8rem;margin-top: 10px;">Nama Perusahaan 
                 <span class="card-namaperusahaan" style="font-weight: bold;padding-left:10px;font-size:1.6rem;"></span> 
                 </h4>
-                <h4 style="font-size: 1.8rem;margin-top: 10px;display:inline-block;padding-right: 50px;">Wilayah Kerja</h4>
-                <span class="card-wilayahkerja" style="font-weight: bold;"></span>
+
+                <h4 style="font-size: 1.8rem;margin-top: 5px;display:inline-block;padding-right: 50px;">Wilayah Kerja</h4>
+                <span class="card-wilayahkerja" style="font-weight: bold;"></span><br>
+
+                <h4 style="font-size: 1.8rem;margin-top: 5px;display:inline-block;padding-right: 29px;">Lokasi Dermaga</h4>
+                <span class="card-lokasi" style="font-size: 1.4rem;font-weight: bold;"></span>
+              
                 <h4 style="font-size: 1.8rem;margin-top: 0;">Spesifikasi</h4>
                 <div class="textarea" style="border:1px solid #43425D; padding:10px;border-radius:5px;">
                 <span class="card-desc"></span>
@@ -420,10 +426,12 @@
 
     const modalNamaPerusahaan   = $(this).parents('.singleSpesifikasi').find('.namaperusahaan').text();
     const modalWilayahKerja     = $(this).parents('.singleSpesifikasi').find('.wilayahkerja').text();
+    const modalLokasi           = $(this).parents('.singleSpesifikasi').find('.lokasi').text();
     const modalSpefikasi        = $(this).parents('.singleSpesifikasi').find('.spesifikasi').html();
 
     $('#modal-spesifikasi .modal-body>h4>.card-namaperusahaan').text(modalNamaPerusahaan);
     $('#modal-spesifikasi .modal-body>.card-wilayahkerja').text(modalWilayahKerja);
+    $('#modal-spesifikasi .modal-body>.card-lokasi').text(modalLokasi);
     $('#modal-spesifikasi .modal-body>.textarea>.card-desc').html(modalSpefikasi);
 
  
