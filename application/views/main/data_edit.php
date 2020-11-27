@@ -97,7 +97,7 @@
                                                 <div class="form-group col-md-7">
                                                     <div class="form-group">
                                                         <label for="provinsi">Provinsi</label>
-                                                        <select name="provinsi_f" class="form-control" id="provinsi_f" >
+                                                        <select name="provinsi_f" class="form-control selectpicker" id="provinsi_f" data-live-search="true">
                                                            <option value="">Pilih Provinsi</option>
                                                             <?php for($i=0;$i<count($dataProvinsi);$i++){?>
                                                                 <?php if($dataProvinsi[$i]->kode == $data['data']->provinsi_id):?>
@@ -111,7 +111,7 @@
                                                     <div class="row">
                                                         <div class="form-group col-md-6" style="margin-bottom: 1rem;">
                                                             <label for="kecamatan">Kecamatan</label>
-                                                            <select name="kecamatan_f" class="form-control" id="kecamatan_f" >
+                                                            <select name="kecamatan_f" class="form-control selectpicker" id="kecamatan_f" data-live-search="true">
                                                                 <option value="">Pilih Kecamatan</option>
                                                                 <?php foreach ($data['kecamatan'] as $key => $value):?>
                                                                     <?php if($value->kode == $data['data']->lokasi_kecamatan):?>

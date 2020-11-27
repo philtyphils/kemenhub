@@ -35,6 +35,7 @@ class bidang_usaha extends CI_Controller
 		$data['baseurl'] = base_url();
 		$data['siteurl'] = site_url();
 		$data['total']  = $this->usaha->_getTotal_usaha();
+		$data['notification']	= $this->usaha->notification();
 	
 		$this->load->view('templates/header',$data);
 		$this->load->view('main/bidang_usaha',$data);	
@@ -78,6 +79,7 @@ class bidang_usaha extends CI_Controller
 		$data['baseurl'] = base_url();
 		$data['siteurl'] = site_url();
 		$data['kategori'] = $this->usaha->_getKategori();
+		$data['notification']	= $this->usaha->notification();
 
 		$this->load->view('templates/header',$data);
 		$this->load->view('main/bidang_usaha_create',$data);
@@ -91,6 +93,7 @@ class bidang_usaha extends CI_Controller
 		$data['siteurl'] 		= site_url();
 		$data['bidang_usaha']	= $this->usaha->_get($id);
 		$data['kategori'] 		= $this->usaha->_getKategori();
+		$data['notification']	= $this->usaha->notification();
 
 		$this->load->view('templates/header',$data);
 		$this->load->view('main/bidang_usaha_edit',$data);

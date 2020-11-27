@@ -80,12 +80,6 @@
                                       <b class="caret"></b>
                                       </p>
                                 </a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="masaberlaku.html">Notification 1</a></li>
-                                    <li><a href="masaberlaku.html">Notification 2</a></li>
-                                    <li><a href="masaberlaku.html">Notification 3</a></li>
-                                    <li><a href="masaberlaku.html">Notification 4</a></li>
-                                </ul>
                             </li>      
                             <li class="dropdown">
                                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">

@@ -54,6 +54,7 @@ class Data extends CI_Controller
 		$tukter 		= $this->input->post('tuk_ter');
 		$status 		= $this->input->post('status');
 		$tglakhir 		= $this->input->post('tgl_akhir');
+		$expired 		= ($this->input->post('expired')) ? TRUE : FALSE;
 		
 		
 		if($trigger){
@@ -155,7 +156,13 @@ class Data extends CI_Controller
 				$t = $tgl[1].'-'.$tgl[0];
 				$this->db->where('ms_berlaku BETWEEN "'.$tgl[1].'-'.$tgl[0].'-01 00:00:00" AND "'.$tgl[1].'-'.$tgl[0].'-30 00:00:00"');
 			}
-		
+
+			if($expired)
+			{
+				$this->db->where("ms_berlaku < '".date("Y-m-d H:i:s")."'");
+			}
+
+			$this->db->where('a.flag',1);
 			$this->db->order_by('a.provinsi_id','asc');
 			$this->db->order_by('a.nm_perusahaan','asc');
 			$return 		= $this->db->get()->result();
@@ -171,7 +178,11 @@ class Data extends CI_Controller
 	        $this->db->join('provinsi as b','a.provinsi_id=b.id','left');
 	        $this->db->join('ksop as c','a.ksop_id=c.ksop_id','left');
 	        $this->db->join('bdg_usaha as d','a.bdgusaha_id=d.bdg_usaha_id');
-	        $this->db->join('kategori as e','a.kategori_id=e.kategori_id','left');
+			$this->db->join('kategori as e','a.kategori_id=e.kategori_id','left');
+			
+			$this->db->where('a.flag',1);
+			$this->db->order_by('a.provinsi_id','asc');
+			$this->db->order_by('a.nm_perusahaan','asc');
 			$return 		= $this->db->get()->result();
 			$data['jumlah'] = count($return);
 			$data['company'] = $return;
@@ -295,6 +306,7 @@ class Data extends CI_Controller
 		$data['dataProvinsi'] = $this->datax->get_provinsi();
 		$data['dataBdgUsaha'] = $this->datax->get_bidangusaha();
 		$data['jenis_sk']     = $this->datax->jenis_sk();
+		$data['notification']	= $this->datax->notification();
 
 		$this->load->view('templates/header',$data);
 		$this->load->view('main/data_create',$data);
@@ -443,7 +455,7 @@ class Data extends CI_Controller
 
 		if($action == "delete")
 		{
-			$data = $this->datax->delete($id);
+			$data = $this->datax->delete($post);
 			$alert 	= array('teks'=>'<div class="alert-danger text-center" role="alert"><b> DELETE DATA GAGAL!</b></div>');
 			if($data)
 			{
