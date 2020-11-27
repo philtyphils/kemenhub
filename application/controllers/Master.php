@@ -34,20 +34,9 @@ class Master extends CI_Controller
 		$data['menu'] = 'Master';
 		$data['baseurl'] = base_url();
 		$data['siteurl'] = site_url();
-<<<<<<< HEAD
-=======
-		$kat_chart = json_encode($this->master->kategori_chart());
-		$wilayah_kerja = json_encode($this->master->wilayah_kerja_chart());
-		$bidang_usaha = json_encode($this->master->bdg_usaha_chart());
-		$data['kategori_chart'] = $kat_chart;
-		$data['wilayah_kerja'] = $wilayah_kerja;
-		$data['bidang_usaha'] = $bidang_usaha;
-		$data['notification']	= $this->master->notification();	
->>>>>>> f5e949e87e308488f64fbace828ce4ffdd788fc1
 
 		$f = $this->master->wilayah_kerja_chart();
 		$x = $this->master->bdg_usaha_chart();
-
 
 		$nmksop 		= array();
 		$wilayah_kerja 	= array();
