@@ -30,7 +30,7 @@ class Data extends CI_Controller
 	 */
 	public function index()
 	{
-		$this->session->sess_destroy();
+		
 		$data['title'] = 'Data';
 		$data['menu'] = 'Data';
 		$data['baseurl'] = base_url();
@@ -57,6 +57,7 @@ class Data extends CI_Controller
 		$expired 		= ($this->input->post('expired')) ? TRUE : FALSE;
 		
 		
+		
 		if($trigger){
 			/* set session data for exporting */
 			$this->session->set_userdata("nm_perusahaan",$namaPerusahaan);
@@ -70,6 +71,8 @@ class Data extends CI_Controller
 			$this->session->set_userdata("tukter",$tukter);
 			$this->session->set_userdata("status",$status);
 			$this->session->set_userdata("tglakhir",$tglakhir);
+
+	
 
 			$this->db->select('a.*,b.name as nmprov,c.nama as nmksop,d.nama as nmusaha,e.nama as nmkateg');
 	        $this->db->from('daftar_perusahaan as a');

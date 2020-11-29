@@ -58,11 +58,12 @@ class Master extends CI_Controller
 
 		$kat_chart 		= json_encode($this->master->kategori_chart());
 
-		$data['nmksop'] 	= json_encode($nmksop);		
+		$data['nmksop'] 		= json_encode($nmksop);		
 		$data['wilayah_kerja'] 	= json_encode($wilayah_kerja);
 		$data['nmbidang_usaha'] = json_encode($nmbidang_usaha);		
 		$data['bidang_usaha'] 	= json_encode($bidang_usaha);
 		$data['kategori_chart'] = $kat_chart;
+		$data['notification']	= $this->master->notification();
 		
 
 		$this->load->view('templates/header',$data);
