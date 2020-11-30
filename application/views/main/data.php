@@ -225,7 +225,11 @@
                         <!-- <input id="Param04" value="ksop_id"  type="hidden"> -->
                         <!-- <select name="kelas[]" class="form-control" id="Filt04" required> -->
                         <select name="kelas" class="selectpicker form-control" id="Filt04" title="Pilih Wilayah Kerja" data-live-search="true" multiple>
-                           <option value="">KSOPP</option>
+                           <option>KSOPP 1</option>
+		           <option>KSOPP II</option>
+		           <option>OP II</option>
+		           <option>KSOPP IV</option>
+		           <option>KSOPP V</option>
                         </select>
                     </div>
                   </div>
