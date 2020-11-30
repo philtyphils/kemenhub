@@ -1,4 +1,4 @@
-            <div class="contents">
+<div class="contents">
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-10">
@@ -29,88 +29,7 @@
                                                         <option>PERIKANAN</option>
                                                 </select>                 
                                             </div> -->
-                                            <div class="wrap">
-                                               
-                                                <div class="form-group col-md-6 border-right">
-                                                    <label for="alamat">Alamat Kantor</label>
-                                                    <textarea name="alamat[]" id="alamat"  rows="11" class="form-control" required></textarea> 
-                                                </div>
-                                                <div class="form-group col-md-6" >
-                                                    <div class="form-group">
-                                                        <label for="provinsi">Provinsi</label>
-                                                        <select name="provinsi[]" class="form-control" id="provinsi" required >
-                                                            <option value="">Pilih Provinsi</option>
-                                                            <option value="">aceh</option>
-                                                            <option value="">bali</option>
-                                                            <option value="">bangka belitung</option>
-                                                            <option value="">banten</option>
-                                                            <option value="">bengkulu</option>
-                                                            <option value="">jawa tengah</option>
-                                                            <option value="">kalimantan tengah</option>
-                                                            <option value="">sulawesi tengah</option>
-                                                            <option value="">jawa timur</option>
-                                                            <option value="">kalimantan timur</option>
-                                                            <option value="">nusa tenggara timur</option>
-                                                            <option value="">gorontalo</option>
-                                                            <option value="">jakarta</option>
-                                                            <option value="">jambi</option>
-                                                            <option value="">lampung</option>
-                                                            <option value="">maluku</option>
-                                                            <option value="">kalimantan utara</option>
-                                                            <option value="">maluku utara</option>
-                                                            <option value="">sulawesi utara</option>
-                                                            <option value="">sumatra utara</option>
-                                                            <option value="">papua</option>
-                                                            <option value="">riau</option>
-                                                            <option value="">kepulauan riau</option>
-                                                            <option value="">kalimantan selatan</option>
-                                                            <option value="">sulawesi selatan</option>
-                                                            <option value="">sumatra selatan</option>
-                                                            <option value="">sulawesi tenggara</option>
-                                                            <option value="">yogyakarta</option>
-                                                            <option value="">jawa barat</option>
-                                                            <option value="">kalimantan barat</option>
-                                                            <option value="">nusa tenggara barat</option>
-                                                            <option value="">papua barat</option>
-                                                            <option value="">sulawesi barat</option>
-                                                            <option value="">sumatra barat</option>
-                                                        </select>
-                                                    </div>
-                                                   
-                                                    <div class="row">
-                                                        <div class="form-group col-md-4">
-                                                            <label for="kecamatan">Kecamatan</label>
-                                                            <select name="kecamatan[]" class="form-control" id="kecamatan" required >
-                                                                <option value="">Pilih Kecamatan</option>
-                                                                <option value="kecamatan A">Kecamatan A</option>
-                                                                <option value="kecamatan B">kecamatan B</option>
-                                                            </select>
-                                                        </div>
-                                                        <div class="form-group col-md-4">
-                                                            <label for="kecamatan">Kelurahan</label>
-                                                            <select name="Kelurahan[]" class="form-control" id="Kelurahan" required >
-                                                                <option value="">Pilih Kelurahan</option>
-                                                                <option value="kelurahan a">Kelurahan A</option>
-                                                                <option value="kelurahan b">Kelurahan B</option>
-                                                            </select>
-                                                        </div>
-                                                        <div class="form-group col-md-4">
-                                                            <label for="kodepos">KodePos</label>
-                                                            <input type="number" name="kodepos" id="kodepos" class="form-control" required placeholder="KodePos">  
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="form-group col-md-6">
-                                                            <label for="contactperson">Contact Person</label>
-                                                            <input type="number" name="contactperson" id="contactperson" class="form-control" required placeholder="Contact Person"> 
-                                                        </div>
-                                                        <div class="form-group col-md-6">
-                                                            <label for="email">Email</label>
-                                                            <input type="email" name="email" id="email" class="form-control" required placeholder="Email">
-                                                        </div>
-                                                    </div>  
-                                                </div>
-                                            </div>
+                                          
                                         </div>
 
                                         <div class="row group">
@@ -126,8 +45,7 @@
                                                 <div class="form-group col-md-7">
                                                     <div class="form-group">
                                                         <label for="provinsi">Provinsi</label>
-                                                        <select name="provinsi[]" class="form-control" id="provinsi" required >
-                                                            <option value="">Pilih Provinsi</option>
+                                                        <select name="provinsi[]" class="form-control selectpicker" id="provinsi" required title="Pilih Provinsi" data-live-search="true">
                                                             <option value="">aceh</option>
                                                             <option value="">bali</option>
                                                             <option value="">bangka belitung</option>
@@ -167,8 +85,7 @@
                                                     <div class="row">
                                                         <div class="form-group col-md-6" style="margin-bottom: 1rem;">
                                                             <label for="kota">Kabupaten / Kota</label>
-                                                            <select name="kota[]" class="form-control" id="kota" required >
-                                                                <option value="">Pilih Kabupaten / Kota</option>
+                                                            <select name="kota[]" class="form-control selectpicker" id="kota" required title="Pilih Kabupaten / Kota" data-live-search="true">
                                                                 <option value="">Simeulue</option> 
                                                                 <option value="">Aceh Singkil</option>
                                                                 <option value="">Aceh Selatan</option> 
@@ -195,8 +112,7 @@
                                                         </div>
                                                         <div class="form-group col-md-6" style="margin-bottom: 1rem;">
                                                             <label for="kecamatan">Kecamatan</label>
-                                                            <select name="kecamatan[]" class="form-control" id="kecamatan" required >
-                                                                <option value="">Pilih Kecamatan</option>
+                                                            <select name="kecamatan[]" class="form-control selectpicker" id="kecamatan" required title="Pilih Kecamatan" data-live-search="true">
                                                                 <option value="kecamatan A">Kecamatan A</option>
                                                                 <option value="kecamatan B">kecamatan B</option>
                                                             </select>
@@ -231,8 +147,7 @@
                                                         </div>
                                                         <div class="form-group col-md-3">
                                                             <label for="direction">Direction</label>
-                                                            <select name="direction[]" class="form-control" id="direction" required>
-                                                                <option value="">Pilih</option>
+                                                            <select name="direction[]" class="form-control selectpicker" id="direction" required title="Pilih">
                                                                 <option value="">LU</option>
                                                                 <option value="">LS</option>
                                                             </select>
@@ -256,8 +171,10 @@
                                                         </div>
                                                         <div class="form-group col-md-3">
                                                             <label for="dms">Seconds</label>
-                                                            <div class="input-group">
-                                                                <input type="number" name="dms[]" id="dms" class="form-control" required placeholder="Seconds" aria-describedby="basic-addon1">
+                                                            <div class="input-group form-group">
+                                                                <input type="number" name="dms1[]" id="dms" class="form-control input-sm" required placeholder="Seconds">
+                                                                <span class="input-group-addon" id="basic-addon1">,</span>
+                                                                <input type="number" name="dms2[]" id="dms" class="form-control input-sm" required placeholder="Seconds">
                                                                 <span class="input-group-addon" id="basic-addon1">"</span>
                                                             </div>
                                                         </div>
@@ -277,6 +194,7 @@
                                                     <div id="dermagamulti" class="wrap-2">
                                                         <div class="col-md-12">
                                                             <button type="button" id="btnTambah" class="btn btn-fill btn-primary" style="margin: 10px 0 20px 0;">
+                                                            <i class="fa fa-plus" style="margin-right: 5px;"></i>
                                                             Tambah Dermaga
                                                             </button>    
                                                         </div>  
@@ -313,8 +231,7 @@
 
                                                                 <div class="col-md-3"style="padding-left:0;margin-top: 1rem;">
                                                                     <label for="satuan">Satuan</label>
-                                                                    <select class="form-control" id="satuan" name="satuan[]" required>
-                                                                        <option value="">Pilih Satuan</option>
+                                                                    <select class="form-control selectpicker" id="satuan" name="satuan[]" required title="Pilih Satuan">
                                                                         <option>FEET</option>
                                                                         <option>GT</option>
                                                                         <option>DWT</option>
@@ -335,8 +252,7 @@
 
                                                         <div class="form-group col-md-6">
                                                             <label for="jenissk">Jenis SK / Legalitas</label>
-                                                            <select name="jenissk[]" class="form-control" id="jenissk" required>
-                                                                <option value="">Pilih Jenis SK / Legalitas</option>
+                                                            <select name="jenissk[]" class="form-control selectpicker" id="jenissk" required title="Pilih Jenis SK / Legalitas">
                                                                 <option value="">Pembangunan</option>
                                                                 <option value="">Pengembangan</option>
                                                                 <option value="">Pengoperasian</option>
@@ -354,8 +270,7 @@
         
                                                         <div class="form-group col-md-6">
                                                             <label for="kelas">Wilayah Kerja</label>
-                                                            <select name="kelas[]" class="form-control" id="kelas" required>
-                                                                <option value="">Pilih Wilayah Kerja</option>
+                                                            <select name="kelas[]" class="form-control selectpicker" id="kelas" required title="Pilih Wilayah Kerja" data-live-search="true">
                                                                 <option value="">KSOP KELAS II TERNATE</option>
                                                                 <option value="">KUPP KELAS III DARUBA</option>
                                                                 <option value="">KUPP KELAS III JAILOLO</option>
@@ -368,8 +283,7 @@
     
                                                         <div class="form-group col-md-3" >
                                                             <label for="tersus_tuks">TERSUS / TUKS</label>
-                                                            <select name="tersus_tuks[]" class="form-control" id="provinsi" required>
-                                                                <option value="">Pilih</option>
+                                                            <select name="tersus_tuks[]" class="form-control selectpicker" id="provinsi" required title="Pilih TERSUS / TUKS">
                                                                 <option value="">TERSUS</option>
                                                                 <option value="">TUKS</option>
                                                             </select>  
@@ -377,8 +291,7 @@
         
                                                         <div class="form-group col-md-3" >
                                                             <label for="status">STATUS OPERASIONAL</label>
-                                                            <select name="status[]" class="form-control" id="status" required>
-                                                                <option value="">Pilih Status</option>
+                                                            <select name="status[]" class="form-control selectpicker" id="status" required title="Pilih Status">
                                                                 <option value="aktif">AKTIF</option>
                                                                 <option value="nonaktif">NON AKTIF</option>
                                                             </select>  

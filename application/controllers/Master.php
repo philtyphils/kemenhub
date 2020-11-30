@@ -8,9 +8,10 @@ class Master extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('Master_User_Model','master');
+		$this->load->model('Dashboard_Model','dashboard');
 		$this->load->helper('url');
 		$this->load->library('session');
-		$this->load->library('encrypt');
+		$this->load->library('encryption');
 		
 	}
 	/**
@@ -29,28 +30,22 @@ class Master extends CI_Controller
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
 	public function index()
-	{
+	{		
 		$data['title'] = 'Master';
 		$data['menu'] = 'Master';
 		$data['baseurl'] = base_url();
 		$data['siteurl'] = site_url();
-<<<<<<< HEAD
-=======
-
->>>>>>> 8fcd27330c15e8274a98e3fe2355d592df0e9b67
 
 		$f = $this->master->wilayah_kerja_chart();
 		$x = $this->master->bdg_usaha_chart();
-
-<<<<<<< HEAD
-=======
-
->>>>>>> 8fcd27330c15e8274a98e3fe2355d592df0e9b67
-		$nmksop 	= array();
+		$total_rekap = $this->dashboard->getallstatus()->result();
+	
+		
+		$nmksop 		= array();
 		$wilayah_kerja 	= array();
 		foreach ($f as $key => $value)
 		{
-			$nmksop[] 		=  $value->wilayah_kerja;
+			$nmksop[] 			=  $value->wilayah_kerja;
 			$wilayah_kerja[] 	= (int) $value->TOTAL;
 		}
 
@@ -62,19 +57,46 @@ class Master extends CI_Controller
 			$bidang_usaha[]   = (int) $value->TOTAL;
 		}
 
+		$provinsi = array();
+		$tuks_aktif = array();
+		$tersus_aktif = array();
+		$tuks_nonaktif = array();
+		$tersus_nonaktif = array();
+		foreach ($total_rekap as $key => $value)
+		{
+			$provinsi[] =  $value->provinsi;
+			$tersus_nonaktif[] = (int) $value->TERSUS_NONAKTIF;
+			$tersus_aktif[] = (int) $value->TERSUS_AKTIF;
+			$tuks_aktif[] = (int) $value->TUKS_AKTIF;
+			$tuks_nonaktif[] = (int) $value->TUKS_NONAKTIF;
+			
+		}
+	
+
 		$kat_chart 		= json_encode($this->master->kategori_chart());
 
-		$data['nmksop'] 	= json_encode($nmksop);		
+		$data['nmksop'] 		= json_encode($nmksop);		
 		$data['wilayah_kerja'] 	= json_encode($wilayah_kerja);
 		$data['nmbidang_usaha'] = json_encode($nmbidang_usaha);		
 		$data['bidang_usaha'] 	= json_encode($bidang_usaha);
-		$data['kategori_chart'] = $kat_chart;
+		
+	
+		$data['provinsi'] = json_encode($provinsi);
+		
+		$data['tuks_aktif'] = json_encode($tuks_aktif);
+		$data['tuks_nonaktif'] = json_encode($tuks_nonaktif);
+		$data['tersus_aktif'] = json_encode($tersus_aktif);
+		$data['tersus_nonaktif'] = json_encode($tersus_nonaktif);
 		
 
+		$data['kategori_chart'] = $kat_chart;
+	
 		$this->load->view('templates/header',$data);
 		$this->load->view('main/master',$data);
 		
 	}
+
+	
 	
 	// public function getDataRole()
 	// {

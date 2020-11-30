@@ -8,9 +8,10 @@ class Data extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('Data_Model','datax');
+		$this->load->model('Dashboard_Model','dashboard');
 		$this->load->helper('url');
 		$this->load->library('session');
-		$this->load->library('encrypt');
+		$this->load->library('encryption');
 		
 	}
 	/**
@@ -30,16 +31,13 @@ class Data extends CI_Controller
 	 */
 	public function index()
 	{
-		$this->session->sess_destroy();
 		$data['title'] = 'Data';
 		$data['menu'] = 'Data';
 		$data['baseurl'] = base_url();
 		$data['siteurl'] = site_url();
-		$data['dataProvinsi'] 	= $this->datax->get_provinsi();
-		$data['dataKateg'] 		= $this->datax->get_kategori();
-		$data['dataBdgUsaha'] 	= $this->datax->get_bidangusaha();
-		$data['dermaga']		= $this->datax->get_dermaga();
-		$data['notification']	= $this->datax->notification();
+		$data['dataProvinsi'] = $this->datax->get_provinsi();
+		$data['dataKateg'] = $this->datax->get_kategori();
+		$data['dataBdgUsaha'] = $this->datax->get_bidangusaha();
 		$trigger ='';
 		$trigger 		= $this->input->post('trigger');
 		$namaPerusahaan = $this->input->post('name');
@@ -54,8 +52,33 @@ class Data extends CI_Controller
 		$tukter 		= $this->input->post('tuk_ter');
 		$status 		= $this->input->post('status');
 		$tglakhir 		= $this->input->post('tgl_akhir');
-		
-		
+		$tuks_aktif 	= array();
+		$tersus_aktif 	= array();
+
+		$r = $this->dashboard->status_aktif()->result();
+
+		$tersus = array(
+			array(
+				"name" => "AKTIF",
+				"y"    => (int) $r[0]->TERSUS_AKTIF
+			),
+			array(
+				"name" => "NON AKTIF",
+				"y"	   => (int) $r[0]->TERSUS_NONAKTIF
+			)
+		);
+
+		$tuks = array(
+			array(
+				"name" => "AKTIF",
+				"y"    => (int) $r[0]->TUKS_AKTIF
+			),
+			array(
+				"name" => "NON AKTIF",
+				"y"	   => (int) $r[0]->TUKS_NONAKTIF
+			)
+		);
+
 		if($trigger){
 			/* set session data for exporting */
 			$this->session->set_userdata("nm_perusahaan",$namaPerusahaan);
@@ -129,14 +152,7 @@ class Data extends CI_Controller
 			// 	$this->db->or_like('a.bdgusaha_id', $bidangusaha[$j]);
 			// }
 			if($dermaga != ''){
-				$query ="(";
-                foreach($dermaga as $k)
-                {
-                    $query = $query."a.spesifikasi LIKE '%".$k. "%' OR ";
-                }
-                $query = substr($query,0,-4);
-                $query= $query.")";
-                $this->db->where($query);
+				$this->db->like('a.spesifikasi', $dermaga);
 			}
 			if($meter != ''){
 				$this->db->like('a.spesifikasi', $meter);
@@ -153,19 +169,14 @@ class Data extends CI_Controller
 			if($tglakhir != ''){
 				$tgl =explode("-", $tglakhir);
 				$t = $tgl[1].'-'.$tgl[0];
-				$this->db->where('ms_berlaku BETWEEN "'.$tgl[1].'-'.$tgl[0].'-01 00:00:00" AND "'.$tgl[1].'-'.$tgl[0].'-30 00:00:00"');
+				$this->db->where('substr(a.tgl_terbit,1,7)', $t);
 			}
-		
-			$this->db->order_by('a.provinsi_id','asc');
-			$this->db->order_by('a.nm_perusahaan','asc');
 			$return 		= $this->db->get()->result();
 			$data['jumlah'] = count($return);
 			$data['company'] = $return;
 			$this->load->view('templates/header',$data);
 			$this->load->view('main/data',$data);
 		} else {
-			$this->db->order_by('a.provinsi_id','asc');
-			$this->db->order_by('a.nm_perusahaan','asc');
 			$this->db->select('a.*,b.name as nmprov,c.nama as nmksop,d.nama as nmusaha,e.nama as nmkateg');
 	        $this->db->from('daftar_perusahaan as a');
 	        $this->db->join('provinsi as b','a.provinsi_id=b.id','left');
@@ -175,22 +186,13 @@ class Data extends CI_Controller
 			$return 		= $this->db->get()->result();
 			$data['jumlah'] = count($return);
 			$data['company'] = $return;
+			$data['tuks'] = json_encode($tuks);		
+			$data['tersus'] = json_encode($tersus);
 			$this->load->view('templates/header',$data);
 			$this->load->view('main/data',$data);
 		}
 	
 	}
-
-	public function load_view($id)
-	{
-		$data['id'] = (int) $id;
-		$data['dataProvinsi'] = $this->datax->get_provinsi();
-		$data['dataBdgUsaha'] = $this->datax->get_bidangusaha();
-
-		$this->load->view('main/load_view',$data);
-		
-	}
-
 	
 	public function get_Kota()
 	{
@@ -198,28 +200,12 @@ class Data extends CI_Controller
 		$provinsi = $this->input->post('provinsi');
 		$dataprov = $this->datax->get_Kota($provinsi);
 		
-		$html .='<option value="" selected readonly>Pilih Kabupaten / Kota</option>';
-		if(count($dataprov) > 0)
-		{
-        	foreach ($dataprov as $list) {
-
-        	 $html .= '<option value="'.trim($list->nama).'">'.trim($list->nama).'</option>';
-			}
-		}
-	    echo json_encode($html); 
-	}
-
-	public function get_Kota2()
-	{
-		$html='';
-        $provinsi = $this->input->post('provinsi');
-        $dataprov = $this->datax->get_Kota2($provinsi);
-        $html .='<option value="">Pilih Kabupaten / Kota</option>';
+        $html .='<option value="" readonly>Pilih Kabupaten / Kota</option>';
         foreach ($dataprov as $list) {
-             $html .= '<option value="'.trim($list->kode).'|'.trim($list->nama).'">'.trim($list->nama).'</option>';
-        	}
-	        echo json_encode($html); 
-	}  
+         $html .= '<option value="'.trim($list->nama).'">'.trim($list->nama).'</option>';
+        }
+	    echo json_encode($html); 
+	} 
 
 	public function get_Kelas()
 	{
@@ -233,290 +219,95 @@ class Data extends CI_Controller
         	}
 	        echo json_encode($html); 
 	} 
+	
 
-	public function get_Kelas2()
+	public function getData()
 	{
-		$html='';
-        $kelas = $this->input->post('kota');
-
-        $datakelas = $this->datax->get_Kelas2($kelas);
-        $html .='<option value="">Pilih Wilayah Kerja</option>';
-        foreach ($datakelas as $list) {
-             $html .= '<option value="'.trim($list->ksop_id).'">'.trim($list->nama).'</option>';
-        	}
-	        echo json_encode($html); 
-	} 
-
-	public function get_Kecamatan()
-	{
-		$html='';
-        $kecamatan = $this->input->post('kota');
-
-        $datakelas = $this->datax->get_Kecamatan($kecamatan);
-        $html .='<option value="">Pilih Kecamatan</option>';
-        foreach ($datakelas as $list) {
-             $html .= '<option value="'.trim($list->kode).'|'.trim($list->nama).'">'.trim($list->nama).'</option>';
-        	}
-	        echo json_encode($html); 
-	} 
-
-	public function get_Kecamatan2()
-	{
-		$html='';
-        $kecamatan = $this->input->post('provinsi');
-
-        $datakecamatan = $this->datax->get_Kecamatan2($kecamatan);
-        $html .='<option value="">Pilih Kecamatan</option>';
-        foreach ($datakecamatan as $list) {
-             $html .= '<option value="'.trim($list->kode).'|'.trim($list->nama).'">'.trim($list->nama).'</option>';
-        	}
-	        echo json_encode($html); 
-	} 
-
-	public function get_Kelurahan()
-	{
-		$html='';
-        $kelurahan = $this->input->post('kecamatan');
-
-        $datakelurahan = $this->datax->get_Kelurahan($kelurahan);
-        $html .='<option value="">Pilih Kelurahan</option>';
-        foreach ($datakelurahan as $list) {
-         $html .= '<option value="'.trim($list->kode).'|'.trim($list->nama).'">'.trim($list->nama).'</option>';
-        }
-	    echo json_encode($html); 
-	} 
-
-	public function create()
-	{
-		$data['title'] = 'Create Data';
-		$data['menu'] = 'Create Data';
+		var_dump('bambaaaan');
+		$data['title'] = 'Data';
+		$data['menu'] = 'Data';
 		$data['baseurl'] = base_url();
 		$data['siteurl'] = site_url();
 		$data['dataProvinsi'] = $this->datax->get_provinsi();
+		$data['dataKateg'] = $this->datax->get_kategori();
 		$data['dataBdgUsaha'] = $this->datax->get_bidangusaha();
-		$data['jenis_sk']     = $this->datax->jenis_sk();
+		$namaPerusahaan = $this->input->post('name');
+		$this->db->from('daftar_perusahaan');
+		$this->db->like('nm_perusahaan', $namaPerusahaan);
+		$data['company'] = $this->db->get()->result();
 
 		$this->load->view('templates/header',$data);
-		$this->load->view('main/data_create',$data);
+		$this->load->view('main/data',$data);
+  		//       $name = trim($this->input->post('name'));
+		// $provinsi = trim($this->input->post('provinsi'));
+		// $kota = trim($this->input->post('kota'));
+		// $kelas = trim($this->input->post('kelas'));
+		// $kategori = trim($this->input->post('kategori'));
+		// $bidangusaha = $this->input->post('bidangusaha');
+		// $dermaga = trim($this->input->post('dermaga'));
+		// $meter = trim($this->input->post('meter')); 
+		// $kapasitas = trim($this->input->post('kapasitas'));
+		// $tuk_ter = trim($this->input->post('tuk_ter'));
+		// $status = trim($this->input->post('status'));
+		// $tgl_akhir = trim($this->input->post('tgl_akhir'));
+
+		// $cek=$this->datax->getData($name,$provinsi,$kota,$kelas,$kategori,$bidangusaha,$dermaga,$meter,$kapasitas,$tuk_ter,$status,$tgl_akhir);
+		// echo json_encode($cek);
+
+		// $html ="";
+		// $param1 = $this->security->xss_clean($this->input->post("param"));
+		// $data = $this->datax->getData($param1);
+
+		// $i=1;
+            
+        // foreach($data as $row)
+        // {
+        //    	$html .="<tr role='row'>";
+        //    	$html .="<td>".$i."</td>";
+        //     $html .="<td><font style='font-weight: bold;'>".trim($row->nm_perusahaan)."</font></td>";
+        //    	$html .="<td><font class='td-status2'>".trim($row->alamat)."</font></td>";
+        //     $html .="<td>".$row->nmksop."</td>";
+        //     // $html .="<td>".$row['nmprov']."</td>";
+        //     $html .="<td>".$row->nmusaha."</td>";
+        //     $html .="<td>".$row->nmkateg."</td>";
+        //     $html .="<td>".trim($row->lokasi)."</td>";
+        //     $html .="<td>".trim($row->koordinat)."</td>";
+        //     $html .="<td>".trim($row->spesifikasi)."</td>";
+        //     if(trim($row->ter_tuk)=='TUKS')
+        //     {
+        //         $html .="<td><font class='td-status' style='color: #A3A0FB;'>".trim($row->ter_tuk)."</font></td>";
+        //     }else{
+        //         $html .="<td>.<font class='td-status' style='color: #6bd189;'>".trim($row->ter_tuk)."</font></td>";
+        //     }
+
+        //     $html .="<td>".trim($row->sk)."</td>";
+        //     $html .="<td>".date('d-m-Y', strtotime(trim($row->tgl_terbit)))."</td>";
+        //     if(trim($row->status)=='Y')
+        //     {
+        //         $html .="<td><font class='td-status' style='color: #649e07;'>AKTIF</font></td>";
+        //     }else{
+        //         $html .="<td><font class='td-status' style='color: red;'>TIDAK AKTIF</font></td>";                
+        //     }
+        //     $html .="<td>".date('d-m-Y', strtotime(trim($row->ms_berlaku)))."</td>";
+        //     $html .='<td><a class="btn btn-simple btn-warning btn-icon btnedit" href="javascript:void(0)" title="Ubah" onclick="edit_Datax('."'".$row->id."'".')"><i class="fa fa-edit"></i></a>
+        //         <a class="btn btn-simple btn-danger btn-icon btndelete" href="javascript:void(0)" title="Hapus" onclick="delete_Datax('."'".$row->id."'".')"><i class="fa fa-times"></i></a></td>';
+		// 	$html .='</tr>';
+			
+        //     $i++;
+        
+        // }  
+        
+        // echo json_encode($html);
+		
 	}
 
-	public function edit($id)
-	{
-		$f = $this->datax->_getspesifikasi($id);
-		foreach($f as $key => $value)
-		{
-			$split = preg_split("/(. DERMAGA|.DERMAGA|\s\|\s)/",$value->spesifikasi);
-			$tipe = array();
-			$spesifikasi = array();
-			$peruntukan = array();
-			$kapasitas = array();
-			$kedalaman = array();
-			$satuan  	= array();
-			$results = array();
-			
-			if(count($split) > 1)
-			{
-				foreach($split as $key => $value)
-				{
-				
-					$a 			= preg_match("/TIPE:([a-zA-Z\s]+)/",$value,$tipe);
-					$b 			= preg_match("/TIPE:[a-zA-Z\s]+,(.*), KEDALAMAN:/",$value,$spesifikasi);
-					$c 			= preg_match("/PERUNTUKAN:([a-zA-Z\s]+)/",$value,$peruntukan);
-					$d 			= preg_match("/KEDALAMAN:(.*)(\sM LWS|M LWS),/",$value,$kedalaman);
-					$e 			= preg_match("/MAKSIMUM\s+([0-9*]+.+[0-9*])+/",$value,$kapasitas);
-					$f 			= preg_match("/MAKSIMUM\s+[0-9.\s*]+([a-zA-Z+]{3,4})/",$value,$satuan);
-					
-					$result = array(
-						"tipe" 			=> (count($tipe) > 1) ? trim($tipe[1]) : "",
-						"spesifikasi" 	=> (count($spesifikasi) > 1) ? trim($spesifikasi[1]) : "",
-						"peruntukan" 	=> (count($peruntukan) > 1) ? trim($peruntukan[1]) : "",
-						"kedalaman" 	=> (count($kedalaman) > 1) ? trim($kedalaman[1]) : "",
-						"kapasitas" 	=> (count($kapasitas) > 1) ? str_replace(",",".",trim($kapasitas[1])) : "",
-						"satuan" 	=> (count($satuan) > 1) ? trim($satuan[1]) : "",
-					);
-					$results[] = $result;
 
-
-				}
-			}
-			else
-			{
-				$a 			= preg_match("/TIPE:([a-zA-Z\s()*]+),/",$split[0],$tipe);
-				$b 			= preg_match("/TIPE:[a-zA-Z\s0-9()]+,(.*), KEDALAMAN:/",$split[0],$spesifikasi);
-				$c 			= preg_match("/PERUNTUKAN:([a-zA-Z\s]+)/",$split[0],$peruntukan);
-				$d 			= preg_match("/KEDALAMAN:(.*)\sM LWS/",$split[0],$kedalaman);
-				$e 			= preg_match("/MAKSIMUM\s+([0-9*]+)/",$split[0],$kapasitas);
-				$f 			= preg_match("/MAKSIMUM\s+[0-9.\s*]+([a-zA-Z+]{3,4})/",$split[0],$satuan);
-
-			
-				$result = array(
-					"tipe" 			=> (count($tipe) > 1) ? trim($tipe[1]) : "",
-					"spesifikasi" 	=> (count($spesifikasi) > 1) ? trim($spesifikasi[1]) : "",
-					"peruntukan" 	=> (count($peruntukan) > 1) ? trim($peruntukan[1]) : "",
-					"kedalaman" 	=> (count($kedalaman) > 1) ? trim($kedalaman[1]) : "",
-					"kapasitas" 	=> (count($kapasitas) > 1) ? str_replace(",",".",trim($kapasitas[1])) : "",
-					"satuan" 	=> (count($satuan) > 1) ? trim($satuan[1]) : "",
-				);
-				$results[] = $result;
-			}
-			
-		}
-		/* Split the koordinat value */
-		$selected 			  			= $this->datax->_getSingleData($id);
-		$selected['data']->koordinat	= str_replace("-","",$selected['data']->koordinat);
-		$split 							= preg_split("/[°º⁰˚'\"”\/]+/",str_replace(",",".",$selected['data']->koordinat));
-		$selected['data']->koordinat	= $split;
-		$data['title'] 					= 'Edit Data';
-		$data['menu'] 					= 'Edit Data';
-		$data['baseurl'] 				= base_url();
-		$data['siteurl'] 	  			= site_url();
-		$data['data']		  			= $selected;
-		$data['dermaga']				= $results;	
-		$data['dataProvinsi'] 			= $this->datax->get_provinsi();
-		$data['dataBdgUsaha'] 			= $this->datax->get_bidangusaha();
-		$data['notification']			= $this->datax->notification();
-
-		$this->load->view('templates/header',$data);
-		$this->load->view('main/data_edit',$data);
-	}
-
-	public function submit($action)
-	{
-		$post = $this->input->post();
-		if($action == "create")
-		{
-			$this->load->library('form_validation');
-            $this->form_validation->set_rules('name', 'Nama Perusahaan', 'required',
-                    array('required' => 'Pastikan %s telah terisi.')
-            );
-            $this->form_validation->set_rules('email', 'Email', 'required',
-					array('required' => 'Pastikan %s telah terisi.')
-			);
-
-			$this->form_validation->set_rules('nosk', 'Nomor SK', 'check_nosk_callback',
-					array('required' => 'Pastikan %s telah terisi dan belum terdaftar.')
-			);
-
-			$this->form_validation->set_rules('d_lat', 'Degree Latitude', 'check_dlat_callback');
-			$this->form_validation->set_rules('m_lat', 'Minutes Latitude', 'check_mlat_callback');
-			$this->form_validation->set_rules('s_lat', 'Second Latitude', 'check_mlat_callback');
-			$this->form_validation->set_rules('d_long', 'Degree Latitude', 'check_dlat_callback');
-			$this->form_validation->set_rules('m_long', 'Degree Latitude', 'check_mlat_callback');
-			$this->form_validation->set_rules('s_long', 'Degree Latitude', 'check_slat_callback');
-			$this->form_validation->set_rules('kelas', 'Wilayah Kerja', 'check_provf_callback');
-			$this->form_validation->set_rules('provinsi_f', 'Provinsi Lokasi', 'check_provf_callback');
-			
-            if ($this->form_validation->run() == FALSE)
-            {
-				$alert = array('teks'=> '<div class="alert-danger text-center" role="alert"><b>'. validation_errors().'</b></div>');
-				$this->session->set_flashdata($alert);
-				redirect(base_url()."Data/create");
-            }
-            else
-            {
-                $data = $this->datax->create($this->input->post());
-			
-				$alert = array('teks'=>'<div class="alert-danger text-center" role="alert"><b> CREATE DATA GAGAL!</b></div>');
-				if($data)
-				{
-					$alert = array('teks'=>'<div style="padding:10%" class="alert-success text-center" role="alert"><b> CREATE DATA BERHASIL !</b></div>');
-				}
-				$this->session->set_flashdata($alert);
-				redirect(base_url()."Data/create");
-				
-			}
-
-			
-		}
-
-		if($action == "edit")
-		{
-			$data 	= $this->datax->edit($post);
-			$alert 	= array('teks'=>'<div class="alert-danger text-center" role="alert"><b> EDIT DATA GAGAL!</b></div>');
-			if($data)
-			{
-				$alert = array('teks'=>'<div class="alert-success text-center" role="alert"><b> EDIT DATA BERHASIL !</b></div>');
-			}
-			$this->session->set_flashdata($alert);
-			redirect(base_url()."Data/edit/".$post['_id']);
-		}
-
-		if($action == "delete")
-		{
-			$data = $this->datax->delete($id);
-			$alert 	= array('teks'=>'<div class="alert-danger text-center" role="alert"><b> DELETE DATA GAGAL!</b></div>');
-			if($data)
-			{
-				$alert = array('teks'=>'<div class="alert-success text-center" role="alert"><b> DELETE DATA BERHASIL !</b></div>');
-			}
-			$this->session->set_flashdata($alert);
-			echo json_encode(array("status" => 200,"data" => "Successfully"));
-		}
-
-	}
-
-	public function check_nosk($arr)
-	{
-		foreach($arr as $key => $value)
-		{
-			
-			if($value == "" || empty($value))
-			{
-				$this->form_validation->set_message('check_nosk', 'Kolom {field} harus terisi.');
-				return FALSE;
-			}
-			
-			$data = $this->datax->check_sk($value);
-			if($data > 0)
-			{
-				$this->form_validation->set_message('check_nosk', '{field} telah terdaftar.');
-				return FALSE;
-			}
-				
-		}
-
-		return TRUE;
-	}
-
-	public function check_dlat($arr)
-	{
-		foreach($arr as $key => $value)
-		{
-			if(!isset($value) || $value == "" || $value > 11)
-			{
-				$this->form_validation->set_message('check_nosk', '{field} harus diisi dan diantara 0-11.');
-				return FALSE;
-			}
-		}
-		return TRUE;
-	}
-
-	public function check_mlat($arr)
-	{
-		foreach($arr as $key => $value)
-		{
-			if(!isset($value) || $value == "" || $value > 60)
-			{
-				$this->form_validation->set_message('check_nosk', '{field} harus diisi dan diantara 1-60.');
-				return FALSE;
-			}
-		}
-		return TRUE;
-	}
-
-	public function check_provf($arr)
-	{
-		foreach($arr as $key => $value)
-		{
-			if($value == "" || empty($value))
-			{
-				$this->form_validation->set_message('check_provf', '{field} harus terisi.');
-				return FALSE;
-			}
-		}
-
-		return TRUE;
-	}
+	// public function getDataRole()
+	// {
+	// 	$ID_USER = trim($this->input->post('USER_ID'));
+	// 	$cek=$this->Home_model->getDataRole($ID_USER);
+	// 	echo json_encode($cek);
+	// }
 	
 }
 ?>

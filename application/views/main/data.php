@@ -1,64 +1,81 @@
 
             <div class="contents">
-                <div class="container-fluid">
-                    <div class="row">
-                        <h2 class="title"></h2>
-                        <div class="col-md-12">
+                <div class="container-fluid"> 
+                            <div class="row">
+                                <div class="col-md-12" style="padding: 0;">
+                                    <div class="col-md-4">
+                                        <div class="card-chart">
+                                            <div class="header" style="padding: 0 15px;">
+                                            <h4 class="title">TERSUS</h4>
+                                            <p class="category" style="color: #AAAAAA; font-weight: 300;font-size:1.2rem;">Jumlah Total TERSUS semua Provinsi</p>
+                                            </div>
+                                            <div id="container-pie3"></div>  
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card-chart">
+                                            <div class="header" style="padding: 0 15px;">
+                                            <h4 class="title">TUKS</h4>
+                                            <p class="category" style="color: #AAAAAA; font-weight: 300;font-size:1.2rem;">Jumlah Total TUKS semua Provinsi</p>
+                                            </div>
+                                            <div id="container-pie4"></div>  
+                                        </div>
+                                    </div>
+                                </div>   
+                            </div>  
+                       
                             <div class="card">
                                 <div class="header-master">
                                     <div class="header">
-                                        <h4 class="title">TERSUS & TUKS DATATABLE</h4>
-                                        <!-- <p class="category" style="color: #AAAAAA; font-weight: 300;">REKAPITULASI TERSUS & TUKS DATATABLE </p> -->
+                                        <h4 class="title">TERSUS & TUKS DATA TABLE</h4>
                                     </div>
                                     <span class="fa fa-folder-open"></span>
                                 </div>
-                                <div class="card-content" style="padding-top: 60px;">
-                                    <div class="warp-toolbar">
+
+                            <div class="row">
+                                <div class="card-content col-md-12" style="padding-top: 10px;">
+                                    <div class="warp-toolbar col-md-12">
                                         <form action="" class="search">
                                             <input type="text" id="searchbox" placeholder="Silahkan cari data disini..." class="searchbutton">
                                             <i class="fa fa-search" aria-hidden="true"></i>
                                         </form>
                                     </div>
                                    
-                                    <div class="wrap-toolbar col-md-2">
-                                        <button type="button" id="btnsearch" class="btn btn-success btn-fill" style="margin-right: 1rem">
-                                            <i class="fa fa-search" aria-hidden="true" style="margin-right: 10px;"></i>
-                                            <span>Filter</span>
-                                        </button>
-                                    </div>
-
-                                    <div class="toolbar col-md-12" style="padding: 0;">
-                                       
-                                    <h4 style="font-weight: 400;color: #AAAAAA;letter-spacing: 2px;font-size: 20px;margin-top: 2rem;">TOTAL : <?php echo number_format($jumlah,0,',','.');?></h4>
-                                    <div class="wrap-toolbar" style="margin: 0;">
-                                        <a href="<?php echo $baseurl."Data/create";?>" class="btn btn-success btn-fill" style="margin-right: 1rem;">
-                                            <i class="fa fa-plus"></i>
-                                            <span>Buat Data Baru</span>  
-                                        </a>
-                                        <a href="#" class="btn btn-info btn-fill export-excel">
-                                            <i class="fa fa-download"></i>
-                                            <span>Export Data Excel</span>   
-                                        </a>
-                                        
-                                        <a href="#" class="btn btn-default btn-fill export-csv">
-                                            <i class="fa fa-globe"></i>
-                                            <span>Export Data CSV To Map</span>   
-                                        </a>  
-                                    </div>
+                                    <div class="toolbar col-md-12">
+                                        <div class="wrap-toolbar">
+                                            <button type="button" id="btnsearch" class="btn btn-success btn-fill" style="margin-right: 1rem">
+                                            <i class="fa fa-filter" aria-hidden="true" style="margin-right: 10px;"></i>
+                                            <span>FILTER DATA</span>
+                                            </button>
+                                            <h4 style="font-weight: 400;color: #AAAAAA;letter-spacing: 2px;font-size: 18px;display: contents;">TOTAL : <?php echo number_format($jumlah,0,',','.');?></h4>    
+                                        </div>
+    
+                                        <div class="wrap-toolbar" style="margin: 0;">
+                                            <a href="<?php echo $baseurl;?>Form" class="btn btn-success btn-fill" style="margin-right: 1rem;">
+                                                <i class="fa fa-plus"></i>
+                                                <span>Buat Data Baru</span>  
+                                            </a>
+                                            <a href="#" class="btn btn-info btn-fill export-excel">
+                                                <i class="fa fa-download"></i>
+                                                <span>Export Data Excel</span>   
+                                            </a>
+                                            
+                                            <a href="#" class="btn btn-default btn-fill export-csv">
+                                                <i class="fa fa-globe"></i>
+                                                <span>Export Data CSV To Map</span>   
+                                            </a>  
+                                        </div>
                                     </div>
                                    
-
-                                    <div class="material-datatables">
-
+                                   
+                                    <div class="material-datatables col-md-12">
                                         <table id="datatables" class="table table-responsive  table-no-bordered table-hover" cellspacing="0" width="100%" style="font-size: 13px;">
                                             <thead style="color: #FFFFFF;font-weight: 600;font-size: 12px;">
                                                 <tr role="row" style="background-color:#43425D;">
                                                     <th>No</th>
                                                     <th>NAMA PERUSAHAAN</th>
-                                                    <th>ALAMAT PERUSAHAAN</th>
                                                     <th>WILAYAH KERJA</th>
                                                     <th>BIDANG USAHA</th>
-                                                    <th>KATEGORI</th>
                                                     <th>LOKASI</th>
                                                     <th>KOORDINAT</th>
                                                     <th>SPESIFIKASI</th>
@@ -81,10 +98,8 @@
                                                 <?php endif; ?>   
                                                     <td><?php echo $no++; ?></td>
                                                     <td style="font-weight: bold;"><?php echo $val->nm_perusahaan; ?></td>
-                                                    <td><?php echo $val->alamat; ?></td>
                                                     <td class="td-status2"><?php echo $val->nmksop; ?></td>
                                                     <td><?php echo $val->nmusaha; ?></td>
-                                                    <td><?php echo $val->nmkateg; ?></td>
                                                     <td><?php echo $val->lokasi; ?></td>
                                                     <td><?php echo $val->koordinat; ?></td>
                                                     <td>
@@ -116,13 +131,13 @@
                                                     <?php } ?>
                                                     <td><?php echo date("d M Y",strtotime($val->ms_berlaku)); ?></td>
                                                     <td>
-                                                        <a href="<?php echo $baseurl."Data/edit/".$val->id;?>" class="btn btn-simple btn-warning btn-icon edit">
-							                                <i class="fa fa-edit"></i>
-					                                    </a>
-                                                        <button id="delete" personal-id="<?php echo $val->id;?>" data-toggle="modal" data-target="#delete-modal" class="btn btn-simple btn-danger btn-icon remove">
+                                                        <a href="#" class="btn btn-simple btn-warning btn-icon edit">
+                                                            <i class="fa fa-edit"></i>
+                                                        </a>
+                                                        <button id="delete" data-toggle="modal" data-target="#delete-modal" class="btn btn-simple btn-danger btn-icon remove">
                                                             <i class="fa fa-times"></i>
-					                                    </button>
-                                                    </td>                         
+                                                        </button>
+                                                    </td>                           
                                                 </tr>
                                                 <?php endforeach; ?>
                                             </tbody>
@@ -134,7 +149,7 @@
 
                             </div>
                         </div>
-                    </div>
+                    
                 </div>
             </div>
 
@@ -172,7 +187,7 @@
                 <button type="button" class="close" data-dismiss="modal" style="color: #ffff;outline: none;opacity: 1;">&times;</button>
             </div>
             <div class="modal-body" style="padding: 50px;">
-                <h5 class="title-form">Cari Data</h5>
+            <h5 class="title-form">FILTER DATA</h5>
  
                 <form role="form" id="frmcari" action="<?= base_url('Data'); ?>" method="post">
                     <div class="row">
@@ -189,10 +204,9 @@
                         <label for="provinsi">Provinsi</label>
                         <!-- <input id="Param02" value="provinsi_id"  type="hidden"> -->
                         <!-- <select name="provinsi[]" class="form-control selectpicker" id="Filt02" data-live-search="true" required > -->
-                        <select name="provinsi[]"  multiple data-live-search="true" class="form-control selectpicker" id="Filt02" >
-                            <option value="" disabled>Pilih Provinsi</option>
+                        <select name="provinsi[]"  class="form-control selectpicker" id="Filt02" multiple data-live-search="true" title="Pilih Provinsi">
                             <?php for($i=0;$i<count($dataProvinsi);$i++){?>
-                                <option value="<?php echo trim($dataProvinsi[$i]->kode); ?>"><?php echo $dataProvinsi[$i]->nama; ?></option>
+                            <option value="<?php echo trim($dataProvinsi[$i]->kode); ?>"><?php echo $dataProvinsi[$i]->nama; ?></option>
                             <?php } ?>
                         </select>
                     </div>
@@ -201,8 +215,8 @@
                         <label for="kota">Kabupaten / Kota</label>
                         <!-- <input id="Param03" value="lokasi"  type="hidden"> -->
                         <!-- <select name="kota[]" class="form-control selectpicker" id="Filt03" data-live-search="true" required > -->
-                        <select name="kota" class="form-control selectpicker" id="Filt03" data-live-search="true" >
-                            <option value="" readonly selected>Pilih Kabupaten / Kota</option>
+                        <select name="kota" class="form-control selectpicker" id="Filt03" data-live-search="true" title="Pilih Kabupaten / Kota">
+                            <option value="">Kabupaten / Kota</option>
                         </select>
                     </div>
 
@@ -210,8 +224,8 @@
                         <label for="kelas">Wilayah Kerja</label>
                         <!-- <input id="Param04" value="ksop_id"  type="hidden"> -->
                         <!-- <select name="kelas[]" class="form-control" id="Filt04" required> -->
-                        <select name="kelas" class="form-control selectpicker" id="Filt04" data-live-search="true" >
-                           <option value="">Pilih Wilayah Kerja</option>
+                        <select name="kelas" class="selectpicker form-control" id="Filt04" title="Pilih Wilayah Kerja" data-live-search="true" multiple>
+                           <option value="">KSOPP</option>
                         </select>
                     </div>
                   </div>
@@ -221,10 +235,7 @@
                         <label for="kategori">Kategori</label>
                         <!-- <input id="Param05" value="kategori_id"  type="hidden"> -->
                         <!-- <select class="selectpicker form-control" multiple data-live-search="true" title="Kategori" name="kategori[]" id="Filt05"> -->
-
-                        <select class="selectpicker form-control" multiple data-live-search="true" title="Kategori" name="kategori[]" id="kategori">
-                                <option value="" disabled>Pilih Kategori</option>
-
+                        <select class="selectpicker form-control" multiple data-live-search="true" title="Pilih Kategori" name="kategori[]" id="Filt05">
                                 <?php for($j=0;$j<count($dataKateg);$j++){?>
                                     <option value="<?php echo trim($dataKateg[$j]->kategori_id); ?>"><?php echo $dataKateg[$j]->nama; ?></option>
                                 <?php } ?>
@@ -234,9 +245,7 @@
                         <label for="bidangusaha">Bidang Usaha</label>
                         <!-- <input id="Param06" value="bdgusaha_id"  type="hidden"> -->
                         <!-- <select class="selectpicker form-control" multiple data-live-search="true" title="Bidang Usaha" name="bidangusaha" id="Filt06"> -->
-                        <select class="selectpicker form-control" multiple data-live-search="true" title="Bidang Usaha" name="bidangusaha[]" id="bidangusaha">
-                                <option value="" disabled>Pilih Bidang Usaha</option>
-
+                        <select class="selectpicker form-control" multiple data-live-search="true" title="Bidang Usaha" name="bidangusaha[]" id="Filt06">
                                 <?php for($k=0;$k<count($dataBdgUsaha);$k++){?>
                                     <option value="<?php echo trim($dataBdgUsaha[$k]->bdg_usaha_id); ?>"><?php echo $dataBdgUsaha[$k]->nama; ?></option>
                                 <?php } ?>
@@ -249,14 +258,15 @@
                         <label for="dermaga">Type Dermaga</label>
                         <!-- <input id="Param07" value="spesifikasi"  type="hidden"> -->
                         <!-- <select class="selectpicker form-control" multiple data-live-search="true" title="Type Dermaga" id="Filt07"> -->
-                        <select class="selectpicker form-control" multiple data-live-search="true" title="Type Dermaga" name="dermaga[]">
-                            <option value="" disabled>Pilih Dermaga</option>
-                            <?php foreach($dermaga as $key => $value): ?>
-                                <option value="<?php echo $value->type;?>"><?php echo $value->type;?></option>
-                            <?php endforeach;?>
+                        <select class="selectpicker form-control" multiple data-live-search="true" title="Type Dermaga" id="Filt07" name="dermaga">
+                            <option>DERMAGA I TIPE MARGINAL</option>
+                            <option>DERMAGA TIPE FINGER</option>
+                            <option>DERMAGA TIPE JETTY HEAD</option>
+                            <option>DERMAGA A TIPE JETTY</option>
+                            <option>DERMAGA TIPE CONVENTIONAL BUOY MOORING (CBM)</option>
                         </select>
                     </div>
-                    <div class="form-group col-md-4" style="margin-bottom: 1rem;">
+                    <div class="form-group col-md-3" style="margin-bottom: 1rem;">
                         <label for="kedalaman">Kedalaman</label>
                         <!-- <input id="Param08" value="spek_kedalaman"  type="hidden"> -->
                         <div class="input-group">
@@ -265,31 +275,37 @@
                             <span class="input-group-addon" id="basic-addon1">M LWS</span>
                         </div>                                                       
                     </div>
-                    <div class="col-md-4" style="margin-bottom: 1rem;">
+                    <div class="col-md-3" style="margin-bottom: 1rem;">
                         <label for="kapasitas">Kapasitas</label>
                         <!-- <input id="Param09" value="spek_kapasitas"  type="hidden"> -->
                         <!-- <input type="number" name="kapasitas" id="Filt09" class="form-control" required placeholder="Kapasitas"> -->
                         <input type="number" name="kapasitas" id="Filt09" class="form-control" placeholder="Kapasitas">
                     </div>
+                    <div class="col-md-2" style="margin-bottom: 1rem;">
+                        <label for="satuan">Satuan</label>
+                        <select class="selectpicker form-control" id="satuan" name="satuan[]" required title="Pilih Satuan">
+                            <option>FEET</option>
+                            <option>GT</option>
+                            <option>DWT</option>
+                        </select>    
+                    </div>
                   </div>
 
                   <div class="row">
                     <div class="form-group col-md-4">
-                        <label for="tukstersus">TUKS /  TERSUS</label>
+                        <label for="tukstersus">TERSUS / TUKS</label>
                         <!-- <input id="Param10" value="ter_tuk"  type="hidden"> -->
                         <!-- <select class="selectpicker form-control" id="Filt10" name="tuk_ter"> -->
-                        <select class="selectpicker form-control" id="Filt10" name="tuk_ter">
-                            <option value="" selected readonly>Pilih TUKS / TERSUS</option>
-                            <option value="TUKS">TUKS</option>
+                        <select class="selectpicker form-control" id="Filt10" name="tuk_ter" title="Pilih TERSUS / TUKS">
                             <option value="TERSUS">TERSUS</option>
+                            <option value="TUKS">TUKS</option>
                         </select>                       
                     </div>
                     <div class="form-group col-md-4">
-                        <label for="status">STATUS</label>
+                        <label for="status">STATUS OPERASIONAL</label>
                         <!-- <input id="Param11" value="status"  type="hidden">
                         <select class="selectpicker form-control" id="Filt11" name="status"> -->
-                        <select class="selectpicker form-control" id="Filt11" name="status">
-                            <option value="">Pilih Status</option>
+                        <select class="selectpicker form-control" id="Filt11" name="status" title="Pilih Status">
                             <option value="Y">AKTIF</option>
                             <option value="N">NON AKTIF</option>
                         </select>
@@ -306,7 +322,7 @@
                         </div>
                     </div>
                   </div>
-                  <button id="btnCari" type="submit" class="btn btn-success btn-fill">Cari Data</button>
+                  <button type="submit" class="btn btn-success btn-fill">FILTER NOW</button>
 
               </form>
 
@@ -345,13 +361,11 @@
                     </div>
                     
                     <div class="form-group col-md-12" style="padding-left: 0;margin-bottom: 1rem;">
-                        <label for="satuan">Satuan</label>
-                        <select class="form-control" id="satuan" name="satuan[]" required>
-                            <option value="">Pilih Satuan</option>
-                            <option value="FEET">FEET</option>
-                            <option value="GT">GT</option>
-                            <option value="DWT">DWT</option>
-                            <option value="TON">TON</option>
+                        <label for="satuan2">Satuan</label>
+                        <select class="form-control selectpicker" id="satuan2" name="satuan" required title="Pilih Satuan">
+                            <option>FEET</option>
+                            <option>GT</option>
+                            <option>DWT</option>
                         </select>                      
                     </div>
                     <button type="submit" class="btn btn-success btn-fill">Cari Data</button>
@@ -361,7 +375,6 @@
     </div>
 </div>
 <!-- MODAL SEARCH-->
-
 <!--======================================== MODAL SINGLE SPESIFICATION  ======================================-->
 
 <div class="modal fade" role="dialog" id="modal-spesifikasi">
@@ -401,6 +414,7 @@
 
 <!--============================================================================================================-->
 
+
 </body>
 
 
@@ -408,10 +422,16 @@
 <script src="<?php echo $baseurl;?>assets/js/bootstrap.min.js" type="text/javascript"></script>
 <script src="<?php echo $baseurl;?>assets/js/light-bootstrap-dashboard.js"></script>
 <script src="<?php echo $baseurl;?>assets/js/bootstrap-select.min.js"></script>
-<script src="<?php echo $baseurl;?>assets/js/jquery.datatables.js"></script>
 <script src="<?php echo $baseurl;?>assets/js/bootstrap-datepicker.js"></script>
+<script src="<?php echo $baseurl;?>assets/js/jquery.datatables.js"></script>
+<script src="<?php echo $baseurl;?>assets/js/highchart/highcharts.js"></script>
+<script src="<?php echo $baseurl;?>assets/js/highchart/highcharts-exporting.js"></script>
+<script src="<?php echo $baseurl;?>assets/js/highchart/highcharts-export.js"></script>
+<script src="<?php echo $baseurl;?>assets/js/highchart/highcharts-access.js"></script>
 
-<script type="text/javascript" src="<?php echo $baseurl;?>assets/js/data.js?v=<?php echo uniqid(); ?>"></script> 
+
+
+<script type="text/javascript" src="<?php echo $baseurl;?>assets/js/data.js?v=<?php echo uniqid(); ?>"></script>
 
 <script>
     $('.showspesifikasi').on('click', function (event) {
@@ -432,6 +452,146 @@
  
 });
 </script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+    Highcharts.setOptions({
+		colors: ['#A3A0FB', '#43425D']
+	});
+	var Total = 0;
+	var chart_tusk = new Highcharts.chart({
+	    chart: {
+	        renderTo: 'container-pie3',
+	        plotBackgroundColor: null,
+	        plotBorderWidth: null,
+	        plotShadow: false,
+	        type: 'pie',
+	        events: {
+	            load: function(event) {
+	            $('.highcharts-legend-item').last().append('<br/><div style="margin-left:2rem;"><hr/><span style="float:left;font-weight: bold;padding-bottom:5px;">Total</span><span style="float:left;color:#9A9A9A;font-weight: 700;"> ' + Total + '</span> </div>')
+	            }
+	        }  
+	    },
+	    title: {
+	        text: ''
+	    },
+	    credits: {
+	    enabled: false
+	    },
+	    plotOptions: {
+	        pie: {
+	            allowPointSelect: true,
+	            cursor: 'pointer',
+	            dataLabels: {
+	                enabled: false
+	            },
+	            showInLegend: true
+	        }
+	    },
+	   	legend: {
+	        useHTML: true,
+			labelFormatter: function() {
+	            Total += this.y;
+				return '<div style="width:auto"><span style="float:left">'+ this.name +' :'+'</span><span style="float:left;color:#9A9A9A;font-weight: 400;">' + this.y + '</span></div>';
+			},
+	        layout: 'vertical',
+	        align: 'right',
+	        verticalAlign: 'top',
+	        x:-10,
+	        itemMarginTop: 5,
+	        itemMarginBottom: 5,
+	        
+	    },
+	    series: [{
+	        name: 'Status',
+	        colorByPoint: true,
+	        innerSize: '50%',
+	        data:<?php echo $tersus; ?>
+	    }],
+	    navigation: {
+	        buttonOptions: {
+	            verticalAlign: 'top',
+	            align: 'left',
+	        }
+	    },
+	    exporting: {
+	        buttons: {
+	            contextButton: {
+	                menuItems: ['downloadXLS','viewData']
+	            }
+	        }
+	    } 
+	});
+    Highcharts.setOptions({
+		colors: ['#6bd189', '#595861']
+	});
+
+	var Total = 0;
+	var chart_tersus = new Highcharts.chart({
+	    chart: {
+	        renderTo: 'container-pie4',
+	        plotBackgroundColor: null,
+	        plotBorderWidth: null,
+	        plotShadow: false,
+	        type: 'pie',
+	        events: {
+	            load: function(event) {
+	            $('.highcharts-legend-item').last().append('<br/><div style="margin-left:2rem;"><hr/><span style="float:left;font-weight: bold;padding-bottom:5px;">Total</span><span style="float:left;color:#9A9A9A;font-weight: 700;"> ' + Total + '</span> </div>')
+	            }
+	        }  
+	        
+	    },
+	    title: {
+	        text: ''
+	    },
+	    credits: {
+	    enabled: false
+	    },
+	    plotOptions: {
+	        pie: {
+	            allowPointSelect: true,
+	            cursor: 'pointer',
+	            dataLabels: {
+	                enabled: false
+	            },
+	            showInLegend: true
+	        }
+	    },
+	    legend: {
+	        useHTML: true,
+			labelFormatter: function() {
+	            Total += this.y;
+				return '<div style="width:auto"><span style="float:left">'+ this.name +' :'+'</span><span style="float:left;color:#9A9A9A;font-weight: 400;">' + this.y + '</span></div>';
+			},
+	        layout: 'vertical',
+	        align: 'right',
+	        verticalAlign: 'top',
+	        x:-10,
+	        itemMarginTop: 5,
+	        itemMarginBottom: 5,
+	    },
+	    series: [{
+	        name: 'Status',
+	        colorByPoint: true,
+	        innerSize: '50%',
+            data:<?php echo $tuks; ?>    
+	    }],
+	    navigation: {
+	        buttonOptions: {
+	            verticalAlign: 'top',
+	            align: 'left',
+	        }
+	    },
+	    exporting: {
+	        buttons: {
+	            contextButton: {
+	                menuItems: ['downloadXLS','viewData']
+	            }
+	        }
+	    } 
+	});
+});
+</script> 
 <!-- 
 <script type="text/javascript">
 var siteurl = $("#txtsite").val();

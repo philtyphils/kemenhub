@@ -13,14 +13,17 @@
     
 </head>
 <body>
-    <input type="hidden" id="txtsite" value="<?php echo $siteurl;?>" />
+<input type="hidden" id="txtsite" value="<?php echo $siteurl;?>" />
 <input type="hidden" id="txtbase" value="<?php echo $baseurl;?>" />
     <div class="wrapper">
             <div class="contents">
-                <div class="container-fluid">
+                <div class="container-fluid" style="padding-left: 30px;padding-right:30px;">
                     <div class="row">
                         <h2 class="title"></h2>
-                        <div class="col-md-5">
+                       
+                       
+
+                        <div class="col-md-4">
                             <div class="card">
                                 <div class="header-master">
                                     <div class="header">
@@ -38,7 +41,20 @@
                             </div>
                         </div>
 
-                        <div class="col-md-10">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="header-master">
+                                <div class="header">
+                                    <h4 class="title">TERSUS & TUKS</h4>
+                                    <p class="category" style="color: #AAAAAA; font-weight: 300;">Jumlah Per Provinsi</p>
+                                </div>
+                                <span class="fa fa-globe"></span>
+                                </div>
+                                <div id="container-bar1"></div>  
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
                             <div class="card">
                                 <div class="header-master">
                                     <div class="header">
@@ -47,16 +63,16 @@
                                     </div>
                                     <span class="fa fa-map-marker"></span>
                                 </div>
-                                <div class="content">
-                                    <div id="container-bar-wilayahkerja"></div>   
-                                </div>
+                               
+                                <div id="container-bar-wilayahkerja"></div>   
+                              
                                 <div class="footer">
                                     <a href="<?php echo $baseurl;?>Kelas" class="btn btn-fill btn-primary">VIEW</a>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="col-md-10">
+                        <div class="col-md-12">
                             <div class="card">
                                 <div class="header-master">
                                     <div class="header">
@@ -65,9 +81,9 @@
                                     </div>
                                     <span class="fa fa-bar-chart"></span>
                                 </div>
-                                <div class="content">
-                                    <div id="container-bar-bidangusaha"></div>   
-                                </div>
+                             
+                                <div id="container-bar-bidangusaha"></div>   
+                              
                                 <div class="footer">
                                     <a href="<?php echo $baseurl;?>bidang_usaha" class="btn btn-fill btn-primary">VIEW</a>
                                 </div>
@@ -89,9 +105,14 @@
 <script src="<?php echo $baseurl;?>assets/js/highchart/highcharts-exporting.js"></script>
 <script src="<?php echo $baseurl;?>assets/js/highchart/highcharts-export.js"></script>
 <script src="<?php echo $baseurl;?>assets/js/highchart/highcharts-access.js"></script>
+
 <script> 
+Highcharts.setOptions({
+	colors: ['#4baee3', '#f15c80', '#2b908f','#3a438a' , '#e4d354','#f7a35c'
+        , '#91e8e1', '#d966d6', '#d97766', '#3a438a']
+});
 var Total = 0;
-var chart_tusk = new Highcharts.chart({
+var chart_kategori = new Highcharts.chart({
     chart: {
         renderTo: 'container-pie',
         plotBackgroundColor: null,
@@ -124,7 +145,7 @@ var chart_tusk = new Highcharts.chart({
         useHTML: true,
 		labelFormatter: function() {
             Total += this.y;
-			return '<div style="width:auto"><span style="float:left">'+ this.name +' :'+'</span><span style="float:left;color:#9A9A9A;font-weight: 400;">' + this.y + '</span></div>';
+			return '<div style="width:auto"><span style="float:left;font-size:1rem;">'+ this.name +' :'+'</span><span style="float:left;color:#9A9A9A;font-weight: 400;">' + this.y + '</span></div>';
 		},
         layout: 'vertical',
         align: 'right',
@@ -136,7 +157,6 @@ var chart_tusk = new Highcharts.chart({
     },
     series: [{
         name: 'Jumlah',
-        colorByPoint: true,
         innerSize: '50%',
         data: <?php echo $kategori_chart;?>
     }],
@@ -155,141 +175,7 @@ var chart_tusk = new Highcharts.chart({
     } 
 });
 
-
-var Total = 0;
-var chart_tusk = new Highcharts.chart({
-    chart: {
-        renderTo: 'container-pie2',
-        plotBackgroundColor: null,
-        plotBorderWidth: null,
-        plotShadow: false,
-        type: 'pie',
-        events: {
-            load: function(event) {
-            $('.highcharts-legend-item').last().append('<br/><div style="margin-left:2rem;"><hr/><span style="float:left;font-weight: bold;padding-bottom:2px;">Total:</span><span style="float:left;color:#9A9A9A;font-weight: 700;"> ' + Total + '</span> </div>')
-            }
-        }  
-    },
-    title: {
-        text: ''
-    },
-    credits: {
-    enabled: false
-    },
-    plotOptions: {
-        pie: {
-            allowPointSelect: true,
-            cursor: 'pointer',
-            dataLabels: {
-                enabled: false,
-                padding:0
-            },
-            showInLegend: true
-        }
-    },
-   legend: {
-        useHTML: true,
-		labelFormatter: function() {
-            Total += this.y;
-			return '<div style="width:auto"><span style="float:left">'+ this.name +' :'+'</span><span style="float:left;color:#9A9A9A;font-weight: 400;">' + this.y + '</span></div>';
-		},
-        layout: 'vertical',
-        align: 'right',
-        verticalAlign: 'top',
-        x:-10,
-        itemMarginTop: 2,
-        itemMarginBottom: 2,
-        
-    },
-    series: [{
-        name: 'Jumlah',
-        colorByPoint: true,
-        innerSize: '50%',
-        data: <?php echo $wilayah_kerja;?>
-    }],
-    navigation: {
-        buttonOptions: {
-            verticalAlign: 'top',
-            align: 'left',
-        }
-    },
-    exporting: {
-        buttons: {
-            contextButton: {
-                menuItems: ['downloadXLS','viewData']
-            }
-        }
-    } 
-});
-
-var Total = 0;
-var chart_tusk = new Highcharts.chart({
-    chart: {
-        renderTo: 'container-pie3',
-        plotBackgroundColor: null,
-        plotBorderWidth: null,
-        plotShadow: false,
-        type: 'pie',
-        events: {
-            load: function(event) {
-            $('.highcharts-legend-item').last().append('<br/><div style="margin-left:2rem;"><hr/><span style="float:left;font-weight: bold;padding-bottom:2px;">Total:</span><span style="float:left;color:#9A9A9A;font-weight: 700;"> ' + Total + '</span> </div>')
-            }
-        }  
-    },
-    title: {
-        text: ''
-    },
-    credits: {
-    enabled: false
-    },
-    plotOptions: {
-        pie: {
-            allowPointSelect: true,
-            cursor: 'pointer',
-            dataLabels: {
-                enabled: false
-            },
-            showInLegend: true
-        }
-    },
-   legend: {
-        useHTML: true,
-		labelFormatter: function() {
-            Total += this.y;
-			return '<div style="width:auto"><span style="float:left">'+ this.name +' :'+'</span><span style="float:left;color:#9A9A9A;font-weight: 400;">' + this.y + '</span></div>';
-		},
-        layout: 'vertical',
-        align: 'right',
-        verticalAlign: 'top',
-        x:-10,
-        itemMarginTop: 2,
-        itemMarginBottom: 2,
-        
-    },
-    series: [{
-        name: 'Jumlah', 
-        colorByPoint: true,
-        innerSize: '50%',
-        data: <?php echo $bidang_usaha;?>
-    }],
-    navigation: {
-        buttonOptions: {
-            verticalAlign: 'top',
-            align: 'left',
-        }
-    },
-    exporting: {
-        buttons: {
-            contextButton: {
-                menuItems: ['downloadXLS','viewData']
-            }
-        }
-    } 
-});
 </script>
-
-<!-- ===================================================== NEW BAR CHART BAR WILAYAH KERJA & BIDANG USAHA ====================================================== -->
-
 <script>
     var chart_bar = new Highcharts.chart({
         chart: {
@@ -320,7 +206,7 @@ var chart_tusk = new Highcharts.chart({
           
         },
         title: {
-            text: ''
+            text: 'WILAYAH KERJA KELAS'
         },
         credits: {
         enabled: false
@@ -356,7 +242,7 @@ var chart_tusk = new Highcharts.chart({
     
         navigation: {
             buttonOptions: {
-                enabled: false
+                verticalAlign: 'top',
             }
         },
         exporting: {
@@ -397,7 +283,7 @@ var chart_tusk = new Highcharts.chart({
           
         },
         title: {
-            text: ''
+            text: 'BIDANG USAHA'
         },
         credits: {
         enabled: false
@@ -433,7 +319,7 @@ var chart_tusk = new Highcharts.chart({
     
         navigation: {
             buttonOptions: {
-                enabled: false
+                verticalAlign: 'top',
             }
         },
         exporting: {
@@ -446,6 +332,107 @@ var chart_tusk = new Highcharts.chart({
     });
   
 </script>
+<script>
+    Highcharts.setOptions({
+		colors: ['#A3A0FB','#43425D','#6bd189','#424038']
+    });
+	
+	var chart_bar = new Highcharts.chart({
+    chart: {
+        renderTo: 'container-bar1',
+        type: 'bar',
+       
+    },
+    xAxis: {
+        categories: <?php echo $provinsi; ?>,
+        labels: {
+        style: {
+            fontSize: '12px',
+            color: '#43425D'
+        }
+        }, 
+        title: {
+            text: null
+        },
+        min:0,
+        max:4,
+        scrollbar: {
+        enabled: true
+        },
+        tickLength: 0,   
+    },
+    yAxis: {
+        title: false, 
+    },
+    title: {
+        text: 'TERSUS & TUKS PROVINSI'
+    },
+    credits: {
+    enabled: false
+    },
+    tooltip: {
+        formatter: function () {
+        return '<b>' + this.x + '</b><br/>' +
+        '<b>'+ this.series.name +'</b>'+ ' : '+'<b>' + this.y + '</b>'+'<br/>' ;
+        }
+    },
+    plotOptions: {
+        series: {
+            point: {}
+        },
+        bar: {       
+            groupPadding:.1,
+            pointWidth:10,
+            pointPadding:1,
+            states: {
+                inactive: {
+                enabled: false
+                },
+                hover: {
+                color: '#4baee3',  
+                }
+            },
+            cursor: 'pointer',
+            showInLegend: true,
+        }
+    },
 
-<!-- =========================================================================================================== -->
+    series: [   
+        {
+        name: 'Tersus Aktif',
+        data: <?php echo $tersus_aktif;?>,
+        },   
+        {
+        name: 'Tersus Non Aktif',
+        data: <?php echo $tersus_nonaktif;?>,
+        },
+        {
+        name: 'Tuks Aktif',
+        data: <?php echo $tuks_aktif;?>,
+        }, 
+        {
+        name: 'Tuks Non Aktif',    
+        data: <?php echo $tuks_nonaktif;?>,
+        },
+          
+    ], 
+    navigation: {
+        buttonOptions: {
+            verticalAlign: 'top',
+        }
+    },
+    exporting: {
+        buttons: {
+            contextButton: {
+                menuItems: ['downloadXLS','viewData']
+            }
+        }
+    }  
+    });
+</script>
+
+
+
+
+
 </html>
