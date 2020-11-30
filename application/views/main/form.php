@@ -141,7 +141,9 @@
                                                         <div class="form-group col-md-3">
                                                             <label for="dms">Seconds</label>
                                                             <div class="input-group">    
-                                                                <input type="number" name="dms[]" id="dms" class="form-control" required placeholder="Seconds" aria-describedby="basic-addon1">
+                                                                <input type="number" name="dms1[]" id="dms" class="form-control input-sm" required placeholder="Seconds">
+                                                                <span class="input-group-addon" id="basic-addon1">,</span>
+                                                                <input type="number" name="dms2[]" id="dms" class="form-control input-sm" required placeholder="Seconds">
                                                                 <span class="input-group-addon" id="basic-addon1">"</span>
                                                             </div>
                                                         </div>
@@ -172,9 +174,9 @@
                                                         <div class="form-group col-md-3">
                                                             <label for="dms">Seconds</label>
                                                             <div class="input-group form-group">
-                                                                <input type="number" name="dms1[]" id="dms" class="form-control input-sm" required placeholder="Seconds">
+                                                                <input type="number" name="dms3[]" id="dms" class="form-control input-sm" required placeholder="Seconds">
                                                                 <span class="input-group-addon" id="basic-addon1">,</span>
-                                                                <input type="number" name="dms2[]" id="dms" class="form-control input-sm" required placeholder="Seconds">
+                                                                <input type="number" name="dms4[]" id="dms" class="form-control input-sm" required placeholder="Seconds">
                                                                 <span class="input-group-addon" id="basic-addon1">"</span>
                                                             </div>
                                                         </div>
