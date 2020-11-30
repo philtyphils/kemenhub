@@ -14,7 +14,8 @@ $(document).ready(function(){
 
     $('#datatables').DataTable({
         "ordering": false,
-        "scrollX": true
+        "scrollX": true,
+        "pageLength" : 5,
     });
 
     var dataTablex = $('#datatables').dataTable();

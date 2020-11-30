@@ -4,8 +4,20 @@
 			$this->load->database();	
 		}
 		
-		public function status_aktif()
+		public function status_aktif($provinsi)
 		{
+			if($provinsi != "")
+			{
+				$query ="(";
+                foreach($provinsi as $p)
+                {
+                    $query = $query."provinsi_id=".$p. " OR ";
+                }
+                $query = substr($query,0,-4);
+                $query= $query.")";
+                $this->db->where($query);
+			}
+
 			$this->db->select_sum('TERSUS_AKTIF');
 			$this->db->select_sum('TERSUS_NONAKTIF');
 			$this->db->select_sum('TUKS_AKTIF');

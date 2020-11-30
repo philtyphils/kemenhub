@@ -35,10 +35,11 @@ class Data extends CI_Controller
 		$data['menu'] = 'Data';
 		$data['baseurl'] = base_url();
 		$data['siteurl'] = site_url();
-		$data['dataProvinsi'] = $this->datax->get_provinsi();
-		$data['dataKateg'] = $this->datax->get_kategori();
-		$data['dataBdgUsaha'] = $this->datax->get_bidangusaha();
+		$data['dataProvinsi'] 	= $this->datax->get_provinsi();
+		$data['dataKateg'] 		= $this->datax->get_kategori();
+		$data['dataBdgUsaha'] 	= $this->datax->get_bidangusaha();
 		$trigger ='';
+
 		$trigger 		= $this->input->post('trigger');
 		$namaPerusahaan = $this->input->post('name');
 		$provinsi 		= $this->input->post('provinsi');
@@ -55,7 +56,7 @@ class Data extends CI_Controller
 		$tuks_aktif 	= array();
 		$tersus_aktif 	= array();
 
-		$r = $this->dashboard->status_aktif()->result();
+		$r = $this->dashboard->status_aktif($provinsi)->result();
 
 		$tersus = array(
 			array(
@@ -135,10 +136,8 @@ class Data extends CI_Controller
                 $query = substr($query,0,-4);
                 $query= $query.")";
                 $this->db->where($query);
-            }
-			// for($i = 0; $i < count($kategori); $i++){
-			// 	$this->db->or_like('a.kategori_id', $kategori[$i]);
-			// }
+			}
+			
 			if(count($bidangusaha) > 0)
             {
                 $query ="(";
@@ -149,10 +148,8 @@ class Data extends CI_Controller
                 $query = substr($query,0,-4);
                 $query= $query.")";
                 $this->db->where($query);
-            }
-			// for($j = 0; $j < count($bidangusaha); $j++){
-			// 	$this->db->or_like('a.bdgusaha_id', $bidangusaha[$j]);
-			// }
+			}
+			
 			if($dermaga != ''){
 				$this->db->like('a.spesifikasi', $dermaga);
 			}
@@ -176,6 +173,8 @@ class Data extends CI_Controller
 			$return 		= $this->db->get()->result();
 			$data['jumlah'] = count($return);
 			$data['company'] = $return;
+			$data['tuks'] 		= json_encode($tuks);		
+			$data['tersus'] 	= json_encode($tersus);
 			$this->load->view('templates/header',$data);
 			$this->load->view('main/data',$data);
 		} else {
@@ -189,11 +188,11 @@ class Data extends CI_Controller
 			$this->db->where('a.flag',1);
 			$this->db->order_by('a.provinsi_id','asc');
 			$this->db->order_by('a.nm_perusahaan','asc');
-			$return 		= $this->db->get()->result();
-			$data['jumlah'] = count($return);
-			$data['company'] = $return;
-			$data['tuks'] = json_encode($tuks);		
-			$data['tersus'] = json_encode($tersus);
+			$return 			= $this->db->get()->result();
+			$data['jumlah'] 	= count($return);
+			$data['company'] 	= $return;
+			$data['tuks'] 		= json_encode($tuks);		
+			$data['tersus'] 	= json_encode($tersus);
 			$this->load->view('templates/header',$data);
 			$this->load->view('main/data',$data);
 		}

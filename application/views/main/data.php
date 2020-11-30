@@ -31,7 +31,7 @@
                                     </div>
                                     <span class="fa fa-folder-open"></span>
                                 </div>
-
+                            
                             <div class="row">
                                 <div class="card-content col-md-12" style="padding-top: 10px;">
                                     <div class="warp-toolbar col-md-12">
@@ -288,7 +288,7 @@
                     </div>
                     <div class="col-md-2" style="margin-bottom: 1rem;">
                         <label for="satuan">Satuan</label>
-                        <select class="selectpicker form-control" id="satuan" name="satuan[]" required title="Pilih Satuan">
+                        <select class="selectpicker form-control" id="satuan" name="satuan[]" title="Pilih Satuan">
                             <option>FEET</option>
                             <option>GT</option>
                             <option>DWT</option>
