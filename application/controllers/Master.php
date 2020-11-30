@@ -35,7 +35,6 @@ class Master extends CI_Controller
 		$data['menu'] = 'Master';
 		$data['baseurl'] = base_url();
 		$data['siteurl'] = site_url();
-<<<<<<< HEAD
 
 		$f = $this->master->wilayah_kerja_chart();
 		$x = $this->master->bdg_usaha_chart();
@@ -43,15 +42,6 @@ class Master extends CI_Controller
 	
 		
 		$nmksop 		= array();
-=======
-
-
-		$f = $this->master->wilayah_kerja_chart();
-		$x = $this->master->bdg_usaha_chart();
-
-
-		$nmksop 	= array();
->>>>>>> aa3e4c89bf32bbd3ee0e10c74449d494d841f3c3
 		$wilayah_kerja 	= array();
 		foreach ($f as $key => $value)
 		{
@@ -89,7 +79,6 @@ class Master extends CI_Controller
 		$data['wilayah_kerja'] 	= json_encode($wilayah_kerja);
 		$data['nmbidang_usaha'] = json_encode($nmbidang_usaha);		
 		$data['bidang_usaha'] 	= json_encode($bidang_usaha);
-<<<<<<< HEAD
 		
 	
 		$data['provinsi'] = json_encode($provinsi);
@@ -98,10 +87,6 @@ class Master extends CI_Controller
 		$data['tuks_nonaktif'] = json_encode($tuks_nonaktif);
 		$data['tersus_aktif'] = json_encode($tersus_aktif);
 		$data['tersus_nonaktif'] = json_encode($tersus_nonaktif);
-=======
-		$data['kategori_chart'] = $kat_chart;
-		$data['notification']	= $this->master->notification();
->>>>>>> aa3e4c89bf32bbd3ee0e10c74449d494d841f3c3
 		
 
 		$data['kategori_chart'] = $kat_chart;

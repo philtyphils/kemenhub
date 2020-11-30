@@ -332,12 +332,7 @@
                     </div>
                     
                   </div>
-<<<<<<< HEAD
                   <button type="submit" class="btn btn-success btn-fill">FILTER NOW</button>
-=======
-                  
-                  <button id="btnCari" type="submit" class="btn btn-success btn-fill">Cari Data</button>
->>>>>>> aa3e4c89bf32bbd3ee0e10c74449d494d841f3c3
 
               </form>
 
