@@ -20,12 +20,6 @@
                                                         </select>
                                                     </div>
                                                     <div class="row">
-                                                        <div class="form-group col-md-12" style="margin-bottom: 1rem;">
-                                                            <label for="kota">Kabupaten / Kota</label>
-                                                            <select name="kota_f[]" class="form-control" id="kota_f<?php echo $id;?>"  >
-                                                                <option value="">Pilih Kabupaten / Kota</option>
-                                                            </select>
-                                                        </div>
                                                         <div class="form-group col-md-6" style="margin-bottom: 1rem;">
                                                             <label for="kecamatan">Kecamatan</label>
                                                             <select name="kecamatan_f[]" class="form-control" id="kecamatan_f<?php echo $id;?>" >
@@ -291,8 +285,8 @@ $('#provinsi_f<?php echo $id;?>').change(function(option, checked){
             dataType: "JSON",
             success: function(data)
             {
-                $('#kota_f<?php echo $id;?>').html(data);
-                $('#kota_f<?php echo $id;?>').selectpicker('refresh');
+                $('#kecamatan_f<?php echo $id;?>').html(data).removeClass('selectpicker').addClass('selectpicker').selectpicker('refresh');;
+
 
                 setKelasExtra(provinsi[0],<?php echo $id;?>);
 

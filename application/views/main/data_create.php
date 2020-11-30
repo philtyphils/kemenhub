@@ -87,17 +87,11 @@
                                                         </select>
                                                     </div>
                                                     <div class="row">
-                                                        <div class="form-group col-md-12" style="margin-bottom: 1rem;">
-                                                            <label for="kota">Kabupaten / Kota</label>
-                                                            <select name="kota_f[]" class="form-control" id="kota_f"  >
-                                                                <option value="">Pilih Kabupaten / Kota</option>
-                                                                
-                                                            </select>
-                                                        </div>
                                                         <div class="form-group col-md-6" style="margin-bottom: 1rem;">
-                                                            <label for="kecamatan">Kecamatan</label>
-                                                            <select name="kecamatan_f[]" class="form-control" id="kecamatan_f" >
+                                                            <label for="kota">Kecamatan</label>
+                                                            <select name="kecamatan_f[]" class="form-control" id="kecamatan_f"  >
                                                                 <option value="">Pilih Kecamatan</option>
+                                                                
                                                             </select>
                                                         </div>
                                                         <div class="form-group col-md-6">
@@ -394,8 +388,7 @@ $(document).ready(function(){
             dataType: "JSON",
             success: function(data)
             {
-                $('#kota_f').html(data);
-                $('#kota_f').selectpicker('refresh');
+                $('#kecamatan_f').html(data).removeClass("selectpicker").addClass("selectpicker").selectpicker('refresh');
 
                 setkelas2(provinsi[0]);
 

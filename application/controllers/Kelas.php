@@ -35,6 +35,7 @@ class Kelas extends CI_Controller
 		$data['baseurl'] = base_url();
 		$data['siteurl'] = site_url();
 		$data['wilayah_kerja'] = $this->kelas->wilayah_kerja();
+		$data['notification']	= $this->kelas->notification();	
 	
 		$this->load->view('templates/header',$data);
 		$this->load->view('main/Kelas',$data);	
@@ -77,6 +78,7 @@ class Kelas extends CI_Controller
 		$data['baseurl'] = base_url();
 		$data['siteurl'] = site_url();
 		$data['provinsi'] = $this->kelas->wilayah_kerja();
+		$data['notification']	= $this->kelas->notification();	
 
 		$this->load->view('templates/header',$data);
 		$this->load->view('main/kelas_create',$data);
@@ -90,6 +92,7 @@ class Kelas extends CI_Controller
 		$data['siteurl'] 		= site_url();
 		$data['provinsi'] 		= $this->kelas->wilayah_kerja();
 		$data['kategori'] 		= $this->kelas->_get($id);
+		$data['notification']	= $this->kelas->notification();	
 
 		$this->load->view('templates/header',$data);
 		$this->load->view('main/kelas_edit',$data);

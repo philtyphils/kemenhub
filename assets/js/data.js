@@ -31,14 +31,15 @@ $(document).ready(function(){
 
     $('#delete-modal').on('show.bs.modal',function() { 
         $('.btn-del').click('.remove',function(e) {
-            var id = $(".remove").attr("personal-id");
-            var param = {"id" : id}
+            var id = $(".remove").attr("personal-id");       
+            var param = {"id" : parseInt(id) }
+
             $.ajax({
                 type: "POST",
-                url: baseurl+"Data/submit/delete",
+                url: siteurl+"/Data/submit/delete",
                 data: param,
                 success: function(e){
-                  window.location.href=baseurl+"Data";
+                  window.location.href=siteurl+"/Data";
                 },
                 dataType: "JSON"
             });

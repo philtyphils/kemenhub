@@ -34,6 +34,7 @@ class Kategori extends CI_Controller
 		$data['menu'] = 'Kategori';
 		$data['baseurl'] = base_url();
 		$data['siteurl'] = site_url();
+		$data['notification']	= $this->kategori->notification();
 	
 		$this->load->view('templates/header',$data);
 		$this->load->view('main/kategori',$data);
@@ -75,6 +76,7 @@ class Kategori extends CI_Controller
 		$data['menu'] = 'Kategori';
 		$data['baseurl'] = base_url();
 		$data['siteurl'] = site_url();
+		$data['notification']	= $this->kategori->notification();
 
 		$id = (int) $id;
 		$return = $this->kategori->get_kategori($id);
@@ -90,7 +92,7 @@ class Kategori extends CI_Controller
 		$data['menu'] = 'Kategori';
 		$data['baseurl'] = base_url();
 		$data['siteurl'] = site_url();
-
+		$data['notification']	= $this->kategori->notification();	
 		$this->load->view('templates/header',$data);
 		$this->load->view('templates/hmenu',$data);
 		$this->load->view('main/kategori_create',$data);

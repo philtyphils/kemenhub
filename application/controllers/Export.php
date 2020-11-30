@@ -51,7 +51,6 @@ class Export extends CI_Controller
             "bidangusaha"   => $this->session->userdata('bidangusaha')
         );
         $post = $session_data;
-        
         /* Filter Nama Perusahaan */
         $nm_perusahaan = "";
         if($post['nm_perusahaan'] != "")
@@ -500,6 +499,8 @@ class Export extends CI_Controller
         $sheet->getStyle("G".$rows)->applyFromArray($styleData);
         $sheet->setCellValue("G".$rows,$jumlah );
 
+        $this->session->sess_destroy();
+        
 		$writer = new Xlsx($spreadsheet);
 		$filename = 'Data-TUKS-TERSUS-INDONESIA_'.date("Ymd");
 		

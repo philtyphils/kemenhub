@@ -138,7 +138,7 @@ class Data_model extends CI_Model {
     public function get_Kecamatan($id)
     {
         
-        $sql ="SELECT * from wilayah where length(kode) = 8 && substr(kode,1,5) = '".$id."' and kode!='".$id."' ORDER BY nama ASC";
+        $sql ="SELECT * from wilayah where length(kode) = 8 && substr(kode,1,2) = '".$id."' and kode!='".$id."' ORDER BY nama ASC";
         $query= $this->db->query($sql);
             
         return $query->result(); 
@@ -146,8 +146,7 @@ class Data_model extends CI_Model {
 
     public function get_Kecamatan2($id)
     {
-        
-        $sql ="SELECT * from wilayah where length(kode) = 8 and substr(kode,1,2) = '".$id."'  ORDER BY nama ASC";
+        $sql ="SELECT * from wilayah where length(kode) = 5 and substr(kode,1,2) = '".$id."'  ORDER BY nama ASC";
         $query= $this->db->query($sql);
             
         return $query->result(); 
@@ -155,7 +154,7 @@ class Data_model extends CI_Model {
 
     public function get_Kelurahan($id)
     {
-        $sql ="SELECT * from wilayah where length(kode) > 8 and substr(kode,1,8) = '".$id."' ORDER BY nama ASC";
+        $sql ="SELECT * from wilayah where length(kode) > 5 and substr(kode,1,5) = '".$id."' ORDER BY nama ASC";
         $query= $this->db->query($sql);
             
         return $query->result(); 
@@ -348,11 +347,12 @@ class Data_model extends CI_Model {
             $d_kelurahan = (int) $dData[0];
         }
 
-        $provinsi_f = "";
+        $provinsi_f = "";$prov_nama = "";
         if($data['provinsi_f'] != "")
         {
             $dData = explode("|",$data['provinsi_f']);
             $provinsi_f = (int) $dData[0];
+            $prov_nama  = $dData[1];
         }
 
        
@@ -369,13 +369,16 @@ class Data_model extends CI_Model {
         }
         $spesifikasi        = substr($spesifikasi,0,-3);
         $_get_kategori_id   = $this->db->where('bdg_usaha_id',(int) $data['bidangusaha'])->get("bdg_usaha")->row();
+
+        $lok_kec            = $this->db->where("kode",$data['kecamatan_f'])->get('wilayah')->row();
+        $lok_kel            = $this->db->where("kode",$data['kelurahan_f'])->get('wilayah')->row();
         /* ------------ table update ---------------*/
         $provinsi_id        = $provinsi_f;
         $ksop_id            = (int) $data['wilayah_kerja'];
         $bdg_usaha_id       = (int) $data['bidangusaha'];
         $kategori_id        = $_get_kategori_id->kategori_id;        
         $nm_perusahaan      = trim($data['name']);
-        $lokasi             = $data['lokasi_f'];
+        $lokasi             = $data['lokasi_f'] . " " .$lok_kec->nama . " " .$lok_kel->nama . " ".$prov_nama;
         $lokasi_kecamatan   = $data['kecamatan_f'];
         $lokasi_kelurahan   = $data['kelurahan_f'];
         $alamat             = $data['alamat'];
@@ -471,11 +474,12 @@ class Data_model extends CI_Model {
         return $this->db->get("jenis_sk")->result();
     }
 
-    public function delete($id)
+    public function delete($data)
     {
-        return $this->db->where("id",$id)->update("daftar_perusahaan",array(
-            "flag" => 0
+       $data = $this->db->where("id",$data['id'])->update("daftar_perusahaan",array(
+            "flag" => "0"
         ));
+        return $data;
     }
 
     public function get_dermaga()
@@ -485,7 +489,7 @@ class Data_model extends CI_Model {
 
     public function notification()
     {
-        return $this->db->where("ms_berlaku < '".date('Y-m-d H:i:s')."'")->count_all_results("daftar_perusahaan");
+        return $this->db->where("flag",1)->where("ms_berlaku < '".date('Y-m-d H:i:s')."'")->count_all_results("daftar_perusahaan");
     }
 
 }

@@ -251,6 +251,7 @@
                                 <?php } ?>
                         </select>
                     </div>
+                    
                   </div>
 
                   <div class="row">
@@ -321,8 +322,18 @@
                             <input placeholder="Masa Berlaku" type="text" class="form-control datepicker" id="Filt12" name="tgl_akhir" autocomplete="off">
                         </div>
                     </div>
+
+                    <div class="form-group col-md-4">
+                        <input type="checkbox" name="expired"/> Expired
+                    </div>
+                    
                   </div>
+<<<<<<< HEAD
                   <button type="submit" class="btn btn-success btn-fill">FILTER NOW</button>
+=======
+                  
+                  <button id="btnCari" type="submit" class="btn btn-success btn-fill">Cari Data</button>
+>>>>>>> aa3e4c89bf32bbd3ee0e10c74449d494d841f3c3
 
               </form>
 
