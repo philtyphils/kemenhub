@@ -142,7 +142,7 @@
                                                             <label for="dms">Seconds</label>
                                                             <div class="input-group">    
                                                                 <input type="number" name="dms1[]" id="dms" class="form-control input-sm" required placeholder="Seconds">
-                                                                <span class="input-group-addon" id="basic-addon1">,</span>
+                                                                <span class="input-group-addon" id="basic-addon1">.</span>
                                                                 <input type="number" name="dms2[]" id="dms" class="form-control input-sm" required placeholder="Seconds">
                                                                 <span class="input-group-addon" id="basic-addon1">"</span>
                                                             </div>
@@ -175,7 +175,7 @@
                                                             <label for="dms">Seconds</label>
                                                             <div class="input-group form-group">
                                                                 <input type="number" name="dms3[]" id="dms" class="form-control input-sm" required placeholder="Seconds">
-                                                                <span class="input-group-addon" id="basic-addon1">,</span>
+                                                                <span class="input-group-addon" id="basic-addon1">.</span>
                                                                 <input type="number" name="dms4[]" id="dms" class="form-control input-sm" required placeholder="Seconds">
                                                                 <span class="input-group-addon" id="basic-addon1">"</span>
                                                             </div>
